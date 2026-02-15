@@ -29,7 +29,7 @@
   --border-medium:  #44403C;
   --border-strong:  #6B6560;
 
-  --gradient-hero:  linear-gradient(145deg, #0C0A09 0%, #1a1209 40%, #0d1117 100%);
+  --gradient-hero:  linear-gradient(160deg, #0C0A09 0%, #151010 40%, #0C0A09 100%);
   --gradient-card:  linear-gradient(160deg, #1C1917 0%, #1a1209 100%);
   --gradient-accent: linear-gradient(135deg, #F0B429 0%, #E8553A 100%);
   --gradient-warm:  linear-gradient(135deg, #E8553A 0%, #C4A7E7 100%);

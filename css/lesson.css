@@ -7,6 +7,21 @@
   margin-bottom: var(--space-8);
   padding-bottom: var(--space-6);
   border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+/* Decorative dot grid behind lesson header */
+.lesson__header::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  background-image: radial-gradient(circle, rgba(240, 180, 41, 0.08) 1px, transparent 1px);
+  background-size: 12px 12px;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .lesson__breadcrumb {
@@ -23,6 +38,7 @@
 .lesson__breadcrumb-link {
   color: var(--text-dim);
   text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .lesson__breadcrumb-link:hover {
@@ -37,6 +53,7 @@
   font-size: var(--text-4xl);
   margin-bottom: var(--space-3);
   line-height: 1.15;
+  animation: textUnblur 0.8s var(--ease-out) forwards;
 }
 
 .lesson__meta {
@@ -60,6 +77,16 @@
   position: relative;
 }
 
+/* Dot pattern behind diagram */
+.lesson__diagram::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(240, 180, 41, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
 .lesson__diagram-loading {
   display: flex;
   align-items: center;
@@ -69,6 +96,8 @@
 .lesson__diagram svg {
   max-width: 100%;
   height: auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* === Lesson content === */
@@ -84,6 +113,18 @@
   padding-top: var(--space-6);
   border-top: 1px solid var(--border-subtle);
   color: var(--accent-primary);
+  position: relative;
+}
+
+/* Accent marker on h2 */
+.lesson__content h2::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--accent-primary);
 }
 
 .lesson__content h3 {
@@ -112,19 +153,37 @@
   margin-bottom: var(--space-3);
 }
 
+.lesson__content li::marker {
+  color: var(--accent-primary);
+}
+
 .lesson__content img {
   border-radius: var(--radius-md);
   margin: var(--space-6) 0;
 }
 
+/* === Callout boxes — distinctive left-border + background treatment === */
+
 /* Key concept callout */
 .lesson__content .key-concept {
-  background: var(--gradient-card);
-  border: 1px solid var(--accent-primary-dim);
+  background: linear-gradient(135deg, rgba(240, 180, 41, 0.06) 0%, rgba(28, 25, 23, 0.8) 100%);
+  border: 1px solid rgba(240, 180, 41, 0.12);
   border-left: 4px solid var(--accent-primary);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   padding: var(--space-5) var(--space-6);
   margin: var(--space-6) 0;
+  position: relative;
+}
+
+.lesson__content .key-concept::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 4px;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(90deg, rgba(240, 180, 41, 0.04), transparent);
+  pointer-events: none;
 }
 
 .lesson__content .key-concept strong {
@@ -136,7 +195,8 @@
 
 /* Warning callout */
 .lesson__content .warning {
-  background: var(--accent-warm-dim);
+  background: linear-gradient(135deg, rgba(232, 85, 58, 0.06) 0%, rgba(28, 25, 23, 0.8) 100%);
+  border: 1px solid rgba(232, 85, 58, 0.12);
   border-left: 4px solid var(--accent-warm);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   padding: var(--space-5) var(--space-6);
@@ -150,7 +210,8 @@
 
 /* Pro tip callout */
 .lesson__content .pro-tip {
-  background: var(--accent-purple-dim);
+  background: linear-gradient(135deg, rgba(196, 167, 231, 0.06) 0%, rgba(28, 25, 23, 0.8) 100%);
+  border: 1px solid rgba(196, 167, 231, 0.12);
   border-left: 4px solid var(--accent-purple);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   padding: var(--space-5) var(--space-6);
@@ -169,6 +230,19 @@
   border-radius: var(--radius-md);
   padding: var(--space-5) var(--space-6);
   margin: var(--space-6) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top accent on example box */
+.lesson__content .example-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), transparent);
 }
 
 .lesson__content .example-box h4 {
@@ -177,12 +251,14 @@
   font-size: var(--text-base);
 }
 
-/* Comparison table */
+/* === Comparison table — with hover glow === */
 .lesson__content table {
   width: 100%;
   border-collapse: collapse;
   margin: var(--space-6) 0;
   font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 .lesson__content thead th {
@@ -191,18 +267,22 @@
   font-weight: 600;
   text-align: left;
   padding: var(--space-3) var(--space-4);
-  border-bottom: 2px solid var(--border-medium);
+  border-bottom: 2px solid var(--accent-primary);
   color: var(--accent-primary);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .lesson__content tbody td {
   padding: var(--space-3) var(--space-4);
   border-bottom: 1px solid var(--border-subtle);
   color: var(--text-secondary);
+  transition: all var(--duration-fast) var(--ease-out);
 }
 
 .lesson__content tbody tr:hover td {
-  background: var(--bg-elevated);
+  background: rgba(240, 180, 41, 0.03);
   color: var(--text-primary);
 }
 
@@ -224,13 +304,17 @@
   text-overflow: ellipsis;
 }
 
-/* === Dashboard styles === */
+/* ============================================
+   DASHBOARD STYLES
+   ============================================ */
+
+/* Hero with scanning line effect */
 .dashboard__hero {
   position: relative;
-  padding: var(--space-12) var(--space-8);
+  padding: var(--space-16) var(--space-8) var(--space-12);
   margin: calc(-1 * var(--space-10)) calc(-1 * var(--space-8)) var(--space-10);
   background: var(--gradient-hero);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(240, 180, 41, 0.08);
   overflow: hidden;
 }
 
@@ -238,8 +322,34 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 30% 50%, rgba(0, 212, 170, 0.08) 0%, transparent 60%),
-    radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
+    radial-gradient(ellipse at 20% 60%, rgba(240, 180, 41, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(126, 184, 218, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 90%, rgba(196, 167, 231, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Horizontal scan line */
+.dashboard__hero-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240, 180, 41, 0.3), transparent);
+  animation: scanLine 6s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+/* Dot grid behind hero */
+.dashboard__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(240, 180, 41, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 70%);
   pointer-events: none;
 }
 
@@ -253,18 +363,23 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   color: var(--accent-primary);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
+  opacity: 0;
+  animation: revealLeft 0.6s var(--ease-out) 0.1s forwards;
 }
 
 .dashboard__title {
   font-size: var(--text-5xl);
+  font-weight: 800;
   margin-bottom: var(--space-4);
   background: var(--gradient-accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  opacity: 0;
+  animation: textUnblur 1s var(--ease-out) 0.2s forwards;
 }
 
 .dashboard__subtitle {
@@ -272,18 +387,32 @@
   font-size: var(--text-lg);
   max-width: 600px;
   margin-bottom: var(--space-8);
+  opacity: 0;
+  animation: revealUp 0.7s var(--ease-out) 0.4s forwards;
 }
 
 .dashboard__stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
-  max-width: 500px;
+  max-width: 520px;
+  opacity: 0;
+  animation: revealUp 0.7s var(--ease-out) 0.6s forwards;
+}
+
+.dashboard__stats .stat {
+  background: rgba(28, 25, 23, 0.5);
+  border: 1px solid rgba(240, 180, 41, 0.06);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(8px);
+  padding: var(--space-3) var(--space-2);
 }
 
 .dashboard__progress-bar {
   margin-top: var(--space-6);
   max-width: 400px;
+  opacity: 0;
+  animation: revealUp 0.7s var(--ease-out) 0.8s forwards;
 }
 
 .dashboard__section-title {
@@ -296,21 +425,22 @@
   margin-bottom: var(--space-6);
 }
 
+/* Module grid — two-column asymmetric */
 .dashboard__grid {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-4);
+}
+
+/* Every 3rd card spans full width for rhythm break */
+.dashboard__grid .card--module:nth-child(5),
+.dashboard__grid .card--module:nth-child(10) {
+  grid-column: 1 / -1;
 }
 
 .dashboard__grid .card--module {
   text-decoration: none;
   color: inherit;
-}
-
-.card__number {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  opacity: 0.6;
-  margin-right: var(--space-2);
 }
 
 .dashboard__modules {
@@ -325,6 +455,18 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .dashboard__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard__grid .card--module:nth-child(5),
+  .dashboard__grid .card--module:nth-child(10) {
+    grid-column: 1;
+  }
 }
 
 @media (max-width: 640px) {

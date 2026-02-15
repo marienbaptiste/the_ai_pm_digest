@@ -1050,5 +1050,659 @@ export const glossaryTerms = {
     analogy: 'Like an assistant who can look over your shoulder and understand what you\'re working on to offer relevant help.',
     whyItMatters: 'Screen context is a core Gemini feature on Android/iOS. The challenge is that app UIs change constantly, making reliable parsing a moving target.',
     related: ['gemini', 'multimodal', 'graceful-degradation', 'schema-drift']
+  },
+
+  // === Additional terms (batch 2) ===
+
+  'artificial-intelligence': {
+    term: 'Artificial Intelligence',
+    definition: 'The science and engineering of creating machines that can perform tasks normally requiring human intelligence — perceiving, reasoning, learning, planning, and generating language. Encompasses multiple paradigms from symbolic reasoning to neural networks.',
+    analogy: 'Like building a brain out of math — not replicating biology, but achieving similar cognitive outcomes through computation.',
+    whyItMatters: 'As a PM at DeepMind, you\'re literally building AI products. Understanding the breadth and limits of AI shapes every product decision you make.',
+    related: ['machine-learning', 'deep-learning', 'agi', 'narrow-ai']
+  },
+  'agi': {
+    term: 'Artificial General Intelligence (AGI)',
+    definition: 'A hypothetical AI system with human-level generality across cognitive domains — able to learn any intellectual task a human can. No AGI system exists today; all current AI is narrow.',
+    analogy: 'Like the difference between a calculator (narrow) and a human brain (general) — AGI would handle any problem, not just the ones it was trained for.',
+    whyItMatters: 'AGI is DeepMind\'s stated long-term mission. Understanding what AGI means, how far we are, and what the risks are is essential for the role.',
+    related: ['artificial-intelligence', 'narrow-ai', 'alignment']
+  },
+  'artificial-general-intelligence': {
+    term: 'Artificial General Intelligence',
+    definition: 'See AGI — a system capable of understanding or learning any intellectual task that a human being can, with the flexibility to transfer knowledge across domains.',
+    analogy: 'Like a polymath who can excel at any field they turn their attention to, rather than a specialist who only knows one thing.',
+    whyItMatters: 'Framing product strategy around the AGI trajectory means anticipating capability jumps that change what products are possible.',
+    related: ['agi', 'narrow-ai', 'artificial-intelligence']
+  },
+  'narrow-ai': {
+    term: 'Narrow AI',
+    definition: 'AI designed and trained for a specific task or domain. Every deployed AI system today is narrow — AlphaGo cannot write poetry, GPT cannot fold proteins. Also called "Weak AI."',
+    analogy: 'Like a chess grandmaster who can\'t drive a car — brilliant in one domain, helpless outside it.',
+    whyItMatters: 'All AI products you\'ll ship are narrow AI. Knowing the boundaries prevents overpromising to users and stakeholders.',
+    related: ['artificial-intelligence', 'agi', 'foundation-model']
+  },
+  'ai-effect': {
+    term: 'AI Effect',
+    definition: 'The tendency for people to redefine "real AI" as whatever machines cannot yet do. Once a capability becomes routine (OCR, chess, route planning), people stop considering it AI.',
+    analogy: 'Like moving goalposts — no matter what AI achieves, the definition of "true intelligence" retreats just beyond its reach.',
+    whyItMatters: 'Helps explain why users undervalue current AI capabilities. As a PM, managing the gap between perceived and actual intelligence is a design challenge.',
+    related: ['artificial-intelligence', 'turing-test']
+  },
+  'ai-winter': {
+    term: 'AI Winter',
+    definition: 'A period of reduced funding and interest in AI research, typically following a cycle of overhyped promises that failed to materialize. Two major AI winters occurred: 1974-1980 and 1987-1993.',
+    analogy: 'Like a stock market crash — a bubble of excitement inflates, reality can\'t match expectations, and investment freezes.',
+    whyItMatters: 'Recognizing hype cycles prevents over-promising in product launches. The gap between expectations and capability — not bad technology — causes winters.',
+    related: ['artificial-intelligence', 'expert-systems', 'symbolic-ai']
+  },
+  'turing-test': {
+    term: 'Turing Test',
+    definition: 'A test proposed by Alan Turing in 1950 where a human judge converses with both a machine and a human. If the judge cannot reliably distinguish them, the machine is said to exhibit intelligent behavior.',
+    analogy: 'Like a blindfolded taste test for intelligence — can you tell which responses are human and which are machine?',
+    whyItMatters: 'Frames the question of "can machines think?" as a behavioral benchmark rather than a philosophical debate. Modern chatbots regularly pass informal versions.',
+    related: ['artificial-intelligence', 'ai-effect']
+  },
+  'symbolic-ai': {
+    term: 'Symbolic AI',
+    definition: 'An approach to AI based on explicit rules, logic, and human-readable representations. Dominant from the 1950s-1980s, it involves manually encoding knowledge as if-then rules rather than learning from data.',
+    analogy: 'Like programming a robot by writing an instruction manual for every possible situation, versus letting it learn from experience.',
+    whyItMatters: 'Understanding symbolic AI\'s limitations (brittleness, inability to learn from data) explains why modern ML approaches won and how hybrid approaches may return.',
+    related: ['expert-systems', 'machine-learning', 'artificial-intelligence']
+  },
+  'expert-systems': {
+    term: 'Expert Systems',
+    definition: 'AI programs from the 1980s that encoded domain expertise as if-then rules. Systems like MYCIN (medical diagnosis) delivered real value but proved brittle outside narrow domains and required expensive knowledge engineering.',
+    analogy: 'Like a very thorough FAQ — incredibly useful for known questions, but completely lost when asked something not in the script.',
+    whyItMatters: 'Expert systems\' failure mode — brittleness and inability to generalize — is a cautionary tale for any AI product that relies on hard-coded rules instead of learning.',
+    related: ['symbolic-ai', 'ai-winter', 'knowledge-graph']
+  },
+  'perceptron': {
+    term: 'Perceptron',
+    definition: 'The simplest neural network — a single neuron that takes weighted inputs, sums them, applies an activation function, and outputs a binary decision. Invented by Frank Rosenblatt in 1958.',
+    analogy: 'Like a simple voting system — each input casts a weighted vote, and the perceptron says yes or no based on the total.',
+    whyItMatters: 'The perceptron is the atomic building block of all neural networks. Understanding it demystifies deep learning as "many perceptrons stacked together."',
+    related: ['neural-network', 'activation-function', 'linearly-separable']
+  },
+  'relu': {
+    term: 'ReLU (Rectified Linear Unit)',
+    definition: 'An activation function f(x) = max(0, x) that outputs the input if positive, zero otherwise. Now the default activation in most deep networks because it avoids the vanishing gradient problem and is computationally cheap.',
+    analogy: 'Like a gate that lets positive signals through unchanged but blocks anything negative — simple but highly effective.',
+    whyItMatters: 'ReLU\'s simplicity enabled training much deeper networks. Understanding why activation functions matter helps you grasp training challenges your ML team discusses.',
+    related: ['activation-function', 'vanishing-gradient', 'neural-network']
+  },
+  'dropout': {
+    term: 'Dropout',
+    definition: 'A regularization technique where random neurons are temporarily "dropped" (set to zero) during training. This prevents co-adaptation and forces the network to learn redundant representations, reducing overfitting.',
+    analogy: 'Like a sports team training with random players sitting out — the remaining players must learn to cover for missing teammates.',
+    whyItMatters: 'Dropout is a standard technique for preventing overfitting. When your ML team says "we added dropout," they\'re combating the model memorizing training data.',
+    related: ['regularisation', 'overfitting', 'neural-network']
+  },
+  'svm': {
+    term: 'Support Vector Machine (SVM)',
+    definition: 'A classical ML algorithm that finds the optimal hyperplane separating classes in feature space, maximizing the margin between the nearest data points (support vectors). Effective for high-dimensional data with clear margins.',
+    analogy: 'Like drawing the widest possible street between two neighborhoods — the road (hyperplane) is placed to maximize distance from the nearest houses on each side.',
+    whyItMatters: 'SVMs were state-of-the-art before deep learning. Understanding them provides context for why neural networks won and when simpler models still suffice.',
+    related: ['machine-learning', 'kernel', 'linearly-separable']
+  },
+  'random-forest': {
+    term: 'Random Forest',
+    definition: 'An ensemble method that builds many decision trees on random subsets of data and features, then combines their predictions by majority vote. Robust, interpretable, and resistant to overfitting.',
+    analogy: 'Like asking 100 doctors for their opinion and going with the majority — individual doctors may be wrong, but the crowd wisdom is usually right.',
+    whyItMatters: 'Random forests remain competitive for tabular data and are far more interpretable than neural networks. Sometimes the right tool for a product isn\'t deep learning.',
+    related: ['decision-tree', 'boosting', 'machine-learning']
+  },
+  'boosting': {
+    term: 'Boosting',
+    definition: 'An ensemble technique that trains models sequentially, each one focusing on correcting the errors of its predecessors. The final prediction combines all models with weighted votes. XGBoost and LightGBM are popular implementations.',
+    analogy: 'Like a relay team where each runner specifically practices the sections the previous runner struggled with.',
+    whyItMatters: 'Boosted models dominate tabular data competitions and many production ML systems. Not everything needs a neural network.',
+    related: ['gradient-boosting', 'random-forest', 'decision-tree']
+  },
+  'gradient-boosting': {
+    term: 'Gradient Boosting',
+    definition: 'A boosting variant that builds trees to predict the residual errors (gradients) of the current model. Each new tree corrects what the existing ensemble gets wrong. XGBoost, LightGBM, and CatBoost are implementations.',
+    analogy: 'Like an editor who only marks what\'s wrong in a draft — each editing pass fixes the remaining mistakes.',
+    whyItMatters: 'XGBoost and similar tools power fraud detection, ranking systems, and recommendation engines. Knowing when to use these vs. deep learning is a key PM skill.',
+    related: ['boosting', 'decision-tree', 'random-forest']
+  },
+  'decision-tree': {
+    term: 'Decision Tree',
+    definition: 'A tree-structured model that makes predictions by learning a series of if-then splits on features. Each internal node tests a condition, each branch represents an outcome, and each leaf assigns a prediction.',
+    analogy: 'Like a flowchart for diagnosis — "Is it raining? If yes, take an umbrella. If no, is it cold? If yes, take a jacket..."',
+    whyItMatters: 'Decision trees are the most interpretable ML model. When stakeholders demand explainability (healthcare, finance), trees may be preferable to black-box models.',
+    related: ['random-forest', 'boosting', 'machine-learning']
+  },
+  'linear-regression': {
+    term: 'Linear Regression',
+    definition: 'The simplest predictive model — fits a straight line (or hyperplane) through data to predict continuous output values by learning weights for each feature that minimize squared prediction error.',
+    analogy: 'Like drawing the best-fit line through a scatter plot — the line that\'s closest to all the points on average.',
+    whyItMatters: 'Linear regression is a baseline model for any prediction task. If a simple line works well enough, there\'s no reason to deploy a neural network.',
+    related: ['machine-learning', 'loss-function', 'gradient-descent']
+  },
+  'k-means': {
+    term: 'K-Means Clustering',
+    definition: 'An unsupervised algorithm that partitions data into K clusters by iteratively assigning points to the nearest centroid, then updating centroids. Simple, fast, but assumes roughly spherical clusters of similar size.',
+    analogy: 'Like sorting M&Ms by color without being told the colors — you group similar ones together and refine the groups until stable.',
+    whyItMatters: 'Used for customer segmentation, data exploration, and feature engineering. Often a first step before more complex analysis.',
+    related: ['unsupervised-learning', 'dbscan', 'embedding']
+  },
+  'dbscan': {
+    term: 'DBSCAN',
+    definition: 'Density-Based Spatial Clustering of Applications with Noise — clusters data by finding dense regions separated by sparse areas. Unlike K-means, it discovers the number of clusters automatically and handles irregular shapes and outliers.',
+    analogy: 'Like identifying islands by sea level — dense land masses become clusters, isolated rocks become noise.',
+    whyItMatters: 'DBSCAN handles messy real-world data better than K-means. Useful when you don\'t know how many natural groups exist.',
+    related: ['k-means', 'unsupervised-learning']
+  },
+  'pca': {
+    term: 'PCA (Principal Component Analysis)',
+    definition: 'A dimensionality reduction technique that finds the directions of maximum variance in data and projects it onto fewer dimensions while preserving as much information as possible.',
+    analogy: 'Like casting a shadow of a 3D object onto a wall — you lose one dimension but the shadow captures the most important shape information.',
+    whyItMatters: 'PCA helps visualize high-dimensional data and reduce computational costs. Essential for understanding embedding spaces and data exploration.',
+    related: ['embedding', 't-sne', 'umap', 'unsupervised-learning']
+  },
+  't-sne': {
+    term: 't-SNE',
+    definition: 't-Distributed Stochastic Neighbor Embedding — a nonlinear dimensionality reduction technique optimized for visualizing high-dimensional data in 2D or 3D. Preserves local structure (nearby points stay nearby) better than PCA.',
+    analogy: 'Like arranging photos on a table so similar photos are close together — the 2D layout reveals clusters that exist in the high-dimensional data.',
+    whyItMatters: 'Used to visualize embeddings and understand what a model has learned. Helps debug and explain model behavior to stakeholders.',
+    related: ['pca', 'umap', 'embedding']
+  },
+  'umap': {
+    term: 'UMAP',
+    definition: 'Uniform Manifold Approximation and Projection — a dimensionality reduction technique that preserves both local and global structure. Faster than t-SNE and often produces more meaningful layouts of high-dimensional data.',
+    analogy: 'Like t-SNE\'s faster, more accurate sibling — it creates a map of your data that preserves both neighborhoods and continents.',
+    whyItMatters: 'UMAP is increasingly preferred over t-SNE for embedding visualization. Understanding these tools helps you interpret what your ML team shows you.',
+    related: ['t-sne', 'pca', 'embedding']
+  },
+  'bias': {
+    term: 'Bias (Statistical)',
+    definition: 'In ML, bias has two meanings: (1) a model parameter (the intercept term), and (2) systematic error from wrong assumptions, causing the model to consistently miss the target. High bias = underfitting.',
+    analogy: 'Like aiming for a bullseye but always hitting the same spot to the left — your aim is consistently off in one direction.',
+    whyItMatters: 'Understanding bias-variance tradeoff helps you grasp why models underfit or overfit, directly affecting product quality.',
+    related: ['bias-variance-tradeoff', 'overfitting', 'data-bias']
+  },
+  'bias-variance-tradeoff': {
+    term: 'Bias-Variance Tradeoff',
+    definition: 'The fundamental tension in ML: simpler models have high bias (underfit) but low variance; complex models have low bias but high variance (overfit). The sweet spot minimizes total error.',
+    analogy: 'Like adjusting a guitar string — too tight (high variance) and it breaks on new songs, too loose (high bias) and nothing sounds right.',
+    whyItMatters: 'Every model your team builds navigates this tradeoff. Understanding it helps you make informed decisions about model complexity and performance expectations.',
+    related: ['bias', 'overfitting', 'regularisation']
+  },
+  'data-bias': {
+    term: 'Data Bias',
+    definition: 'Systematic skew in training data that leads models to make unfair or inaccurate predictions for certain groups. Sources include selection bias, labeling bias, historical bias, and representation gaps.',
+    analogy: 'Like learning about the world only from one neighborhood — your conclusions won\'t generalize to places you\'ve never seen.',
+    whyItMatters: 'Data bias is the #1 source of AI fairness issues. As a PM, ensuring diverse, representative training data is a product responsibility, not just an ethics checkbox.',
+    related: ['bias', 'fairness', 'responsible-ai']
+  },
+  'vanishing-gradient': {
+    term: 'Vanishing Gradient Problem',
+    definition: 'When gradients become extremely small as they propagate backward through many layers, causing early layers to learn extremely slowly or not at all. This limited deep network training until innovations like ReLU and residual connections.',
+    analogy: 'Like a game of telephone — the message (gradient) gets weaker with each person it passes through until it\'s meaningless.',
+    whyItMatters: 'Understanding this explains why deep networks were impractical until ~2012 and why architectural choices (ReLU, skip connections, layer norm) matter.',
+    related: ['relu', 'gradient-descent', 'batch-normalisation', 'residual-connection']
+  },
+  'batch-normalisation': {
+    term: 'Batch Normalization',
+    definition: 'A technique that normalizes layer inputs to have zero mean and unit variance within each mini-batch during training. Stabilizes training, allows higher learning rates, and acts as a mild regularizer.',
+    analogy: 'Like recalibrating instruments between measurements — ensuring each layer starts from a consistent baseline.',
+    whyItMatters: 'BatchNorm made training deep networks much more practical. When your team discusses normalization strategies, understanding the basics helps you follow the conversation.',
+    related: ['layer-norm', 'group-norm', 'internal-covariate-shift']
+  },
+  'layer-norm': {
+    term: 'Layer Normalization',
+    definition: 'Normalizes inputs across features for each individual example (rather than across a batch like BatchNorm). Used in Transformers and RNNs where batch statistics are unreliable or unavailable.',
+    analogy: 'Like grading each student\'s test on their own curve rather than the class curve — each example is normalized independently.',
+    whyItMatters: 'Layer norm is standard in Transformers (Gemini, GPT). Understanding it helps you grasp architectural discussions about model design.',
+    related: ['batch-normalisation', 'transformer', 'group-norm']
+  },
+  'group-norm': {
+    term: 'Group Normalization',
+    definition: 'A normalization variant that divides channels into groups and normalizes within each group. Works well with small batch sizes where BatchNorm statistics are noisy.',
+    analogy: 'Like normalizing test scores within study groups rather than the whole class — useful when class sizes are too small for meaningful statistics.',
+    whyItMatters: 'Group norm is common in computer vision models. Understanding normalization variants helps you follow architecture decisions.',
+    related: ['batch-normalisation', 'layer-norm', 'instance-norm']
+  },
+  'instance-norm': {
+    term: 'Instance Normalization',
+    definition: 'Normalizes each individual feature map independently for each example. Primarily used in style transfer and generative models where preserving per-instance style information matters.',
+    analogy: 'Like adjusting the brightness of each photo individually rather than using one setting for the whole album.',
+    whyItMatters: 'Relevant for understanding diffusion models and image generation — key Gemini capabilities.',
+    related: ['batch-normalisation', 'group-norm', 'diffusion-models']
+  },
+  'internal-covariate-shift': {
+    term: 'Internal Covariate Shift',
+    definition: 'The change in the distribution of layer inputs during training as parameters of preceding layers update. BatchNorm was originally proposed to address this, though the exact mechanism is debated.',
+    analogy: 'Like trying to hit a moving target — each layer\'s input distribution shifts as earlier layers learn, making training unstable.',
+    whyItMatters: 'Understanding why normalization helps training stability is useful context for architectural decisions.',
+    related: ['batch-normalisation', 'layer-norm']
+  },
+  'regularisation': {
+    term: 'Regularization',
+    definition: 'Techniques to prevent overfitting by adding constraints that discourage overly complex models. Includes L1/L2 penalties, dropout, early stopping, data augmentation, and weight decay.',
+    analogy: 'Like adding speed bumps to prevent a car from going too fast — small constraints that keep the model from memorizing noise.',
+    whyItMatters: 'Regularization is why models generalize to new data. When your team discusses model performance, regularization choices are often the key lever.',
+    related: ['overfitting', 'dropout', 'weight-decay', 'early-stopping']
+  },
+  'weight-decay': {
+    term: 'Weight Decay',
+    definition: 'A regularization technique that adds a penalty proportional to the magnitude of weights to the loss function, encouraging smaller weights. Equivalent to L2 regularization in most optimizers.',
+    analogy: 'Like a tax on complexity — the bigger the weights, the higher the penalty, encouraging the model to use simpler solutions.',
+    whyItMatters: 'Weight decay is a standard hyperparameter in every training run. Understanding it helps you grasp tuning discussions.',
+    related: ['regularisation', 'hyperparameters', 'overfitting']
+  },
+  'weight-sharing': {
+    term: 'Weight Sharing',
+    definition: 'Using the same set of weights across multiple positions or timesteps in a network. CNNs share weights across spatial positions; RNNs share weights across time steps. Reduces parameters and captures translation invariance.',
+    analogy: 'Like using the same set of instructions for every section of a factory — efficient and ensures consistent processing regardless of position.',
+    whyItMatters: 'Weight sharing is why CNNs work for images and RNNs for sequences. It\'s a fundamental design principle in neural architectures.',
+    related: ['cnn', 'rnn', 'translation-invariance', 'parameters']
+  },
+  'weight': {
+    term: 'Weight',
+    definition: 'A learnable parameter in a neural network that determines the strength of connection between neurons. During training, weights are adjusted via backpropagation to minimize the loss function.',
+    analogy: 'Like the volume knob on each input channel of a mixing board — adjusting how much each input contributes to the output.',
+    whyItMatters: 'When people say a model has "175 billion parameters," they mostly mean weights. Model size = number of weights = compute cost = capability.',
+    related: ['parameters', 'gradient-descent', 'neural-network']
+  },
+  'parameters': {
+    term: 'Parameters',
+    definition: 'The learnable values in a model (weights and biases) that are adjusted during training. Parameter count is a primary measure of model size — GPT-4 is estimated at ~1.8 trillion parameters.',
+    analogy: 'Like the total number of adjustable knobs in a sound system — more knobs means more precise control but also more complexity.',
+    whyItMatters: 'Parameter count drives compute costs, memory requirements, and (loosely) capability. Crucial for infrastructure planning and cost estimation.',
+    related: ['weight', 'hyperparameters', 'scaling-laws']
+  },
+  'hyperparameters': {
+    term: 'Hyperparameters',
+    definition: 'Configuration values set before training begins (not learned from data). Includes learning rate, batch size, number of layers, dropout rate, and architecture choices. Tuning hyperparameters is a key part of ML engineering.',
+    analogy: 'Like the settings on an oven before cooking — temperature, time, rack position. They\'re not the food (data) but they determine how it turns out.',
+    whyItMatters: 'Hyperparameter tuning is often the bottleneck between a mediocre and great model. Understanding what your ML team is tuning helps you plan timelines.',
+    related: ['learning-rate', 'batch-size', 'parameters']
+  },
+  'gradient': {
+    term: 'Gradient',
+    definition: 'A vector of partial derivatives indicating the direction and magnitude of steepest increase of a function. In ML, gradients of the loss function with respect to parameters tell the optimizer which direction to adjust weights.',
+    analogy: 'Like a compass pointing uphill — you go the opposite direction to find the valley (minimum loss).',
+    whyItMatters: 'Gradients are the mechanism by which neural networks learn. Understanding them demystifies training.',
+    related: ['gradient-descent', 'backpropagation', 'loss-function']
+  },
+  'gradient-clipping': {
+    term: 'Gradient Clipping',
+    definition: 'A technique that caps gradient magnitudes during training to prevent exploding gradients, where parameter updates become so large they destabilize training. Essential for training RNNs and large models.',
+    analogy: 'Like a speed limiter on a car — prevents dangerous acceleration even if the engine wants to go faster.',
+    whyItMatters: 'Gradient clipping is a standard practice in LLM training. It\'s part of the infrastructure that makes training stable.',
+    related: ['vanishing-gradient', 'gradient-descent', 'rnn']
+  },
+  'data-augmentation': {
+    term: 'Data Augmentation',
+    definition: 'Creating synthetic training examples by applying transformations to existing data — rotating/flipping images, adding noise, paraphrasing text, or mixing examples. Increases effective dataset size without collecting new data.',
+    analogy: 'Like studying flashcards in different lighting, angles, and order — you see the same content but build more robust understanding.',
+    whyItMatters: 'Data augmentation is often the cheapest way to improve model performance. As a PM, knowing this option helps when data collection is expensive.',
+    related: ['training-data', 'overfitting', 'regularisation']
+  },
+  'early-stopping': {
+    term: 'Early Stopping',
+    definition: 'Halting training when performance on a validation set stops improving, even if training loss is still decreasing. Prevents the model from overfitting by memorizing training data.',
+    analogy: 'Like knowing when to stop studying — at some point, more cramming hurts performance because you start memorizing errors.',
+    whyItMatters: 'Early stopping is a simple, effective regularization technique. Understanding it helps you grasp why training doesn\'t just "run longer for better results."',
+    related: ['overfitting', 'regularisation', 'validation']
+  },
+  'lr-schedule': {
+    term: 'Learning Rate Schedule',
+    definition: 'A strategy for changing the learning rate during training — typically starting high and decreasing. Common schedules include cosine annealing, step decay, and warmup-then-decay. Critical for training stability.',
+    analogy: 'Like driving fast on the highway and slowing down near your destination — large steps at first, then finer adjustments as you approach the optimum.',
+    whyItMatters: 'Learning rate scheduling is one of the most impactful hyperparameters. Discussions about training configurations almost always involve the LR schedule.',
+    related: ['learning-rate', 'hyperparameters', 'adam']
+  },
+  'adam': {
+    term: 'Adam Optimizer',
+    definition: 'Adaptive Moment Estimation — the most popular optimizer for deep learning. Combines momentum (tracking direction of recent gradients) with adaptive per-parameter learning rates. Works well out of the box across many tasks.',
+    analogy: 'Like a GPS that adjusts speed based on road conditions and traffic — it adapts the pace of learning for each parameter individually.',
+    whyItMatters: 'Adam is the default optimizer for most projects. Understanding it helps you follow discussions about training configuration.',
+    related: ['gradient-descent', 'learning-rate', 'lr-schedule']
+  },
+  'feedforward-network': {
+    term: 'Feedforward Network',
+    definition: 'A neural network where data flows in one direction — from input through hidden layers to output — with no cycles or feedback connections. The simplest network topology, contrasted with recurrent or graph networks.',
+    analogy: 'Like a one-way assembly line — each station processes and passes forward, never looking back.',
+    whyItMatters: 'Feedforward layers are a component of Transformers and most architectures. Understanding the building blocks helps you follow architectural discussions.',
+    related: ['neural-network', 'rnn', 'transformer']
+  },
+  'bidirectional-rnn': {
+    term: 'Bidirectional RNN',
+    definition: 'An RNN variant that processes sequences in both forward and backward directions, capturing context from both past and future tokens. Two separate RNNs are run — one left-to-right, one right-to-left — and their outputs are combined.',
+    analogy: 'Like reading a sentence both forwards and backwards to better understand each word from full context.',
+    whyItMatters: 'Bidirectional processing is the idea behind BERT. Understanding it helps you grasp why some models need the full input before generating output.',
+    related: ['rnn', 'lstm', 'encoder-decoder']
+  },
+  'hidden-state': {
+    term: 'Hidden State',
+    definition: 'In RNNs, the internal memory vector that accumulates information from previous time steps and passes it forward. In general, any internal representation a model maintains that isn\'t directly observable.',
+    analogy: 'Like your working memory when reading a book — you carry forward relevant context from earlier pages to understand the current one.',
+    whyItMatters: 'Hidden states are how sequence models maintain memory. Understanding them clarifies why LLMs have context windows.',
+    related: ['rnn', 'cell-state', 'lstm']
+  },
+  'cell-state': {
+    term: 'Cell State',
+    definition: 'In LSTM networks, the long-term memory channel that runs through the entire sequence with minimal modification. Gates control what information is added to or removed from the cell state, solving the vanishing gradient problem.',
+    analogy: 'Like a conveyor belt running through a factory — information travels along it, and workers at each station can add or remove items.',
+    whyItMatters: 'Cell state is the key innovation of LSTMs that enabled practical sequence modeling before Transformers.',
+    related: ['lstm', 'gates', 'hidden-state']
+  },
+  'gates': {
+    term: 'Gates (Neural Network)',
+    definition: 'Learned sigmoid-based mechanisms in LSTMs and GRUs that control information flow. Include forget gates (what to discard), input gates (what to add), and output gates (what to expose). Values between 0 (block) and 1 (pass through).',
+    analogy: 'Like traffic lights controlling which cars (information) can enter or leave an intersection at any given time.',
+    whyItMatters: 'Gates are the architectural innovation that made RNNs practical. The gating concept influences modern attention mechanisms.',
+    related: ['lstm', 'gru', 'cell-state', 'attention']
+  },
+  'gru': {
+    term: 'GRU (Gated Recurrent Unit)',
+    definition: 'A simplified variant of LSTM that combines the forget and input gates into a single "update gate" and merges cell/hidden state. Fewer parameters than LSTM with comparable performance on many tasks.',
+    analogy: 'Like a streamlined LSTM — same concept of gated memory, but with fewer moving parts.',
+    whyItMatters: 'GRUs demonstrate that simpler architectures can match complex ones. Sometimes less is more in model design.',
+    related: ['lstm', 'rnn', 'gates']
+  },
+  'bptt': {
+    term: 'BPTT (Backpropagation Through Time)',
+    definition: 'The algorithm for training RNNs by unrolling the network across time steps and applying standard backpropagation. Gradients flow backward through all time steps, which can cause vanishing or exploding gradients.',
+    analogy: 'Like tracing cause-and-effect backward through a chain of events — how did what happened 10 steps ago influence the current outcome?',
+    whyItMatters: 'BPTT\'s limitations (vanishing gradients over long sequences) are why attention mechanisms and Transformers were invented.',
+    related: ['backpropagation', 'rnn', 'vanishing-gradient']
+  },
+  'encoder-decoder': {
+    term: 'Encoder-Decoder Architecture',
+    definition: 'A model structure where an encoder processes input into a latent representation, and a decoder generates output from it. Used in translation (seq2seq), image segmentation (U-Net), and original Transformer. Decoder-only (GPT) and encoder-only (BERT) are variants.',
+    analogy: 'Like a translator who first understands the source language (encoder) and then formulates the translation (decoder).',
+    whyItMatters: 'Understanding encoder-decoder vs. decoder-only explains fundamental differences between BERT-like and GPT-like models, including Gemini\'s architecture choices.',
+    related: ['transformer', 'attention', 'unet']
+  },
+  'unet': {
+    term: 'U-Net',
+    definition: 'An encoder-decoder architecture with skip connections between corresponding encoder and decoder layers, forming a U shape. Originally designed for medical image segmentation, now widely used as the backbone of diffusion models like Stable Diffusion.',
+    analogy: 'Like a funnel that compresses information then expands it back, with shortcuts connecting matching resolution levels so fine details aren\'t lost.',
+    whyItMatters: 'U-Net is the backbone of image generation (Stable Diffusion, DALL-E). Understanding it helps you grasp diffusion model capabilities.',
+    related: ['encoder-decoder', 'diffusion-models', 'residual-connection']
+  },
+  'kernel': {
+    term: 'Kernel (Convolution)',
+    definition: 'A small matrix of learnable weights that slides across input data in a CNN, detecting local patterns like edges, textures, or shapes. Also called a filter. In SVMs, a kernel is a function that maps data to higher dimensions.',
+    analogy: 'Like a magnifying glass that scans across an image, looking for specific patterns at each position.',
+    whyItMatters: 'Kernels are why CNNs can detect visual features. Understanding them helps you grasp how computer vision models work.',
+    related: ['cnn', 'stride', 'padding', 'svm']
+  },
+  'stride': {
+    term: 'Stride',
+    definition: 'The step size at which a convolutional kernel moves across the input. Stride 1 means the kernel moves one pixel at a time; stride 2 skips every other position, reducing output dimensions by half.',
+    analogy: 'Like reading every word (stride 1) versus every other word (stride 2) — higher stride means faster but coarser processing.',
+    whyItMatters: 'Stride controls the spatial resolution tradeoff in CNN architectures — relevant for understanding computer vision capabilities.',
+    related: ['kernel', 'cnn', 'padding']
+  },
+  'padding': {
+    term: 'Padding (Convolution)',
+    definition: 'Adding extra values (usually zeros) around the border of input data before convolution. "Same" padding preserves spatial dimensions; "valid" padding reduces them. Prevents information loss at edges.',
+    analogy: 'Like adding a frame around a photo before scanning it — ensures the scanner can fully cover the edges.',
+    whyItMatters: 'Padding choices affect model architecture dimensions. Understanding it helps follow CNN architecture discussions.',
+    related: ['kernel', 'stride', 'cnn']
+  },
+  'translation-invariance': {
+    term: 'Translation Invariance',
+    definition: 'A property of CNNs meaning they can detect the same feature regardless of where it appears in the input. A cat detector works whether the cat is in the top-left or bottom-right of the image.',
+    analogy: 'Like recognizing a friend\'s face whether they\'re on the left or right side of a group photo.',
+    whyItMatters: 'Translation invariance is why CNNs are powerful for vision. It reduces the data needed — you don\'t need examples of cats in every possible position.',
+    related: ['cnn', 'kernel', 'weight-sharing']
+  },
+  'dense-prediction': {
+    term: 'Dense Prediction',
+    definition: 'Making a prediction for every pixel/position in an input, rather than a single prediction for the whole input. Includes semantic segmentation, depth estimation, and optical flow.',
+    analogy: 'Like coloring every pixel of an image with its category label, rather than just saying "this image contains a cat."',
+    whyItMatters: 'Dense prediction powers AR overlays, autonomous driving, and medical imaging — capabilities that Gemini\'s multimodal models may need.',
+    related: ['cnn', 'unet', 'encoder-decoder']
+  },
+  'linearly-separable': {
+    term: 'Linearly Separable',
+    definition: 'Data that can be perfectly divided into classes by a straight line (2D), plane (3D), or hyperplane (higher dimensions). Perceptrons can only solve linearly separable problems; XOR is the classic non-linearly-separable example.',
+    analogy: 'Like sorting a mixed pile of red and blue marbles by drawing one straight line between them — possible only if they\'re already somewhat grouped.',
+    whyItMatters: 'Understanding linear separability explains why deep networks with nonlinear activations are necessary — most real problems aren\'t linearly separable.',
+    related: ['perceptron', 'svm', 'activation-function']
+  },
+  'universal-approximation': {
+    term: 'Universal Approximation Theorem',
+    definition: 'The theorem stating that a neural network with a single hidden layer and sufficient neurons can approximate any continuous function to arbitrary precision. However, it says nothing about how to find those weights or how many neurons are needed.',
+    analogy: 'Like proving that enough Lego bricks can build anything — true in theory, but doesn\'t tell you which bricks to use or how many you need.',
+    whyItMatters: 'This theorem is why neural networks are so versatile. But "can approximate" doesn\'t mean "easy to train" — the gap between theory and practice matters.',
+    related: ['neural-network', 'deep-learning']
+  },
+  'classification-metrics': {
+    term: 'Classification Metrics',
+    definition: 'Quantitative measures for evaluating classification models: accuracy, precision, recall, F1-score, AUC-ROC. Each captures different aspects of performance — accuracy can be misleading with imbalanced classes.',
+    analogy: 'Like evaluating a spam filter: precision asks "of flagged emails, how many were actually spam?" while recall asks "of all spam emails, how many were caught?"',
+    whyItMatters: 'Choosing the right metric is a product decision, not just a technical one. A medical test should optimize recall; a recommendation engine might optimize precision.',
+    related: ['confusion-matrix', 'precision-recall', 'evaluation']
+  },
+  'confusion-matrix': {
+    term: 'Confusion Matrix',
+    definition: 'A table showing true positives, true negatives, false positives, and false negatives for a classification model. Reveals exactly where the model gets confused and which types of errors it makes.',
+    analogy: 'Like a detailed scoreboard that shows not just wins and losses, but exactly which opponents you won or lost against.',
+    whyItMatters: 'Confusion matrices reveal whether errors are tolerable or catastrophic. "95% accuracy" means different things if the 5% errors are evenly spread or concentrated in one critical class.',
+    related: ['classification-metrics', 'precision-recall']
+  },
+  'fid': {
+    term: 'FID (Fréchet Inception Distance)',
+    definition: 'A metric for evaluating the quality and diversity of generated images by comparing the distribution of generated images to real images in the feature space of an Inception network. Lower FID = better quality and diversity.',
+    analogy: 'Like comparing the overall vibe of two photo albums — not individual photos, but whether the collection as a whole looks similar.',
+    whyItMatters: 'FID is the standard metric for image generation models. Understanding it helps you evaluate and compare diffusion model performance.',
+    related: ['diffusion-models', 'evaluation', 'generative-ai']
+  },
+  'elo-rating': {
+    term: 'Elo Rating',
+    definition: 'A relative ranking system where models are rated based on head-to-head comparisons. Originally designed for chess, now used in LLM evaluation (Chatbot Arena). A model\'s rating increases when it wins comparisons and decreases when it loses.',
+    analogy: 'Like a chess rating for AI — you earn points by beating higher-rated opponents and lose points to lower-rated ones.',
+    whyItMatters: 'Elo-based leaderboards (LMSYS Chatbot Arena) are how LLMs are compared. Understanding this helps you interpret competitive benchmarks.',
+    related: ['evaluation', 'benchmarks']
+  },
+  'mode-collapse': {
+    term: 'Mode Collapse',
+    definition: 'A failure mode in GANs where the generator produces only a narrow subset of possible outputs, ignoring the full diversity of the data distribution. The generator finds a few "safe" outputs that fool the discriminator and stops exploring.',
+    analogy: 'Like a student who memorizes one perfect essay and submits it for every topic — technically not wrong, but severely lacking diversity.',
+    whyItMatters: 'Mode collapse is why GANs were largely replaced by diffusion models for image generation. Understanding failure modes of generative models helps evaluate alternatives.',
+    related: ['gan', 'generative-ai', 'diffusion-models']
+  },
+  'model-drift': {
+    term: 'Model Drift',
+    definition: 'The degradation of model performance over time as the real-world data distribution changes from what the model was trained on. Includes concept drift (the target relationship changes) and data drift (input distribution shifts).',
+    analogy: 'Like a map becoming outdated as new roads are built and old ones close — the model\'s understanding of the world slowly diverges from reality.',
+    whyItMatters: 'Model drift is why AI products need monitoring and retraining pipelines. A model that\'s great at launch can silently degrade without proper observability.',
+    related: ['evaluation', 'model-serving', 'monitoring']
+  },
+  'model-serving': {
+    term: 'Model Serving',
+    definition: 'The infrastructure for deploying trained models to handle real-time prediction requests. Involves API design, load balancing, batching, hardware optimization (GPU/TPU), latency management, and scaling.',
+    analogy: 'Like running a restaurant kitchen — the recipe (model) is done, but you need infrastructure to serve thousands of meals (predictions) per second.',
+    whyItMatters: 'Serving infrastructure determines user-facing latency and cost. A PM must understand the tradeoffs between model size, speed, and cost.',
+    related: ['latency', 'inference', 'scaling']
+  },
+  'uncertainty': {
+    term: 'Model Uncertainty',
+    definition: 'The model\'s own assessment of how confident it is in its predictions. Includes epistemic uncertainty (from limited training data) and aleatoric uncertainty (from inherent noise in the task). Crucial for knowing when to defer to humans.',
+    analogy: 'Like a doctor saying "I\'m 90% sure it\'s a cold, but 10% chance it\'s something else" — the confidence level matters as much as the diagnosis.',
+    whyItMatters: 'Uncertainty estimation enables "I don\'t know" responses, human-in-the-loop workflows, and calibrated confidence. Essential for responsible AI products.',
+    related: ['evaluation', 'calibration', 'responsible-ai']
+  },
+  'self-supervised-learning': {
+    term: 'Self-Supervised Learning',
+    definition: 'A training paradigm where the model creates its own supervision signal from unlabeled data — e.g., predicting masked words (BERT), next tokens (GPT), or matching image augmentations (CLIP). Eliminates the need for expensive human labels.',
+    analogy: 'Like learning a language by reading millions of books and filling in blanks, rather than having a teacher provide translations.',
+    whyItMatters: 'Self-supervised learning is how all modern LLMs are pre-trained. It\'s the key insight that enabled scaling to trillions of tokens of training data.',
+    related: ['pre-training', 'llm', 'contrastive-learning']
+  },
+  'generative-ai': {
+    term: 'Generative AI',
+    definition: 'AI systems that create new content — text, images, audio, video, code — rather than just classifying or predicting. Includes LLMs (GPT, Gemini), diffusion models (DALL-E, Imagen), and audio models (MusicLM).',
+    analogy: 'Like the difference between a critic who evaluates art and an artist who creates it — generative AI produces, not just judges.',
+    whyItMatters: 'Generative AI is the product category you\'ll be building at DeepMind. Understanding its capabilities and limitations is your core PM competency.',
+    related: ['llm', 'diffusion-models', 'multimodal']
+  },
+  'foundation-model': {
+    term: 'Foundation Model',
+    definition: 'A large model trained on broad data that can be adapted to many downstream tasks. Gemini, GPT-4, and Claude are foundation models — trained once at enormous cost, then fine-tuned or prompted for specific applications.',
+    analogy: 'Like a liberal arts education — broad knowledge that can be specialized for any career, versus vocational training for one specific job.',
+    whyItMatters: 'Foundation models are the product you\'re building. Understanding the economics (massive training cost, versatile application) shapes platform strategy.',
+    related: ['llm', 'pre-training', 'fine-tuning', 'generative-ai']
+  },
+  'agent': {
+    term: 'Agent (RL/AI)',
+    definition: 'An entity that perceives its environment, takes actions, and receives rewards. In RL, the agent learns a policy that maps states to actions to maximize cumulative reward. In AI products, "agent" increasingly means an LLM-powered system that autonomously takes actions.',
+    analogy: 'Like a player in a video game who observes the screen, chooses moves, and gets points — learning which strategies work over time.',
+    whyItMatters: 'AI agents (tool-using LLMs, autonomous systems) are a major product trend. Understanding agency is central to building Gemini assistive features.',
+    related: ['reinforcement-learning', 'policy', 'environment', 'reward']
+  },
+  'action': {
+    term: 'Action (RL)',
+    definition: 'A decision made by an RL agent at each time step. The set of possible actions is the "action space" — it can be discrete (turn left/right) or continuous (steering angle). The agent\'s policy determines which action to take given the current state.',
+    analogy: 'Like choosing which move to make in chess — each piece you could move represents a different action in your action space.',
+    whyItMatters: 'Understanding action spaces helps you grasp how RL agents operate, which is core DeepMind knowledge.',
+    related: ['agent', 'state', 'policy', 'environment']
+  },
+  'state': {
+    term: 'State (RL)',
+    definition: 'The current situation of the environment as perceived by the agent — a complete or partial description of the world at a given moment. The state is the input to the agent\'s policy for choosing actions.',
+    analogy: 'Like the current position of all pieces on a chess board — everything the player needs to see to make their next move.',
+    whyItMatters: 'State representation design is a critical decision in RL systems. Partial observability (not seeing the full state) is a key real-world challenge.',
+    related: ['agent', 'action', 'environment', 'policy']
+  },
+  'environment': {
+    term: 'Environment (RL)',
+    definition: 'Everything external to the RL agent — the world it interacts with. The environment receives actions, transitions to new states, and provides rewards. Can be a simulation (game, physics engine) or the real world (robotics).',
+    analogy: 'Like the game board and rules in a board game — it responds to the player\'s moves and determines outcomes.',
+    whyItMatters: 'Environment design determines what the agent can learn. Simulation environments (like DeepMind Lab) accelerate research by providing fast, safe training grounds.',
+    related: ['agent', 'state', 'reward', 'action']
+  },
+  'reward': {
+    term: 'Reward (RL)',
+    definition: 'A scalar signal from the environment that tells the agent how good its action was. The agent\'s objective is to maximize cumulative reward over time. Reward design (reward shaping) is one of the hardest parts of RL.',
+    analogy: 'Like the score in a game — it tells you how well you\'re doing, and you learn strategies that maximize your score.',
+    whyItMatters: 'Reward misspecification is a major source of AI alignment failures. The agent optimizes exactly what you reward — which may not be what you intended.',
+    related: ['agent', 'reward-hacking', 'rlhf', 'alignment']
+  },
+  'reward-hacking': {
+    term: 'Reward Hacking',
+    definition: 'When an RL agent exploits loopholes in the reward function to achieve high reward without actually solving the intended task. A symptom of misspecified objectives — the agent finds shortcuts that satisfy the letter but not spirit of the reward.',
+    analogy: 'Like a student who games the grading system — getting perfect scores without actually learning the material.',
+    whyItMatters: 'Reward hacking is an alignment problem that extends to RLHF-trained LLMs. Models may learn to produce outputs that "look good" to evaluators without being genuinely helpful.',
+    related: ['reward', 'alignment', 'rlhf', 'exploration-exploitation']
+  },
+  'policy': {
+    term: 'Policy (RL)',
+    definition: 'A function that maps states to actions — the agent\'s strategy for behavior. Can be deterministic (state → action) or stochastic (state → probability distribution over actions). Learning the optimal policy is the goal of RL.',
+    analogy: 'Like a rulebook for how to play — given any game situation, the policy tells you what move to make.',
+    whyItMatters: 'Policies are what RL agents learn. AlphaGo\'s policy network was the breakthrough that enabled superhuman Go play.',
+    related: ['agent', 'state', 'action', 'reinforcement-learning']
+  },
+  'exploration-exploitation': {
+    term: 'Exploration-Exploitation Tradeoff',
+    definition: 'The fundamental dilemma in RL: should the agent try new actions to discover potentially better strategies (explore) or stick with known good actions (exploit)? Too much exploration wastes time; too much exploitation misses better options.',
+    analogy: 'Like choosing between your favorite restaurant (exploit) and trying a new one that might be better or worse (explore).',
+    whyItMatters: 'This tradeoff appears in product decisions too: should you optimize the current feature or experiment with alternatives? Understanding it frames A/B testing and product evolution.',
+    related: ['reinforcement-learning', 'agent', 'reward']
+  },
+  'credit-assignment': {
+    term: 'Credit Assignment Problem',
+    definition: 'The challenge of determining which actions in a sequence actually contributed to the eventual reward. When reward is delayed (e.g., winning a game after 100 moves), it\'s unclear which early decisions mattered.',
+    analogy: 'Like figuring out which ingredient made a recipe taste great when you changed five things at once.',
+    whyItMatters: 'Credit assignment is why attribution analysis matters in both RL and product analytics — knowing what caused success is harder than it seems.',
+    related: ['reinforcement-learning', 'reward', 'temporal-difference']
+  },
+  'deepmind': {
+    term: 'DeepMind',
+    definition: 'A leading AI research lab founded in 2010, acquired by Google in 2014, now part of Google DeepMind. Known for AlphaGo, AlphaFold, Gemini, and fundamental contributions to reinforcement learning, neuroscience-inspired AI, and protein structure prediction.',
+    analogy: 'Like the Bell Labs of AI — a research powerhouse that produces both fundamental breakthroughs and world-changing products.',
+    whyItMatters: 'This is where you\'re interviewing. Understanding DeepMind\'s culture (research-first, ambitious long-term bets, safety focus) is essential.',
+    related: ['gemini', 'alphago', 'alphafold']
+  },
+  'ai-product-lifecycle': {
+    term: 'AI Product Lifecycle',
+    definition: 'The end-to-end process of building AI products: problem definition → data collection → model development → evaluation → deployment → monitoring → iteration. Unlike traditional software, AI products require continuous data and model maintenance.',
+    analogy: 'Like farming versus manufacturing — traditional software is built once and shipped; AI products are living systems that need ongoing cultivation.',
+    whyItMatters: 'Understanding the full lifecycle prevents the common PM mistake of treating model development as the hard part when deployment and maintenance are equally challenging.',
+    related: ['model-drift', 'model-serving', 'evaluation']
+  },
+  'developer-platform': {
+    term: 'Developer Platform',
+    definition: 'A set of APIs, SDKs, tools, documentation, and services that enable external developers to build on top of your technology. Examples: Google Cloud AI Platform, OpenAI API, Hugging Face. Success is measured by developer adoption and ecosystem growth.',
+    analogy: 'Like providing a well-equipped kitchen to chefs — the better your tools and ingredients, the more amazing dishes (apps) developers can create.',
+    whyItMatters: 'The Gemini role specifically involves SDK and developer platform strategy. Understanding what makes platforms succeed (DX, reliability, documentation) is core to the job.',
+    related: ['sdk', 'developer-experience', 'developer-advocacy', 'platform-strategy']
+  },
+  'developer-advocacy': {
+    term: 'Developer Advocacy',
+    definition: 'The practice of building relationships with developer communities, creating educational content, gathering feedback, and representing developer interests internally. Developer advocates bridge the gap between the platform team and its users.',
+    analogy: 'Like being an ambassador — you represent the platform to developers and represent developers to the platform team.',
+    whyItMatters: 'Developer advocates are a key channel for understanding what developers need. As a platform PM, working closely with DevRel shapes your roadmap.',
+    related: ['developer-platform', 'developer-experience', 'platform-strategy']
+  },
+  'platform-strategy': {
+    term: 'Platform Strategy',
+    definition: 'The strategic approach to building a technology platform that creates value by connecting producers and consumers, creating network effects, and establishing ecosystem lock-in. Platform strategy for AI includes API design, pricing, and ecosystem cultivation.',
+    analogy: 'Like building a marketplace — the platform becomes more valuable as more people use it, creating a self-reinforcing cycle.',
+    whyItMatters: 'Gemini\'s developer platform is competing with OpenAI, Anthropic, and open-source. Platform strategy determines who wins the AI ecosystem war.',
+    related: ['developer-platform', 'network-effects', 'flywheel']
+  },
+  'network-effects': {
+    term: 'Network Effects',
+    definition: 'A phenomenon where a product becomes more valuable as more people use it. Direct network effects (more users = more value, like a phone network) and indirect effects (more developers = more apps = more users).',
+    analogy: 'Like a party — the more people who come, the more fun it is, which attracts even more people.',
+    whyItMatters: 'Network effects are how platforms win. For Gemini, more developers using the API → more apps → more user adoption → more data → better models.',
+    related: ['platform-strategy', 'flywheel', 'developer-platform']
+  },
+  'flywheel': {
+    term: 'Flywheel Effect',
+    definition: 'A self-reinforcing cycle where each component feeds the next, building momentum over time. In AI: more users → more data → better models → better products → more users. Coined by Jim Collins.',
+    analogy: 'Like pushing a heavy wheel — each push adds a bit of momentum until the wheel spins under its own power.',
+    whyItMatters: 'The data flywheel is the most powerful moat in AI. Products with flywheels compound advantages over time.',
+    related: ['network-effects', 'platform-strategy', 'data-moat']
+  },
+  'portfolio-approach': {
+    term: 'Portfolio Approach',
+    definition: 'A strategy of investing in multiple parallel initiatives with varying risk profiles, expecting some to fail but the winners to more than compensate. Applied to AI product bets: some safe improvements, some moonshot experiments.',
+    analogy: 'Like an investment portfolio — you diversify across safe bonds and risky stocks to balance guaranteed returns with upside potential.',
+    whyItMatters: 'AI roadmaps should balance incremental improvements with experimental bets. This approach manages the inherent uncertainty of AI research translating to products.',
+    related: ['ai-product-lifecycle', 'platform-strategy']
+  },
+  'mental-model': {
+    term: 'Mental Model',
+    definition: 'A user\'s internal understanding of how a system works. AI products often face a mental model gap — users don\'t know what the AI can or can\'t do, leading to misuse, disappointment, or underutilization.',
+    analogy: 'Like a map in your head — if your map doesn\'t match the territory, you\'ll take wrong turns even if the road is perfectly built.',
+    whyItMatters: 'Designing for correct mental models is critical for AI products. Users who think chatbots "understand" them will have different expectations than those who know they pattern-match.',
+    related: ['user-research', 'developer-experience']
+  },
+  'wizard-of-oz': {
+    term: 'Wizard of Oz Testing',
+    definition: 'A prototyping technique where users interact with what appears to be an AI system, but a human behind the scenes is actually generating the responses. Used to test AI product concepts before building the model.',
+    analogy: 'Like the Wizard of Oz — the user sees impressive "AI" but there\'s a person behind the curtain pulling the levers.',
+    whyItMatters: 'WOz testing is the fastest way to validate AI product concepts. You can test user interactions, identify edge cases, and refine prompts before investing in model development.',
+    related: ['user-research', 'ai-product-lifecycle']
+  },
+  'third-party-integration': {
+    term: 'Third-Party Integration',
+    definition: 'Connecting your AI system with external services (Instagram, WhatsApp, banking apps) to provide contextual assistance. Challenges include API instability, authentication, rate limits, and maintaining functionality when third parties change their interfaces.',
+    analogy: 'Like building bridges between islands — each island (service) can change its coastline anytime, potentially breaking your bridge.',
+    whyItMatters: 'Gemini as an assistant layer on Android/iOS depends heavily on third-party app integrations. When Instagram changes its UI, Gemini\'s screen-reading features can break.',
+    related: ['graceful-degradation', 'schema-drift', 'screen-context']
+  },
+  'sse': {
+    term: 'SSE (Server-Sent Events)',
+    definition: 'A web technology enabling a server to push real-time updates to a client over HTTP. Used in streaming LLM responses — tokens appear as they\'re generated rather than waiting for the complete response.',
+    analogy: 'Like watching a letter being typed live versus waiting for the entire letter to arrive in an envelope.',
+    whyItMatters: 'SSE enables the streaming chat experience users expect from AI products. Understanding it helps you design responsive API interfaces.',
+    related: ['api', 'sdk', 'latency']
+  },
+  'vertex-ai': {
+    term: 'Vertex AI',
+    definition: 'Google Cloud\'s managed ML platform that provides tools for building, deploying, and scaling ML models. Includes AutoML, custom training, model deployment, and increasingly, access to Gemini foundation models via API.',
+    analogy: 'Like a turnkey factory for AI — all the machines, tools, and logistics are set up so you can focus on what to build.',
+    whyItMatters: 'Vertex AI is a key distribution channel for Gemini models. Understanding Google\'s platform ecosystem is essential for the DeepMind PM role.',
+    related: ['model-serving', 'developer-platform', 'gemini']
   }
 };

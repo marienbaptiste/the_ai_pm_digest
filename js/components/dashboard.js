@@ -7,7 +7,7 @@ export function renderDashboard(container) {
   const streak = storage.getStreak();
 
   container.innerHTML = `
-    <div class="dashboard animate-in">
+    <div class="dashboard">
       <header class="dashboard__hero">
         <div class="dashboard__hero-bg"></div>
         <div class="dashboard__hero-content">
@@ -45,8 +45,8 @@ export function renderDashboard(container) {
       <section class="dashboard__modules">
         <h2 class="dashboard__section-title">Your Learning Path</h2>
         <p class="dashboard__section-desc">12 modules taking you from AI fundamentals to DeepMind interview readiness.</p>
-        <div class="dashboard__grid">
-          ${modules.map((mod, index) => {
+        <div class="dashboard__grid orchestrate">
+          ${modules.map((mod) => {
             const modProgress = storage.getModuleProgress(mod);
             const nextLesson = mod.lessons.find(l => !storage.isLessonCompleted(`${mod.id}-${l.id}`));
             const href = nextLesson
@@ -54,13 +54,13 @@ export function renderDashboard(container) {
               : `#/module/${mod.id}/lesson/${mod.lessons[0].id}`;
 
             return `
-              <a href="${href}" class="card card--interactive card--module stagger-${(index % 8) + 1} animate-in" style="--module-color: ${mod.color};">
+              <a href="${href}" class="card card--interactive card--module" style="--module-color: ${mod.color};">
                 <div class="card__icon" style="background: ${mod.color}15; color: ${mod.color};">
                   ${mod.icon}
                 </div>
                 <div class="card__body">
+                  <span class="card__number">${String(mod.number).padStart(2, '0')}</span>
                   <div class="card__title" style="color: ${mod.color};">
-                    <span class="card__number">${String(mod.number).padStart(2, '0')}</span>
                     ${mod.title}
                   </div>
                   <div class="card__description">${mod.description}</div>
@@ -87,7 +87,7 @@ export function renderDashboard(container) {
           <h3 style="color: var(--accent-purple); margin-bottom: var(--space-3);">Target Role</h3>
           <h4 style="margin-bottom: var(--space-2);">Product Manager, Gemini App Integrated Assistance</h4>
           <p style="color: var(--text-secondary); font-size: var(--text-sm); margin-bottom: var(--space-4);">Google DeepMind \u2014 Zurich, Switzerland</p>
-          <div class="dashboard__skills">
+          <div class="dashboard__skills orchestrate--wave">
             <span class="tag tag--primary">LLMs</span>
             <span class="tag tag--blue">SDK Design</span>
             <span class="tag tag--purple">Diffusion Models</span>
