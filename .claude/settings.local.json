@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:job-boards.greenhouse.io)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:www.typewolf.com)",
+      "Bash(npx -y serve:*)",
+      "Bash(node -e:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(curl:*)"
+    ]
+  }
+}

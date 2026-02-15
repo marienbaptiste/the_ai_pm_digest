@@ -1,0 +1,192 @@
+/* === Page transitions === */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* === Ambient background drift === */
+@keyframes ambientDrift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-2%, 1%) rotate(1deg); }
+  100% { transform: translate(1%, -1%) rotate(-0.5deg); }
+}
+
+/* === Tooltip === */
+@keyframes tooltipIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Pulse === */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 10px var(--accent-primary-dim); }
+  50% { box-shadow: 0 0 25px var(--accent-primary-dim); }
+}
+
+/* === Shake (quiz wrong answer) === */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* === Scale pop === */
+@keyframes scalePop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* === SVG draw === */
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* === Node activate (for diagrams) === */
+@keyframes nodeActivate {
+  0% {
+    fill: var(--bg-elevated);
+    r: 8;
+  }
+  50% {
+    fill: var(--accent-primary);
+    r: 11;
+  }
+  100% {
+    fill: var(--accent-primary);
+    r: 9;
+  }
+}
+
+/* === Data flow (for diagrams) === */
+@keyframes dataFlow {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* === Gradient shift === */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === Spin === */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* === Stagger utility classes === */
+.stagger-1 { animation-delay: 50ms; }
+.stagger-2 { animation-delay: 100ms; }
+.stagger-3 { animation-delay: 150ms; }
+.stagger-4 { animation-delay: 200ms; }
+.stagger-5 { animation-delay: 250ms; }
+.stagger-6 { animation-delay: 300ms; }
+.stagger-7 { animation-delay: 350ms; }
+.stagger-8 { animation-delay: 400ms; }
+
+/* === Animate on scroll/view utility === */
+.animate-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideUp var(--duration-slow) var(--ease-out) forwards;
+}
+
+/* === Correct / Incorrect quiz animations === */
+.quiz-correct {
+  animation: scalePop var(--duration-normal) var(--ease-spring);
+  border-color: var(--accent-green) !important;
+  background: var(--accent-green-dim) !important;
+}
+
+.quiz-incorrect {
+  animation: shake var(--duration-normal) var(--ease-out);
+  border-color: var(--accent-red) !important;
+  background: var(--accent-red-dim) !important;
+}
+
+/* === Loading spinner === */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-medium);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin var(--duration-slower) linear infinite;
+}
+
+/* === Progress ring fill animation === */
+@keyframes progressFill {
+  from {
+    stroke-dashoffset: var(--circumference);
+  }
+}
+
+/* === Diagram-specific animations === */
+@keyframes flowPulse {
+  0%, 100% {
+    stroke-width: 2;
+    stroke-opacity: 0.3;
+  }
+  50% {
+    stroke-width: 3;
+    stroke-opacity: 0.8;
+  }
+}
+
+@keyframes nodeBreathe {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.08);
+    filter: brightness(1.3);
+  }
+}
