@@ -465,6 +465,8 @@ export const lessons = {
   <strong>PM Perspective:</strong> You do not need to implement optimisers, but you should understand that <strong>hyperparameter tuning</strong> — choosing the learning rate, batch size, optimiser, and learning rate schedule — significantly impacts model performance and training cost. When your ML team says "we need more compute for hyperparameter search," they are exploring this space. The learning rate alone can make the difference between a model that converges in hours and one that never converges at all.
 </div>
 
+<div class="interactive" data-interactive="gradient-descent"></div>
+
 <h2>The Training Loop in Full</h2>
 <p>
   Putting it all together, the training loop for a neural network is:
@@ -651,6 +653,8 @@ export const lessons = {
 <div class="key-concept">
   <strong>Key Concept:</strong> The <span class="term" data-term="vanishing-gradient">vanishing gradient problem</span> plagued early deep networks. When using sigmoid or tanh activations, gradients in early layers become exponentially small during backpropagation, making those layers learn extremely slowly. ReLU largely solved this for feedforward networks, enabling training of much deeper architectures. This practical breakthrough, not a theoretical one, was a key enabler of the deep learning revolution.
 </div>
+
+<div class="interactive" data-interactive="neuron-playground"></div>
 
 <h2>Architecture of a Feedforward Neural Network</h2>
 <p>

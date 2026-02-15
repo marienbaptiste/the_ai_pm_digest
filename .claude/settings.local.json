@@ -10,7 +10,10 @@
       "Bash(curl:*)",
       "Bash(findstr:*)",
       "Bash(ls:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(node --input-type=module -e:*)",
+      "Bash(wc:*)",
+      "Bash(python3:*)"
     ]
   }
 }

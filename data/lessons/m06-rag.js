@@ -56,6 +56,8 @@ export const lessons = {
   mathematical framework.
 </p>
 
+<div class="interactive" data-interactive="embedding-projector"></div>
+
 <h3>Contextual Embeddings (ELMo, BERT, GPT)</h3>
 <p>
   Static embeddings (Word2Vec, GloVe) assign one vector per word regardless of context. The word

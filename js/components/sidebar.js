@@ -57,10 +57,48 @@ export function updateSidebarProgress() {
   const container = document.getElementById('sidebar-progress-ring');
   const text = document.getElementById('sidebar-progress-text');
 
-  container.innerHTML = '';
-  container.appendChild(createProgressRing(overall.percent, 36, 3));
-  text.textContent = `${overall.percent}% Complete`;
+  if (container) {
+    container.innerHTML = '';
+    container.appendChild(createProgressRing(overall.percent, 36, 3));
+  }
+  if (text) {
+    text.textContent = `${overall.completed}/${overall.total} — ${overall.percent}% Complete`;
+  }
 }
+
+// Listen for progress changes from any source
+window.addEventListener('progress-changed', (e) => {
+  updateSidebarProgress();
+  // Update lesson completion state in sidebar nav without full re-render
+  const lessonKey = e.detail?.lessonKey;
+  if (lessonKey) {
+    const link = document.querySelector(`.nav-lesson[data-lesson-key="${lessonKey}"]`);
+    if (link) {
+      if (e.detail.reset) {
+        link.classList.remove('is-completed');
+      } else {
+        link.classList.add('is-completed');
+      }
+    }
+    // Update module progress count
+    const modId = lessonKey.split('-')[0];
+    const mod = modules.find(m => m.id === modId);
+    if (mod) {
+      const modProgress = storage.getModuleProgress(mod);
+      const modHeader = document.querySelector(`.nav-module[data-module="${modId}"] .nav-module__header`);
+      if (modHeader) {
+        const existing = modHeader.querySelector('.tag');
+        if (modProgress.completed > 0) {
+          const tagHtml = `<span class="tag tag--primary" style="margin-left: auto; margin-right: 4px;">${modProgress.completed}/${modProgress.total}</span>`;
+          if (existing) existing.outerHTML = tagHtml;
+          else modHeader.querySelector('.nav-module__chevron').insertAdjacentHTML('beforebegin', tagHtml);
+        } else if (existing) {
+          existing.remove();
+        }
+      }
+    }
+  }
+});
 
 // Mobile sidebar toggle
 export function initSidebarToggle() {

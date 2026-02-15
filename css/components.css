@@ -245,6 +245,7 @@
 
 .progress-bar__fill {
   height: 100%;
+  min-width: 4px;
   background: linear-gradient(90deg, var(--accent-primary), var(--accent-warm), var(--accent-primary));
   background-size: 200% 100%;
   border-radius: var(--radius-full);

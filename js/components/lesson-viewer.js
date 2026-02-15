@@ -26,6 +26,7 @@ const diagramLoaders = {
   'stakeholder-map': () => import('../diagrams/stakeholder-map.js'),
   'gemini-ecosystem': () => import('../diagrams/gemini-ecosystem.js'),
   'interview-framework': () => import('../diagrams/interview-framework.js'),
+  'frontier-tech': () => import('../diagrams/frontier-tech.js'),
 };
 
 export async function renderLesson(container, moduleId, lessonId) {
@@ -185,7 +186,8 @@ function getModuleFileName(moduleId) {
     m09: 'ai-ethics',
     m10: 'leadership',
     m11: 'deepmind-gemini',
-    m12: 'interview-prep'
+    m12: 'interview-prep',
+    m13: 'frontier-ai'
   };
   return names[moduleId] || moduleId;
 }

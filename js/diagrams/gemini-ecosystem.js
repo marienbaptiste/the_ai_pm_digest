@@ -212,15 +212,15 @@ export function render(container) {
             fill="#a855f7" font-family="var(--font-mono)" font-size="8" font-weight="600">Ultra</text>
         </g>
         <g class="ge-badge" style="animation-delay: 3.0s;">
-          <rect x="${cx - 26}" y="${cy + outerR + 30}" width="52" height="20" rx="10"
+          <rect x="${cx - 26}" y="${cy + outerOrbitR + 30}" width="52" height="20" rx="10"
             fill="#3b82f620" stroke="#3b82f660" stroke-width="1"/>
-          <text x="${cx}" y="${cy + outerR + 41}" text-anchor="middle" dominant-baseline="central"
+          <text x="${cx}" y="${cy + outerOrbitR + 41}" text-anchor="middle" dominant-baseline="central"
             fill="#3b82f6" font-family="var(--font-mono)" font-size="8" font-weight="600">Pro</text>
         </g>
         <g class="ge-badge" style="animation-delay: 3.2s;">
-          <rect x="${cx + 38}" y="${cy + outerR + 30}" width="52" height="20" rx="10"
+          <rect x="${cx + 38}" y="${cy + outerOrbitR + 30}" width="52" height="20" rx="10"
             fill="#00d4aa20" stroke="#00d4aa60" stroke-width="1"/>
-          <text x="${cx + 64}" y="${cy + outerR + 41}" text-anchor="middle" dominant-baseline="central"
+          <text x="${cx + 64}" y="${cy + outerOrbitR + 41}" text-anchor="middle" dominant-baseline="central"
             fill="#00d4aa" font-family="var(--font-mono)" font-size="8" font-weight="600">Flash</text>
         </g>
 

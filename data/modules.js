@@ -143,8 +143,23 @@ export const modules = [
     ]
   },
   {
-    id: 'm11',
+    id: 'm13',
     number: 11,
+    title: 'Frontier AI & Cutting-Edge Concepts',
+    description: 'MoE architectures, state space models, reasoning at inference, AI agents, and the trends shaping 2025\u20132026.',
+    icon: '\u{1F680}',
+    color: '#14b8a6',
+    lessons: [
+      { id: 'l01', title: 'Mixture of Experts \u2014 How Gemini & Mixtral Scale Efficiently', diagram: 'frontier-tech' },
+      { id: 'l02', title: 'State Space Models \u2014 Mamba, S4 & Alternatives to Transformers', diagram: 'frontier-tech' },
+      { id: 'l03', title: 'Reasoning Models & Test-Time Compute \u2014 o1, R1 & Thinking at Inference', diagram: 'frontier-tech' },
+      { id: 'l04', title: 'AI Agents, Tool Use & Multi-Agent Systems', diagram: 'frontier-tech' },
+      { id: 'l05', title: 'Frontier Trends \u2014 Synthetic Data, World Models, Video Gen & What\u2019s Next', diagram: 'frontier-tech' }
+    ]
+  },
+  {
+    id: 'm11',
+    number: 12,
     title: 'DeepMind & Gemini Deep Dive',
     description: 'DeepMind\'s journey, Gemini\'s architecture, product ecosystem, and competitive landscape.',
     icon: '\u{1F48E}',
@@ -158,7 +173,7 @@ export const modules = [
   },
   {
     id: 'm12',
-    number: 12,
+    number: 13,
     title: 'Interview Prep & Case Studies',
     description: 'PM interview frameworks, AI case studies, and mock interview practice.',
     icon: '\u{1F3AF}',

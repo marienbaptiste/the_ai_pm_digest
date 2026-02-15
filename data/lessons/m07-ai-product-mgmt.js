@@ -280,6 +280,8 @@ export const lessons = {
   will lose trust immediately.
 </p>
 
+<div class="interactive" data-interactive="confusion-matrix"></div>
+
 <h3>Precision, Recall, and F1-Score</h3>
 <p>
   <strong>Precision</strong> answers: <em>Of everything the model flagged as positive, how many were actually positive?</em>

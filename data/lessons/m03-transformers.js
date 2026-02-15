@@ -67,6 +67,29 @@ export const lessons = {
 
 <div class="key-concept"><strong>Key Concept:</strong> The Transformer is not just an NLP architecture — it is a general-purpose sequence processor. Its dominance across vision, protein science, robotics, and code demonstrates that self-attention is a fundamental computational primitive, not a domain-specific trick. This universality is what makes it the backbone of modern AI.</div>
 
+<h2>The Positional Encoding Problem and RoPE</h2>
+<p>Self-attention is <strong>permutation-invariant</strong> — it treats tokens as an unordered set, not a sequence. "Dog bites man" and "Man bites dog" would produce identical attention scores without positional information. The original Transformer solved this with <span class="term" data-term="positional-encoding">sinusoidal positional encodings</span>: deterministic sine and cosine functions that inject position information by adding a position-dependent vector to each token embedding.</p>
+
+<p>But sinusoidal encodings had limitations. As the field pushed toward longer contexts (from 512 tokens in BERT to 128K+ in modern models), the original scheme struggled to generalise to sequence lengths beyond what was seen during training. This sparked an evolution of positional encoding methods that is one of the most consequential developments in post-2017 Transformer research:</p>
+
+<table>
+<thead>
+<tr><th>Method</th><th>Mechanism</th><th>Length Generalisation</th><th>Used In</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Sinusoidal</strong></td><td>Add fixed sin/cos vectors to input embeddings</td><td>Moderate — degrades beyond training length</td><td>Original Transformer (2017)</td></tr>
+<tr><td><strong>Learned Positions</strong></td><td>Learnable embedding per position slot</td><td>Poor — hard limit at max trained length</td><td>BERT, GPT-2</td></tr>
+<tr><td><strong>RoPE</strong> (Rotary Position Embedding)</td><td>Rotates Q and K vectors by position-dependent angles; relative distance encoded in dot product</td><td>Good — extendable via NTK-aware scaling, YaRN</td><td>LLaMA, Gemini, Mistral, Qwen</td></tr>
+<tr><td><strong>ALiBi</strong></td><td>Adds linear bias to attention scores based on token distance</td><td>Excellent — no learned parameters, zero-shot extrapolation</td><td>BLOOM, MPT</td></tr>
+</tbody>
+</table>
+
+<p><strong>RoPE</strong> (Su et al., 2021) has emerged as the dominant choice for modern LLMs. The core insight is elegant: instead of adding positional information to the token embeddings, RoPE applies a rotation matrix to the Query and Key vectors before the dot product. The rotation angle depends on the token's position in the sequence. Because the dot product of two rotated vectors naturally encodes the <em>relative</em> angular difference between them, the attention score between two tokens automatically reflects their relative distance — without learning any extra parameters. This means "how far apart are these tokens?" is baked into the geometry of the attention computation itself.</p>
+
+<p>Critically, RoPE-based models can be extended to longer contexts after training through interpolation techniques like <strong>NTK-aware scaling</strong> (which adjusts the frequency base of the rotations) and <strong>YaRN</strong> (Yet another RoPE extensioN). This capability is what allows models trained on 8K contexts to be extended to 128K+ — a feature directly impacting product capabilities like long-document analysis and extended conversations in Gemini.</p>
+
+<div class="pro-tip"><strong>PM Perspective:</strong> The choice of positional encoding has direct product impact. When a customer asks "Can Gemini analyse my entire codebase in a single prompt?", the answer depends on whether the model's positional encoding supports that context length — and at what quality. RoPE scaling enables extension, but quality degrades at extreme lengths. A PM must insist on "needle in a haystack" evaluations at the target length before committing to context-window claims in product marketing.</div>
+
 <h2>From One Paper to Industry Transformation</h2>
 <p>The trajectory from the 2017 paper to today's multi-billion-dollar AI industry is remarkably direct. BERT (2018) showed that Transformer encoders could be pre-trained for powerful representations. GPT-2 (2019) showed that Transformer decoders could generate coherent text. GPT-3 (2020) showed that scaling these models to 175 billion parameters unlocked surprising emergent capabilities like <span class="term" data-term="few-shot">few-shot</span> learning. By 2023, Transformer-based <span class="term" data-term="llm">LLMs</span> were powering consumer products serving hundreds of millions of users.</p>
 
@@ -227,6 +250,8 @@ export const lessons = {
 </ul>
 
 <div class="pro-tip"><strong>PM Perspective:</strong> Attention visualizations are a powerful tool for debugging and building trust with stakeholders. When a model makes an incorrect prediction, showing that it attended to the wrong part of the input provides an intuitive explanation — far more accessible than "the loss function had a high value." As a PM, you should know that attention-based explanations are approximate (they show correlation, not necessarily causation), but they are the most interpretable window into Transformer behavior and invaluable for responsible AI reviews.</div>
+
+<div class="interactive" data-interactive="attention-viz"></div>
 
 <h2>Causal (Masked) Self-Attention</h2>
 <p>In autoregressive models like <span class="term" data-term="gpt">GPT</span>, there is a critical constraint: when predicting token <code>t+1</code>, the model must not "see" tokens at positions <code>t+1, t+2, ...</code> because those are the tokens it's trying to predict. This is enforced through <strong>causal masking</strong> (also called "masked self-attention").</p>

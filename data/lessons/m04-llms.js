@@ -33,6 +33,8 @@ export const lessons = {
 
 <p>Word2Vec's impact was enormous. It demonstrated that unsupervised learning on raw text could produce useful semantic representations, and it made word embeddings a standard component in nearly all NLP pipelines for the next five years.</p>
 
+<div class="interactive" data-interactive="embedding-projector"></div>
+
 <h2>GloVe and FastText: Refinements (2014-2016)</h2>
 <p>Stanford's GloVe (Global Vectors, 2014) approached the same goal through matrix factorization of a global word co-occurrence matrix, producing embeddings with similar quality to Word2Vec but with stronger theoretical grounding. Facebook's FastText (2016) extended Word2Vec by representing words as bags of character n-grams, enabling it to generate embeddings for out-of-vocabulary words — a practical limitation of Word2Vec.</p>
 
@@ -210,6 +212,8 @@ export const lessons = {
 <p><code>["Transform", "ers", " are", " revolution", "izing", " AI"]</code> — 6 tokens</p>
 <p>Note that common words ("are", "AI") are single tokens, while less common words are split into subword pieces. Spaces are typically attached to the beginning of words. The token vocabulary is learned from the training data, so frequently occurring subwords become single tokens.</p>
 </div>
+
+<div class="interactive" data-interactive="tokenizer"></div>
 
 <div class="warning"><strong>Common Misconception:</strong> Tokens are not words. This is critical for understanding model behavior and pricing. GPT-4's tokenizer splits "ChatGPT" into ["Chat", "G", "PT"] — 3 tokens for what looks like one word. Conversely, "the" is 1 token. On average, 1 token ≈ 0.75 English words, but this varies dramatically by language (Chinese text typically requires more tokens per semantic unit than English). Token count directly impacts cost (API pricing is per-token), latency (each token requires a forward pass during generation), and effective context length.</div>
 
@@ -556,6 +560,8 @@ export const lessons = {
 <p><strong>Retrieval-Augmented Prompting:</strong> Including retrieved context in the prompt to ground the model's responses in specific data. This is the foundation of <span class="term" data-term="rag">RAG</span> systems.</p>
 
 <div class="pro-tip"><strong>PM Perspective:</strong> The system prompt is your product's invisible design layer. It determines the user experience as much as the UI does. A PM should treat system prompt development with the same rigor as feature development: write it carefully, test it systematically, version control it, A/B test variations, and monitor its impact on user satisfaction and safety metrics. At DeepMind, the Gemini system prompts undergo extensive review and testing before deployment.</div>
+
+<div class="interactive" data-interactive="prompt-compare"></div>
 
 <h2>Prompt Engineering Best Practices</h2>
 <p>Based on extensive research and industry experience, several best practices have emerged:</p>

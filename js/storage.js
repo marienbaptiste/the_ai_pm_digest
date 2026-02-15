@@ -4,12 +4,18 @@ function getStore() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
-  } catch (e) { /* ignore */ }
+  } catch (e) {
+    console.warn('[Storage] Failed to read localStorage:', e);
+  }
   return { progress: {}, streakDays: [], lastVisit: null };
 }
 
 function saveStore(store) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  } catch (e) {
+    console.error('[Storage] Failed to save to localStorage:', e);
+  }
 }
 
 export const storage = {
@@ -19,6 +25,7 @@ export const storage = {
   },
 
   markLessonComplete(lessonKey, quizScore) {
+    console.log(`[Storage] Marking lesson complete: ${lessonKey}, score: ${quizScore}`);
     const store = getStore();
     store.progress[lessonKey] = {
       completed: true,
@@ -27,6 +34,14 @@ export const storage = {
     };
     saveStore(store);
     this._updateStreak();
+    // Verify save worked
+    const verify = getStore();
+    if (verify.progress[lessonKey]?.completed) {
+      console.log(`[Storage] Save verified for ${lessonKey}`);
+    } else {
+      console.error(`[Storage] Save FAILED for ${lessonKey} — localStorage may be unavailable`);
+    }
+    window.dispatchEvent(new CustomEvent('progress-changed', { detail: { lessonKey, quizScore } }));
   },
 
   isLessonCompleted(lessonKey) {
@@ -90,8 +105,7 @@ export const storage = {
     if (!store.streakDays) store.streakDays = [];
 
     if (store.streakDays.includes(today)) {
-      saveStore(store);
-      return;
+      return; // Already recorded today, don't re-save
     }
 
     const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
@@ -110,7 +124,16 @@ export const storage = {
     return getStore().progress;
   },
 
+  resetLesson(lessonKey) {
+    console.log(`[Storage] Resetting lesson: ${lessonKey}`);
+    const store = getStore();
+    delete store.progress[lessonKey];
+    saveStore(store);
+    window.dispatchEvent(new CustomEvent('progress-changed', { detail: { lessonKey, reset: true } }));
+  },
+
   resetAll() {
     localStorage.removeItem(STORAGE_KEY);
+    window.dispatchEvent(new CustomEvent('progress-changed', { detail: { reset: true } }));
   }
 };
