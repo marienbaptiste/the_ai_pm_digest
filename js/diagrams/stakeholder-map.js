@@ -34,20 +34,20 @@ export function render(container) {
     // Connection line (thick, animated dash flow)
     connectionsSvg += `
       <line x1="${cx}" y1="${cy}" x2="${sx}" y2="${sy}"
-        stroke="#3b82f6" stroke-width="2.5" stroke-opacity="0.5"
+        stroke="#7EB8DA" stroke-width="2.5" stroke-opacity="0.5"
         class="sm-line-inner" style="animation-delay: ${lineDelay}s;"/>
       <line x1="${cx}" y1="${cy}" x2="${sx}" y2="${sy}"
-        stroke="#3b82f6" stroke-width="2.5" stroke-dasharray="4,6"
+        stroke="#7EB8DA" stroke-width="2.5" stroke-dasharray="4,6"
         class="sm-flow-line" style="animation-delay: 1.8s;"/>
     `;
 
     // Node
     nodesSvg += `
       <g class="sm-inner-node" style="animation-delay: ${delay}s;">
-        <circle cx="${sx}" cy="${sy}" r="28" fill="var(--bg-elevated)" stroke="#3b82f6" stroke-width="2"/>
-        <circle cx="${sx}" cy="${sy}" r="28" fill="#3b82f620"/>
+        <circle cx="${sx}" cy="${sy}" r="28" fill="var(--bg-elevated)" stroke="#7EB8DA" stroke-width="2"/>
+        <circle cx="${sx}" cy="${sy}" r="28" fill="#7EB8DA20"/>
         <text x="${sx}" y="${sy - 5}" text-anchor="middle" dominant-baseline="central"
-          fill="#3b82f6" font-size="14">${s.icon}</text>
+          fill="#7EB8DA" font-size="14">${s.icon}</text>
         <text x="${sx}" y="${sy + 12}" text-anchor="middle" dominant-baseline="central"
           fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="9" font-weight="600">
           ${s.label}
@@ -67,20 +67,20 @@ export function render(container) {
     // Connection line (thin dashed)
     connectionsSvg += `
       <line x1="${cx}" y1="${cy}" x2="${sx}" y2="${sy}"
-        stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="5,5" stroke-opacity="0.35"
+        stroke="#F0B429" stroke-width="1.2" stroke-dasharray="5,5" stroke-opacity="0.35"
         class="sm-line-outer" style="animation-delay: ${lineDelay}s;"/>
       <line x1="${cx}" y1="${cy}" x2="${sx}" y2="${sy}"
-        stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,7"
+        stroke="#F0B429" stroke-width="1.2" stroke-dasharray="3,7"
         class="sm-flow-line-outer" style="animation-delay: 2.2s;"/>
     `;
 
     // Node (smaller)
     nodesSvg += `
       <g class="sm-outer-node" style="animation-delay: ${delay}s;">
-        <circle cx="${sx}" cy="${sy}" r="22" fill="var(--bg-elevated)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.7"/>
-        <circle cx="${sx}" cy="${sy}" r="22" fill="#f59e0b10"/>
+        <circle cx="${sx}" cy="${sy}" r="22" fill="var(--bg-elevated)" stroke="#F0B429" stroke-width="1.5" stroke-opacity="0.7"/>
+        <circle cx="${sx}" cy="${sy}" r="22" fill="#F0B42910"/>
         <text x="${sx}" y="${sy - 4}" text-anchor="middle" dominant-baseline="central"
-          fill="#f59e0b" font-size="12">${s.icon}</text>
+          fill="#F0B429" font-size="12">${s.icon}</text>
         <text x="${sx}" y="${sy + 11}" text-anchor="middle" dominant-baseline="central"
           fill="var(--text-dim)" font-family="var(--font-heading)" font-size="8" font-weight="600">
           ${s.label}
@@ -194,12 +194,12 @@ export function render(container) {
 
         <!-- Center PM node -->
         <g class="sm-center">
-          <circle cx="${cx}" cy="${cy}" r="38" fill="#00d4aa" opacity="0.15" filter="url(#smGlow)"
+          <circle cx="${cx}" cy="${cy}" r="38" fill="#9CCFA4" opacity="0.15" filter="url(#smGlow)"
             class="sm-center-glow"/>
-          <circle cx="${cx}" cy="${cy}" r="32" fill="var(--bg-elevated)" stroke="#00d4aa" stroke-width="2.5"/>
-          <circle cx="${cx}" cy="${cy}" r="32" fill="#00d4aa15"/>
+          <circle cx="${cx}" cy="${cy}" r="32" fill="var(--bg-elevated)" stroke="#9CCFA4" stroke-width="2.5"/>
+          <circle cx="${cx}" cy="${cy}" r="32" fill="#9CCFA415"/>
           <text x="${cx}" y="${cy - 6}" text-anchor="middle" dominant-baseline="central"
-            fill="#00d4aa" font-family="var(--font-heading)" font-size="16" font-weight="700">
+            fill="#9CCFA4" font-family="var(--font-heading)" font-size="16" font-weight="700">
             PM
           </text>
           <text x="${cx}" y="${cy + 11}" text-anchor="middle" dominant-baseline="central"
@@ -213,13 +213,13 @@ export function render(container) {
 
         <!-- Legend -->
         <g class="sm-legend">
-          <line x1="55" y1="330" x2="75" y2="330" stroke="#3b82f6" stroke-width="2.5"/>
+          <line x1="55" y1="330" x2="75" y2="330" stroke="#7EB8DA" stroke-width="2.5"/>
           <text x="82" y="334" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Core Team (daily)</text>
 
-          <line x1="230" y1="330" x2="250" y2="330" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,4"/>
+          <line x1="230" y1="330" x2="250" y2="330" stroke="#F0B429" stroke-width="1.5" stroke-dasharray="4,4"/>
           <text x="257" y="334" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Extended (weekly)</text>
 
-          <circle cx="420" cy="330" r="5" fill="#00d4aa30" stroke="#00d4aa" stroke-width="1.5"/>
+          <circle cx="420" cy="330" r="5" fill="#9CCFA430" stroke="#9CCFA4" stroke-width="1.5"/>
           <text x="432" y="334" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">PM (hub)</text>
 
           <text x="530" y="334" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">

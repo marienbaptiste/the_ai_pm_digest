@@ -21,8 +21,8 @@ export function render(container) {
 
         <!-- Step 1: User Query -->
         <g class="rag-box" style="animation-delay: 0s;">
-          <rect x="20" y="120" width="120" height="70" rx="10" fill="#3b82f615" stroke="#3b82f6" stroke-width="2"/>
-          <text x="80" y="148" text-anchor="middle" class="rag-title" fill="#3b82f6">User Query</text>
+          <rect x="20" y="120" width="120" height="70" rx="10" fill="#7EB8DA15" stroke="#7EB8DA" stroke-width="2"/>
+          <text x="80" y="148" text-anchor="middle" class="rag-title" fill="#7EB8DA">User Query</text>
           <text x="80" y="168" text-anchor="middle" class="rag-label">"How does RAG work?"</text>
         </g>
 
@@ -32,9 +32,9 @@ export function render(container) {
 
         <!-- Step 2: Embedding Model -->
         <g class="rag-box" style="animation-delay: 0.2s;">
-          <rect x="180" y="110" width="120" height="90" rx="10" fill="#a855f715" stroke="#a855f7" stroke-width="2"/>
-          <text x="240" y="142" text-anchor="middle" class="rag-title" fill="#a855f7">Embedding</text>
-          <text x="240" y="158" text-anchor="middle" class="rag-title" fill="#a855f7">Model</text>
+          <rect x="180" y="110" width="120" height="90" rx="10" fill="#C4A7E715" stroke="#C4A7E7" stroke-width="2"/>
+          <text x="240" y="142" text-anchor="middle" class="rag-title" fill="#C4A7E7">Embedding</text>
+          <text x="240" y="158" text-anchor="middle" class="rag-title" fill="#C4A7E7">Model</text>
           <text x="240" y="180" text-anchor="middle" class="rag-label">[0.23, -0.41, 0.87...]</text>
         </g>
 
@@ -44,15 +44,15 @@ export function render(container) {
 
         <!-- Step 3: Vector DB -->
         <g class="rag-box" style="animation-delay: 0.4s;">
-          <rect x="340" y="90" width="130" height="130" rx="10" fill="#f59e0b15" stroke="#f59e0b" stroke-width="2"/>
-          <text x="405" y="118" text-anchor="middle" class="rag-title" fill="#f59e0b">Vector Database</text>
+          <rect x="340" y="90" width="130" height="130" rx="10" fill="#F0B42915" stroke="#F0B429" stroke-width="2"/>
+          <text x="405" y="118" text-anchor="middle" class="rag-title" fill="#F0B429">Vector Database</text>
 
           <!-- Mini vector dots -->
           ${[0,1,2,3,4,5,6,7].map(i => {
             const cx = 365 + (i % 4) * 25;
             const cy = 140 + Math.floor(i / 4) * 30;
             const isMatch = i === 1 || i === 5;
-            return `<circle cx="${cx}" cy="${cy}" r="6" fill="${isMatch ? '#00d4aa' : '#f59e0b30'}" stroke="${isMatch ? '#00d4aa' : '#f59e0b50'}" stroke-width="1">
+            return `<circle cx="${cx}" cy="${cy}" r="6" fill="${isMatch ? '#9CCFA4' : '#F0B42930'}" stroke="${isMatch ? '#9CCFA4' : '#F0B42950'}" stroke-width="1">
               ${isMatch ? `<animate attributeName="r" values="6;8;6" dur="1.5s" repeatCount="indefinite" begin="${(0.6 + i * 0.1).toFixed(1)}s"/>` : ''}
             </circle>`;
           }).join('')}
@@ -66,14 +66,14 @@ export function render(container) {
 
         <!-- Step 4: Retrieved Context -->
         <g class="rag-box" style="animation-delay: 0.6s;">
-          <rect x="510" y="100" width="100" height="110" rx="10" fill="#00d4aa15" stroke="#00d4aa" stroke-width="2"/>
-          <text x="560" y="128" text-anchor="middle" class="rag-title" fill="#00d4aa">Retrieved</text>
-          <text x="560" y="144" text-anchor="middle" class="rag-title" fill="#00d4aa">Context</text>
+          <rect x="510" y="100" width="100" height="110" rx="10" fill="#9CCFA415" stroke="#9CCFA4" stroke-width="2"/>
+          <text x="560" y="128" text-anchor="middle" class="rag-title" fill="#9CCFA4">Retrieved</text>
+          <text x="560" y="144" text-anchor="middle" class="rag-title" fill="#9CCFA4">Context</text>
 
           <!-- Mini doc icons -->
-          <rect x="530" y="155" width="60" height="12" rx="2" fill="#00d4aa30" stroke="none"/>
-          <rect x="530" y="172" width="50" height="12" rx="2" fill="#00d4aa20" stroke="none"/>
-          <rect x="530" y="189" width="55" height="12" rx="2" fill="#00d4aa20" stroke="none"/>
+          <rect x="530" y="155" width="60" height="12" rx="2" fill="#9CCFA430" stroke="none"/>
+          <rect x="530" y="172" width="50" height="12" rx="2" fill="#9CCFA420" stroke="none"/>
+          <rect x="530" y="189" width="55" height="12" rx="2" fill="#9CCFA420" stroke="none"/>
         </g>
 
         <!-- Arrow 4 (down to LLM) -->
@@ -87,8 +87,8 @@ export function render(container) {
 
         <!-- Step 5: LLM -->
         <g class="rag-box" style="animation-delay: 0.8s;">
-          <rect x="400" y="250" width="220" height="70" rx="12" fill="#ec489915" stroke="#ec4899" stroke-width="2"/>
-          <text x="510" y="278" text-anchor="middle" class="rag-title" fill="#ec4899">Large Language Model</text>
+          <rect x="400" y="250" width="220" height="70" rx="12" fill="#E8553A15" stroke="#E8553A" stroke-width="2"/>
+          <text x="510" y="278" text-anchor="middle" class="rag-title" fill="#E8553A">Large Language Model</text>
           <text x="510" y="298" text-anchor="middle" class="rag-label">Query + Context \u2192 Grounded Response</text>
         </g>
 
@@ -98,9 +98,9 @@ export function render(container) {
 
         <!-- Step 6: Response -->
         <g class="rag-box" style="animation-delay: 1s;">
-          <rect x="665" y="260" width="70" height="50" rx="10" fill="#00d4aa15" stroke="#00d4aa" stroke-width="2"/>
+          <rect x="665" y="260" width="70" height="50" rx="10" fill="#9CCFA415" stroke="#9CCFA4" stroke-width="2"/>
           <text x="700" y="285" text-anchor="middle" font-size="22">\u{1F4AC}</text>
-          <text x="700" y="300" text-anchor="middle" class="rag-label" fill="#00d4aa">Answer</text>
+          <text x="700" y="300" text-anchor="middle" class="rag-label" fill="#9CCFA4">Answer</text>
         </g>
 
         <!-- Title -->

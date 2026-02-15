@@ -2,10 +2,10 @@ export function render(container) {
   const width = 700;
   const height = 350;
   const layers = [
-    { name: 'Input', nodes: 4, color: '#3b82f6' },
-    { name: 'Hidden 1', nodes: 6, color: '#a855f7' },
-    { name: 'Hidden 2', nodes: 5, color: '#a855f7' },
-    { name: 'Output', nodes: 3, color: '#00d4aa' }
+    { name: 'Input', nodes: 4, color: '#7EB8DA' },
+    { name: 'Hidden 1', nodes: 6, color: '#C4A7E7' },
+    { name: 'Hidden 2', nodes: 5, color: '#C4A7E7' },
+    { name: 'Output', nodes: 3, color: '#9CCFA4' }
   ];
 
   const layerSpacing = width / (layers.length + 1);

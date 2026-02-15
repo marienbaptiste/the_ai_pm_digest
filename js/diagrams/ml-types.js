@@ -9,7 +9,7 @@ export function render(container) {
 
   let supPointsSvg = '';
   supervisedPoints.forEach((p, i) => {
-    const color = p.cls === 0 ? '#60a5fa' : '#f59e0b';
+    const color = p.cls === 0 ? '#7EB8DA' : '#F0B429';
     const shape = p.cls === 0 ? 'circle' : 'rect';
     const delay = (0.8 + i * 0.08).toFixed(2);
     if (shape === 'circle') {
@@ -21,13 +21,13 @@ export function render(container) {
 
   // Unsupervised clustering points
   const clusters = [
-    { cx: 50, cy: 45, r: 30, color: '#c084fc', points: [
+    { cx: 50, cy: 45, r: 30, color: '#C4A7E7', points: [
       { x: 40, y: 35 }, { x: 55, y: 40 }, { x: 45, y: 55 }, { x: 60, y: 50 }, { x: 38, y: 48 }
     ]},
-    { cx: 130, cy: 110, r: 28, color: '#f0abfc', points: [
+    { cx: 130, cy: 110, r: 28, color: '#C4A7E7', points: [
       { x: 120, y: 100 }, { x: 135, y: 115 }, { x: 140, y: 105 }, { x: 125, y: 120 }
     ]},
-    { cx: 50, cy: 120, r: 25, color: '#e879f9', points: [
+    { cx: 50, cy: 120, r: 25, color: '#C4A7E7', points: [
       { x: 40, y: 115 }, { x: 55, y: 125 }, { x: 48, y: 110 }, { x: 60, y: 118 }
     ]}
   ];
@@ -103,8 +103,8 @@ export function render(container) {
             50% { opacity: 1; }
           }
           @keyframes mlRewardGlow {
-            0%, 100% { fill: #00d4aa; filter: none; }
-            50% { fill: #00ffcc; filter: url(#mlGlow); }
+            0%, 100% { fill: #9CCFA4; filter: none; }
+            50% { fill: #9CCFA4; filter: url(#mlGlow); }
           }
         </style>
 
@@ -117,9 +117,9 @@ export function render(container) {
         <!-- ===== Panel 1: Supervised ===== -->
         <g class="ml-panel" style="animation-delay: 0s;">
           <rect x="15" y="40" width="230" height="260" rx="12"
-            fill="#3b82f608" stroke="#3b82f6" stroke-width="1.5" opacity="0.8"/>
+            fill="#7EB8DA08" stroke="#7EB8DA" stroke-width="1.5" opacity="0.8"/>
           <text x="130" y="30" text-anchor="middle"
-            fill="#3b82f6" font-family="var(--font-heading)" font-size="14" font-weight="700">
+            fill="#7EB8DA" font-family="var(--font-heading)" font-size="14" font-weight="700">
             Supervised Learning
           </text>
         </g>
@@ -136,22 +136,22 @@ export function render(container) {
           ${supPointsSvg}
           <!-- Decision boundary -->
           <line x1="10" y1="150" x2="155" y2="10"
-            stroke="#3b82f6" stroke-width="2" class="ml-boundary"/>
+            stroke="#7EB8DA" stroke-width="2" class="ml-boundary"/>
         </g>
 
         <!-- X->Y labels -->
         <g class="ml-label" style="animation-delay: 1.8s;">
-          <text x="75" y="85" fill="#60a5fa" font-family="var(--font-mono)" font-size="10" font-weight="600">Class A</text>
-          <text x="155" y="210" fill="#f59e0b" font-family="var(--font-mono)" font-size="10" font-weight="600">Class B</text>
+          <text x="75" y="85" fill="#7EB8DA" font-family="var(--font-mono)" font-size="10" font-weight="600">Class A</text>
+          <text x="155" y="210" fill="#F0B429" font-family="var(--font-mono)" font-size="10" font-weight="600">Class B</text>
           <text x="60" y="258" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">X \u2192 Y (labeled)</text>
         </g>
 
         <!-- ===== Panel 2: Unsupervised ===== -->
         <g class="ml-panel" style="animation-delay: 0.3s;">
           <rect x="260" y="40" width="230" height="260" rx="12"
-            fill="#a855f708" stroke="#a855f7" stroke-width="1.5" opacity="0.8"/>
+            fill="#C4A7E708" stroke="#C4A7E7" stroke-width="1.5" opacity="0.8"/>
           <text x="375" y="30" text-anchor="middle"
-            fill="#a855f7" font-family="var(--font-heading)" font-size="14" font-weight="700">
+            fill="#C4A7E7" font-family="var(--font-heading)" font-size="14" font-weight="700">
             Unsupervised Learning
           </text>
         </g>
@@ -175,9 +175,9 @@ export function render(container) {
         <!-- ===== Panel 3: Reinforcement ===== -->
         <g class="ml-panel" style="animation-delay: 0.6s;">
           <rect x="505" y="40" width="230" height="260" rx="12"
-            fill="#00d4aa08" stroke="#00d4aa" stroke-width="1.5" opacity="0.8"/>
+            fill="#9CCFA408" stroke="#9CCFA4" stroke-width="1.5" opacity="0.8"/>
           <text x="620" y="30" text-anchor="middle"
-            fill="#00d4aa" font-family="var(--font-heading)" font-size="14" font-weight="700">
+            fill="#9CCFA4" font-family="var(--font-heading)" font-size="14" font-weight="700">
             Reinforcement Learning
           </text>
         </g>
@@ -185,41 +185,41 @@ export function render(container) {
         <!-- Agent -->
         <g class="ml-label" style="animation-delay: 1s;">
           <rect x="580" y="85" width="80" height="40" rx="8"
-            fill="#00d4aa20" stroke="#00d4aa" stroke-width="2"/>
+            fill="#9CCFA420" stroke="#9CCFA4" stroke-width="2"/>
           <text x="620" y="110" text-anchor="middle"
-            fill="#00d4aa" font-family="var(--font-heading)" font-size="12" font-weight="600">Agent</text>
+            fill="#9CCFA4" font-family="var(--font-heading)" font-size="12" font-weight="600">Agent</text>
         </g>
 
         <!-- Environment -->
         <g class="ml-label" style="animation-delay: 1.2s;">
           <rect x="565" y="195" width="110" height="45" rx="8"
-            fill="#f59e0b15" stroke="#f59e0b" stroke-width="1.5"/>
+            fill="#F0B42915" stroke="#F0B429" stroke-width="1.5"/>
           <text x="620" y="222" text-anchor="middle"
-            fill="#f59e0b" font-family="var(--font-heading)" font-size="12" font-weight="600">Environment</text>
+            fill="#F0B429" font-family="var(--font-heading)" font-size="12" font-weight="600">Environment</text>
         </g>
 
         <!-- Action arrow (Agent -> Env, right side) -->
         <g class="ml-label" style="animation-delay: 1.5s;">
           <path d="M660,115 C690,115 690,200 660,200" fill="none"
-            stroke="#00d4aa" stroke-width="2" class="ml-arrow"
+            stroke="#9CCFA4" stroke-width="2" class="ml-arrow"
             marker-end="url(#mlArrowHead)"/>
           <text x="700" y="160" text-anchor="middle"
-            fill="#00d4aa" font-family="var(--font-mono)" font-size="9" font-weight="600">Action</text>
+            fill="#9CCFA4" font-family="var(--font-mono)" font-size="9" font-weight="600">Action</text>
         </g>
 
         <!-- Reward arrow (Env -> Agent, left side) -->
         <g class="ml-label" style="animation-delay: 1.8s;">
           <path d="M580,200 C545,200 545,115 580,115" fill="none"
-            stroke="#f59e0b" stroke-width="2" class="ml-arrow"
+            stroke="#F0B429" stroke-width="2" class="ml-arrow"
             marker-end="url(#mlArrowHeadAmber)"/>
           <text x="530" y="148" text-anchor="middle"
-            fill="#f59e0b" font-family="var(--font-mono)" font-size="9" font-weight="600">Reward</text>
+            fill="#F0B429" font-family="var(--font-mono)" font-size="9" font-weight="600">Reward</text>
           <text x="530" y="162" text-anchor="middle"
-            fill="#f59e0b" font-family="var(--font-mono)" font-size="9">+ State</text>
+            fill="#F0B429" font-family="var(--font-mono)" font-size="9">+ State</text>
         </g>
 
         <!-- RL pulse on agent -->
-        <circle cx="620" cy="105" r="12" fill="none" stroke="#00d4aa" stroke-width="1" opacity="0"
+        <circle cx="620" cy="105" r="12" fill="none" stroke="#9CCFA4" stroke-width="1" opacity="0"
           class="ml-rl-pulse">
           <animate attributeName="r" values="12;22;12" dur="2s" repeatCount="indefinite" begin="2s"/>
           <animate attributeName="opacity" values="0.5;0;0.5" dur="2s" repeatCount="indefinite" begin="2s"/>
@@ -233,23 +233,23 @@ export function render(container) {
         <defs>
           <marker id="mlArrowHead" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00d4aa"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9CCFA4"/>
           </marker>
           <marker id="mlArrowHeadAmber" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#F0B429"/>
           </marker>
         </defs>
 
         <!-- Bottom summary -->
         <g class="ml-label" style="animation-delay: 2.5s;">
-          <text x="130" y="325" text-anchor="middle" fill="#3b82f6" font-family="var(--font-mono)" font-size="10">
+          <text x="130" y="325" text-anchor="middle" fill="#7EB8DA" font-family="var(--font-mono)" font-size="10">
             "Learn from labels"
           </text>
-          <text x="375" y="325" text-anchor="middle" fill="#a855f7" font-family="var(--font-mono)" font-size="10">
+          <text x="375" y="325" text-anchor="middle" fill="#C4A7E7" font-family="var(--font-mono)" font-size="10">
             "Find patterns"
           </text>
-          <text x="620" y="325" text-anchor="middle" fill="#00d4aa" font-family="var(--font-mono)" font-size="10">
+          <text x="620" y="325" text-anchor="middle" fill="#9CCFA4" font-family="var(--font-mono)" font-size="10">
             "Learn by doing"
           </text>
         </g>

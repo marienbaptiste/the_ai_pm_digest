@@ -4,11 +4,11 @@ export function render(container) {
 
   // Five frontier pillars arranged in a horizontal layout
   const pillars = [
-    { label: 'MoE', sub: 'Mixture of\nExperts', x: 95, color: '#14b8a6', icon: 'M22 12H2M8 6h8M6 18h12' },
-    { label: 'SSM', sub: 'State Space\nModels', x: 245, color: '#06b6d4', icon: 'M4 20L8 4l4 10 4-6 4 16' },
-    { label: 'Reasoning', sub: 'Test-Time\nCompute', x: 395, color: '#a855f7', icon: 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 6v4l3 3' },
-    { label: 'Agents', sub: 'Tool Use &\nMulti-Agent', x: 545, color: '#f59e0b', icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' },
-    { label: 'Frontier', sub: 'Video, World\nModels', x: 675, color: '#ec4899', icon: 'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' },
+    { label: 'MoE', sub: 'Mixture of\nExperts', x: 95, color: '#9CCFA4', icon: 'M22 12H2M8 6h8M6 18h12' },
+    { label: 'SSM', sub: 'State Space\nModels', x: 245, color: '#7EB8DA', icon: 'M4 20L8 4l4 10 4-6 4 16' },
+    { label: 'Reasoning', sub: 'Test-Time\nCompute', x: 395, color: '#C4A7E7', icon: 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 6v4l3 3' },
+    { label: 'Agents', sub: 'Tool Use &\nMulti-Agent', x: 545, color: '#F0B429', icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' },
+    { label: 'Frontier', sub: 'Video, World\nModels', x: 675, color: '#E8553A', icon: 'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' },
   ];
 
   // Connection arrows between pillars

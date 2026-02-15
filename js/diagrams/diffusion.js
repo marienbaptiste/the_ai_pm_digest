@@ -22,9 +22,9 @@ export function render(container) {
           rects += `<rect x="${px}" y="${py}" width="${gridSize - 0.5}" height="${gridSize - 0.5}" fill="${color}" rx="0.5"/>`;
         } else {
           // Image-like colors (blues, greens for "clean" image)
-          const hue = 160 + Math.random() * 40;
-          const sat = 40 + Math.random() * 30;
-          const light = 30 + Math.random() * 30;
+          const hue = 25 + Math.random() * 30;
+          const sat = 50 + Math.random() * 30;
+          const light = 25 + Math.random() * 35;
           rects += `<rect x="${px}" y="${py}" width="${gridSize - 0.5}" height="${gridSize - 0.5}" fill="hsl(${hue}, ${sat}%, ${light}%)" rx="0.5"/>`;
         }
       }

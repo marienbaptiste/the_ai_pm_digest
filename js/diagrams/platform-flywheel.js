@@ -5,10 +5,10 @@ export function render(container) {
 
   // Segment definitions: angle ranges (0 = top, clockwise)
   const segments = [
-    { label: 'Developers', icon: '\u2328', color: '#3b82f6', angle: -45, growth: '+SDKs' },
-    { label: 'Apps &\nIntegrations', icon: '\u2699', color: '#a855f7', angle: 45, growth: '+plugins' },
-    { label: 'Users', icon: '\u263A', color: '#00d4aa', angle: 135, growth: '+adoption' },
-    { label: 'Data &\nFeedback', icon: '\u2605', color: '#f59e0b', angle: 225, growth: '+insights' }
+    { label: 'Developers', icon: '\u2328', color: '#7EB8DA', angle: -45, growth: '+SDKs' },
+    { label: 'Apps &\nIntegrations', icon: '\u2699', color: '#C4A7E7', angle: 45, growth: '+plugins' },
+    { label: 'Users', icon: '\u263A', color: '#9CCFA4', angle: 135, growth: '+adoption' },
+    { label: 'Data &\nFeedback', icon: '\u2605', color: '#F0B429', angle: 225, growth: '+insights' }
   ];
 
   // Build arc segments
@@ -208,7 +208,7 @@ export function render(container) {
         <!-- Center content (does not rotate) -->
         <circle cx="${cx}" cy="${cy}" r="50" fill="var(--bg-elevated)" stroke="var(--border-medium)" stroke-width="1.5"
           class="fw-center-text"/>
-        <circle cx="${cx}" cy="${cy}" r="55" fill="none" stroke="#00d4aa" stroke-width="1" opacity="0.15"
+        <circle cx="${cx}" cy="${cy}" r="55" fill="none" stroke="#9CCFA4" stroke-width="1" opacity="0.15"
           class="fw-pulse-ring" filter="url(#fwGlow)"/>
 
         <g class="fw-center-text">
@@ -217,7 +217,7 @@ export function render(container) {
             Platform
           </text>
           <text x="${cx}" y="${cy + 8}" text-anchor="middle" dominant-baseline="central"
-            fill="#00d4aa" font-family="var(--font-heading)" font-size="13" font-weight="700">
+            fill="#9CCFA4" font-family="var(--font-heading)" font-size="13" font-weight="700">
             Flywheel
           </text>
           <text x="${cx}" y="${cy + 25}" text-anchor="middle" dominant-baseline="central"
@@ -230,10 +230,10 @@ export function render(container) {
         ${growthSvg}
 
         <!-- Corner decorations: small flow dots -->
-        <circle cx="${cx}" cy="${cy - r - 50}" r="3" fill="#3b82f6" class="fw-dot" style="animation-delay: 0s;"/>
-        <circle cx="${cx + r + 50}" cy="${cy}" r="3" fill="#a855f7" class="fw-dot" style="animation-delay: 0.5s;"/>
-        <circle cx="${cx}" cy="${cy + r + 50}" r="3" fill="#00d4aa" class="fw-dot" style="animation-delay: 1s;"/>
-        <circle cx="${cx - r - 50}" cy="${cy}" r="3" fill="#f59e0b" class="fw-dot" style="animation-delay: 1.5s;"/>
+        <circle cx="${cx}" cy="${cy - r - 50}" r="3" fill="#7EB8DA" class="fw-dot" style="animation-delay: 0s;"/>
+        <circle cx="${cx + r + 50}" cy="${cy}" r="3" fill="#C4A7E7" class="fw-dot" style="animation-delay: 0.5s;"/>
+        <circle cx="${cx}" cy="${cy + r + 50}" r="3" fill="#9CCFA4" class="fw-dot" style="animation-delay: 1s;"/>
+        <circle cx="${cx - r - 50}" cy="${cy}" r="3" fill="#F0B429" class="fw-dot" style="animation-delay: 1.5s;"/>
 
         <!-- Subtitle -->
         <text x="${cx}" y="335" text-anchor="middle" class="fw-title" style="animation-delay: 2.5s;"

@@ -31,14 +31,14 @@ export function render(container) {
       <g class="ge-product" style="animation-delay: ${delay}s;">
         <!-- Orbital line to core -->
         <line x1="${cx}" y1="${cy}" x2="${px}" y2="${py}"
-          stroke="#3b82f6" stroke-width="1" stroke-opacity="0.25" stroke-dasharray="3,5"/>
+          stroke="#7EB8DA" stroke-width="1" stroke-opacity="0.25" stroke-dasharray="3,5"/>
         <!-- Product box -->
         <rect x="${px - 30}" y="${py - 14}" width="60" height="28" rx="8"
-          fill="var(--bg-elevated)" stroke="#3b82f6" stroke-width="1.5"/>
+          fill="var(--bg-elevated)" stroke="#7EB8DA" stroke-width="1.5"/>
         <rect x="${px - 30}" y="${py - 14}" width="60" height="28" rx="8"
-          fill="#3b82f610"/>
+          fill="#7EB8DA10"/>
         <text x="${px}" y="${py + 1}" text-anchor="middle" dominant-baseline="central"
-          fill="#3b82f6" font-family="var(--font-heading)" font-size="11" font-weight="600">
+          fill="#7EB8DA" font-family="var(--font-heading)" font-size="11" font-weight="600">
           ${p.label}
         </text>
       </g>
@@ -58,15 +58,15 @@ export function render(container) {
           <!-- Capability dot -->
           <circle cx="${cx + outerOrbitR * Math.cos(startAngle * Math.PI / 180)}"
                   cy="${cy + outerOrbitR * Math.sin(startAngle * Math.PI / 180)}"
-                  r="6" fill="#00d4aa30" stroke="#00d4aa" stroke-width="1.5"/>
+                  r="6" fill="#9CCFA430" stroke="#9CCFA4" stroke-width="1.5"/>
           <circle cx="${cx + outerOrbitR * Math.cos(startAngle * Math.PI / 180)}"
                   cy="${cy + outerOrbitR * Math.sin(startAngle * Math.PI / 180)}"
-                  r="3" fill="#00d4aa"/>
+                  r="3" fill="#9CCFA4"/>
           <!-- Label -->
           <text x="${cx + (outerOrbitR + 16) * Math.cos(startAngle * Math.PI / 180)}"
                 y="${cy + (outerOrbitR + 16) * Math.sin(startAngle * Math.PI / 180)}"
                 text-anchor="middle" dominant-baseline="central"
-                fill="#00d4aa" font-family="var(--font-mono)" font-size="9" opacity="0.85">
+                fill="#9CCFA4" font-family="var(--font-mono)" font-size="9" opacity="0.85">
             ${c.label}
           </text>
         </g>
@@ -152,8 +152,8 @@ export function render(container) {
             <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
           </filter>
           <radialGradient id="geCoreGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#a855f7" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#a855f7" stop-opacity="0.05"/>
+            <stop offset="0%" stop-color="#C4A7E7" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#C4A7E7" stop-opacity="0.05"/>
           </radialGradient>
         </defs>
 
@@ -174,16 +174,16 @@ export function render(container) {
         <!-- Core Gemini node -->
         <g class="ge-core">
           <!-- Outer glow -->
-          <circle cx="${cx}" cy="${cy}" r="55" fill="#a855f7" opacity="0.2" filter="url(#geGlow)"
+          <circle cx="${cx}" cy="${cy}" r="55" fill="#C4A7E7" opacity="0.2" filter="url(#geGlow)"
             class="ge-core-glow"/>
           <!-- Core circle -->
-          <circle cx="${cx}" cy="${cy}" r="42" fill="url(#geCoreGrad)" stroke="#a855f7" stroke-width="2"/>
+          <circle cx="${cx}" cy="${cy}" r="42" fill="url(#geCoreGrad)" stroke="#C4A7E7" stroke-width="2"/>
           <circle cx="${cx}" cy="${cy}" r="42" fill="var(--bg-elevated)" opacity="0.7"/>
           <!-- Inner accent ring -->
-          <circle cx="${cx}" cy="${cy}" r="35" fill="none" stroke="#a855f7" stroke-width="0.8" stroke-opacity="0.4"/>
+          <circle cx="${cx}" cy="${cy}" r="35" fill="none" stroke="#C4A7E7" stroke-width="0.8" stroke-opacity="0.4"/>
           <!-- Gemini text -->
           <text x="${cx}" y="${cy - 6}" text-anchor="middle" dominant-baseline="central"
-            fill="#a855f7" font-family="var(--font-heading)" font-size="18" font-weight="700">
+            fill="#C4A7E7" font-family="var(--font-heading)" font-size="18" font-weight="700">
             Gemini
           </text>
           <text x="${cx}" y="${cy + 13}" text-anchor="middle" dominant-baseline="central"
@@ -193,10 +193,10 @@ export function render(container) {
         </g>
 
         <!-- Decorative sparkles around core -->
-        <circle cx="${cx - 50}" cy="${cy - 45}" r="2" fill="#a855f7" class="ge-sparkle" style="animation-delay: 0s;"/>
-        <circle cx="${cx + 48}" cy="${cy - 38}" r="1.5" fill="#a855f7" class="ge-sparkle" style="animation-delay: 0.7s;"/>
-        <circle cx="${cx + 52}" cy="${cy + 40}" r="2" fill="#a855f7" class="ge-sparkle" style="animation-delay: 1.4s;"/>
-        <circle cx="${cx - 45}" cy="${cy + 42}" r="1.5" fill="#a855f7" class="ge-sparkle" style="animation-delay: 2.1s;"/>
+        <circle cx="${cx - 50}" cy="${cy - 45}" r="2" fill="#C4A7E7" class="ge-sparkle" style="animation-delay: 0s;"/>
+        <circle cx="${cx + 48}" cy="${cy - 38}" r="1.5" fill="#C4A7E7" class="ge-sparkle" style="animation-delay: 0.7s;"/>
+        <circle cx="${cx + 52}" cy="${cy + 40}" r="2" fill="#C4A7E7" class="ge-sparkle" style="animation-delay: 1.4s;"/>
+        <circle cx="${cx - 45}" cy="${cy + 42}" r="1.5" fill="#C4A7E7" class="ge-sparkle" style="animation-delay: 2.1s;"/>
 
         <!-- Product nodes (inner orbit) -->
         ${productsSvg}
@@ -207,21 +207,21 @@ export function render(container) {
         <!-- Model variants badges -->
         <g class="ge-badge" style="animation-delay: 2.8s;">
           <rect x="${cx - 90}" y="${cy + outerOrbitR + 30}" width="52" height="20" rx="10"
-            fill="#a855f720" stroke="#a855f760" stroke-width="1"/>
+            fill="#C4A7E720" stroke="#C4A7E760" stroke-width="1"/>
           <text x="${cx - 64}" y="${cy + outerOrbitR + 41}" text-anchor="middle" dominant-baseline="central"
-            fill="#a855f7" font-family="var(--font-mono)" font-size="8" font-weight="600">Ultra</text>
+            fill="#C4A7E7" font-family="var(--font-mono)" font-size="8" font-weight="600">Ultra</text>
         </g>
         <g class="ge-badge" style="animation-delay: 3.0s;">
           <rect x="${cx - 26}" y="${cy + outerOrbitR + 30}" width="52" height="20" rx="10"
-            fill="#3b82f620" stroke="#3b82f660" stroke-width="1"/>
+            fill="#7EB8DA20" stroke="#7EB8DA60" stroke-width="1"/>
           <text x="${cx}" y="${cy + outerOrbitR + 41}" text-anchor="middle" dominant-baseline="central"
-            fill="#3b82f6" font-family="var(--font-mono)" font-size="8" font-weight="600">Pro</text>
+            fill="#7EB8DA" font-family="var(--font-mono)" font-size="8" font-weight="600">Pro</text>
         </g>
         <g class="ge-badge" style="animation-delay: 3.2s;">
           <rect x="${cx + 38}" y="${cy + outerOrbitR + 30}" width="52" height="20" rx="10"
-            fill="#00d4aa20" stroke="#00d4aa60" stroke-width="1"/>
+            fill="#9CCFA420" stroke="#9CCFA460" stroke-width="1"/>
           <text x="${cx + 64}" y="${cy + outerOrbitR + 41}" text-anchor="middle" dominant-baseline="central"
-            fill="#00d4aa" font-family="var(--font-mono)" font-size="8" font-weight="600">Flash</text>
+            fill="#9CCFA4" font-family="var(--font-mono)" font-size="8" font-weight="600">Flash</text>
         </g>
 
         <!-- Labels for rings -->

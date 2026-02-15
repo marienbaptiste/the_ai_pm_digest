@@ -21,7 +21,7 @@ export function render(container) {
             <polygon points="0 0, 8 3, 0 6" fill="var(--border-medium)"/>
           </marker>
           <marker id="rlhf-arrowhead-teal" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="#00d4aa"/>
+            <polygon points="0 0, 8 3, 0 6" fill="#9CCFA4"/>
           </marker>
         </defs>
 
@@ -33,29 +33,29 @@ export function render(container) {
 
         <!-- Step 1: Base LLM (top-left) -->
         <g class="rlhf-box" style="animation-delay: 0s;">
-          <rect x="90" y="50" width="180" height="80" rx="12" fill="#a855f715" stroke="#a855f7" stroke-width="2"/>
+          <rect x="90" y="50" width="180" height="80" rx="12" fill="#C4A7E715" stroke="#C4A7E7" stroke-width="2"/>
           <!-- Brain icon -->
           <g transform="translate(130, 70)">
-            <ellipse cx="12" cy="10" rx="11" ry="12" fill="none" stroke="#a855f7" stroke-width="1.5"/>
-            <path d="M7 10 Q12 2 17 10" fill="none" stroke="#a855f7" stroke-width="1.2"/>
-            <path d="M7 14 Q12 6 17 14" fill="none" stroke="#a855f7" stroke-width="1.2"/>
-            <line x1="12" y1="0" x2="12" y2="22" stroke="#a855f7" stroke-width="1.2"/>
+            <ellipse cx="12" cy="10" rx="11" ry="12" fill="none" stroke="#C4A7E7" stroke-width="1.5"/>
+            <path d="M7 10 Q12 2 17 10" fill="none" stroke="#C4A7E7" stroke-width="1.2"/>
+            <path d="M7 14 Q12 6 17 14" fill="none" stroke="#C4A7E7" stroke-width="1.2"/>
+            <line x1="12" y1="0" x2="12" y2="22" stroke="#C4A7E7" stroke-width="1.2"/>
           </g>
-          <text x="195" y="85" text-anchor="middle" class="rlhf-title" fill="#a855f7">Base LLM</text>
+          <text x="195" y="85" text-anchor="middle" class="rlhf-title" fill="#C4A7E7">Base LLM</text>
           <text x="195" y="105" text-anchor="middle" class="rlhf-label">Generates responses</text>
           <!-- Step badge -->
-          <circle cx="100" cy="60" r="11" fill="#a855f7"/>
+          <circle cx="100" cy="60" r="11" fill="#C4A7E7"/>
           <text x="100" y="64" text-anchor="middle" class="rlhf-step" fill="#fff">1</text>
         </g>
 
         <!-- Responses bubbles from LLM -->
         <g class="rlhf-responses" style="animation-delay: 0.5s;">
-          <rect x="300" y="42" width="80" height="22" rx="6" fill="#a855f720" stroke="#a855f7" stroke-width="1"/>
-          <text x="340" y="57" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="#a855f7">Response A</text>
-          <rect x="300" y="68" width="80" height="22" rx="6" fill="#a855f720" stroke="#a855f7" stroke-width="1"/>
-          <text x="340" y="83" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="#a855f7">Response B</text>
-          <rect x="300" y="94" width="80" height="22" rx="6" fill="#a855f720" stroke="#a855f7" stroke-width="1"/>
-          <text x="340" y="109" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="#a855f7">Response C</text>
+          <rect x="300" y="42" width="80" height="22" rx="6" fill="#C4A7E720" stroke="#C4A7E7" stroke-width="1"/>
+          <text x="340" y="57" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="#C4A7E7">Response A</text>
+          <rect x="300" y="68" width="80" height="22" rx="6" fill="#C4A7E720" stroke="#C4A7E7" stroke-width="1"/>
+          <text x="340" y="83" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="#C4A7E7">Response B</text>
+          <rect x="300" y="94" width="80" height="22" rx="6" fill="#C4A7E720" stroke="#C4A7E7" stroke-width="1"/>
+          <text x="340" y="109" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="#C4A7E7">Response C</text>
         </g>
 
         <!-- Arrow: LLM -> Responses -->
@@ -63,24 +63,24 @@ export function render(container) {
 
         <!-- Step 2: Human Evaluator (top-right) -->
         <g class="rlhf-box" style="animation-delay: 0.6s;">
-          <rect x="470" y="50" width="190" height="80" rx="12" fill="#f59e0b15" stroke="#f59e0b" stroke-width="2"/>
+          <rect x="470" y="50" width="190" height="80" rx="12" fill="#F0B42915" stroke="#F0B429" stroke-width="2"/>
           <!-- Human silhouette icon -->
           <g transform="translate(500, 65)">
-            <circle cx="12" cy="6" r="6" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
-            <path d="M0 24 Q0 14 12 14 Q24 14 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+            <circle cx="12" cy="6" r="6" fill="none" stroke="#F0B429" stroke-width="1.5"/>
+            <path d="M0 24 Q0 14 12 14 Q24 14 24 24" fill="none" stroke="#F0B429" stroke-width="1.5"/>
           </g>
-          <text x="580" y="85" text-anchor="middle" class="rlhf-title" fill="#f59e0b">Human Evaluator</text>
+          <text x="580" y="85" text-anchor="middle" class="rlhf-title" fill="#F0B429">Human Evaluator</text>
           <text x="580" y="105" text-anchor="middle" class="rlhf-label">Ranks preferences</text>
           <!-- Step badge -->
-          <circle cx="480" cy="60" r="11" fill="#f59e0b"/>
+          <circle cx="480" cy="60" r="11" fill="#F0B429"/>
           <text x="480" y="64" text-anchor="middle" class="rlhf-step" fill="#fff">2</text>
         </g>
 
         <!-- Ranking indicators -->
         <g class="rlhf-box" style="animation-delay: 1.0s;">
-          <text x="632" y="74" font-family="var(--font-mono)" font-size="14" fill="#22c55e">&#9733;</text>
-          <text x="645" y="74" font-family="var(--font-mono)" font-size="14" fill="#22c55e">&#9733;</text>
-          <text x="658" y="74" font-family="var(--font-mono)" font-size="14" fill="#22c55e">&#9733;</text>
+          <text x="632" y="74" font-family="var(--font-mono)" font-size="14" fill="#9CCFA4">&#9733;</text>
+          <text x="645" y="74" font-family="var(--font-mono)" font-size="14" fill="#9CCFA4">&#9733;</text>
+          <text x="658" y="74" font-family="var(--font-mono)" font-size="14" fill="#9CCFA4">&#9733;</text>
           <text x="632" y="100" font-family="var(--font-mono)" font-size="10" fill="var(--text-dim)">A &gt; C &gt; B</text>
         </g>
 
@@ -89,17 +89,17 @@ export function render(container) {
 
         <!-- Step 3: Reward Model (bottom-right) -->
         <g class="rlhf-box" style="animation-delay: 1.2s;">
-          <rect x="470" y="260" width="190" height="80" rx="12" fill="#3b82f615" stroke="#3b82f6" stroke-width="2"/>
+          <rect x="470" y="260" width="190" height="80" rx="12" fill="#7EB8DA15" stroke="#7EB8DA" stroke-width="2"/>
           <!-- Chart icon -->
           <g transform="translate(500, 275)">
-            <rect x="0" y="14" width="6" height="10" rx="1" fill="#3b82f6" opacity="0.6"/>
-            <rect x="8" y="8" width="6" height="16" rx="1" fill="#3b82f6" opacity="0.8"/>
-            <rect x="16" y="2" width="6" height="22" rx="1" fill="#3b82f6"/>
+            <rect x="0" y="14" width="6" height="10" rx="1" fill="#7EB8DA" opacity="0.6"/>
+            <rect x="8" y="8" width="6" height="16" rx="1" fill="#7EB8DA" opacity="0.8"/>
+            <rect x="16" y="2" width="6" height="22" rx="1" fill="#7EB8DA"/>
           </g>
-          <text x="577" y="295" text-anchor="middle" class="rlhf-title" fill="#3b82f6">Reward Model</text>
+          <text x="577" y="295" text-anchor="middle" class="rlhf-title" fill="#7EB8DA">Reward Model</text>
           <text x="577" y="315" text-anchor="middle" class="rlhf-label">Learns human preferences</text>
           <!-- Step badge -->
-          <circle cx="480" cy="270" r="11" fill="#3b82f6"/>
+          <circle cx="480" cy="270" r="11" fill="#7EB8DA"/>
           <text x="480" y="274" text-anchor="middle" class="rlhf-step" fill="#fff">3</text>
         </g>
 
@@ -109,21 +109,21 @@ export function render(container) {
 
         <!-- Step 4: PPO/Policy Update (bottom-left) -->
         <g class="rlhf-box" style="animation-delay: 1.8s;">
-          <rect x="90" y="260" width="180" height="80" rx="12" fill="#00d4aa15" stroke="#00d4aa" stroke-width="2"/>
+          <rect x="90" y="260" width="180" height="80" rx="12" fill="#9CCFA415" stroke="#9CCFA4" stroke-width="2"/>
           <!-- Gear/update icon -->
           <g transform="translate(120, 278)">
-            <circle cx="12" cy="12" r="10" fill="none" stroke="#00d4aa" stroke-width="1.5"/>
-            <circle cx="12" cy="12" r="4" fill="none" stroke="#00d4aa" stroke-width="1.5"/>
-            <line x1="12" y1="0" x2="12" y2="4" stroke="#00d4aa" stroke-width="2"/>
-            <line x1="12" y1="20" x2="12" y2="24" stroke="#00d4aa" stroke-width="2"/>
-            <line x1="0" y1="12" x2="4" y2="12" stroke="#00d4aa" stroke-width="2"/>
-            <line x1="20" y1="12" x2="24" y2="12" stroke="#00d4aa" stroke-width="2"/>
+            <circle cx="12" cy="12" r="10" fill="none" stroke="#9CCFA4" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="4" fill="none" stroke="#9CCFA4" stroke-width="1.5"/>
+            <line x1="12" y1="0" x2="12" y2="4" stroke="#9CCFA4" stroke-width="2"/>
+            <line x1="12" y1="20" x2="12" y2="24" stroke="#9CCFA4" stroke-width="2"/>
+            <line x1="0" y1="12" x2="4" y2="12" stroke="#9CCFA4" stroke-width="2"/>
+            <line x1="20" y1="12" x2="24" y2="12" stroke="#9CCFA4" stroke-width="2"/>
           </g>
-          <text x="200" y="295" text-anchor="middle" class="rlhf-title" fill="#00d4aa">PPO / Policy Update</text>
+          <text x="200" y="295" text-anchor="middle" class="rlhf-title" fill="#9CCFA4">PPO / Policy Update</text>
           <text x="200" y="315" text-anchor="middle" class="rlhf-label">Optimizes LLM policy</text>
           <!-- Step badge -->
-          <circle cx="100" cy="270" r="11" fill="#00d4aa"/>
-          <text x="100" y="274" text-anchor="middle" class="rlhf-step" fill="#111827">4</text>
+          <circle cx="100" cy="270" r="11" fill="#9CCFA4"/>
+          <text x="100" y="274" text-anchor="middle" class="rlhf-step" fill="#0C0A09">4</text>
         </g>
 
         <!-- Arrow: Reward Model -> PPO (bottom, going left) -->
@@ -131,13 +131,13 @@ export function render(container) {
         <text x="375" y="290" text-anchor="middle" class="rlhf-label" fill="var(--text-dim)">Reward signal</text>
 
         <!-- Arrow: PPO -> LLM (left side, going up) - THE CYCLE! -->
-        <path d="M 90 280 L 50 280 L 50 90 L 86 90" fill="none" stroke="#00d4aa" stroke-width="2" class="rlhf-arrow" marker-end="url(#rlhf-arrowhead-teal)"/>
-        <text x="40" y="195" class="rlhf-label" fill="#00d4aa" font-size="9" transform="rotate(-90, 40, 195)">Updated weights</text>
+        <path d="M 90 280 L 50 280 L 50 90 L 86 90" fill="none" stroke="#9CCFA4" stroke-width="2" class="rlhf-arrow" marker-end="url(#rlhf-arrowhead-teal)"/>
+        <text x="40" y="195" class="rlhf-label" fill="#9CCFA4" font-size="9" transform="rotate(-90, 40, 195)">Updated weights</text>
 
         <!-- Iteration indicator -->
         <g class="rlhf-box" style="animation-delay: 2.8s;">
-          <rect x="290" y="350" width="170" height="36" rx="8" fill="#00d4aa10" stroke="#00d4aa" stroke-width="1" stroke-dasharray="4"/>
-          <text x="375" y="365" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="#00d4aa">
+          <rect x="290" y="350" width="170" height="36" rx="8" fill="#9CCFA410" stroke="#9CCFA4" stroke-width="1" stroke-dasharray="4"/>
+          <text x="375" y="365" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="#9CCFA4">
             <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
             &#8635; Iterative refinement loop
           </text>
@@ -146,8 +146,8 @@ export function render(container) {
 
         <!-- Reward score flowing -->
         <g class="rlhf-box" style="animation-delay: 2.0s;">
-          <rect x="380" y="315" width="56" height="18" rx="4" fill="#3b82f630"/>
-          <text x="408" y="328" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="#3b82f6">r = 0.87</text>
+          <rect x="380" y="315" width="56" height="18" rx="4" fill="#7EB8DA30"/>
+          <text x="408" y="328" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="#7EB8DA">r = 0.87</text>
         </g>
 
       </svg>

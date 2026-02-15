@@ -13,7 +13,11 @@
       "Bash(dir:*)",
       "Bash(node --input-type=module -e:*)",
       "Bash(wc:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(git stash:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash pop:*)",
+      "Bash(git add:*)"
     ]
   }
 }

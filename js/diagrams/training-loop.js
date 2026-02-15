@@ -25,8 +25,8 @@ export function render(container) {
 
         <!-- Step 1: Data Batch -->
         <g class="tl-box" style="animation-delay: 0s;">
-          <rect x="235" y="30" width="130" height="55" rx="10" fill="#3b82f615" stroke="#3b82f6" stroke-width="2"/>
-          <text x="300" y="55" text-anchor="middle" class="tl-title" fill="#3b82f6">Data Batch</text>
+          <rect x="235" y="30" width="130" height="55" rx="10" fill="#7EB8DA15" stroke="#7EB8DA" stroke-width="2"/>
+          <text x="300" y="55" text-anchor="middle" class="tl-title" fill="#7EB8DA">Data Batch</text>
           <text x="300" y="72" text-anchor="middle" class="tl-label">Mini-batch sampling</text>
         </g>
 
@@ -35,8 +35,8 @@ export function render(container) {
 
         <!-- Step 2: Forward Pass -->
         <g class="tl-box" style="animation-delay: 0.2s;">
-          <rect x="370" y="120" width="130" height="55" rx="10" fill="#a855f715" stroke="#a855f7" stroke-width="2"/>
-          <text x="435" y="145" text-anchor="middle" class="tl-title" fill="#a855f7">Forward Pass</text>
+          <rect x="370" y="120" width="130" height="55" rx="10" fill="#C4A7E715" stroke="#C4A7E7" stroke-width="2"/>
+          <text x="435" y="145" text-anchor="middle" class="tl-title" fill="#C4A7E7">Forward Pass</text>
           <text x="435" y="162" text-anchor="middle" class="tl-label">y\u0302 = f(x; \u03B8)</text>
         </g>
 
@@ -45,8 +45,8 @@ export function render(container) {
 
         <!-- Step 3: Loss Calculation -->
         <g class="tl-box" style="animation-delay: 0.4s;">
-          <rect x="255" y="240" width="130" height="55" rx="10" fill="#ef444415" stroke="#ef4444" stroke-width="2"/>
-          <text x="320" y="265" text-anchor="middle" class="tl-title" fill="#ef4444">Loss Function</text>
+          <rect x="255" y="240" width="130" height="55" rx="10" fill="#EB6F9215" stroke="#EB6F92" stroke-width="2"/>
+          <text x="320" y="265" text-anchor="middle" class="tl-title" fill="#EB6F92">Loss Function</text>
           <text x="320" y="282" text-anchor="middle" class="tl-label">L(y, y\u0302) = error</text>
         </g>
 
@@ -55,8 +55,8 @@ export function render(container) {
 
         <!-- Step 4: Backward Pass -->
         <g class="tl-box" style="animation-delay: 0.6s;">
-          <rect x="95" y="150" width="130" height="55" rx="10" fill="#f59e0b15" stroke="#f59e0b" stroke-width="2"/>
-          <text x="160" y="175" text-anchor="middle" class="tl-title" fill="#f59e0b">Backward Pass</text>
+          <rect x="95" y="150" width="130" height="55" rx="10" fill="#F0B42915" stroke="#F0B429" stroke-width="2"/>
+          <text x="160" y="175" text-anchor="middle" class="tl-title" fill="#F0B429">Backward Pass</text>
           <text x="160" y="192" text-anchor="middle" class="tl-label">\u2207L / \u2207\u03B8 (gradients)</text>
         </g>
 
@@ -65,8 +65,8 @@ export function render(container) {
 
         <!-- Update weights label in center -->
         <g class="tl-box" style="animation-delay: 0.8s;">
-          <circle cx="300" cy="180" r="35" fill="#00d4aa15" stroke="#00d4aa" stroke-width="2"/>
-          <text x="300" y="176" text-anchor="middle" class="tl-title" fill="#00d4aa">Update</text>
+          <circle cx="300" cy="180" r="35" fill="#9CCFA415" stroke="#9CCFA4" stroke-width="2"/>
+          <text x="300" y="176" text-anchor="middle" class="tl-title" fill="#9CCFA4">Update</text>
           <text x="300" y="192" text-anchor="middle" class="tl-label">\u03B8 \u2192 \u03B8 - \u03B1\u2207L</text>
         </g>
 

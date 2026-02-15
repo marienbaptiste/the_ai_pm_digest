@@ -1,5 +1,5 @@
 import { storage } from '../storage.js';
-import { renderSidebar } from './sidebar.js';
+import { renderSidebar, updateSidebarProgress } from './sidebar.js';
 
 export function renderQuiz(container, quizData, lessonKey) {
   if (!quizData || !quizData.questions || quizData.questions.length === 0) {
@@ -11,55 +11,107 @@ export function renderQuiz(container, quizData, lessonKey) {
     return;
   }
 
-  // Per-question checked state
-  const state = {
-    answers: {},
-    checked: {},       // which questions have been checked
-    selfGraded: {},    // self-grading for open-ended questions: { [index]: true/false }
-  };
-
   const totalQ = quizData.questions.length;
+
+  // Restore persisted state or start fresh
+  const saved = storage.getQuizState(lessonKey);
+  const state = saved
+    ? { answers: saved.answers || {}, checked: saved.checked || {}, selfGraded: saved.selfGraded || {} }
+    : { answers: {}, checked: {}, selfGraded: {} };
+
+  // Convert string keys back to numbers (JSON stringify converts numeric keys to strings)
+  function normalizeKeys(obj) {
+    const out = {};
+    for (const k of Object.keys(obj)) out[parseInt(k)] = obj[k];
+    return out;
+  }
+  if (saved) {
+    state.answers = normalizeKeys(state.answers);
+    state.checked = normalizeKeys(state.checked);
+    state.selfGraded = normalizeKeys(state.selfGraded);
+  }
+
+  function persistState() {
+    storage.saveQuizState(lessonKey, {
+      answers: state.answers,
+      checked: state.checked,
+      selfGraded: state.selfGraded
+    });
+  }
 
   function getScore() {
     let correct = 0;
     quizData.questions.forEach((q, i) => {
-      if (state.checked[i] && checkAnswer(q, state.answers[i], state.selfGraded[i])) correct++;
+      const isChecked = !!state.checked[i];
+      const isCorrect = isChecked && checkAnswer(q, state.answers[i], state.selfGraded[i]);
+      if (isCorrect) correct++;
     });
-    return { correct, total: totalQ, percent: Math.round((correct / totalQ) * 100) };
+    const percent = totalQ > 0 ? Math.round((correct / totalQ) * 100) : 0;
+    return { correct, total: totalQ, percent };
   }
 
   function allChecked() {
-    if (Object.keys(state.checked).length !== totalQ) return false;
-    // Open-ended questions must also be self-graded
+    // Check each question individually (avoids key-type issues with Object.keys)
     for (let i = 0; i < totalQ; i++) {
+      if (!state.checked[i]) {
+        console.log(`[Quiz] allChecked: Q${i + 1} not yet checked`);
+        return false;
+      }
       const q = quizData.questions[i];
       if ((q.type === 'short' || q.type === 'scenario') && state.selfGraded[i] === undefined) {
+        console.log(`[Quiz] allChecked: Q${i + 1} (${q.type}) awaiting self-grade`);
         return false;
       }
     }
+    console.log(`[Quiz] allChecked: true — all ${totalQ} questions checked`);
     return true;
   }
 
   function render() {
     const score = getScore();
     const isComplete = allChecked();
-    const prevScore = storage.getQuizScore(lessonKey);
     const isAlreadyCompleted = storage.isLessonCompleted(lessonKey);
 
-    // Save progress when all answered and score >= 70
-    console.log(`[Quiz] isComplete=${isComplete}, score=${score.percent}%, isAlreadyCompleted=${isAlreadyCompleted}, checked=${Object.keys(state.checked).length}/${totalQ}`);
-    if (isComplete && score.percent >= 70 && !isAlreadyCompleted) {
-      storage.markLessonComplete(lessonKey, score.percent);
-      renderSidebar();
-      // Update breadcrumb tag
-      const breadcrumb = document.querySelector('.lesson__breadcrumb');
-      if (breadcrumb && !breadcrumb.querySelector('.tag--primary')) {
-        breadcrumb.insertAdjacentHTML('beforeend',
-          '<span class="tag tag--primary" style="margin-left: 8px;">Completed</span>'
-        );
+    // Log completion state for debugging
+    console.log(`[Quiz] render: lessonKey=${lessonKey}, isComplete=${isComplete}, score=${score.percent}%, alreadyCompleted=${isAlreadyCompleted}, checked=${JSON.stringify(state.checked)}`);
+
+    // Save progress when all answered and score >= 70%
+    if (isComplete && score.percent >= 70) {
+      if (!isAlreadyCompleted) {
+        console.log(`[Quiz] Marking lesson complete: ${lessonKey} with score ${score.percent}%`);
+        storage.markLessonComplete(lessonKey, score.percent);
+        try { renderSidebar(); } catch (e) { console.error('[Quiz] renderSidebar error:', e); }
+        // Direct fallback update
+        try { updateSidebarProgress(); } catch (e) { console.error('[Quiz] updateSidebarProgress error:', e); }
+        const breadcrumb = document.querySelector('.lesson__breadcrumb');
+        if (breadcrumb && !breadcrumb.querySelector('.tag--primary')) {
+          breadcrumb.insertAdjacentHTML('beforeend',
+            '<span class="tag tag--primary" style="margin-left: 8px;">Completed</span>'
+          );
+        }
+        showToast(`Lesson completed! Score: ${score.percent}%`);
+      } else {
+        // Already completed — check for high score
+        const prevScore = storage.getQuizScore(lessonKey);
+        if (score.percent > (prevScore || 0)) {
+          storage.markLessonComplete(lessonKey, score.percent);
+          try { updateSidebarProgress(); } catch (e) { console.error('[Quiz] updateSidebarProgress error:', e); }
+          showToast(`New high score: ${score.percent}%`);
+        }
       }
-      // Show save confirmation toast
-      showToast(`Lesson completed! Score: ${score.percent}%`);
+    }
+
+    const checkedCount = Object.keys(state.checked).length;
+    const progressPercent = totalQ > 0 ? Math.round((checkedCount / totalQ) * 100) : 0;
+
+    let subtitleText;
+    if (isComplete) {
+      subtitleText = `Score: ${score.correct}/${score.total} (${score.percent}%) ${score.percent >= 70 ? '\u2014 Passed!' : '\u2014 Need 70% to pass.'}`;
+    } else if (checkedCount > 0) {
+      const remaining = totalQ - checkedCount;
+      subtitleText = `${checkedCount}/${totalQ} checked \u2014 ${remaining} question${remaining !== 1 ? 's' : ''} remaining`;
+    } else {
+      subtitleText = `${totalQ} questions \u2014 answer & check all to complete. Need 70% to pass.`;
     }
 
     container.innerHTML = `
@@ -68,14 +120,14 @@ export function renderQuiz(container, quizData, lessonKey) {
           <div class="quiz__header-icon">\u{1F9EA}</div>
           <div style="flex: 1;">
             <h3 class="quiz__title">Knowledge Check</h3>
-            <p class="quiz__subtitle">${isComplete
-              ? `Score: ${score.correct}/${score.total} (${score.percent}%) ${score.percent >= 70 ? '— Passed!' : '— Need 70% to pass.'}`
-              : `Answer each question — feedback is instant. Need 70% to complete.`
-            }</p>
+            <p class="quiz__subtitle">${subtitleText}</p>
           </div>
           <div class="quiz__progress-ring">
-            <span class="quiz__progress-count">${Object.keys(state.checked).length}/${totalQ}</span>
+            <span class="quiz__progress-count">${checkedCount}/${totalQ}</span>
           </div>
+        </div>
+        <div class="quiz__progress-bar" style="height: 3px; background: var(--bg-elevated); border-radius: 2px; margin-bottom: var(--space-6); overflow: hidden;">
+          <div style="height: 100%; width: ${progressPercent}%; background: linear-gradient(90deg, var(--accent-primary), ${isComplete && score.percent >= 70 ? 'var(--accent-green)' : 'var(--accent-blue)'}); border-radius: 2px; transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);"></div>
         </div>
 
         <div class="quiz__questions">
@@ -113,10 +165,10 @@ export function renderQuiz(container, quizData, lessonKey) {
     `;
 
     // Attach choice listeners for unchecked questions
-    attachChoiceListeners(quizData.questions, state, container, render);
+    attachChoiceListeners(quizData.questions, state, container, render, persistState);
 
     // Attach text input listeners
-    attachTextListeners(quizData.questions, state, container, render);
+    attachTextListeners(quizData.questions, state, container, render, persistState);
 
     // Attach expert note toggles
     container.querySelectorAll('.quiz__expert-toggle').forEach(btn => {
@@ -133,28 +185,43 @@ export function renderQuiz(container, quizData, lessonKey) {
       btn.addEventListener('click', () => {
         const qi = parseInt(btn.dataset.selfGrade);
         const grade = btn.dataset.grade;
+        console.log(`[Quiz] Self-grade Q${qi + 1}: grade=${grade}, isCorrect=${grade === 'correct'}`);
         state.selfGraded[qi] = grade === 'correct';
+        persistState();
         render();
       });
     });
 
-    // Retry button
+    // Per-question reset buttons
+    container.querySelectorAll('[data-reset-question]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qi = parseInt(btn.dataset.resetQuestion);
+        delete state.answers[qi];
+        delete state.checked[qi];
+        delete state.selfGraded[qi];
+        persistState();
+        render();
+      });
+    });
+
+    // Retry button (resets all questions)
     document.getElementById('quiz-retry')?.addEventListener('click', () => {
       state.answers = {};
       state.checked = {};
       state.selfGraded = {};
+      persistState();
       render();
     });
 
-    // Reset lesson button
+    // Reset lesson button (resets progress + answers)
     document.getElementById('quiz-reset-lesson')?.addEventListener('click', () => {
       storage.resetLesson(lessonKey);
+      storage.clearQuizState(lessonKey);
       state.answers = {};
       state.checked = {};
       state.selfGraded = {};
       render();
       renderSidebar();
-      // Remove completed tag from breadcrumb
       document.querySelector('.lesson__breadcrumb .tag--primary')?.remove();
       document.querySelector('.lesson__breadcrumb .tag--blue')?.remove();
     });
@@ -168,7 +235,6 @@ function renderQuestion(q, index, state) {
   const isOpenEnded = q.type === 'short' || q.type === 'scenario';
   const needsSelfGrade = isChecked && isOpenEnded && state.selfGraded[index] === undefined;
   const isCorrect = isChecked && checkAnswer(q, state.answers[index], state.selfGraded[index]);
-  const isIncorrect = isChecked && !needsSelfGrade && !isCorrect;
   const stateClass = isChecked ? (needsSelfGrade ? 'quiz-pending' : (isCorrect ? 'quiz-correct' : 'quiz-incorrect')) : '';
 
   const difficultyColors = {
@@ -183,13 +249,18 @@ function renderQuestion(q, index, state) {
         <span class="quiz__question-num">Q${index + 1}</span>
         <span class="tag ${difficultyColors[q.difficulty] || 'tag--blue'}">${q.difficulty || 'applied'}</span>
         ${isChecked ? (needsSelfGrade ? `<span class="quiz__check-badge" style="background: var(--accent-blue); color: white;">\u2026</span>` : `<span class="quiz__check-badge ${isCorrect ? 'quiz__check-badge--correct' : 'quiz__check-badge--incorrect'}">${isCorrect ? '\u2713' : '\u2717'}</span>`) : ''}
+        ${isChecked ? `
+          <button class="quiz__question-reset" data-reset-question="${index}" title="Reset this question">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 8a6 6 0 1 1 1.76 4.24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 12.5V8h4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        ` : ''}
       </div>
       <p class="quiz__question-text">${q.question}</p>
 
       ${q.type === 'mc' || q.type === 'multi' ? renderChoices(q, index, state) : ''}
       ${q.type === 'short' || q.type === 'scenario' ? renderTextInput(q, index, state) : ''}
 
-      ${!isChecked && (q.type === 'multi') ? `
+      ${!isChecked && (q.type === 'mc' || q.type === 'multi') ? `
         <button class="quiz__action-btn quiz__action-btn--check" data-check="${index}">
           Check Answer
         </button>
@@ -298,12 +369,12 @@ function renderTextInput(q, index, state) {
   `;
 }
 
-function attachChoiceListeners(questions, state, container, rerender) {
+function attachChoiceListeners(questions, state, container, rerender, persistState) {
   container.querySelectorAll('.quiz__choice:not(.is-locked)').forEach(choice => {
     choice.addEventListener('click', () => {
       const questionEl = choice.closest('.quiz__question');
       const qi = parseInt(questionEl.dataset.question);
-      if (state.checked[qi]) return; // Already checked
+      if (state.checked[qi]) return;
 
       const ci = parseInt(choice.dataset.choice);
       const q = questions[qi];
@@ -345,46 +416,49 @@ function attachChoiceListeners(questions, state, container, rerender) {
         }
       });
 
-      // For mc (single-choice), auto-check immediately
-      if (q.type === 'mc') {
-        state.checked[qi] = true;
-        rerender();
-      }
+      // Save selection (checked later via Check Answer button)
+      persistState();
     });
   });
 
-  // Check buttons for multi-select questions
-  container.querySelectorAll('.quiz__action-btn--check').forEach(btn => {
+  // Check buttons for all question types
+  container.querySelectorAll('.quiz__action-btn--check[data-check]').forEach(btn => {
     btn.addEventListener('click', () => {
       const qi = parseInt(btn.dataset.check);
+      const q = questions[qi];
+      console.log(`[Quiz] Check Q${qi + 1}: type=${q?.type}, answer=${JSON.stringify(state.answers[qi])}, correct=${JSON.stringify(q?.correct)}`);
       state.checked[qi] = true;
+      persistState();
       rerender();
     });
   });
 }
 
-function attachTextListeners(questions, state, container, rerender) {
+function attachTextListeners(questions, state, container, rerender, persistState) {
   container.querySelectorAll('.quiz__textarea').forEach(textarea => {
+    let debounceTimer;
     textarea.addEventListener('input', () => {
       const qi = parseInt(textarea.dataset.question);
       state.answers[qi] = textarea.value;
+      // Debounce persistence to avoid excessive writes
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => persistState(), 500);
     });
   });
 }
 
 function checkAnswer(q, answer, selfGraded) {
-  if (answer === undefined || answer === null) return false;
-
   if (q.type === 'mc') {
+    if (answer === undefined || answer === null) return false;
     return answer === q.correct;
   }
   if (q.type === 'multi') {
-    if (!Array.isArray(answer)) return false;
+    if (!Array.isArray(answer) || answer.length === 0) return false;
     return q.correct.length === answer.length &&
       q.correct.every(c => answer.includes(c));
   }
-  // For short/scenario, use self-grading result
   if (q.type === 'short' || q.type === 'scenario') {
+    // For open-ended questions, correctness depends entirely on self-grading
     return selfGraded === true;
   }
   return false;
@@ -406,7 +480,6 @@ function showToast(message) {
     animation: toastIn 0.4s ease forwards;
   `;
 
-  // Add animation keyframes if not already present
   if (!document.getElementById('toast-styles')) {
     const style = document.createElement('style');
     style.id = 'toast-styles';

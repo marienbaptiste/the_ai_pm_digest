@@ -124,6 +124,27 @@ export const storage = {
     return getStore().progress;
   },
 
+  // Quiz answer persistence
+  getQuizState(lessonKey) {
+    const store = getStore();
+    return store.quizState?.[lessonKey] || null;
+  },
+
+  saveQuizState(lessonKey, quizState) {
+    const store = getStore();
+    if (!store.quizState) store.quizState = {};
+    store.quizState[lessonKey] = quizState;
+    saveStore(store);
+  },
+
+  clearQuizState(lessonKey) {
+    const store = getStore();
+    if (store.quizState) {
+      delete store.quizState[lessonKey];
+      saveStore(store);
+    }
+  },
+
   resetLesson(lessonKey) {
     console.log(`[Storage] Resetting lesson: ${lessonKey}`);
     const store = getStore();

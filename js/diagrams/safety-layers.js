@@ -4,11 +4,11 @@ export function render(container) {
 
   // Layers from innermost to outermost
   const layers = [
-    { label: 'Model', sublabel: 'Core AI', r: 35, color: '#a855f7', delay: 0.3, techniques: [] },
-    { label: 'Alignment', sublabel: '', r: 70, color: '#3b82f6', delay: 0.8, techniques: ['RLHF', 'Constitutional AI'] },
-    { label: 'Guardrails', sublabel: '', r: 108, color: '#00d4aa', delay: 1.3, techniques: ['Input Filters', 'Output Policy'] },
-    { label: 'Red Teaming', sublabel: '', r: 143, color: '#f59e0b', delay: 1.8, techniques: ['Adversarial Tests', 'Jailbreak Probes'] },
-    { label: 'Regulation', sublabel: '', r: 168, color: '#ef4444', delay: 2.3, techniques: ['EU AI Act', 'Governance'] }
+    { label: 'Model', sublabel: 'Core AI', r: 35, color: '#C4A7E7', delay: 0.3, techniques: [] },
+    { label: 'Alignment', sublabel: '', r: 70, color: '#7EB8DA', delay: 0.8, techniques: ['RLHF', 'Constitutional AI'] },
+    { label: 'Guardrails', sublabel: '', r: 108, color: '#9CCFA4', delay: 1.3, techniques: ['Input Filters', 'Output Policy'] },
+    { label: 'Red Teaming', sublabel: '', r: 143, color: '#F0B429', delay: 1.8, techniques: ['Adversarial Tests', 'Jailbreak Probes'] },
+    { label: 'Regulation', sublabel: '', r: 168, color: '#EB6F92', delay: 2.3, techniques: ['EU AI Act', 'Governance'] }
   ];
 
   let ringsSvg = '';
@@ -101,18 +101,18 @@ export function render(container) {
       <g class="sl-attack" style="animation-delay: ${delay}s;">
         <!-- Arrow line -->
         <line x1="${atk.fromX}" y1="${atk.fromY}" x2="${stopX}" y2="${stopY}"
-          stroke="#ef4444" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"
+          stroke="#EB6F92" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"
           marker-end="url(#sl-attack-arrow)"/>
         <!-- Label -->
         <text x="${(atk.fromX + midX) / 2 + 5}" y="${(atk.fromY + midY) / 2 - 6}" text-anchor="middle"
-          fill="#ef4444" font-family="var(--font-mono)" font-size="8" opacity="0.8">
+          fill="#EB6F92" font-family="var(--font-mono)" font-size="8" opacity="0.8">
           ${atk.label}
         </text>
         <!-- Blocked X mark -->
         <g transform="translate(${stopX}, ${stopY})">
-          <circle r="10" fill="#ef444430" stroke="#ef4444" stroke-width="1.5"/>
-          <line x1="-5" y1="-5" x2="5" y2="5" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
-          <line x1="5" y1="-5" x2="-5" y2="5" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+          <circle r="10" fill="#EB6F9230" stroke="#EB6F92" stroke-width="1.5"/>
+          <line x1="-5" y1="-5" x2="5" y2="5" stroke="#EB6F92" stroke-width="2" stroke-linecap="round"/>
+          <line x1="5" y1="-5" x2="-5" y2="5" stroke="#EB6F92" stroke-width="2" stroke-linecap="round"/>
         </g>
       </g>
     `;
@@ -174,7 +174,7 @@ export function render(container) {
           </filter>
           <marker id="sl-attack-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4"
             orient="auto" markerUnits="strokeWidth">
-            <path d="M1,1 L7,4 L1,7" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+            <path d="M1,1 L7,4 L1,7" fill="none" stroke="#EB6F92" stroke-width="1.5"/>
           </marker>
         </defs>
 
@@ -185,7 +185,7 @@ export function render(container) {
         </text>
 
         <!-- Core glow -->
-        <circle cx="${cx}" cy="${cy}" r="40" fill="#a855f7" opacity="0.2"
+        <circle cx="${cx}" cy="${cy}" r="40" fill="#C4A7E7" opacity="0.2"
           class="sl-core-glow" filter="url(#slGlow)"/>
 
         <!-- Concentric rings (drawn outer to inner for correct stacking) -->

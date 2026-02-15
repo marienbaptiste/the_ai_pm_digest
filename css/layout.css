@@ -276,6 +276,28 @@
   color: var(--text-secondary);
 }
 
+.sidebar__reset-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: all var(--duration-fast) var(--ease-out);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.sidebar__reset-btn:hover {
+  color: var(--accent-red);
+  background: var(--accent-red-dim);
+}
+
 /* Sidebar toggle (mobile) */
 .sidebar-toggle {
   display: none;

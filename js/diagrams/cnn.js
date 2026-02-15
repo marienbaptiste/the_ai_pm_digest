@@ -4,26 +4,26 @@ export function render(container) {
 
   // Input grid colors (6x6) - represent a simple image pattern
   const inputColors = [
-    ['#1e3a5f','#1e3a5f','#2d5a87','#2d5a87','#1e3a5f','#1e3a5f'],
-    ['#1e3a5f','#3b82f6','#3b82f6','#3b82f6','#3b82f6','#1e3a5f'],
-    ['#2d5a87','#3b82f6','#60a5fa','#60a5fa','#3b82f6','#2d5a87'],
-    ['#2d5a87','#3b82f6','#60a5fa','#93c5fd','#3b82f6','#2d5a87'],
-    ['#1e3a5f','#3b82f6','#3b82f6','#3b82f6','#3b82f6','#1e3a5f'],
-    ['#1e3a5f','#1e3a5f','#2d5a87','#2d5a87','#1e3a5f','#1e3a5f']
+    ['#3D6F8A','#3D6F8A','#5A99B8','#5A99B8','#3D6F8A','#3D6F8A'],
+    ['#3D6F8A','#7EB8DA','#7EB8DA','#7EB8DA','#7EB8DA','#3D6F8A'],
+    ['#5A99B8','#7EB8DA','#9ECDE6','#9ECDE6','#7EB8DA','#5A99B8'],
+    ['#5A99B8','#7EB8DA','#9ECDE6','#BFE0F0','#7EB8DA','#5A99B8'],
+    ['#3D6F8A','#7EB8DA','#7EB8DA','#7EB8DA','#7EB8DA','#3D6F8A'],
+    ['#3D6F8A','#3D6F8A','#5A99B8','#5A99B8','#3D6F8A','#3D6F8A']
   ];
 
   // Feature map values (4x4) - lighter = higher activation
   const featureColors = [
-    ['#1a1a2e','#2d2d5f','#2d2d5f','#1a1a2e'],
-    ['#2d2d5f','#a855f7','#c084fc','#2d2d5f'],
-    ['#2d2d5f','#c084fc','#e9d5ff','#2d2d5f'],
-    ['#1a1a2e','#2d2d5f','#2d2d5f','#1a1a2e']
+    ['#1C1917','#292524','#292524','#1C1917'],
+    ['#292524','#C4A7E7','#D4BFF0','#292524'],
+    ['#292524','#D4BFF0','#E8DDF5','#292524'],
+    ['#1C1917','#292524','#292524','#1C1917']
   ];
 
   // Pooled map (2x2)
   const pooledColors = [
-    ['#a855f7', '#c084fc'],
-    ['#c084fc', '#e9d5ff']
+    ['#C4A7E7', '#D4BFF0'],
+    ['#D4BFF0', '#E8DDF5']
   ];
 
   // Build input grid
@@ -69,7 +69,7 @@ export function render(container) {
       const idx = r * 4 + c;
       const delay = (1.5 + idx * 0.25).toFixed(2);
       featureGrid += `<rect x="${fmX + c * (cellSize + gap)}" y="${fmY + r * (cellSize + gap)}"
-        width="${cellSize}" height="${cellSize}" rx="3" fill="${color}" stroke="#a855f7" stroke-width="0.5"
+        width="${cellSize}" height="${cellSize}" rx="3" fill="${color}" stroke="#C4A7E7" stroke-width="0.5"
         class="cnn-feature" style="animation-delay: ${delay}s;"/>`;
     });
   });
@@ -83,7 +83,7 @@ export function render(container) {
     row.forEach((color, c) => {
       const delay = (6 + r * 0.3 + c * 0.3).toFixed(2);
       pooledGrid += `<rect x="${poolX + c * (poolCell + gap)}" y="${poolY + r * (poolCell + gap)}"
-        width="${poolCell}" height="${poolCell}" rx="4" fill="${color}" stroke="#00d4aa" stroke-width="1"
+        width="${poolCell}" height="${poolCell}" rx="4" fill="${color}" stroke="#9CCFA4" stroke-width="1"
         class="cnn-feature" style="animation-delay: ${delay}s;"/>`;
     });
   });
@@ -144,11 +144,11 @@ export function render(container) {
         <defs>
           <marker id="cnnArrow" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#F0B429"/>
           </marker>
           <marker id="cnnArrowTeal" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#00d4aa"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9CCFA4"/>
           </marker>
         </defs>
 
@@ -169,8 +169,8 @@ export function render(container) {
         </text>
 
         <!-- Sliding kernel overlay -->
-        <rect width="${kSize}" height="${kSize}" rx="4" fill="#f59e0b15"
-          stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4 2" class="cnn-kernel">
+        <rect width="${kSize}" height="${kSize}" rx="4" fill="#F0B42915"
+          stroke="#F0B429" stroke-width="2.5" stroke-dasharray="4 2" class="cnn-kernel">
           <animate attributeName="x"
             values="${[...Array(4)].map((_, r) => [...Array(4)].map((_, c) => kernelX + c * (cellSize + gap))).flat().join(';')};${kernelX}"
             dur="8s" repeatCount="indefinite" begin="1s" calcMode="discrete"/>
@@ -182,18 +182,18 @@ export function render(container) {
         <!-- Kernel label -->
         <text x="${inputX + 3 * (cellSize + gap) - gap / 2}" y="${inputY - 10}"
           text-anchor="middle" class="cnn-label" style="animation-delay: 0.9s;"
-          fill="#f59e0b" font-family="var(--font-mono)" font-size="11" font-weight="600">
+          fill="#F0B429" font-family="var(--font-mono)" font-size="11" font-weight="600">
           Kernel (3\u00D73)
         </text>
 
         <!-- Arrow: Input -> Feature Map -->
         <line x1="${inputX + 6 * (cellSize + gap) + 10}" y1="${arrowY}"
           x2="${fmX - 10}" y2="${arrowY}"
-          stroke="#f59e0b" stroke-width="2" class="cnn-arrow"
+          stroke="#F0B429" stroke-width="2" class="cnn-arrow"
           marker-end="url(#cnnArrow)"/>
         <text x="${(inputX + 6 * (cellSize + gap) + fmX) / 2}" y="${arrowY - 10}"
           text-anchor="middle" class="cnn-label" style="animation-delay: 1.3s;"
-          fill="#f59e0b" font-family="var(--font-mono)" font-size="9">Convolve</text>
+          fill="#F0B429" font-family="var(--font-mono)" font-size="9">Convolve</text>
 
         <!-- ===== Feature Map 4x4 ===== -->
         ${featureGrid}
@@ -201,18 +201,18 @@ export function render(container) {
         <!-- Feature map label -->
         <text x="${fmX + 2 * (cellSize + gap) - gap / 2}" y="${fmY + 4 * (cellSize + gap) + 15}"
           text-anchor="middle" class="cnn-label" style="animation-delay: 3s;"
-          fill="#a855f7" font-family="var(--font-mono)" font-size="11">
+          fill="#C4A7E7" font-family="var(--font-mono)" font-size="11">
           Feature Map (4\u00D74)
         </text>
 
         <!-- Arrow: Feature Map -> Pooled -->
         <line x1="${fmX + 4 * (cellSize + gap) + 10}" y1="${arrowY}"
           x2="${poolX - 10}" y2="${arrowY}"
-          stroke="#00d4aa" stroke-width="2" class="cnn-pool-arrow"
+          stroke="#9CCFA4" stroke-width="2" class="cnn-pool-arrow"
           marker-end="url(#cnnArrowTeal)"/>
         <text x="${(fmX + 4 * (cellSize + gap) + poolX) / 2}" y="${arrowY - 10}"
           text-anchor="middle" class="cnn-label" style="animation-delay: 5.5s;"
-          fill="#00d4aa" font-family="var(--font-mono)" font-size="9">Max Pool</text>
+          fill="#9CCFA4" font-family="var(--font-mono)" font-size="9">Max Pool</text>
 
         <!-- ===== Pooled Map 2x2 ===== -->
         ${pooledGrid}
@@ -220,7 +220,7 @@ export function render(container) {
         <!-- Pooled label -->
         <text x="${poolX + poolCell + gap / 2}" y="${poolY + 2 * (poolCell + gap) + 15}"
           text-anchor="middle" class="cnn-label" style="animation-delay: 6.5s;"
-          fill="#00d4aa" font-family="var(--font-mono)" font-size="11">
+          fill="#9CCFA4" font-family="var(--font-mono)" font-size="11">
           Pooled (2\u00D72)
         </text>
 
@@ -237,7 +237,7 @@ export function render(container) {
 
         <!-- Highlight indicator on feature map showing current fill -->
         <rect width="${cellSize}" height="${cellSize}" rx="3" fill="none"
-          stroke="#f59e0b" stroke-width="2" opacity="0.8">
+          stroke="#F0B429" stroke-width="2" opacity="0.8">
           <animate attributeName="x"
             values="${[...Array(4)].map((_, r) => [...Array(4)].map((_, c) => fmX + c * (cellSize + gap))).flat().join(';')};${fmX}"
             dur="8s" repeatCount="indefinite" begin="1s" calcMode="discrete"/>

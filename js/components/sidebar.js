@@ -54,15 +54,20 @@ export function renderSidebar() {
 
 export function updateSidebarProgress() {
   const overall = storage.getOverallProgress(modules);
+  console.log(`[Sidebar] updateProgress: ${overall.completed}/${overall.total} = ${overall.percent}%`);
   const container = document.getElementById('sidebar-progress-ring');
   const text = document.getElementById('sidebar-progress-text');
 
   if (container) {
     container.innerHTML = '';
     container.appendChild(createProgressRing(overall.percent, 36, 3));
+  } else {
+    console.warn('[Sidebar] progress-ring container not found');
   }
   if (text) {
     text.textContent = `${overall.completed}/${overall.total} — ${overall.percent}% Complete`;
+  } else {
+    console.warn('[Sidebar] progress-text element not found');
   }
 }
 
@@ -99,6 +104,21 @@ window.addEventListener('progress-changed', (e) => {
     }
   }
 });
+
+// Global reset button in sidebar footer
+export function initGlobalReset() {
+  const btn = document.getElementById('sidebar-reset-all');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    if (!confirm('Reset ALL progress? This will clear all quiz answers and lesson completions.')) return;
+    storage.resetAll();
+    renderSidebar();
+    // If on a lesson page, re-navigate to reset quiz UI
+    if (window.location.hash.includes('/lesson/')) {
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
+    }
+  });
+}
 
 // Mobile sidebar toggle
 export function initSidebarToggle() {

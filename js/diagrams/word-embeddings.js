@@ -2,7 +2,7 @@ export function render(container) {
   // Word positions in 2D embedding space (within a ~600x300 coordinate area)
   const words = {
     animals: {
-      color: '#3b82f6',
+      color: '#7EB8DA',
       label: 'Animals',
       items: [
         { word: 'cat', x: 120, y: 80 },
@@ -11,7 +11,7 @@ export function render(container) {
       ]
     },
     food: {
-      color: '#f59e0b',
+      color: '#F0B429',
       label: 'Food',
       items: [
         { word: 'pizza', x: 480, y: 90 },
@@ -20,7 +20,7 @@ export function render(container) {
       ]
     },
     tech: {
-      color: '#00d4aa',
+      color: '#9CCFA4',
       label: 'Tech',
       items: [
         { word: 'code', x: 310, y: 230 },
@@ -88,9 +88,9 @@ export function render(container) {
   // Cluster labels
   let clusterLabels = '';
   const clusterPositions = [
-    { label: 'Animals', x: 125, y: 160, color: '#3b82f6' },
-    { label: 'Food', x: 490, y: 168, color: '#f59e0b' },
-    { label: 'Tech', x: 315, y: 290, color: '#00d4aa' }
+    { label: 'Animals', x: 125, y: 160, color: '#7EB8DA' },
+    { label: 'Food', x: 490, y: 168, color: '#F0B429' },
+    { label: 'Tech', x: 315, y: 290, color: '#9CCFA4' }
   ];
   clusterPositions.forEach((cl, i) => {
     const delay = (2.8 + i * 0.2).toFixed(2);
@@ -168,15 +168,15 @@ export function render(container) {
         <defs>
           <marker id="weArrowPurple" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#a855f7"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#C4A7E7"/>
           </marker>
           <marker id="weArrowRed" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#EB6F92"/>
           </marker>
           <marker id="weArrowGreen" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#22c55e"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#F6C177"/>
           </marker>
           <filter id="weGlow">
             <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
@@ -227,79 +227,79 @@ export function render(container) {
         <!-- Analogy word dots -->
         <g class="we-analogy" style="animation-delay: 3.5s;">
           <!-- king -->
-          <circle cx="${a.king.x}" cy="${a.king.y}" r="6" fill="#a855f7" stroke="#a855f740" stroke-width="3"/>
+          <circle cx="${a.king.x}" cy="${a.king.y}" r="6" fill="#C4A7E7" stroke="#C4A7E740" stroke-width="3"/>
           <text x="${a.king.x}" y="${a.king.y - 12}" text-anchor="middle"
-            fill="#a855f7" font-family="var(--font-mono)" font-size="11" font-weight="600">king</text>
+            fill="#C4A7E7" font-family="var(--font-mono)" font-size="11" font-weight="600">king</text>
         </g>
 
         <g class="we-analogy" style="animation-delay: 3.8s;">
           <!-- man -->
-          <circle cx="${a.man.x}" cy="${a.man.y}" r="6" fill="#ef4444" stroke="#ef444440" stroke-width="3"/>
+          <circle cx="${a.man.x}" cy="${a.man.y}" r="6" fill="#EB6F92" stroke="#EB6F9240" stroke-width="3"/>
           <text x="${a.man.x}" y="${a.man.y + 18}" text-anchor="middle"
-            fill="#ef4444" font-family="var(--font-mono)" font-size="11" font-weight="600">man</text>
+            fill="#EB6F92" font-family="var(--font-mono)" font-size="11" font-weight="600">man</text>
         </g>
 
         <g class="we-analogy" style="animation-delay: 4.1s;">
           <!-- woman -->
-          <circle cx="${a.woman.x}" cy="${a.woman.y}" r="6" fill="#22c55e" stroke="#22c55e40" stroke-width="3"/>
+          <circle cx="${a.woman.x}" cy="${a.woman.y}" r="6" fill="#F6C177" stroke="#F6C17740" stroke-width="3"/>
           <text x="${a.woman.x}" y="${a.woman.y + 18}" text-anchor="middle"
-            fill="#22c55e" font-family="var(--font-mono)" font-size="11" font-weight="600">woman</text>
+            fill="#F6C177" font-family="var(--font-mono)" font-size="11" font-weight="600">woman</text>
         </g>
 
         <g class="we-analogy" style="animation-delay: 4.8s;">
           <!-- queen (result) with glow -->
-          <circle cx="${a.queen.x}" cy="${a.queen.y}" r="8" fill="#a855f7" stroke="#a855f7" stroke-width="2">
+          <circle cx="${a.queen.x}" cy="${a.queen.y}" r="8" fill="#C4A7E7" stroke="#C4A7E7" stroke-width="2">
             <animate attributeName="r" values="6;9;6" dur="2s" repeatCount="indefinite" begin="5.5s"/>
           </circle>
-          <circle cx="${a.queen.x}" cy="${a.queen.y}" r="14" fill="#a855f7" opacity="0" filter="url(#weGlow)">
+          <circle cx="${a.queen.x}" cy="${a.queen.y}" r="14" fill="#C4A7E7" opacity="0" filter="url(#weGlow)">
             <animate attributeName="opacity" values="0;0.4;0" dur="2s" repeatCount="indefinite" begin="5.5s"/>
           </circle>
           <text x="${a.queen.x}" y="${a.queen.y - 14}" text-anchor="middle"
-            fill="#a855f7" font-family="var(--font-mono)" font-size="12" font-weight="700">queen</text>
+            fill="#C4A7E7" font-family="var(--font-mono)" font-size="12" font-weight="700">queen</text>
         </g>
 
         <!-- Analogy arrows -->
         <!-- king -> man (subtract) -->
         <line x1="${a.king.x}" y1="${a.king.y}" x2="${a.man.x}" y2="${a.man.y}"
-          stroke="#ef4444" stroke-width="1.5" class="we-analogy-arrow" style="animation-delay: 4s;"
+          stroke="#EB6F92" stroke-width="1.5" class="we-analogy-arrow" style="animation-delay: 4s;"
           marker-end="url(#weArrowRed)"/>
         <text x="${(a.king.x + a.man.x) / 2 + 12}" y="${(a.king.y + a.man.y) / 2}"
           text-anchor="start" class="we-analogy" style="animation-delay: 4.2s;"
-          fill="#ef4444" font-family="var(--font-mono)" font-size="10" font-weight="600">- man</text>
+          fill="#EB6F92" font-family="var(--font-mono)" font-size="10" font-weight="600">- man</text>
 
         <!-- man -> woman (the offset) -->
         <line x1="${a.man.x}" y1="${a.man.y}" x2="${a.woman.x}" y2="${a.woman.y}"
-          stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5 3" class="we-analogy-arrow" style="animation-delay: 4.3s;"
+          stroke="#F6C177" stroke-width="1.5" stroke-dasharray="5 3" class="we-analogy-arrow" style="animation-delay: 4.3s;"
           marker-end="url(#weArrowGreen)"/>
         <text x="${(a.man.x + a.woman.x) / 2}" y="${a.man.y + 30}"
           text-anchor="middle" class="we-analogy" style="animation-delay: 4.5s;"
-          fill="#22c55e" font-family="var(--font-mono)" font-size="10" font-weight="600">+ woman</text>
+          fill="#F6C177" font-family="var(--font-mono)" font-size="10" font-weight="600">+ woman</text>
 
         <!-- king -> queen (the result vector) -->
         <line x1="${a.king.x}" y1="${a.king.y}" x2="${a.queen.x + 8}" y2="${a.queen.y}"
-          stroke="#a855f7" stroke-width="2" class="we-analogy-arrow" style="animation-delay: 4.6s;"
+          stroke="#C4A7E7" stroke-width="2" class="we-analogy-arrow" style="animation-delay: 4.6s;"
           marker-end="url(#weArrowPurple)"/>
         <text x="${(a.king.x + a.queen.x) / 2}" y="${a.king.y - 10}"
           text-anchor="middle" class="we-analogy" style="animation-delay: 4.8s;"
-          fill="#a855f7" font-family="var(--font-mono)" font-size="10" font-weight="700">= queen</text>
+          fill="#C4A7E7" font-family="var(--font-mono)" font-size="10" font-weight="700">= queen</text>
 
         <!-- Analogy equation box -->
         <g class="we-analogy" style="animation-delay: 5.2s;">
           <rect x="200" y="345" width="300" height="26" rx="6"
-            fill="var(--bg-elevated)" stroke="#a855f7" stroke-width="1" opacity="0.9"/>
+            fill="var(--bg-elevated)" stroke="#C4A7E7" stroke-width="1" opacity="0.9"/>
           <text x="350" y="363" text-anchor="middle"
-            fill="#a855f7" font-family="var(--font-mono)" font-size="11" font-weight="600">
+            fill="#C4A7E7" font-family="var(--font-mono)" font-size="11" font-weight="600">
             king \u2212 man + woman \u2248 queen
           </text>
         </g>
 
         <!-- Legend -->
         <g class="we-analogy" style="animation-delay: 3.2s;">
-          <circle cx="75" cy="355" r="4" fill="#3b82f6"/>
+          <circle cx="75" cy="355" r="4" fill="#7EB8DA"/>
           <text x="85" y="359" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Animals</text>
-          <circle cx="140" cy="355" r="4" fill="#f59e0b"/>
+          <circle cx="140" cy="355" r="4" fill="#F0B429"/>
           <text x="150" y="359" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Food</text>
-          <circle cx="195" cy="355" r="4" fill="#00d4aa"/>
+          <circle cx="195" cy="355" r="4" fill="#9CCFA4"/>
           <text x="205" y="359" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Tech</text>
         </g>
       </svg>

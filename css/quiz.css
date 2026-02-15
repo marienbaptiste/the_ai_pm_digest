@@ -132,6 +132,28 @@
   animation: revealUp 0.3s var(--ease-out);
 }
 
+/* Per-question reset button */
+.quiz__question-reset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: all var(--duration-fast) var(--ease-out);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.quiz__question-reset:hover {
+  color: var(--accent-warm);
+  background: var(--accent-warm-dim);
+}
+
 .quiz__check-badge--correct {
   background: var(--accent-green);
   color: white;
@@ -499,8 +521,8 @@
 .quiz__self-grade {
   margin-top: var(--space-4);
   padding: var(--space-4);
-  background: rgba(59, 130, 246, 0.06);
-  border: 1px solid rgba(59, 130, 246, 0.15);
+  background: rgba(126, 184, 218, 0.06);
+  border: 1px solid rgba(126, 184, 218, 0.15);
   border-radius: var(--radius-md);
   animation: revealUp 0.4s var(--ease-out);
 }

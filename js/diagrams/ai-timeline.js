@@ -1,12 +1,12 @@
 export function render(container) {
   const milestones = [
-    { year: 1950, label: 'Turing Test', color: '#3b82f6', above: true },
-    { year: 1957, label: 'Perceptron', color: '#3b82f6', above: false },
-    { year: 1986, label: 'Backprop', color: '#a855f7', above: true },
-    { year: 1997, label: 'Deep Blue', color: '#a855f7', above: false },
-    { year: 2012, label: 'AlexNet', color: '#f59e0b', above: true },
-    { year: 2017, label: 'Transformer', color: '#00d4aa', above: false },
-    { year: 2022, label: 'ChatGPT', color: '#ef4444', above: true }
+    { year: 1950, label: 'Turing Test', color: '#7EB8DA', above: true },
+    { year: 1957, label: 'Perceptron', color: '#7EB8DA', above: false },
+    { year: 1986, label: 'Backprop', color: '#C4A7E7', above: true },
+    { year: 1997, label: 'Deep Blue', color: '#C4A7E7', above: false },
+    { year: 2012, label: 'AlexNet', color: '#F0B429', above: true },
+    { year: 2017, label: 'Transformer', color: '#9CCFA4', above: false },
+    { year: 2022, label: 'ChatGPT', color: '#EB6F92', above: true }
   ];
 
   const lineY = 190;
@@ -50,9 +50,9 @@ export function render(container) {
 
   // Era brackets
   const eras = [
-    { start: 1950, end: 1957, label: 'Foundations', color: '#3b82f6' },
-    { start: 1986, end: 1997, label: 'Revival', color: '#a855f7' },
-    { start: 2012, end: 2022, label: 'Deep Learning', color: '#00d4aa' }
+    { start: 1950, end: 1957, label: 'Foundations', color: '#7EB8DA' },
+    { start: 1986, end: 1997, label: 'Revival', color: '#C4A7E7' },
+    { start: 2012, end: 2022, label: 'Deep Learning', color: '#9CCFA4' }
   ];
 
   let eraSvg = '';
@@ -123,13 +123,13 @@ export function render(container) {
 
         <!-- Animated glow that travels along the line -->
         <path id="tl-path" d="M${startX - 15},${lineY} L${endX + 15},${lineY}" fill="none" stroke="none"/>
-        <circle r="6" fill="#00d4aa" opacity="0" class="tl-glow">
+        <circle r="6" fill="#9CCFA4" opacity="0" class="tl-glow">
           <animateMotion dur="4s" repeatCount="indefinite" begin="2s"
             path="M${startX - 15},0 L${endX + 15},0"/>
           <animate attributeName="opacity" values="0;0.8;0.8;0" dur="4s" repeatCount="indefinite" begin="2s"/>
         </circle>
         <!-- Glow halo -->
-        <circle r="14" fill="#00d4aa" opacity="0" filter="url(#tlBlur)">
+        <circle r="14" fill="#9CCFA4" opacity="0" filter="url(#tlBlur)">
           <animateMotion dur="4s" repeatCount="indefinite" begin="2s"
             path="M${startX - 15},${lineY} L${endX + 15},${lineY}"/>
           <animate attributeName="opacity" values="0;0.3;0.3;0" dur="4s" repeatCount="indefinite" begin="2s"/>
@@ -155,13 +155,13 @@ export function render(container) {
 
         <!-- Legend at bottom -->
         <g class="tl-era" style="animation-delay: 3s;">
-          <circle cx="200" cy="325" r="5" fill="#3b82f6"/>
+          <circle cx="200" cy="325" r="5" fill="#7EB8DA"/>
           <text x="212" y="329" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">Foundations</text>
-          <circle cx="320" cy="325" r="5" fill="#a855f7"/>
+          <circle cx="320" cy="325" r="5" fill="#C4A7E7"/>
           <text x="332" y="329" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">Revival</text>
-          <circle cx="420" cy="325" r="5" fill="#00d4aa"/>
+          <circle cx="420" cy="325" r="5" fill="#9CCFA4"/>
           <text x="432" y="329" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">Deep Learning</text>
-          <circle cx="545" cy="325" r="5" fill="#ef4444"/>
+          <circle cx="545" cy="325" r="5" fill="#EB6F92"/>
           <text x="557" y="329" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">Generative AI</text>
         </g>
       </svg>

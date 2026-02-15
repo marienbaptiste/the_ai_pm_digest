@@ -1,5 +1,5 @@
 import { Router } from './router.js';
-import { renderSidebar, initSidebarToggle } from './components/sidebar.js';
+import { renderSidebar, initSidebarToggle, initGlobalReset } from './components/sidebar.js';
 import { renderDashboard } from './components/dashboard.js';
 import { renderLesson } from './components/lesson-viewer.js';
 
@@ -44,6 +44,7 @@ router.onNavigate = () => {
 function init() {
   renderSidebar();
   initSidebarToggle();
+  initGlobalReset();
   router.start();
 }
 

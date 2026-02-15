@@ -1,12 +1,12 @@
 export function render(container) {
   const steps = [
-    { letter: 'C', word: 'Comprehend', desc: 'Understand the question and context', color: '#3b82f6' },
-    { letter: 'I', word: 'Identify', desc: 'Identify the user and customer', color: '#3b82f6' },
-    { letter: 'R', word: 'Report', desc: 'Report customer needs and pain points', color: '#a855f7' },
-    { letter: 'C', word: 'Cut', desc: 'Cut through prioritization', color: '#a855f7' },
-    { letter: 'L', word: 'List', desc: 'List possible solutions', color: '#00d4aa' },
-    { letter: 'E', word: 'Evaluate', desc: 'Evaluate trade-offs systematically', color: '#00d4aa' },
-    { letter: 'S', word: 'Summarize', desc: 'Summarize your recommendation', color: '#f59e0b' }
+    { letter: 'C', word: 'Comprehend', desc: 'Understand the question and context', color: '#7EB8DA' },
+    { letter: 'I', word: 'Identify', desc: 'Identify the user and customer', color: '#7EB8DA' },
+    { letter: 'R', word: 'Report', desc: 'Report customer needs and pain points', color: '#C4A7E7' },
+    { letter: 'C', word: 'Cut', desc: 'Cut through prioritization', color: '#C4A7E7' },
+    { letter: 'L', word: 'List', desc: 'List possible solutions', color: '#9CCFA4' },
+    { letter: 'E', word: 'Evaluate', desc: 'Evaluate trade-offs systematically', color: '#9CCFA4' },
+    { letter: 'S', word: 'Summarize', desc: 'Summarize your recommendation', color: '#F0B429' }
   ];
 
   const startY = 55;
@@ -162,15 +162,15 @@ export function render(container) {
         </g>
 
         <!-- Accent line under title -->
-        <line x1="300" y1="32" x2="450" y2="32" stroke="#00d4aa" stroke-width="2"
+        <line x1="300" y1="32" x2="450" y2="32" stroke="#9CCFA4" stroke-width="2"
           stroke-linecap="round" class="if-accent-line"/>
 
         <!-- "For PM Interviews" badge -->
         <g class="if-badge" style="animation-delay: 0.15s;">
           <rect x="325" y="37" width="100" height="16" rx="8"
-            fill="#00d4aa15" stroke="#00d4aa40" stroke-width="1"/>
+            fill="#9CCFA415" stroke="#9CCFA440" stroke-width="1"/>
           <text x="375" y="47" text-anchor="middle" dominant-baseline="central"
-            fill="#00d4aa" font-family="var(--font-mono)" font-size="8">PM Interviews</text>
+            fill="#9CCFA4" font-family="var(--font-mono)" font-size="8">PM Interviews</text>
         </g>
 
         <!-- Vertical connector -->
@@ -184,13 +184,13 @@ export function render(container) {
 
         <!-- Color legend at bottom left -->
         <g class="if-subtitle" style="animation-delay: 2.0s;">
-          <circle cx="115" cy="350" r="4" fill="#3b82f6"/>
+          <circle cx="115" cy="350" r="4" fill="#7EB8DA"/>
           <text x="125" y="354" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="8">Define</text>
-          <circle cx="175" cy="350" r="4" fill="#a855f7"/>
+          <circle cx="175" cy="350" r="4" fill="#C4A7E7"/>
           <text x="185" y="354" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="8">Analyze</text>
-          <circle cx="240" cy="350" r="4" fill="#00d4aa"/>
+          <circle cx="240" cy="350" r="4" fill="#9CCFA4"/>
           <text x="250" y="354" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="8">Solve</text>
-          <circle cx="300" cy="350" r="4" fill="#f59e0b"/>
+          <circle cx="300" cy="350" r="4" fill="#F0B429"/>
           <text x="310" y="354" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="8">Conclude</text>
         </g>
 

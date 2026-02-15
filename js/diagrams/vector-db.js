@@ -1,10 +1,10 @@
 export function render(container) {
   // Generate deterministic cluster points
   const clusters = [
-    { cx: 200, cy: 160, color: '#a855f7', label: 'Science', count: 12 },
-    { cx: 320, cy: 100, color: '#f59e0b', label: 'Finance', count: 10 },
-    { cx: 260, cy: 260, color: '#ec4899', label: 'Health', count: 11 },
-    { cx: 150, cy: 280, color: '#22c55e', label: 'Tech', count: 9 },
+    { cx: 200, cy: 160, color: '#C4A7E7', label: 'Science', count: 12 },
+    { cx: 320, cy: 100, color: '#F0B429', label: 'Finance', count: 10 },
+    { cx: 260, cy: 260, color: '#E8553A', label: 'Health', count: 11 },
+    { cx: 150, cy: 280, color: '#9CCFA4', label: 'Tech', count: 9 },
   ];
 
   // Seed-based pseudo-random for deterministic dots
@@ -53,7 +53,7 @@ export function render(container) {
   // Nearest neighbor lines
   const nnLines = nearest.map((n, i) => {
     const score = (1 - n.dist / 200).toFixed(2);
-    return `<line x1="${qx}" y1="${qy}" x2="${n.x}" y2="${n.y}" stroke="#00d4aa" stroke-width="1.5" opacity="0"
+    return `<line x1="${qx}" y1="${qy}" x2="${n.x}" y2="${n.y}" stroke="#9CCFA4" stroke-width="1.5" opacity="0"
       class="vdb-nn-line" style="animation-delay: ${2.8 + i * 0.2}s;" stroke-dasharray="4 2"/>`;
   }).join('\n        ');
 
@@ -96,8 +96,8 @@ export function render(container) {
 
         <defs>
           <radialGradient id="vdb-space-grad" cx="50%" cy="50%">
-            <stop offset="0%" stop-color="#1e2740" stop-opacity="0.8"/>
-            <stop offset="100%" stop-color="#111827" stop-opacity="1"/>
+            <stop offset="0%" stop-color="#1C1917" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#0C0A09" stop-opacity="1"/>
           </radialGradient>
         </defs>
 
@@ -122,11 +122,11 @@ export function render(container) {
         ${dotsSvg}
 
         <!-- Distance rings from query -->
-        <circle cx="${qx}" cy="${qy}" r="50" fill="none" stroke="#3b82f6" stroke-width="0.8" stroke-dasharray="3 3"
+        <circle cx="${qx}" cy="${qy}" r="50" fill="none" stroke="#7EB8DA" stroke-width="0.8" stroke-dasharray="3 3"
           class="vdb-ring" style="animation-delay: 2.2s;"/>
-        <circle cx="${qx}" cy="${qy}" r="100" fill="none" stroke="#3b82f6" stroke-width="0.6" stroke-dasharray="3 3"
+        <circle cx="${qx}" cy="${qy}" r="100" fill="none" stroke="#7EB8DA" stroke-width="0.6" stroke-dasharray="3 3"
           class="vdb-ring" style="animation-delay: 2.4s;"/>
-        <circle cx="${qx}" cy="${qy}" r="150" fill="none" stroke="#3b82f6" stroke-width="0.4" stroke-dasharray="3 3"
+        <circle cx="${qx}" cy="${qy}" r="150" fill="none" stroke="#7EB8DA" stroke-width="0.4" stroke-dasharray="3 3"
           class="vdb-ring" style="animation-delay: 2.6s;"/>
 
         <!-- Nearest neighbor connecting lines -->
@@ -134,20 +134,20 @@ export function render(container) {
 
         <!-- Query vector (pulsing diamond) -->
         <g class="vdb-query" style="animation-delay: 1.8s;">
-          <polygon points="${qx},${qy - 10} ${qx + 8},${qy} ${qx},${qy + 10} ${qx - 8},${qy}" fill="#3b82f6" stroke="#fff" stroke-width="1">
+          <polygon points="${qx},${qy - 10} ${qx + 8},${qy} ${qx},${qy + 10} ${qx - 8},${qy}" fill="#7EB8DA" stroke="#fff" stroke-width="1">
             <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
           </polygon>
           <!-- Pulse ring -->
-          <circle cx="${qx}" cy="${qy}" r="6" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0">
+          <circle cx="${qx}" cy="${qy}" r="6" fill="none" stroke="#7EB8DA" stroke-width="1.5" opacity="0">
             <animate attributeName="r" values="6;18;6" dur="2s" repeatCount="indefinite"/>
             <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/>
           </circle>
-          <text x="${qx}" y="${qy - 16}" text-anchor="middle" font-family="var(--font-heading)" font-size="10" fill="#3b82f6" font-weight="600">Query</text>
+          <text x="${qx}" y="${qy - 16}" text-anchor="middle" font-family="var(--font-heading)" font-size="10" fill="#7EB8DA" font-weight="600">Query</text>
         </g>
 
         <!-- Results panel -->
         <g class="vdb-fade" style="animation-delay: 3.2s;">
-          <rect x="500" y="25" width="230" height="230" rx="12" fill="#11182795" stroke="var(--border-medium)" stroke-width="1.5"/>
+          <rect x="500" y="25" width="230" height="230" rx="12" fill="#0C0A0995" stroke="var(--border-medium)" stroke-width="1.5"/>
           <text x="615" y="50" text-anchor="middle" class="vdb-title" fill="var(--text-primary)">Top 3 Results</text>
         </g>
 
@@ -155,8 +155,8 @@ export function render(container) {
 
         <!-- K-NN label -->
         <g class="vdb-fade" style="animation-delay: 3.8s;">
-          <rect x="500" y="275" width="230" height="70" rx="10" fill="#00d4aa10" stroke="#00d4aa" stroke-width="1" stroke-dasharray="4"/>
-          <text x="615" y="298" text-anchor="middle" font-family="var(--font-heading)" font-size="11" fill="#00d4aa" font-weight="600">Approximate Nearest Neighbors</text>
+          <rect x="500" y="275" width="230" height="70" rx="10" fill="#9CCFA410" stroke="#9CCFA4" stroke-width="1" stroke-dasharray="4"/>
+          <text x="615" y="298" text-anchor="middle" font-family="var(--font-heading)" font-size="11" fill="#9CCFA4" font-weight="600">Approximate Nearest Neighbors</text>
           <text x="615" y="315" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--text-dim)">HNSW / IVF index for O(log n) search</text>
           <text x="615" y="332" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--text-dim)">Cosine similarity / L2 distance</text>
         </g>
