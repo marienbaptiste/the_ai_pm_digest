@@ -8,7 +8,9 @@
       "Bash(node -e:*)",
       "WebFetch(domain:localhost)",
       "Bash(curl:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(ls:*)",
+      "Bash(dir:*)"
     ]
   }
 }

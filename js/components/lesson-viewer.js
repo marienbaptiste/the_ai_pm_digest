@@ -1,6 +1,7 @@
 import { getModule, getLesson, modules } from '../../data/modules.js';
 import { storage } from '../storage.js';
 import { attachGlossary } from './glossary.js';
+import { attachInteractives } from '../interactives/index.js';
 import { renderQuiz } from './quiz-engine.js';
 import { renderSidebar } from './sidebar.js';
 
@@ -10,6 +11,21 @@ const diagramLoaders = {
   'diffusion': () => import('../diagrams/diffusion.js'),
   'rag-pipeline': () => import('../diagrams/rag-pipeline.js'),
   'training-loop': () => import('../diagrams/training-loop.js'),
+  'ai-timeline': () => import('../diagrams/ai-timeline.js'),
+  'ml-types': () => import('../diagrams/ml-types.js'),
+  'cnn': () => import('../diagrams/cnn.js'),
+  'lstm': () => import('../diagrams/lstm.js'),
+  'word-embeddings': () => import('../diagrams/word-embeddings.js'),
+  'rlhf': () => import('../diagrams/rlhf.js'),
+  'scaling-laws': () => import('../diagrams/scaling-laws.js'),
+  'multimodal': () => import('../diagrams/multimodal.js'),
+  'vector-db': () => import('../diagrams/vector-db.js'),
+  'product-lifecycle': () => import('../diagrams/product-lifecycle.js'),
+  'platform-flywheel': () => import('../diagrams/platform-flywheel.js'),
+  'safety-layers': () => import('../diagrams/safety-layers.js'),
+  'stakeholder-map': () => import('../diagrams/stakeholder-map.js'),
+  'gemini-ecosystem': () => import('../diagrams/gemini-ecosystem.js'),
+  'interview-framework': () => import('../diagrams/interview-framework.js'),
 };
 
 export async function renderLesson(container, moduleId, lessonId) {
@@ -122,10 +138,11 @@ export async function renderLesson(container, moduleId, lessonId) {
     </article>
   `;
 
-  // Attach glossary tooltips
+  // Attach glossary tooltips and interactive modules
   const contentEl = document.getElementById('lesson-content');
   if (contentEl) {
     await attachGlossary(contentEl);
+    await attachInteractives(contentEl);
   }
 
   // Load diagram
