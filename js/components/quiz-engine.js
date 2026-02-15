@@ -79,10 +79,15 @@ export function renderQuiz(container, quizData, lessonKey) {
     if (isComplete && score.percent >= 70) {
       if (!isAlreadyCompleted) {
         console.log(`[Quiz] Marking lesson complete: ${lessonKey} with score ${score.percent}%`);
+        // markLessonComplete saves to localStorage and dispatches 'progress-changed'
+        // event, which updates sidebar progress ring, text, lesson link, and module count
         storage.markLessonComplete(lessonKey, score.percent);
-        try { renderSidebar(); } catch (e) { console.error('[Quiz] renderSidebar error:', e); }
-        // Direct fallback update
+        // Direct fallback update in case event handler missed it
         try { updateSidebarProgress(); } catch (e) { console.error('[Quiz] updateSidebarProgress error:', e); }
+        // Deferred update to ensure DOM is stable after all synchronous work
+        requestAnimationFrame(() => {
+          try { updateSidebarProgress(); } catch (e) { /* silent */ }
+        });
         const breadcrumb = document.querySelector('.lesson__breadcrumb');
         if (breadcrumb && !breadcrumb.querySelector('.tag--primary')) {
           breadcrumb.insertAdjacentHTML('beforeend',

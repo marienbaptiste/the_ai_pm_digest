@@ -54,26 +54,28 @@ export function renderSidebar() {
 
 export function updateSidebarProgress() {
   const overall = storage.getOverallProgress(modules);
-  console.log(`[Sidebar] updateProgress: ${overall.completed}/${overall.total} = ${overall.percent}%`);
   const container = document.getElementById('sidebar-progress-ring');
   const text = document.getElementById('sidebar-progress-text');
 
-  if (container) {
-    container.innerHTML = '';
-    container.appendChild(createProgressRing(overall.percent, 36, 3));
-  } else {
-    console.warn('[Sidebar] progress-ring container not found');
-  }
+  // Update text first (most reliable, most important)
   if (text) {
     text.textContent = `${overall.completed}/${overall.total} — ${overall.percent}% Complete`;
-  } else {
-    console.warn('[Sidebar] progress-text element not found');
+  }
+
+  // Update ring separately — if this fails, text is already updated
+  if (container) {
+    try {
+      container.innerHTML = '';
+      container.appendChild(createProgressRing(overall.percent, 36, 3));
+    } catch (e) {
+      console.error('[Sidebar] Progress ring render error:', e);
+    }
   }
 }
 
 // Listen for progress changes from any source
 window.addEventListener('progress-changed', (e) => {
-  updateSidebarProgress();
+  try { updateSidebarProgress(); } catch (err) { console.error('[Sidebar] progress update error:', err); }
   // Update lesson completion state in sidebar nav without full re-render
   const lessonKey = e.detail?.lessonKey;
   if (lessonKey) {
