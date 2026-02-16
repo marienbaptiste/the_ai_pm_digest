@@ -214,11 +214,11 @@ export const lessons = {
           options: [
             'A diffusion model, because it produces the highest quality results',
             'A GAN-based model, because single-pass inference enables real-time speeds',
-            'A normalizing flow, because exact likelihoods help quality assessment',
+            'A normalizing flow, because they are also single-pass but with better theoretical guarantees',
             'A VAE, because stable training is the most important criterion'
           ],
           correct: 1,
-          explanation: 'Real-time (30fps) requires inference in roughly 33ms per frame. Standard diffusion models require dozens of sequential denoising steps, making them too slow without heavy distillation. GANs produce outputs in a single forward pass, making them the natural starting point for latency-constrained applications. You might later explore distilled diffusion, but evaluating GANs first is the correct scoping decision.',
+          explanation: 'Real-time (30fps) requires inference in roughly 33ms per frame. Standard diffusion models require dozens of sequential denoising steps, making them too slow without heavy distillation. GANs produce outputs in a single forward pass, making them the natural starting point for latency-constrained applications. While normalizing flows are also single-pass, they historically have a quality gap compared to GANs (architectural invertibility constraints limit expressiveness) and are less battle-tested for real-time video applications.',
           difficulty: 'applied',
           expertNote: 'In practice, teams often use a GAN for real-time inference and a diffusion model for offline quality benchmarks. Consistency models and latent consistency models have narrowed this gap to 1-4 steps, but as of 2024 GANs remain faster for hard real-time constraints.'
         },
