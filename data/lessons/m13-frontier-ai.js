@@ -128,10 +128,10 @@ where L_load_balance = N * sum_i( f_i * P_i )
           question: 'You are a PM at Google DeepMind, and a partner team proposes deploying an MoE model for a latency-sensitive mobile keyboard prediction feature. The model has 8 experts totaling 14B parameters with 2B active per token. What is the most critical concern you should raise?',
           type: 'mc',
           options: [
-            'MoE models cannot perform text prediction tasks at all',
-            'The total model size far exceeds mobile device memory constraints for edge deployment',
-            'The model will be too accurate for a keyboard prediction task',
-            'MoE routing adds so much latency that the model will always be slower than dense'
+            'MoE models cannot perform text prediction at all',
+            'Total model size exceeds mobile memory constraints',
+            'The model will be too accurate for keyboard tasks',
+            'MoE routing adds latency making it slower than dense'
           ],
           correct: 1,
           explanation: 'MoE trades memory for compute: the full model must be loaded into memory even though only a fraction activates per token. On mobile devices, memory is the primary constraint. A 14B-parameter MoE requires the same memory as a 14B dense model, despite only using 2B parameters per inference. A 2B dense model would be far more appropriate for edge deployment.',

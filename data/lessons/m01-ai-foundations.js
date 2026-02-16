@@ -112,10 +112,10 @@ export const lessons = {
           question: 'A startup claims their new AI system achieves "human-level performance across all domains." As an AI PM evaluating a potential partnership, which historical pattern should make you most sceptical?',
           type: 'mc',
           options: [
-            'Expert systems in the 1980s made broad claims but collapsed outside trained domains',
-            'Deep Blue\'s victory over Kasparov demonstrates machines achieve human parity across domains',
-            'Multiple systems passing the Turing Test validates claims of achieving general intelligence',
-            'AlphaFold\'s protein folding breakthrough proves domain-general AI capabilities are routine'
+            'Expert systems made broad claims but failed outside domains',
+            'Deep Blue shows machines achieve parity across domains',
+            'Multiple Turing Test passes validate general intelligence',
+            'AlphaFold proves domain-general AI is now routine'
           ],
           correct: 0,
           explanation: 'Both AI winters were triggered by overpromising. Expert systems were marketed as broadly intelligent but failed outside their narrow rule-based domains. No current system demonstrates true cross-domain generality, and claims of AGI should be evaluated against specific, measurable benchmarks.',
@@ -551,7 +551,7 @@ export const lessons = {
         {
           question: 'Scenario: Your team is training a content recommendation model. The ML lead proposes optimising for click-through rate (CTR) using cross-entropy loss. The UX research team flags that users are clicking on sensational content but reporting dissatisfaction in surveys. How should you, as PM, reconcile this tension through the lens of loss function design?',
           type: 'scenario',
-          correct: 'The core issue is a misalignment between the optimisation objective (CTR) and the actual product goal (user satisfaction). A strong PM response would: (1) Acknowledge that the loss function encodes what the model optimises for, and CTR-based cross-entropy literally trains the model to maximise clicks regardless of downstream satisfaction. (2) Propose a composite objective that incorporates satisfaction signals — e.g., combining CTR with engagement depth (time spent, completion rate), explicit feedback (thumbs up/down), and inversely weighting signals of regret (back-button rate, "not interested" clicks). (3) Recognise that not all desired outcomes are differentiable — some may need to be incorporated as post-training filters or re-ranking layers rather than in the training loss. (4) Propose an A/B test comparing the CTR-optimised model against a satisfaction-adjusted model to quantify the trade-off.',
+          correct: 'The core issue is CTR-satisfaction misalignment. A strong PM would: (1) Recognize the loss function literally trains for max clicks, ignoring downstream satisfaction. (2) Propose composite objectives incorporating engagement depth, explicit feedback signals, and regret indicators like back-button rate. (3) Note that not all outcomes are differentiable—some need post-training filters. (4) Run A/B tests comparing CTR-optimized vs satisfaction-adjusted models to quantify tradeoffs.',
           explanation: 'This is a classic Goodhart\'s Law scenario: "When a measure becomes a target, it ceases to be a good measure." The loss function defines what the model values, and aligning it with true user outcomes is one of the most important PM decisions in ML product development.',
           difficulty: 'expert',
           expertNote: 'A DeepMind-calibre PM would also consider long-term engagement effects (does optimising for satisfaction today improve retention over 30 days?) and propose establishing a causal framework rather than purely correlational metrics.'

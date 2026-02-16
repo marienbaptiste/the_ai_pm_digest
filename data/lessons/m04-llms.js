@@ -94,10 +94,10 @@ export const lessons = {
           question: 'You are evaluating a vendor who claims their NLP product uses "advanced word embeddings powered by Word2Vec" for a customer sentiment analysis system. What is the most important technical concern you should raise?',
           type: 'mc',
           options: [
-            'Word2Vec is too old to be useful for any modern NLP application',
-            'Word2Vec produces static embeddings missing context like sarcasm, negation, and polysemy',
-            'Word2Vec requires too much training data for practical deployment',
-            'Word2Vec cannot process text in non-English languages effectively'
+            'Word2Vec is too old for any modern NLP applications',
+            'Static embeddings miss context, sarcasm, negation',
+            'Word2Vec requires too much training data to deploy',
+            'Word2Vec cannot process non-English languages well'
           ],
           correct: 1,
           explanation: 'Word2Vec produces one fixed vector per word regardless of context. This means "not good" will have similar representation to "good" (since the embeddings of "not" and "good" are independently looked up), sarcasm will be missed, and polysemous words will conflate their senses. For sentiment analysis, where context fundamentally determines meaning, this is a critical limitation.',
@@ -146,10 +146,10 @@ export const lessons = {
           question: 'You are building a roadmap for an AI product that needs to classify support tickets (understanding task) and generate suggested replies (generation task). Given the evolution from BERT to modern LLMs, what is the most cost-effective architectural strategy?',
           type: 'mc',
           options: [
-            'Use BERT for classification and GPT for generation — always use specialized models',
-            'Use a single modern LLM for both tasks, but consider fine-tuned BERT for high-volume classification',
-            'Build a custom architecture from scratch specifically for the support ticket domain',
-            'Use Word2Vec embeddings with traditional ML classifiers for both classification and generation'
+            'Always use BERT for classification and GPT for generation',
+            'Single LLM for both, fine-tuned BERT for high volume',
+            'Build custom architecture from scratch for the domain',
+            'Word2Vec with traditional ML for both tasks'
           ],
           correct: 1,
           explanation: 'A modern LLM can handle both tasks through prompting, which simplifies the stack. However, if classification volume is very high (millions of tickets/day), running a large LLM for simple classification may be prohibitively expensive. A small fine-tuned BERT (~110M parameters) can classify tickets at 100x lower cost per request than a large LLM. The PM should evaluate the volume/cost tradeoff and potentially use a hybrid approach: BERT for high-volume classification, LLM for generation.',
@@ -284,10 +284,10 @@ export const lessons = {
           question: 'A non-technical stakeholder asks: "Why does pre-training cost $100M+? Can\'t we just train on less data to save money?" What is the best technical explanation?',
           type: 'mc',
           options: [
-            'We could train on less data but we choose not to because more data is always better regardless of cost considerations',
-            'Scaling laws show a predictable relationship between compute, data, and model quality — reducing training data would proportionally degrade the model\'s capabilities, potentially below the quality threshold needed for the product to be competitive',
-            'The cost is entirely due to GPU electricity bills and cannot be reduced through any optimization',
-            'Pre-training costs are fixed regardless of data volume or compute allocation decisions'
+            'More data is always better regardless of cost considerations, so we maximize spending to ensure superiority',
+            'Quality scales predictably with data via scaling laws',
+            'Training infrastructure electricity costs account for the entire budget and cannot be optimized or reduced through alternative approaches',
+            'Pre-training budgets are essentially fixed across all model architectures regardless of data volume or parameter choices'
           ],
           correct: 1,
           explanation: 'Scaling laws (Kaplan et al., Chinchilla) demonstrate that model quality improves predictably with more compute, data, and parameters. Reducing any of these degrades quality in a measurable way. If the product requires frontier-level capabilities to be competitive, there is a minimum compute budget below which the model simply will not be good enough. The PM must help stakeholders understand that the training budget is not arbitrary — it is determined by the quality bar required for the product.',
@@ -313,10 +313,10 @@ export const lessons = {
           question: 'During a pre-training run for a new Gemini model, the training loss spikes dramatically at step 500,000 of a planned 1,000,000 steps. The ML team proposes rolling back to step 490,000 and continuing from there. As PM, what should you understand about the impact on the project timeline?',
           type: 'mc',
           options: [
-            'This will have no impact — training will resume seamlessly from step 490,000 without delay',
-            'The rollback means losing 10,000 steps of progress, and the team needs to investigate the cause to prevent recurrence, which may add days or weeks to the timeline depending on whether the spike was caused by bad data, a hardware failure, or a fundamental stability issue',
-            'The entire training run must restart from step 0 due to corruption',
-            'Loss spikes are always beneficial and indicate the model is learning faster than expected'
+            'Training resumes seamlessly with no timeline impact',
+            '10K steps lost, investigation needed—timeline impact ranges from days to weeks depending on root cause (bad data batch vs fundamental instability)',
+            'Entire run must restart from step 0 due to corruption',
+            'Spikes are beneficial, indicating accelerated learning'
           ],
           correct: 1,
           explanation: 'Rolling back loses the compute invested in steps 490K-500K and requires investigation to prevent recurrence. If caused by a bad data batch, it may be a quick fix (exclude the batch and resume). If caused by fundamental numerical instability, it may require hyperparameter changes that necessitate restarting from an earlier checkpoint or even from scratch. The PM should get a root cause analysis and timeline estimate before updating stakeholders.',
@@ -424,7 +424,7 @@ export const lessons = {
           question: 'After launching a new aligned model, you receive user feedback that the model refuses to help with writing fiction involving conflict or villains, saying the content is "potentially harmful." This is causing frustration among creative writing users. What is the most likely cause and how should you address it?',
           type: 'scenario',
           options: null,
-          correct: 'The most likely cause is over-alignment — the RLHF process or safety annotation guidelines were too conservative, causing the model to refuse creative writing requests that pattern-match to harmful content categories but are actually legitimate. To address this: (1) Collect specific examples of false refusals and categorize them, (2) Work with the safety team to refine annotation guidelines to distinguish between creative fiction involving conflict (acceptable) and genuine harmful content generation (not acceptable), (3) Create targeted SFT/RLHF data showing the model appropriately assisting with creative writing while still refusing genuinely harmful requests, (4) Evaluate the updated model on both the false-refusal cases AND the safety benchmarks to ensure you are not degrading safety while improving helpfulness. This is a classic safety-helpfulness tension that requires iterative refinement, not a one-time fix.',
+          correct: 'Likely over-alignment—safety guidelines were too conservative. Fix: (1) Collect/categorize false refusal examples, (2) Refine guidelines to distinguish creative fiction from genuinely harmful content, (3) Create targeted alignment data showing appropriate creative writing assistance while maintaining safety boundaries, (4) Evaluate on both false-refusal cases AND safety benchmarks. Classic safety-helpfulness tension requiring iterative refinement.',
           explanation: 'Over-alignment is a common post-launch issue where the model\'s safety training is too aggressive, causing false refusals on legitimate use cases. The fix requires refined annotation guidelines that distinguish legitimate creative content from genuinely harmful requests, combined with targeted alignment data.',
           difficulty: 'expert',
           expertNote: 'A world-class PM would also establish a systematic taxonomy of refusal types, track false-refusal rates as a key product metric alongside safety metrics, and build an escalation path for edge cases where the correct model behavior is genuinely ambiguous.'
@@ -606,10 +606,10 @@ export const lessons = {
           question: 'Chain-of-thought prompting improved GPT-3\'s accuracy on GSM8K math problems from ~17% to ~57%. What is the primary mechanism by which CoT improves reasoning performance?',
           type: 'mc',
           options: [
-            'CoT provides the model with additional training data at inference time',
-            'CoT breaks a difficult multi-step reasoning problem into sequential single-step predictions, where each step conditions on the previous steps, making each individual prediction easier',
-            'CoT forces the model to use a different neural pathway for reasoning',
-            'CoT increases the model\'s parameter count during inference'
+            'CoT provides additional training data at inference',
+            'CoT decomposes hard multi-step problems into easier sequential predictions, each conditioning on previous steps via autoregressive attention',
+            'CoT activates different neural pathways for reasoning',
+            'CoT increases parameter count during inference'
           ],
           correct: 1,
           explanation: 'CoT works by decomposition. Instead of predicting the final answer in one step (requiring the model to do all reasoning internally), the model generates intermediate reasoning tokens. Each step is conditioned on the previous steps via the autoregressive attention mechanism, effectively giving the model a "scratchpad" for computation. This converts one hard prediction into many easier predictions. No additional training or parameters are involved.',
@@ -644,10 +644,10 @@ export const lessons = {
           question: 'When is prompting alone insufficient and fine-tuning or RAG becomes necessary? Select the most accurate answer.',
           type: 'mc',
           options: [
-            'Prompting is always sufficient — fine-tuning is never needed',
-            'Prompting is insufficient when the task requires specialized domain knowledge not in the model\'s training data, consistent behavior at scale that cannot be reliably achieved through prompt design alone, or when the cost of including examples/context in every prompt exceeds the one-time cost of fine-tuning',
-            'Fine-tuning is always superior to prompting',
-            'RAG and fine-tuning are interchangeable solutions'
+            'Prompting handles every conceivable use case and eliminates the need for any fine-tuning approaches',
+            'Specialized knowledge, consistent behavior, or cost constraints',
+            'Fine-tuning universally outperforms prompting across all tasks and scales regardless of data availability',
+            'RAG and fine-tuning solve identical problems and can be used completely interchangeably with no tradeoffs'
           ],
           correct: 1,
           explanation: 'Prompting has clear limitations: it cannot inject new knowledge the model lacks (use RAG for this), it can be brittle and inconsistent at scale (fine-tuning bakes in consistent behavior), and the per-request cost of long prompts with many examples can exceed the one-time cost of fine-tuning. The PM should evaluate the specific use case: if the model already knows the domain and only needs formatting/style guidance, prompting suffices. If new knowledge or consistent specialized behavior is needed, fine-tuning or RAG is warranted.',
@@ -770,10 +770,10 @@ export const lessons = {
           question: 'What is the primary insight behind LoRA that makes it so parameter-efficient?',
           type: 'mc',
           options: [
-            'Language models are mostly redundant parameters that can be removed',
-            'The weight updates during fine-tuning have low intrinsic rank, so they can be decomposed into two small matrices (B × A) that approximate the full update with far fewer parameters',
-            'LoRA removes attention layers to reduce parameters',
-            'LoRA quantizes all weights to 1-bit precision'
+            'Foundation models contain predominantly redundant parameters that can be pruned without capability loss',
+            'Low-rank weight updates approximate full fine-tuning',
+            'LoRA architecturally eliminates entire attention mechanisms to reduce computational overhead and parameter count',
+            'Extreme quantization to 1-bit weight precision enables massive compression without accuracy degradation'
           ],
           correct: 1,
           explanation: 'LoRA\'s key insight is that fine-tuning weight updates occupy a low-dimensional subspace. Instead of learning a full d × d update matrix, LoRA learns two matrices B (d × r) and A (r × d) where r << d. This low-rank decomposition captures the essential adaptation with ~128× fewer parameters. The original weights are frozen, preserving pre-trained capabilities.',
@@ -939,10 +939,10 @@ export const lessons = {
           question: 'DeepMind is planning the next Gemini model and has a fixed compute budget of 10²⁵ FLOPs. Based on scaling laws, how should this budget be allocated?',
           type: 'mc',
           options: [
-            'Spend all compute on the largest possible model with minimal data',
-            'Spend all compute on a small model trained on as much data as possible',
-            'Follow Chinchilla scaling — allocate roughly equal compute to parameters and data for the training-optimal model, but also consider inference cost: if serving efficiency matters, favor a smaller model trained on more data',
-            'The allocation does not matter as long as the total compute is spent'
+            'Maximize model size exclusively and minimize training data volume to achieve the highest parameter count',
+            'Train the smallest viable model architecture on the absolute maximum dataset size possible within compute constraints',
+            'Balance parameters and data, consider inference cost',
+            'Budget allocation strategies have no measurable impact on final model quality or performance characteristics'
           ],
           correct: 2,
           explanation: 'Chinchilla scaling provides the training-optimal allocation (equal scaling of parameters and tokens), but real product decisions must also consider inference cost. If the model will serve millions of users, a smaller model trained beyond the Chinchilla-optimal ratio (like LLaMA 3\'s approach) may be the better product decision — slightly lower training-optimal quality but significantly cheaper to serve. The PM should facilitate a discussion between research (who wants training-optimal) and infrastructure (who wants serving-optimal).',
@@ -953,10 +953,10 @@ export const lessons = {
           question: 'The concept of "emergent abilities" in LLMs is controversial. Why does this debate matter for product management?',
           type: 'mc',
           options: [
-            'It determines whether AI will become conscious',
-            'If emergence is real, capability thresholds are unpredictable — a PM cannot reliably forecast when a model will gain a specific ability. If it is an evaluation artifact, performance may be more predictable, enabling better product planning around expected capabilities',
-            'It only matters for academic research with no practical implications',
-            'Emergence means larger models are always worse at simple tasks'
+            'The debate determines whether models will develop consciousness, fundamentally changing ethical requirements',
+            'Unpredictable capability thresholds affect roadmap planning',
+            'Academic emergence research applies only to theoretical capabilities with no practical product implications',
+            'The debate explains why larger models consistently underperform smaller models on basic reasoning tasks'
           ],
           correct: 1,
           explanation: 'The emergence debate directly impacts product planning. If capabilities truly emerge unpredictably at scale, a PM cannot reliably promise that the next model generation will solve a specific task — capabilities might appear at 2x scale or 10x scale. If emergence is an evaluation artifact and performance actually scales smoothly, the PM can make more confident predictions about when a capability will become product-ready. This affects roadmap commitments, feature planning, and resource allocation.',
@@ -991,12 +991,12 @@ export const lessons = {
           question: 'As a PM at DeepMind, you need to decide whether to build a new feature on Gemini Ultra (highest quality, highest cost) or Gemini Flash (lower quality, much lower cost). The feature is a document summarization tool for enterprise customers. How should you approach this decision?',
           type: 'mc',
           options: [
-            'Always use the highest quality model — enterprise customers demand the best',
-            'Always use the cheapest model — cost is the only thing that matters',
-            'Evaluate both models on a representative summarization benchmark with real enterprise documents, measure the quality gap on your specific use case, calculate the per-request cost difference, and make the decision based on whether the quality premium of Ultra justifies its cost premium for this specific feature and customer segment',
-            'Let the engineering team decide since this is a technical choice'
+            'Always prioritize highest quality for enterprise customers',
+            'Benchmark both on real documents, measure quality-cost tradeoffs, decide if Ultra\'s premium justifies cost for this segment',
+            'Always choose cheapest model since cost matters most',
+            'Defer to engineering team on this technical choice'
           ],
-          correct: 2,
+          correct: 1,
           explanation: 'Model selection is a product decision that requires data-driven analysis. The quality gap between Ultra and Flash may be significant on hard reasoning tasks but negligible on straightforward summarization. If Flash achieves 95% of Ultra\'s summarization quality at 20% of the cost, it is the clear choice for this feature. The PM should commission this evaluation and make the decision based on the specific use case requirements, customer willingness to pay, and competitive positioning.',
           difficulty: 'applied',
           expertNote: 'In practice, many AI products use model routing — sending easy requests to cheaper models and hard requests to frontier models. A sophisticated PM would explore this approach for the summarization feature: use Flash for standard documents and route to Ultra only for complex, multi-document, or highly technical summarization tasks.'

@@ -20,7 +20,9 @@
       "Bash(git add:*)",
       "Bash(lsof:*)",
       "Bash(xargs kill:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(/tmp/length_report.md:*)",
+      "Bash(node:*)"
     ]
   }
 }

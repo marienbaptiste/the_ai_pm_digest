@@ -463,10 +463,10 @@ export const lessons = {
           question: 'Your RAG system currently uses brute-force FAISS search over 500,000 vectors and returns results in 50ms. Your roadmap calls for scaling to 50 million vectors. Without changing the search algorithm, what approximate latency should you expect, and what should you recommend?',
           type: 'mc',
           options: [
-            'Latency will remain at 50ms because FAISS automatically optimizes at scale',
-            'Latency will increase to ~5 seconds (100x data = 100x time for brute force). You should recommend switching to an ANN index like HNSW or IVF-PQ.',
-            'Latency will increase to ~500ms, which is acceptable for most applications',
-            'You should recommend switching to a keyword-based search system instead'
+            'FAISS automatically optimizes at scale, maintaining 50ms latency without configuration changes',
+            '~5 seconds; switch to ANN index like HNSW',
+            'Latency increases to ~500ms, which remains acceptable for most interactive applications',
+            'Recommend switching to keyword-based search system instead of vector search to avoid scaling issues'
           ],
           correct: 1,
           explanation: 'Brute-force search is O(n) — scaling data by 100x scales latency by ~100x. At 5 seconds per query, the system is unusable for interactive applications. ANN algorithms like HNSW or IVF-PQ provide sub-linear search time, maintaining millisecond latency even at 50M vectors. The PM should recommend this architectural change well before hitting the scaling wall, ideally when the roadmap is set.',
@@ -477,10 +477,10 @@ export const lessons = {
           question: 'What is the primary trade-off when using Product Quantization (PQ) to compress vectors?',
           type: 'mc',
           options: [
-            'PQ increases search speed but makes it impossible to add new vectors',
-            'PQ reduces memory usage dramatically (often 64x) but introduces some loss in search accuracy due to vector compression',
-            'PQ improves search accuracy but increases memory usage',
-            'PQ is only compatible with GPU-based search and cannot run on CPU'
+            'Increased search speed but vectors become permanently immutable and cannot be added dynamically',
+            'Memory reduction vs. accuracy loss',
+            'Improved search accuracy through quantization but with significantly increased memory usage',
+            'PQ is GPU-exclusive and fundamentally incompatible with CPU-based search implementations'
           ],
           correct: 1,
           explanation: 'Product Quantization compresses vectors by splitting them into sub-vectors and quantizing each independently. A 1536-dim float32 vector (6KB) can be compressed to ~96 bytes. This enables fitting billions of vectors in memory but introduces quantization error — the compressed vector is an approximation of the original, leading to some search accuracy loss (typically 1-5% recall reduction).',
@@ -506,10 +506,10 @@ export const lessons = {
           question: 'Why is HNSW (Hierarchical Navigable Small World) generally preferred over IVF for production vector search?',
           type: 'mc',
           options: [
-            'HNSW requires less memory than IVF',
-            'HNSW provides better recall at equivalent query latency because its graph navigation more efficiently explores the vector space compared to IVF\'s cluster-based approach',
-            'HNSW supports metadata filtering while IVF does not',
-            'HNSW is the only algorithm that works with high-dimensional vectors'
+            'HNSW requires significantly less memory than IVF for equivalent dataset sizes',
+            'Better recall-latency tradeoff via efficient graph navigation',
+            'HNSW supports metadata filtering while IVF fundamentally cannot support any metadata operations',
+            'HNSW is the only algorithm capable of working with high-dimensional vectors above 512 dimensions'
           ],
           correct: 1,
           explanation: 'HNSW builds a multi-layer proximity graph that enables efficient navigation from coarse to fine-grained similarity. This graph structure typically achieves 95-99% recall in microseconds, outperforming IVF at equivalent latency. The trade-off is that HNSW requires more memory (the full graph must be in RAM) and has slower index build times. IVF is preferred when memory is the binding constraint.',
@@ -814,10 +814,10 @@ export const lessons = {
           question: 'You are building an internal AI assistant for DeepMind researchers that must answer questions about both published papers (public) and internal research memos (private, frequently updated). Which architecture best fits these requirements?',
           type: 'mc',
           options: [
-            'Fine-tune the LLM on all internal memos so it memorizes the information',
-            'Use long context — paste all relevant memos into the prompt for every query',
-            'Build a RAG system with continuous ingestion from both public paper repositories and internal document stores, with access control metadata to enforce permissions',
-            'Use a general-purpose LLM without RAG — frontier models already know most published research'
+            'Fine-tune on internal memos for complete information memorization and instant retrieval',
+            'Use long context by pasting all relevant memos into every query prompt for completeness',
+            'RAG with continuous ingestion and access control',
+            'General-purpose LLM without RAG since frontier models know most published research'
           ],
           correct: 2,
           explanation: 'RAG is ideal here because: (1) internal memos are frequently updated, requiring dynamic knowledge access; (2) access control metadata ensures researchers only retrieve documents they have permission to see; (3) the knowledge base is too large for long context; (4) fine-tuning cannot reliably memorize specific research findings and would need retraining whenever memos are updated. Continuous ingestion keeps the system current.',
@@ -828,10 +828,10 @@ export const lessons = {
           question: 'What is the "lost in the middle" problem and why does it matter for RAG system design?',
           type: 'mc',
           options: [
-            'Chunks in the middle of a document are harder to embed accurately',
-            'LLMs struggle to use information placed in the middle of long contexts, preferentially attending to the beginning and end — so chunk ordering and retrieval precision directly affect answer quality',
-            'Vector databases lose accuracy for vectors stored in the middle of large indices',
-            'The middle steps of the RAG pipeline (embedding and indexing) are the most error-prone'
+            'Document chunks positioned in the middle are significantly harder to embed with accuracy',
+            'LLMs attend preferentially to context edges, not middle',
+            'Vector databases demonstrate degraded retrieval accuracy for embedding vectors stored in middle index positions',
+            'The middle pipeline steps like embedding and indexing introduce the most significant error rates'
           ],
           correct: 1,
           explanation: 'Liu et al. (2023) showed that when relevant information is placed in the middle of a long context surrounded by irrelevant chunks, LLM performance degrades significantly. This means retrieval precision (not just recall) matters enormously — retrieving 20 chunks with 3 relevant ones dilutes the signal. Fewer, higher-quality chunks placed strategically produce better answers.',
@@ -857,10 +857,10 @@ export const lessons = {
           question: 'Your RAG system has high retrieval recall (85% of relevant documents are found) but users report that answers are often wrong. Looking at the failure analysis, most errors involve the LLM citing retrieved documents that are topically related but do not actually answer the question. What is the most effective intervention?',
           type: 'mc',
           options: [
-            'Increase retrieval top-k from 5 to 20 to include more potentially relevant documents',
-            'Add a reranking step using a cross-encoder to improve precision — ensuring the chunks that reach the LLM are truly relevant, not just topically similar',
-            'Switch to a more powerful LLM that can better distinguish relevant from irrelevant context',
-            'Increase the embedding model dimensionality for finer-grained similarity'
+            'Increase top-k from 5 to 20 to include more potentially relevant documents and improve coverage',
+            'Add cross-encoder reranking to improve precision',
+            'Switch to a more powerful LLM architecture that can better distinguish relevant from irrelevant context',
+            'Increase embedding dimensionality from 768 to 1536 dimensions for finer-grained semantic similarity'
           ],
           correct: 1,
           explanation: 'The failure pattern described — high recall but low precision — is exactly what reranking solves. A cross-encoder reranker jointly encodes the query and each candidate document, producing a more accurate relevance score than the bi-encoder\'s cosine similarity. This filters out topically related but non-relevant chunks before they reach the LLM. Increasing top-k would worsen the precision problem. A more powerful LLM might help but does not address the root cause.',
@@ -1218,10 +1218,10 @@ export const lessons = {
           question: 'Your production RAG system for a healthcare company pulls information from several medical databases. One morning, you notice that answers about drug interactions have become unreliable. Investigation reveals that one database changed its API response format two weeks ago, and your parser has been silently extracting incorrect data. Which combination of practices would have prevented this?',
           type: 'mc',
           options: [
-            'Using a more powerful LLM that can handle incorrect context better',
-            'Content validation after parsing (checking for expected fields and reasonable content length), source health monitoring dashboards with anomaly alerts, and automated regression testing with golden queries that would have caught the quality drop',
-            'Switching to a different database vendor with more stable APIs',
-            'Implementing hybrid search so that keyword matching compensates for corrupted vector data'
+            'Deploying a significantly more powerful and expensive LLM architecture that can implicitly handle corrupted or malformed context',
+            'Content validation, monitoring, and automated testing',
+            'Migrating the entire data pipeline to a completely different database vendor with more stable API guarantees',
+            'Implementing hybrid search with keyword matching to automatically compensate for any corrupted vector embeddings'
           ],
           correct: 1,
           explanation: 'This is a classic schema drift failure. Content validation would have caught the malformed data at ingestion time (missing or incorrect fields). Source health monitoring would have flagged the anomaly in parsed content statistics. Automated regression testing with golden queries (e.g., "What drugs interact with warfarin?") would have detected the quality drop within a day, not two weeks. Together, these practices form a defense-in-depth against schema drift.',
@@ -1232,10 +1232,10 @@ export const lessons = {
           question: 'What is the primary advantage of Reciprocal Rank Fusion (RRF) over linear score combination for hybrid search?',
           type: 'mc',
           options: [
-            'RRF always produces more relevant results than linear combination',
-            'RRF does not require score calibration between retrieval systems — it uses only rank positions, which are comparable across any scoring method',
-            'RRF is computationally cheaper than linear combination',
-            'RRF works only with dense retrieval, making it simpler to implement'
+            'RRF universally produces more relevant results across datasets',
+            'No score calibration needed, uses ranks only',
+            'RRF is computationally cheaper by orders of magnitude',
+            'RRF works exclusively with dense retrieval simplifying it'
           ],
           correct: 1,
           explanation: 'Dense retrieval (cosine similarity: 0-1) and sparse retrieval (BM25: unbounded positive scores) produce scores on completely different scales. Linear combination requires normalizing these to comparable ranges, which is tricky and sensitive to the normalization method. RRF sidesteps this entirely by using only rank positions (1st, 2nd, 3rd...), which are naturally comparable regardless of the underlying scoring method.',
@@ -1247,8 +1247,8 @@ export const lessons = {
           type: 'mc',
           options: [
             'Hard-coding new CSS selectors every time the site changes',
-            'Using LLM-based semantic extraction that identifies content by meaning rather than DOM structure, with fallback chains and content validation',
-            'Switching from web scraping to manual data entry for reliability',
+            'LLM semantic extraction with fallback chains and validation',
+            'Switching from web scraping to manual data entry completely',
             'Increasing the scraping frequency to detect changes faster'
           ],
           correct: 1,
@@ -1275,10 +1275,10 @@ export const lessons = {
           question: 'A DeepMind PM is evaluating whether to implement Agentic RAG (multi-step retrieval with LLM reasoning) for a complex research assistant. What is the primary trade-off compared to single-turn RAG?',
           type: 'mc',
           options: [
-            'Agentic RAG always produces worse results because multiple retrieval steps introduce more noise',
-            'Agentic RAG can answer complex multi-hop questions that single-turn RAG cannot, but significantly increases latency, cost, and unpredictability since the LLM controls the retrieval strategy',
-            'Agentic RAG eliminates the need for a vector database',
-            'Agentic RAG is only useful for code generation tasks, not general knowledge'
+            'Multi-step retrieval inherently introduces noise making it worse',
+            'Multi-hop capability vs. latency, cost, unpredictability',
+            'Agentic RAG eliminates need for vector databases completely',
+            'Exclusively useful for code, no value for general knowledge'
           ],
           correct: 1,
           explanation: 'Agentic RAG enables multi-hop reasoning (e.g., finding that Google acquired DeepMind, then looking up Google\'s market cap) that single-turn RAG cannot perform. However, each additional retrieval step adds latency (typically 1-3 seconds per step) and cost (embedding + vector search + LLM reasoning per step). The LLM\'s retrieval decisions can be unpredictable — it might pursue irrelevant tangents or loop. Production agentic RAG requires careful guardrails: step limits, relevance checks between steps, and timeout budgets.',
@@ -1289,10 +1289,10 @@ export const lessons = {
           question: 'Your team is building a RAG system that retrieves from an internal wiki. Documents range from 50 to 10,000 words. A colleague suggests using parent-child retrieval. What problem does this solve?',
           type: 'mc',
           options: [
-            'It eliminates the need for embeddings by using keyword search on parent documents',
-            'It resolves the tension between small chunks (precise retrieval) and large chunks (rich LLM context) by retrieving on small chunks but passing their parent context to the LLM',
-            'It automatically splits documents into optimal chunk sizes',
-            'It enables multi-lingual retrieval by translating parent documents'
+            'Parent-child retrieval completely eliminates the need for embedding vectors by implementing keyword search',
+            'Balances precision and context for retrieval and generation',
+            'The algorithm automatically determines and splits documents into optimal chunk sizes with no configuration',
+            'Parent document translation enables seamless multi-lingual retrieval across all supported languages'
           ],
           correct: 1,
           explanation: 'Parent-child retrieval addresses a fundamental chunk size dilemma: small chunks (100-200 tokens) give precise retrieval scores (the chunk is about exactly one thing), but provide insufficient context for the LLM to generate a good answer. Large chunks (500-1000 tokens) give the LLM more context but dilute retrieval precision. Parent-child retrieval retrieves on small child chunks for precision, then expands to the parent section for generation context — getting the best of both.',

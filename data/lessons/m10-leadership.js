@@ -107,10 +107,10 @@ export const lessons = {
           question: 'Which of the following best describes the "one-way door vs. two-way door" decision framework?',
           type: 'mc',
           options: [
-            'One-way doors require single-person decisions while two-way doors need consensus',
-            'One-way doors are costly to reverse warranting careful analysis while two-way doors are easily reversed',
-            'One-way doors impact single teams while two-way doors create dependencies across multiple teams',
-            'One-way doors are annual strategic commitments while two-way doors are weekly tactical adjustments'
+            'One-way doors need single-person decisions, two-way need consensus',
+            'One-way doors are costly to reverse, two-way are easily reversed',
+            'One-way doors impact single teams, two-way create dependencies',
+            'One-way doors are annual strategic, two-way are weekly tactical'
           ],
           correct: 1,
           explanation: 'The one-way/two-way door framework, popularized by Amazon, classifies decisions by reversibility. One-way doors (Type 1) are irreversible or very expensive to reverse — they warrant careful analysis, broad consultation, and deliberate decision-making. Two-way doors (Type 2) are easily reversible — they should be decided quickly because the cost of delay exceeds the cost of a wrong decision. A PM\'s key skill is correctly classifying which type each decision is.',
@@ -135,10 +135,10 @@ export const lessons = {
           question: 'In the influence stack described in this lesson, why is technical credibility identified as the foundational layer for AI PMs?',
           type: 'mc',
           options: [
-            'Because PMs need hands-on coding ability and direct model training experience to contribute to implementation work',
-            'Because AI researchers and engineers assess PM credibility through technical understanding before trusting strategic or execution guidance',
-            'Because technical credibility requires less effort to build compared to strategic clarity or relational capital',
-            'Because the PM role primarily involves making detailed technical architecture decisions for the engineering team'
+            'PMs need hands-on coding and model training to contribute',
+            'Researchers assess PM credibility through technical understanding',
+            'Technical credibility requires less effort to build than strategy',
+            'PM role involves making detailed technical architecture decisions'
           ],
           correct: 1,
           explanation: 'In AI organizations, researchers and engineers are the primary collaborators a PM must influence. These professionals assess credibility significantly through technical understanding — not because the PM needs to do their job, but because understanding the technology is a prerequisite for asking good questions, making informed tradeoffs, and proposing realistic plans. Without technical credibility, a PM\'s strategic vision feels uninformed, their execution commitments feel unreliable, and their relationships feel shallow.',

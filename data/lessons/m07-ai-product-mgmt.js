@@ -195,10 +195,10 @@ export const lessons = {
           question: 'What is the primary purpose of the prototyping stage in the AI product lifecycle?',
           type: 'mc',
           options: [
-            'To produce a polished demonstration suitable for executive stakeholders',
-            'To validate that model capabilities actually solve user problems on real-world data',
-            'To finalize and lock the model architecture for production deployment',
-            'To complete the data labeling and annotation pipeline'
+            'Producing polished demonstrations suitable for executive stakeholders',
+            'Validating model capabilities solve real user problems',
+            'Finalizing and locking model architecture for production deployment',
+            'Completing the data labeling and annotation pipeline infrastructure'
           ],
           correct: 1,
           explanation: 'The prototyping stage exists to bridge the gap between research results and user value. Its purpose is to test whether the model capabilities translate to real problem-solving when confronted with messy, real-world data, not to polish demos or finalize architectures.',
@@ -218,10 +218,10 @@ export const lessons = {
           question: 'When estimating timelines for moving an AI model from research to production, what multiplier does the lesson recommend applying to ML team estimates?',
           type: 'mc',
           options: [
-            '1.5x — standard software development buffer',
-            '2x — double for AI uncertainty',
-            '3x — the research-to-production gap is consistently underestimated',
-            '5x — AI timelines are fundamentally unpredictable'
+            '1.5x standard software buffer',
+            '2x double for AI uncertainty',
+            '3x research-to-production gap consistently underestimated',
+            '5x AI timelines fundamentally unpredictable'
           ],
           correct: 2,
           explanation: 'The lesson recommends a 3x multiplier. The gap between a working prototype and a production system serving millions of users at low latency is consistently underestimated. This accounts for optimization, safety evaluation, infrastructure work, and the inevitable surprises that arise during productionization.',

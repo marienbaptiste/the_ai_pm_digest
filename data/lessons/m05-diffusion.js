@@ -226,10 +226,10 @@ export const lessons = {
           question: 'What is the primary reason VAE outputs tend to appear blurry compared to GAN outputs?',
           type: 'mc',
           options: [
-            'VAEs use smaller neural networks than GANs for computational efficiency',
-            'The reconstruction loss optimizes for output averages smoothing high-frequency details',
-            'VAEs cannot learn hierarchical features due to the KL divergence term',
-            'The latent space in a VAE is too high-dimensional for detail preservation'
+            'VAEs use smaller networks for computational efficiency',
+            'Reconstruction loss averages modes, smoothing details',
+            'VAEs cannot learn hierarchical features due to KL term',
+            'Latent space is too high-dimensional for details'
           ],
           correct: 1,
           explanation: 'VAEs minimize a pixel-wise reconstruction loss (typically MSE) plus a KL regularizer. When the true data distribution is multimodal — e.g., a face could have slightly different hair positions — the model learns to average over modes, producing blurry outputs. GANs avoid this by using an adversarial loss that rewards sharpness directly.',
@@ -240,10 +240,10 @@ export const lessons = {
           question: 'A researcher proposes replacing the GAN in your image generation pipeline with a normalizing flow to gain exact log-likelihood computation. What is the most significant trade-off you should raise?',
           type: 'mc',
           options: [
-            'Normalizing flows cannot generate images at all — they are only density estimators',
-            'The invertibility constraint limits architectural flexibility, likely reducing sample quality',
-            'Normalizing flows require adversarial training which is even less stable than GANs',
-            'Flow models cannot use GPUs efficiently due to the Jacobian computation'
+            'Normalizing flows cannot generate images at all',
+            'Invertibility constraint limits flexibility and quality',
+            'Flows require adversarial training less stable than GANs',
+            'Flow models cannot use GPUs efficiently'
           ],
           correct: 1,
           explanation: 'Normalizing flows require every layer to be invertible with a tractable Jacobian determinant. This architectural constraint eliminates many powerful building blocks (e.g., standard convolutions, attention without modification). The result is typically lower sample quality compared to unconstrained architectures used in GANs or diffusion models.',
@@ -269,10 +269,10 @@ export const lessons = {
           question: 'Your team at DeepMind is building a generative feature that requires both high-quality output AND the ability to compute how likely a given image is under the model. Which architecture or combination should you recommend?',
           type: 'mc',
           options: [
-            'A pure GAN — it can be modified to approximate likelihoods',
-            'A diffusion model — it provides exact likelihoods natively',
-            'A hybrid approach using a diffusion model for generation and evaluating likelihoods via the ELBO or probability flow ODE',
-            'A normalizing flow — it is the only architecture that can generate high-quality images with exact likelihoods'
+            'Pure GAN can be modified to approximate likelihoods',
+            'Diffusion model provides exact likelihoods natively',
+            'Diffusion for generation, likelihood via ELBO or ODE',
+            'Normalizing flow is only architecture with quality and likelihood'
           ],
           correct: 2,
           explanation: 'Diffusion models provide a lower-bound on log-likelihood via the ELBO and can compute exact likelihoods through the probability flow ODE formulation. This gives you state-of-the-art generation quality with principled likelihood computation. GANs have no native likelihood, and normalizing flows sacrifice too much quality. The hybrid framing (diffusion for generation, ODE for likelihood) is the practical approach used in research.',
@@ -490,8 +490,8 @@ export const lessons = {
           question: 'During diffusion model training, a random timestep t is sampled for each training example. Why is this approach used instead of training sequentially from t=T down to t=1?',
           type: 'mc',
           options: [
-            'Sequential training would require T times more training data',
-            'Random timestep sampling allows the model to learn all noise levels simultaneously in a single pass, massively improving training efficiency',
+            'Sequential training would require T times more training data to achieve the same coverage',
+            'Learns all noise levels simultaneously for efficiency',
             'The forward process must be computed sequentially, so training must be too',
             'Sequential training would cause the model to forget earlier timesteps (catastrophic forgetting)'
           ],
@@ -504,8 +504,8 @@ export const lessons = {
           question: 'Your team is building a consumer image generation product. Testing shows that 50-step DDIM sampling takes 4 seconds on target hardware, but the product requirement is under 1.5 seconds. Which approach should you prioritize investigating?',
           type: 'mc',
           options: [
-            'Switch from DDIM to the original DDPM sampler with 1000 steps for better quality',
-            'Evaluate distillation approaches like Latent Consistency Models that reduce steps to 4-8 while preserving quality',
+            'Switch to original DDPM with 1000 steps for better quality',
+            'Distillation to 4-8 steps while preserving quality',
             'Reduce image resolution from 512x512 to 128x128 to meet latency targets',
             'Deploy on 4x more GPUs to parallelize the denoising steps'
           ],
@@ -547,7 +547,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'Cosine schedules are computationally cheaper to implement in production',
-            'Cosine schedules destroy information more gradually in early steps, preserving more coarse structure for longer and improving sample quality',
+            'Preserves structure longer, improving quality',
             'Cosine schedules make the forward process deterministic instead of stochastic',
             'Cosine schedules eliminate the need for classifier-free guidance entirely'
           ],
@@ -785,10 +785,10 @@ export const lessons = {
           question: 'You are a PM at DeepMind evaluating whether to build your next image generation system as a pixel-space cascade (like Imagen) or a latent diffusion model (like Stable Diffusion). Your primary product targets are: (1) consumer-grade hardware deployment, (2) 1024x1024 output resolution, (3) strong compositional text understanding. Which architecture should you recommend and what is the key trade-off?',
           type: 'mc',
           options: [
-            'Pixel-space cascade — higher theoretical quality ceiling justifies the compute cost',
-            'Latent diffusion with a large text encoder — 48x fewer diffusion elements enables consumer deployment while a scaled text encoder addresses compositional understanding',
-            'Pixel-space with model compression — quantize the model to fit on consumer GPUs',
-            'A GAN-based approach — consumer hardware requires single-pass inference'
+            'Pixel-space cascade because higher theoretical quality ceiling justifies the computational cost',
+            'Latent diffusion with large text encoder for efficiency',
+            'Pixel-space with aggressive model compression and quantization to fit on consumer GPUs',
+            'GAN-based approach since consumer hardware strictly requires single-pass inference'
           ],
           correct: 1,
           explanation: 'Latent diffusion reduces the computational burden by ~48x through VAE compression, making consumer GPU deployment feasible. The lesson from Imagen is that text understanding is the bottleneck for compositional prompts, so pairing latent diffusion with a large text encoder (like T5-XXL, as SD3 does) addresses both requirements simultaneously. Pixel-space cascades require too much compute for consumer hardware, and model compression alone is insufficient. GANs sacrifice the quality and controllability that users expect.',
@@ -814,7 +814,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'Switching from a diffusion to an autoregressive architecture for generation',
-            'Training a custom captioning model to recaption all training images with highly detailed descriptions',
+            'Recaptioning training data with detailed descriptions',
             'Doubling the size of the CLIP text encoder parameters',
             'Using classifier guidance instead of classifier-free guidance mechanisms'
           ],
@@ -856,10 +856,10 @@ export const lessons = {
           question: 'Your team has built a latent diffusion model. During testing, users report that images look slightly "soft" or lacking fine detail compared to pixel-space models. What is the most likely cause and the standard mitigation?',
           type: 'mc',
           options: [
-            'The U-Net is too small — double its parameters to improve quality',
-            'The VAE decoder introduces reconstruction artifacts when decompressing from latent space; a refiner model or VAE fine-tuning can address this',
+            'The U-Net architecture is too small and needs parameter doubling to improve quality',
+            'VAE lossy compression; use refiner or VAE tuning',
             'The text encoder is not powerful enough to describe fine details accurately',
-            'Classifier-free guidance is set too low, causing the model to generate generic outputs consistently'
+            'Classifier-free guidance is set too low, causing generic outputs consistently'
           ],
           correct: 1,
           explanation: 'The VAE compression is lossy — going from 512x512x3 to 64x64x4 and back inevitably loses some high-frequency detail. This manifests as slight softness. Standard mitigations include: (1) fine-tuning the VAE decoder for sharper reconstruction, (2) using a refiner model (as SDXL does) that adds detail in a second pass, or (3) training with a higher-resolution latent space. This is a known trade-off of the latent diffusion approach.',
@@ -1097,10 +1097,10 @@ export const lessons = {
           question: 'You are building a document processing product at DeepMind that needs to extract structured data from scanned invoices. The system must handle diverse layouts, handwritten annotations, and tables. Which multimodal architecture pattern is most appropriate?',
           type: 'mc',
           options: [
-            'CLIP-based contrastive model — embed documents and search for matching templates',
-            'A generative multimodal LLM (like GPT-4V/Gemini) that can reason about document structure and extract fields through natural language interaction',
-            'A text-only LLM that processes OCR output — multimodal capabilities are unnecessary',
-            'A diffusion model conditioned on document images to generate cleaned-up versions'
+            'CLIP-based contrastive model to embed documents and search for matching templates',
+            'Generative multimodal LLM for structure reasoning',
+            'Text-only LLM processing OCR output since multimodal capabilities are unnecessary',
+            'Diffusion model conditioned on document images to generate cleaned-up versions'
           ],
           correct: 1,
           explanation: 'Document extraction with diverse layouts, handwriting, and tables requires deep visual reasoning — understanding spatial relationships, table structure, and handwritten text. A generative multimodal LLM can be prompted to extract specific fields, handle layout variations flexibly, and even explain its reasoning. CLIP is too limited (similarity matching only). Text-only LLM after OCR loses spatial/layout information. Diffusion models generate images, not structured data.',
@@ -1111,9 +1111,9 @@ export const lessons = {
           question: 'What is the fundamental difference between CLIP\'s contrastive training and Flamingo\'s generative training?',
           type: 'mc',
           options: [
-            'CLIP uses a larger vision encoder while Flamingo uses a smaller one',
-            'CLIP learns to match image-text pairs via similarity; Flamingo learns to generate text conditioned on visual input, enabling open-ended reasoning',
-            'CLIP can process multiple images while Flamingo is limited to one',
+            'CLIP uses a significantly larger vision encoder while Flamingo uses a smaller one',
+            'Contrastive similarity vs. generative reasoning',
+            'CLIP can process multiple images in parallel while Flamingo is limited to one',
             'CLIP is trained on more data while Flamingo uses a curated smaller dataset'
           ],
           correct: 1,
@@ -1155,9 +1155,9 @@ export const lessons = {
           type: 'mc',
           options: [
             'Native multimodality requires fewer parameters than bolted-on approaches',
-            'The model can develop deeper cross-modal reasoning because modalities interact throughout the entire architecture from pretraining, rather than being connected through a narrow adapter',
+            'Deeper cross-modal reasoning via architectural integration',
             'Native multimodal models are faster at inference because they skip the vision encoding step',
-            'Only native multimodal models can generate images — bolted-on models cannot'
+            'Only native multimodal models can generate images while bolted-on models cannot'
           ],
           correct: 1,
           explanation: 'When modalities are trained jointly from the beginning, the model can learn rich cross-modal representations at every layer of the network. In a bolted-on approach, the connection between vision and language is limited to the adapter layer — a potential bottleneck for complex reasoning that requires deep integration of visual and textual information. Native multimodality allows the model to develop "visual thinking" throughout its entire depth.',

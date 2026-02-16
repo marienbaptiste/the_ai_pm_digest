@@ -101,10 +101,10 @@ export const lessons = {
           question: 'You are a PM evaluating a proposal to replace an LSTM-based text classification pipeline with a Transformer model. The dataset consists of legal documents averaging 5,000 tokens. Your ML lead says the Transformer will be "strictly better." What is the most important technical nuance you should push back on?',
           type: 'mc',
           options: [
-            'Transformers cannot process text longer than 512 tokens under any circumstances',
-            'The O(n²) attention complexity makes 5,000-token documents expensive requiring context-window strategies',
-            'LSTMs are always more accurate than Transformers on long documents with explicit memory',
-            'Transformers require more training data than LSTMs to achieve comparable accuracy'
+            'Transformers cannot process over 512 tokens ever',
+            'O(n²) complexity makes 5K tokens expensive needing strategies',
+            'LSTMs always beat Transformers on long documents',
+            'Transformers need much more training data than LSTMs'
           ],
           correct: 1,
           explanation: 'Self-attention has O(n²) complexity with respect to sequence length. At 5,000 tokens, the attention matrix has 25 million entries per layer per head, making compute and memory significant concerns. A good PM would push for discussion of efficient attention variants, chunking strategies, or hierarchical approaches before committing to the migration.',
@@ -139,10 +139,10 @@ export const lessons = {
           question: 'The original "Attention Is All You Need" paper achieved state-of-the-art results on machine translation. What was the most significant practical advantage of the Transformer over previous SOTA models beyond raw accuracy?',
           type: 'mc',
           options: [
-            'It required no pre-training data and could work effectively in zero-shot mode',
-            'It dramatically reduced training time by enabling full parallelization across sequences',
-            'It eliminated the need for tokenization entirely in the translation pipeline',
-            'It used fewer parameters than any prior model achieving comparable accuracy'
+            'Required no pre-training and worked in zero-shot mode',
+            'Reduced training time via full sequence parallelization',
+            'Eliminated the need for tokenization entirely',
+            'Used fewer parameters than any comparable prior model'
           ],
           correct: 1,
           explanation: 'The Transformer trained in 3.5 days on 8 GPUs for English-to-French translation, compared to weeks for comparable RNN-based models. This speedup came from eliminating sequential dependencies, allowing all positions to be processed in parallel. This efficiency gain was arguably even more impactful than the accuracy improvement, because it unlocked the scaling regime that led to modern LLMs.',
@@ -153,10 +153,10 @@ export const lessons = {
           question: 'Your team is building a real-time document analysis feature for Gemini. Users will submit documents of highly variable lengths — some 200 tokens, others 50,000 tokens. Given the Transformer\'s computational profile, which product strategy best addresses this?',
           type: 'mc',
           options: [
-            'Set a universal context window of 50,000 tokens for all requests to ensure no truncation',
-            'Implement tiered processing using actual document length with efficient attention for long documents',
-            'Limit all documents to 2,000 tokens to keep costs predictable and manageable',
-            'Use an RNN-based model for long documents and a Transformer for short ones'
+            'Universal 50K window for all requests ensuring no truncation',
+            'Tiered processing by actual length with efficient attention',
+            'Limit all documents to 2K tokens for predictable costs',
+            'RNN for long documents, Transformer for short documents'
           ],
           correct: 1,
           explanation: 'Dynamic compute allocation is the correct product strategy. Using a fixed 50,000-token window wastes enormous compute on short documents (O(n²) means padding is costly). Truncating to 2,000 tokens destroys the value proposition for long-document users. Switching architectures creates maintenance burden and inconsistent quality. Tiered processing with efficient attention variants (sparse attention, sliding window) for long documents is the standard industry approach.',
@@ -311,10 +311,10 @@ export const lessons = {
           question: 'A junior engineer on your team says: "The Query, Key, and Value matrices in self-attention are like a database lookup — the Query searches for matching Keys, and returns the corresponding Values." How would you evaluate this analogy?',
           type: 'mc',
           options: [
-            'It is completely wrong — Q, K, V have no relationship to database concepts',
-            'It is a useful analogy with one critical caveat: unlike a database lookup that returns one exact match, attention returns a weighted combination of ALL values, with weights determined by query-key similarity',
-            'It is a perfect analogy that needs no caveats or additional explanation',
-            'It is misleading because Queries and Keys are the same thing in self-attention'
+            'Completely wrong; Q, K, V have no relationship to database concepts',
+            'Useful analogy but returns weighted combinations, not exact matches',
+            'Perfect analogy requiring no caveats or additional explanation',
+            'Misleading because Queries and Keys are identical in self-attention'
           ],
           correct: 1,
           explanation: 'The database analogy captures the core idea well: Q represents "what I\'m looking for," K represents "what I have to offer," and V represents "the content to retrieve." But the critical difference is that attention performs soft retrieval — it returns a blended mixture of all values, not a single exact match. This blending is what makes attention so powerful for capturing nuanced contextual relationships.',
@@ -511,10 +511,10 @@ export const lessons = {
           question: 'Rotary Position Embedding (RoPE) has become the dominant positional encoding in modern LLMs like LLaMA and Gemini. What property of RoPE makes it particularly well-suited for language models compared to sinusoidal or learned encodings?',
           type: 'mc',
           options: [
-            'RoPE requires fewer parameters than any other method',
-            'RoPE naturally encodes relative position information in the attention score through rotation of Q and K vectors, and can be extended to longer contexts through interpolation techniques',
+            'RoPE requires fewer parameters than any other positional encoding method',
+            'Relative position via rotation; extendable',
             'RoPE completely eliminates the need for positional information',
-            'RoPE works only with English text, which is why it was designed for English-centric models'
+            'RoPE works only with English text for English-centric models'
           ],
           correct: 1,
           explanation: 'RoPE applies position-dependent rotations to Q and K vectors such that the dot product QK naturally reflects the relative distance between tokens. This relative position encoding is linguistically natural (we care about how far apart words are, not their absolute positions). Additionally, RoPE can be extended beyond training length through interpolation methods like NTK-aware scaling and YaRN, enabling long-context applications.',
@@ -525,10 +525,10 @@ export const lessons = {
           question: 'You are planning the next Gemini API pricing tier. Engineering tells you that switching from 8-group GQA to 4-group GQA (fewer groups = more sharing = less KV cache) would reduce serving cost by 30% but might reduce quality on multi-step reasoning benchmarks by 1-2%. How should you approach this decision?',
           type: 'mc',
           options: [
-            'Always prioritize cost reduction — 1-2% quality loss is negligible',
-            'Never compromise quality — maintain 8-group GQA regardless of cost',
-            'Run rigorous evaluations on the specific use cases your API customers care about, quantify the quality impact on those tasks, and make the decision based on whether the quality-cost tradeoff aligns with your product positioning and customer expectations',
-            'Let the ML team decide independently since this is a purely technical choice'
+            'Always prioritize cost reduction since 1-2% quality loss is negligible',
+            'Never compromise quality; maintain 8-group GQA regardless of cost',
+            'Evaluate impact on customer use cases and decide based on product positioning',
+            'Let the ML team decide independently since this is purely technical'
           ],
           correct: 2,
           explanation: 'This is a classic PM tradeoff decision. A 30% cost reduction could translate to lower prices or better margins, but quality regressions on reasoning tasks could hurt enterprise customers who depend on multi-step analysis. The PM should drive a rigorous evaluation on task-specific benchmarks, consult with key customers or customer-facing teams, and make a data-informed decision aligned with the product strategy.',
@@ -664,9 +664,9 @@ export const lessons = {
           question: 'Which of the following correctly describes the "prefill" and "decode" phases in decoder-only model inference?',
           type: 'mc',
           options: [
-            'Prefill generates the output tokens, and decode processes the input prompt',
-            'Prefill processes all prompt tokens in parallel (compute-bound), building the KV cache; decode generates tokens one at a time (memory-bandwidth-bound), reading the KV cache for each new token',
-            'Prefill and decode are identical operations that differ only in batch size',
+            'Prefill generates output tokens, decode processes the input prompt',
+            'Parallel prompt processing vs. autoregressive generation',
+            'Prefill and decode are identical operations differing only in batch size',
             'Prefill is the pre-training phase and decode is the inference phase'
           ],
           correct: 1,
@@ -693,10 +693,10 @@ export const lessons = {
           question: 'A product manager proposes adding "10x longer context window" as a headline feature for the next Gemini release. Based on your understanding of architecture trade-offs, what is the most critical question you should raise?',
           type: 'mc',
           options: [
-            'Will the marketing team have enough time to prepare launch materials?',
-            'What is the impact on time-to-first-token (prefill latency), serving cost per request, and whether the model actually maintains quality at the extended length — verified by needle-in-a-haystack and long-range reasoning evaluations?',
-            'Should we file a patent for longer context windows?',
-            'Can we simply increase the number of decoder layers to support longer context?'
+            'Will marketing have sufficient time to prepare launch materials for the context window announcement?',
+            'Impact on latency, cost, and quality verification?',
+            'Should we file a patent application for the longer context window capability?',
+            'Can we simply increase decoder layers to support the extended context length?'
           ],
           correct: 1,
           explanation: 'Extending context 10x has cascading impacts: O(n²) attention means ~100x more attention compute, the KV cache grows 10x (affecting memory and throughput), prefill latency increases proportionally, and the model may not maintain quality at the extended length. A responsible PM must demand evaluations like needle-in-a-haystack (can the model find specific information buried in long context?), long-range reasoning tests, and latency/cost analysis before committing to the feature.',

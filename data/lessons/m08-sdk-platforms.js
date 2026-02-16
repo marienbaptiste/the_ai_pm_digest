@@ -190,10 +190,10 @@ export const lessons = {
           question: 'Which of the following best describes the "Trust Tax" concept for developer platforms?',
           type: 'mc',
           options: [
-            'The monetary cost of implementing security features for the platform infrastructure',
-            'The accumulated extra effort developers invest in error handling and workarounds',
-            'The fee charged to developers for premium support and services on the platform',
-            'The time required to pass a platform\'s security review process successfully'
+            'The cost of security infrastructure and compliance features',
+            'Extra effort developers invest in error handling after reliability issues',
+            'Premium support fees charged to enterprise developers',
+            'Time required for platform security review processes'
           ],
           correct: 1,
           explanation: 'The Trust Tax is the hidden cost that accumulates when developers lose confidence in a platform\'s reliability. After experiencing downtime or breaking changes, developers build defensive code: extra error handling, fallback systems, caching layers, and manual workarounds. This effort compounds over time and eventually makes alternative platforms more attractive, even if switching costs are high.',
@@ -213,10 +213,10 @@ export const lessons = {
           question: 'According to the documentation framework, what are the four types of documentation a developer platform should provide?',
           type: 'mc',
           options: [
-            'README, FAQ, API spec, and changelog for version tracking',
-            'Tutorials (learning), how-to guides (tasks), reference (specs), and explanation (concepts)',
-            'Quickstart, advanced guide, troubleshooting, and release notes documentation',
-            'Code samples, video walkthroughs, blog posts, and community wiki content'
+            'README, FAQ, API reference, and changelogs',
+            'Tutorials, how-to guides, reference, and explanation',
+            'Quickstart, advanced guide, troubleshooting, release notes',
+            'Code samples, videos, blog posts, and community wiki'
           ],
           correct: 1,
           explanation: 'The four documentation types serve distinct needs: Tutorials are learning-oriented for beginners, How-to Guides are task-oriented for solving specific problems, Reference is information-oriented for complete API specs, and Explanation is understanding-oriented for conceptual background. This framework (from Divio/Diataxis) ensures documentation serves developers at every stage of their journey.',

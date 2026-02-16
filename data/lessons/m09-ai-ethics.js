@@ -108,10 +108,10 @@ export const lessons = {
           question: 'Which of the following correctly describes the impossibility theorem in algorithmic fairness?',
           type: 'mc',
           options: [
-            'It is impossible to build an AI system that is completely free of bias',
-            'When base rates differ across groups, three common fairness definitions cannot all hold simultaneously',
-            'Fairness and accuracy are always in tension; improving one necessarily degrades the other',
-            'Individual fairness and group fairness are logically contradictory and cannot coexist'
+            'No AI system can be completely free of all bias',
+            'Three fairness definitions cannot all hold when base rates differ',
+            'Fairness and accuracy always trade off against each other',
+            'Individual and group fairness are logically contradictory'
           ],
           correct: 1,
           explanation: 'The impossibility theorem (Chouldechova 2017, Kleinberg et al. 2016) specifically proves that when the base rate of the positive class differs between groups, three common group fairness definitions — demographic parity, equalized odds, and predictive parity — cannot all be satisfied at once. This is a precise mathematical result, not a general claim about bias or accuracy tradeoffs.',
