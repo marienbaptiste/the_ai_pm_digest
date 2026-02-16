@@ -391,8 +391,9 @@ function formatModelAnswer(text) {
   }
 
   // Check if text contains numbered points like (1), (2), (3) or 1., 2., 3.
-  const numberedPattern = /\((\d+)\)\s+/g;
-  const dotPattern = /(\d+)\.\s+/g;
+  // Only match at start of string or after newlines to avoid matching "et al." etc.
+  const numberedPattern = /(\(1\)\s+.*?\(2\)\s+)/s;
+  const dotPattern = /(^|\n)(\d+)\.\s+/g;
 
   if (numberedPattern.test(text)) {
     // Split by (1), (2), etc.
@@ -402,11 +403,16 @@ function formatModelAnswer(text) {
       return `<ol>${items}</ol>`;
     }
   } else if (dotPattern.test(text)) {
-    // Split by 1., 2., etc.
-    const parts = text.split(/\d+\.\s+/).filter(p => p.trim());
-    if (parts.length > 1) {
-      const items = parts.map(part => `<li>${part.trim()}</li>`).join('');
-      return `<ol>${items}</ol>`;
+    // Split by 1., 2., etc. only at start of lines
+    const lines = text.split('\n');
+    const hasNumberedList = lines.some(line => /^\d+\.\s+/.test(line.trim()));
+
+    if (hasNumberedList) {
+      const parts = text.split(/(?:^|\n)\d+\.\s+/).filter(p => p.trim());
+      if (parts.length > 1) {
+        const items = parts.map(part => `<li>${part.trim()}</li>`).join('');
+        return `<ol>${items}</ol>`;
+      }
     }
   }
 
