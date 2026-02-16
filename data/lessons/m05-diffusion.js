@@ -210,7 +210,7 @@ export const lessons = {
       questions: [
         {
           question: 'You are scoping a new real-time background replacement feature for video calls. The feature must run at 30fps on consumer GPUs with no noticeable latency. Which generative approach is most appropriate to evaluate first, and why?',
-          type: 'scenario',
+          type: 'mc',
           options: [
             'A diffusion model, because it produces the highest quality results',
             'A GAN-based model, because single-pass inference enables real-time speeds',
@@ -502,7 +502,7 @@ export const lessons = {
         },
         {
           question: 'Your team is building a consumer image generation product. Testing shows that 50-step DDIM sampling takes 4 seconds on target hardware, but the product requirement is under 1.5 seconds. Which approach should you prioritize investigating?',
-          type: 'scenario',
+          type: 'mc',
           options: [
             'Switch from DDIM to the original DDPM sampler with 1000 steps for better quality',
             'Evaluate distillation approaches like Latent Consistency Models that reduce steps to 4-8 while preserving quality',
@@ -783,7 +783,7 @@ export const lessons = {
       questions: [
         {
           question: 'You are a PM at DeepMind evaluating whether to build your next image generation system as a pixel-space cascade (like Imagen) or a latent diffusion model (like Stable Diffusion). Your primary product targets are: (1) consumer-grade hardware deployment, (2) 1024x1024 output resolution, (3) strong compositional text understanding. Which architecture should you recommend and what is the key trade-off?',
-          type: 'scenario',
+          type: 'mc',
           options: [
             'Pixel-space cascade — higher theoretical quality ceiling justifies the compute cost',
             'Latent diffusion with a large text encoder — 48x fewer diffusion elements enables consumer deployment while a scaled text encoder addresses compositional understanding',
@@ -1095,7 +1095,7 @@ export const lessons = {
       questions: [
         {
           question: 'You are building a document processing product at DeepMind that needs to extract structured data from scanned invoices. The system must handle diverse layouts, handwritten annotations, and tables. Which multimodal architecture pattern is most appropriate?',
-          type: 'scenario',
+          type: 'mc',
           options: [
             'CLIP-based contrastive model — embed documents and search for matching templates',
             'A generative multimodal LLM (like GPT-4V/Gemini) that can reason about document structure and extract fields through natural language interaction',

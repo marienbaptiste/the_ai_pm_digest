@@ -461,7 +461,7 @@ export const lessons = {
       questions: [
         {
           question: 'Your RAG system currently uses brute-force FAISS search over 500,000 vectors and returns results in 50ms. Your roadmap calls for scaling to 50 million vectors. Without changing the search algorithm, what approximate latency should you expect, and what should you recommend?',
-          type: 'scenario',
+          type: 'mc',
           options: [
             'Latency will remain at 50ms because FAISS automatically optimizes at scale',
             'Latency will increase to ~5 seconds (100x data = 100x time for brute force). You should recommend switching to an ANN index like HNSW or IVF-PQ.',
@@ -812,7 +812,7 @@ export const lessons = {
       questions: [
         {
           question: 'You are building an internal AI assistant for DeepMind researchers that must answer questions about both published papers (public) and internal research memos (private, frequently updated). Which architecture best fits these requirements?',
-          type: 'scenario',
+          type: 'mc',
           options: [
             'Fine-tune the LLM on all internal memos so it memorizes the information',
             'Use long context — paste all relevant memos into the prompt for every query',
@@ -1216,7 +1216,7 @@ export const lessons = {
       questions: [
         {
           question: 'Your production RAG system for a healthcare company pulls information from several medical databases. One morning, you notice that answers about drug interactions have become unreliable. Investigation reveals that one database changed its API response format two weeks ago, and your parser has been silently extracting incorrect data. Which combination of practices would have prevented this?',
-          type: 'scenario',
+          type: 'mc',
           options: [
             'Using a more powerful LLM that can handle incorrect context better',
             'Content validation after parsing (checking for expected fields and reasonable content length), source health monitoring dashboards with anomaly alerts, and automated regression testing with golden queries that would have caught the quality drop',

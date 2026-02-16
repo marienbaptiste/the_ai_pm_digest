@@ -385,6 +385,11 @@ function renderTextInput(q, index, state) {
 }
 
 function formatModelAnswer(text) {
+  // Guard against null/undefined
+  if (!text || typeof text !== 'string') {
+    return '<p>No model answer available.</p>';
+  }
+
   // Check if text contains numbered points like (1), (2), (3) or 1., 2., 3.
   const numberedPattern = /\((\d+)\)\s+/g;
   const dotPattern = /(\d+)\.\s+/g;
