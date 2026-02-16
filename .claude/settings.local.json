@@ -17,7 +17,9 @@
       "Bash(git stash:*)",
       "Bash(git pull:*)",
       "Bash(git stash pop:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)"
     ]
   }
 }

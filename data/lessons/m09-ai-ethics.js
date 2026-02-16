@@ -94,10 +94,10 @@ export const lessons = {
           question: 'Your team is building a content moderation model for a global product. Evaluation shows 96% aggregate accuracy, but when you request disaggregated metrics, you discover the false positive rate for African American Vernacular English (AAVE) is 3x higher than for Standard American English. Engineering argues the aggregate metric meets the launch bar. What is the most appropriate PM response?',
           type: 'mc',
           options: [
-            'Launch with the current model since 96% aggregate accuracy exceeds the threshold, and plan to address the disparity in a future release.',
-            'Delay launch and require the team to achieve equal false positive rates across all demographic groups before shipping.',
-            'Launch with a monitoring dashboard and commit to reducing the disparity within 90 days post-launch.',
-            'Delay launch, require equalized false positive rates for the content moderation use case, and establish a fairness evaluation rubric that must be passed for all future model updates.'
+            'Launch with the current model since 96% aggregate accuracy exceeds the threshold',
+            'Delay launch and require equal false positive rates across all demographic groups',
+            'Launch with monitoring dashboard and commit to reducing disparity within 90 days',
+            'Delay launch, require equalized rates, and establish fairness rubric for future updates'
           ],
           correct: 3,
           explanation: 'A 3x disparity in false positive rates for content moderation means AAVE speakers are being censored at triple the rate — a severe fairness failure with direct harm to users. Aggregate accuracy is misleading here. The correct response combines an immediate fix (do not ship known disparate harm) with a structural change (establish a fairness rubric as a launch gate going forward). Option B is directionally correct but lacks the structural improvement. Option C accepts shipping known harm. Option A ignores the problem entirely.',
@@ -108,10 +108,10 @@ export const lessons = {
           question: 'Which of the following correctly describes the impossibility theorem in algorithmic fairness?',
           type: 'mc',
           options: [
-            'It is impossible to build an AI system that is completely free of bias.',
-            'When base rates differ across groups, demographic parity, equalized odds, and predictive parity cannot all hold simultaneously.',
-            'Fairness and accuracy are always in tension — improving one necessarily degrades the other.',
-            'Individual fairness and group fairness are logically contradictory and cannot coexist.'
+            'It is impossible to build an AI system that is completely free of bias',
+            'When base rates differ across groups, three common fairness definitions cannot all hold simultaneously',
+            'Fairness and accuracy are always in tension; improving one necessarily degrades the other',
+            'Individual fairness and group fairness are logically contradictory and cannot coexist'
           ],
           correct: 1,
           explanation: 'The impossibility theorem (Chouldechova 2017, Kleinberg et al. 2016) specifically proves that when the base rate of the positive class differs between groups, three common group fairness definitions — demographic parity, equalized odds, and predictive parity — cannot all be satisfied at once. This is a precise mathematical result, not a general claim about bias or accuracy tradeoffs.',
@@ -145,10 +145,10 @@ export const lessons = {
           question: 'What is the primary purpose of a model card in the context of AI fairness?',
           type: 'mc',
           options: [
-            'To provide marketing materials that highlight the model\'s best performance metrics.',
-            'To document intended use, training data characteristics, evaluation results across subgroups, and known limitations in standardized format.',
-            'To satisfy regulatory requirements by listing the model\'s parameters and architecture details.',
-            'To provide end users with instructions on how to prompt the model for optimal results.'
+            'To provide marketing materials that highlight the model\'s best performance metrics',
+            'To document intended use, training data, evaluation across subgroups, and known limitations',
+            'To satisfy regulatory requirements by listing the model\'s parameters and architecture details',
+            'To provide end users with instructions on how to prompt the model for optimal results'
           ],
           correct: 1,
           explanation: 'Model cards, introduced by Mitchell et al. (2019), are standardized documentation artifacts that provide transparency about a model\'s intended use, training data, evaluation methodology, disaggregated performance metrics, ethical considerations, and known limitations. They serve as a communication tool between model developers, deployers, and stakeholders — enabling informed decisions about whether and how to use a model.',

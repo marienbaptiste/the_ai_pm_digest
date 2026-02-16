@@ -102,8 +102,8 @@ export const lessons = {
           type: 'mc',
           options: [
             'Transformers cannot process text longer than 512 tokens under any circumstances',
-            'The O(n²) attention complexity means 5,000-token documents will be very expensive to process, and you need to discuss context-window strategies',
-            'LSTMs are always more accurate than Transformers on long documents because they have explicit memory',
+            'The O(n²) attention complexity makes 5,000-token documents expensive requiring context-window strategies',
+            'LSTMs are always more accurate than Transformers on long documents with explicit memory',
             'Transformers require more training data than LSTMs to achieve comparable accuracy'
           ],
           correct: 1,
@@ -139,10 +139,10 @@ export const lessons = {
           question: 'The original "Attention Is All You Need" paper achieved state-of-the-art results on machine translation. What was the most significant practical advantage of the Transformer over previous SOTA models beyond raw accuracy?',
           type: 'mc',
           options: [
-            'It required no pre-training data and could work zero-shot',
-            'It dramatically reduced training time by enabling full parallelization across the sequence dimension',
-            'It eliminated the need for tokenization entirely',
-            'It used fewer parameters than any prior model'
+            'It required no pre-training data and could work effectively in zero-shot mode',
+            'It dramatically reduced training time by enabling full parallelization across sequences',
+            'It eliminated the need for tokenization entirely in the translation pipeline',
+            'It used fewer parameters than any prior model achieving comparable accuracy'
           ],
           correct: 1,
           explanation: 'The Transformer trained in 3.5 days on 8 GPUs for English-to-French translation, compared to weeks for comparable RNN-based models. This speedup came from eliminating sequential dependencies, allowing all positions to be processed in parallel. This efficiency gain was arguably even more impactful than the accuracy improvement, because it unlocked the scaling regime that led to modern LLMs.',
@@ -153,9 +153,9 @@ export const lessons = {
           question: 'Your team is building a real-time document analysis feature for Gemini. Users will submit documents of highly variable lengths — some 200 tokens, others 50,000 tokens. Given the Transformer\'s computational profile, which product strategy best addresses this?',
           type: 'mc',
           options: [
-            'Set a universal context window of 50,000 tokens for all requests to ensure no document is truncated',
-            'Implement tiered processing: use the actual document length to allocate compute dynamically, with efficient attention variants for long documents and standard attention for short ones',
-            'Limit all documents to 2,000 tokens to keep costs predictable',
+            'Set a universal context window of 50,000 tokens for all requests to ensure no truncation',
+            'Implement tiered processing using actual document length with efficient attention for long documents',
+            'Limit all documents to 2,000 tokens to keep costs predictable and manageable',
             'Use an RNN-based model for long documents and a Transformer for short ones'
           ],
           correct: 1,
@@ -289,7 +289,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'The model would be unable to learn any attention patterns',
-            'The softmax outputs would become nearly one-hot, causing the model to attend to only a single token per position and losing the ability to aggregate information from multiple sources',
+            'The softmax outputs would become one-hot losing the ability to aggregate multiple sources',
             'The model would attend equally to all tokens regardless of content',
             'Training would become faster due to simplified computation'
           ],

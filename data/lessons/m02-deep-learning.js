@@ -121,10 +121,10 @@ export const lessons = {
           question: 'Your team is building a visual inspection system for a factory production line. The system needs to detect tiny defects (scratches, dents) on manufactured parts. The ML engineer proposes using aggressive max pooling (4x4 windows) to speed up inference. What product risk does this introduce?',
           type: 'mc',
           options: [
-            'Max pooling will cause the model to overfit on training data',
-            'Large pooling windows discard fine spatial detail, potentially causing the model to miss small defects that span only a few pixels',
-            'Max pooling will make the model too slow for real-time inspection',
-            'Max pooling prevents the use of pre-trained backbones like ResNet'
+            'Max pooling will cause the model to overfit on the training dataset',
+            'Large pooling windows discard fine spatial detail needed to detect tiny defects',
+            'Max pooling increases inference latency making real-time inspection impossible',
+            'Max pooling prevents transfer learning from pre-trained ResNet architectures'
           ],
           correct: 1,
           explanation: 'Max pooling with a 4x4 window reduces spatial resolution by 75% at each application. For defect detection where defects may be only a few pixels across, this aggressive downsampling can discard the very features the model needs to detect. A better approach might be smaller pooling windows, dilated convolutions, or feature pyramid networks that preserve multi-scale information.',
@@ -135,10 +135,10 @@ export const lessons = {
           question: 'Why do CNNs use dramatically fewer parameters than fully connected networks for image processing?',
           type: 'mc',
           options: [
-            'CNNs use smaller images as input through mandatory preprocessing',
-            'CNNs use weight sharing (same kernel applied across all spatial positions) and local connectivity (each neuron connects to only a small input region)',
-            'CNNs only process grayscale images, reducing input dimensionality',
-            'CNNs replace multiplication with addition, halving parameter count'
+            'CNNs use smaller images through mandatory preprocessing that reduces dimensions',
+            'CNNs share weights across spatial positions and use local connectivity patterns',
+            'CNNs only process grayscale images which reduces the input dimensionality',
+            'CNNs replace expensive multiplication operations with addition operations'
           ],
           correct: 1,
           explanation: 'Weight sharing means a single 3x3 kernel with 9 parameters is applied at every spatial position, rather than learning separate weights for each position. Local connectivity means each output neuron depends on only a small patch of the input rather than the entire image. Together, these reduce parameters by orders of magnitude while encoding the inductive bias that local spatial patterns are important.',
@@ -157,11 +157,11 @@ export const lessons = {
           question: 'Which of the following are valid reasons that ResNet can train networks with 150+ layers while VGGNet struggles beyond 19 layers? Select all that apply.',
           type: 'multi',
           options: [
-            'ResNet uses residual (skip) connections that allow gradients to flow directly through the network, mitigating vanishing gradients',
-            'ResNet uses a fundamentally different type of convolution that is more stable',
-            'Skip connections allow layers to learn residual mappings (corrections to the identity), which are easier to optimise than learning the full transformation from scratch',
-            'ResNet uses larger kernels that capture more context per layer',
-            'The identity shortcuts in ResNet ensure that adding layers can never hurt performance in theory — the extra layers can always learn the identity function'
+            'ResNet uses skip connections that allow gradients to flow directly mitigating vanishing gradients',
+            'ResNet uses a fundamentally different type of convolution that is more stable during training',
+            'Skip connections allow learning residual corrections which are easier to optimize than full transformations',
+            'ResNet uses larger kernel sizes that capture significantly more context per layer',
+            'Identity shortcuts ensure adding layers never hurts as they can always learn identity mappings'
           ],
           correct: [0, 2, 4],
           explanation: 'ResNet\'s key innovation is the skip (residual) connection: the output of a block is the sum of the block\'s transformation and the original input. This allows gradients to flow unimpeded (addressing vanishing gradients), makes the learning target easier (learn a small correction rather than a full transformation), and ensures that deeper networks are at least as good as shallower ones (extra layers can learn to be identity mappings). ResNet uses standard 3x3 convolutions, not different or larger ones.',
@@ -172,10 +172,10 @@ export const lessons = {
           question: 'Your team must choose a CNN backbone for a mobile app that identifies plant species from photos. The app runs on-device with no internet connection. Inference must complete in under 100ms on a typical smartphone. Which architectural consideration should MOST heavily influence your choice?',
           type: 'mc',
           options: [
-            'The number of training epochs required to reach convergence during development',
-            'The model\'s parameter count and floating-point operations (FLOPs), which determine inference speed and memory usage on mobile hardware',
-            'Whether the model was originally pre-trained on ImageNet or on a plant-specific dataset',
-            'The choice of activation function used in the hidden layers throughout the network'
+            'The number of training epochs required to reach convergence on your dataset',
+            'The model\'s parameter count and FLOPs which determine mobile inference speed',
+            'Whether the model was pre-trained on ImageNet versus plant-specific datasets',
+            'The activation function choice used in hidden layers throughout the network'
           ],
           correct: 1,
           explanation: 'For on-device mobile inference with a strict latency budget, the primary constraint is the model\'s computational footprint: parameter count (affects memory and download size) and FLOPs (affects inference latency). Architectures like MobileNet and EfficientNet-B0 are specifically designed for this constraint. Training details, original dataset, and activation choice are secondary to the fundamental size/speed constraint.',
@@ -331,10 +331,10 @@ export const lessons = {
           question: 'Your team is building a predictive maintenance system for industrial equipment that processes real-time sensor streams on an edge device with limited compute. The input is a continuous time series from 12 sensors, and you need to flag anomalies within 50ms. Would you recommend an LSTM or a Transformer, and why?',
           type: 'mc',
           options: [
-            'Transformer — because transformers are always superior to LSTMs',
-            'LSTM — because it processes inputs incrementally (one time step at a time), is computationally lighter for streaming data, and can run within the latency budget on edge hardware',
-            'Neither — time series require CNNs exclusively',
-            'LSTM — because transformers cannot process numerical sensor data'
+            'Transformer because they are superior to LSTMs for all sequence modeling tasks',
+            'LSTM because it processes incrementally with lower compute and meets edge latency needs',
+            'Neither architecture because time series tasks require CNNs exclusively for accuracy',
+            'LSTM because transformers fundamentally cannot process numerical sensor data streams'
           ],
           correct: 1,
           explanation: 'For streaming time series on edge devices, LSTMs are often the better choice. They process data incrementally (maintaining a hidden state updated with each new reading) and have a much smaller computational footprint than transformers. Transformers require all positions to attend to all other positions (quadratic cost), which is expensive for long streams, and they struggle with truly incremental processing without modifications.',
@@ -345,10 +345,10 @@ export const lessons = {
           question: 'What specific problem does the LSTM cell state solve that the vanilla RNN hidden state cannot?',
           type: 'mc',
           options: [
-            'The cell state allows the LSTM to process longer input sequences by compressing data more efficiently',
-            'The cell state provides an additive information pathway through time, preventing gradient vanishing that occurs with the multiplicative hidden state updates in vanilla RNNs',
-            'The cell state stores a copy of the original input sequence for reference',
-            'The cell state enables parallel processing of sequence elements, which vanilla RNNs cannot do'
+            'The cell state allows processing longer sequences through more efficient data compression',
+            'The cell state provides an additive pathway preventing gradient vanishing from multiplicative updates',
+            'The cell state stores a copy of the original input sequence for later reference',
+            'The cell state enables parallel processing of sequence elements unlike vanilla RNNs'
           ],
           correct: 1,
           explanation: 'The cell state is updated additively (new information is added; old information is retained or erased via gates) rather than through repeated matrix multiplication. In vanilla RNNs, the hidden state is repeatedly multiplied by the weight matrix, causing gradients to vanish or explode. The LSTM\'s additive cell state allows gradients to flow through time with minimal decay, enabling learning of long-range dependencies.',
@@ -542,10 +542,10 @@ export const lessons = {
           question: 'Why does modern transformer training use a "warmup + cosine decay" learning rate schedule rather than a constant learning rate?',
           type: 'mc',
           options: [
-            'A constant learning rate causes the model to learn only the first few examples in the dataset',
-            'Warmup prevents destructively large gradient updates when weights are randomly initialised, and cosine decay enables progressively finer optimisation as training proceeds',
-            'The schedule is required by the Adam optimiser and cannot be changed',
-            'Warmup reduces memory usage and cosine decay reduces training time'
+            'A constant rate causes the model to learn only the first few training examples',
+            'Warmup prevents destructive updates from random initialization and decay enables fine optimization',
+            'The schedule is required by the Adam optimizer and cannot be modified or changed',
+            'Warmup reduces memory usage during training and decay reduces total training time'
           ],
           correct: 1,
           explanation: 'At the start of training, weights are random and gradients are noisy and potentially large. A high learning rate at this point can push the model into a poor region of parameter space from which it cannot recover. Warmup starts small and ramps up, allowing the model to stabilise. Cosine decay gradually reduces the learning rate later in training, enabling finer-grained optimisation as the model approaches a good solution.',
@@ -579,10 +579,10 @@ export const lessons = {
           question: 'A junior engineer proposes using a dropout rate of 0.9 (dropping 90% of neurons) to eliminate overfitting. Why is this likely to be counterproductive?',
           type: 'mc',
           options: [
-            'Dropout rates above 0.5 cause numerical overflow in the weight gradients',
-            'With 90% of neurons dropped, the effective capacity of the network at each training step is so small that it cannot learn the underlying patterns — it underfits severely',
-            'Dropout rates must be exactly 0.5 to maintain the mathematical guarantees of the technique',
-            'High dropout rates prevent BatchNorm from computing accurate statistics'
+            'Dropout rates above 0.5 cause numerical overflow in the weight gradient computations',
+            'With 90% dropped the effective network capacity becomes too small to learn patterns and underfits',
+            'Dropout rates must be exactly 0.5 to maintain the mathematical guarantees of regularization',
+            'High dropout rates prevent BatchNorm from computing accurate statistics during training'
           ],
           correct: 1,
           explanation: 'With a dropout rate of 0.9, only 10% of neurons are active during each training step. This creates an extremely low-capacity sub-network at each step, likely insufficient to capture the complexity of the data. The model will underfit — failing to learn even the training data, let alone generalising. Typical dropout rates range from 0.1-0.5, balancing regularisation against learning capacity.',
@@ -737,10 +737,10 @@ export const lessons = {
           question: 'Your team is designing a medical image segmentation model to outline tumour boundaries in MRI scans. The output must be a pixel-level mask at the original image resolution. Which architecture is the most natural fit, and why?',
           type: 'mc',
           options: [
-            'ResNet-152 — its depth provides the highest feature extraction capability',
-            'A standard GAN — adversarial training produces the most realistic-looking segmentations',
-            'U-Net — its encoder-decoder structure with skip connections combines high-level semantic features with fine spatial detail for precise pixel-level predictions',
-            'A vanilla CNN classifier applied to each pixel independently'
+            'ResNet-152 because its depth provides the highest feature extraction capability',
+            'A standard GAN because adversarial training produces the most realistic segmentations',
+            'U-Net because its encoder-decoder structure combines semantic features with spatial detail',
+            'A vanilla CNN classifier applied to each pixel independently for segmentation'
           ],
           correct: 2,
           explanation: 'U-Net was specifically designed for medical image segmentation. Its encoder captures "what" (semantic understanding of tissue types), its decoder recovers "where" (spatial precision), and the skip connections combine both for precise boundaries. ResNet is a classification backbone, not designed for dense prediction. GANs are for generation, not segmentation. Per-pixel classification ignores spatial context.',
@@ -751,10 +751,10 @@ export const lessons = {
           question: 'A startup pitches you on a GAN-based product that generates synthetic medical images for training data augmentation. What is the MOST significant risk you should evaluate as a PM?',
           type: 'mc',
           options: [
-            'GANs cannot generate high-resolution images',
-            'Mode collapse — the GAN may produce limited diversity in synthetic images, failing to represent the full variability of real medical data, and potentially introducing systematic biases into models trained on the synthetic data',
-            'GANs are too slow for batch generation of training data',
-            'Synthetic medical images are illegal in all jurisdictions'
+            'GANs cannot generate high-resolution images suitable for medical training purposes',
+            'Mode collapse may produce limited diversity failing to represent medical data variability and biases',
+            'GANs are too slow for batch generation of the required training data volumes',
+            'Synthetic medical images are illegal in all jurisdictions under current regulations'
           ],
           correct: 1,
           explanation: 'Mode collapse is the critical risk: if the GAN generates only a narrow range of pathologies, patient demographics, or imaging conditions, models trained on this synthetic data will inherit those gaps. In medical contexts, this could mean the model fails on underrepresented patient populations or rare conditions — with potentially life-threatening consequences. The other options are either false or secondary concerns.',
@@ -788,10 +788,10 @@ export const lessons = {
           question: 'A GAN trained on celebrity faces consistently generates only young, light-skinned female faces despite the training dataset containing diverse demographics. What is the most likely technical cause?',
           type: 'mc',
           options: [
-            'The discriminator is too weak to detect demographic differences',
-            'Mode collapse — the generator has found a narrow distribution of outputs that consistently fools the discriminator, ignoring underrepresented modes in the data',
-            'The training data was not preprocessed correctly',
-            'GANs are inherently unable to generate diverse outputs'
+            'The discriminator is too weak to detect demographic differences in face generation',
+            'Mode collapse where the generator found a narrow output distribution ignoring underrepresented modes',
+            'The training data was not preprocessed correctly before the GAN training began',
+            'GANs are inherently unable to generate diverse outputs across demographic categories'
           ],
           correct: 1,
           explanation: 'Mode collapse is the GAN-specific pathology where the generator collapses to producing only a narrow range of outputs. If certain demographics are overrepresented in the training data or are easier for the generator to model (e.g., young female faces may be more prevalent in celebrity datasets), the generator can satisfy the discriminator by producing only those types, ignoring the rest of the distribution. This is both a technical problem (mode collapse) and a data problem (dataset imbalance).',
@@ -802,10 +802,10 @@ export const lessons = {
           question: 'Why has the residual connection design pattern from ResNet become ubiquitous across nearly all modern deep learning architectures, including Transformers?',
           type: 'mc',
           options: [
-            'It reduces the number of parameters needed in the network',
-            'It provides a direct gradient pathway that prevents vanishing gradients, ensures adding depth never hurts performance in theory, and enables the training of much deeper networks',
-            'It was mandated by major deep learning frameworks like PyTorch and TensorFlow',
-            'It eliminates the need for activation functions in the network'
+            'It reduces the number of parameters needed in the network architecture significantly',
+            'It provides a direct gradient pathway preventing vanishing gradients and enabling deeper networks',
+            'It was mandated by major deep learning frameworks like PyTorch and TensorFlow standards',
+            'It eliminates the need for activation functions in the network architecture entirely'
           ],
           correct: 1,
           explanation: 'Residual connections provide three universal benefits: (1) gradient highway — gradients flow through the identity path without decay, enabling training of very deep networks; (2) easy identity — blocks can default to passing information through unchanged, so added depth cannot hurt in theory; (3) ensemble effect — multiple paths create implicit ensembles. These benefits are not specific to CNNs — they apply to any deep architecture, which is why Transformers, diffusion models, and modern RNNs all use them.',

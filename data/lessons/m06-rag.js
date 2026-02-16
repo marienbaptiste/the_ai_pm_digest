@@ -195,10 +195,10 @@ export const lessons = {
           question: 'Your team is building a RAG system over 5 million technical documents. The engineering lead proposes using 3072-dimensional embeddings for maximum quality. What concern should you raise as a PM?',
           type: 'mc',
           options: [
-            'Higher-dimensional embeddings always produce worse results on technical content due to the curse of dimensionality',
-            'Storage and search latency costs double — 5M docs at 3072 dims requires ~60GB vs ~30GB at 1536 dims, and ANN search time scales proportionally. Verify the quality gain justifies infrastructure costs.',
-            '3072-dimensional embeddings cannot represent technical terminology accurately compared to lower-dimensional representations',
-            'Embedding models with higher dimensions require GPU-accelerated inference hardware, which is prohibitively expensive at scale'
+            'Higher-dimensional embeddings produce worse results on technical content due to dimensionality curse',
+            'Storage and search costs double at 3072 dims versus 1536 dims requiring cost-benefit analysis',
+            '3072-dimensional embeddings cannot represent technical terminology accurately compared to lower dimensions',
+            'Higher-dimensional embedding models require GPU-accelerated inference hardware at prohibitive scale costs'
           ],
           correct: 1,
           explanation: 'Higher dimensionality means more storage (each vector is 12KB at 3072 dims vs. 6KB at 1536), more memory for the vector index, and slower search. For 5M documents, this is the difference between ~30GB and ~60GB. The PM should ask for benchmarks showing the quality improvement (e.g., recall@10 on a representative query set) before accepting the additional infrastructure cost. The answer may well be worth it, but it should be a data-driven decision.',
@@ -210,7 +210,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'Word2Vec could not process words exceeding ten characters in length',
-            'Word2Vec assigned a single fixed vector per word regardless of context, making polysemous words indistinguishable',
+            'Word2Vec assigned a single fixed vector per word making polysemous words indistinguishable',
             'Word2Vec required labeled training data while BERT uses unsupervised learning',
             'Word2Vec embeddings were too high-dimensional for practical applications'
           ],
@@ -223,10 +223,10 @@ export const lessons = {
           question: 'You are evaluating two chunking strategies for a customer support RAG system. Strategy A uses 150-token chunks with no overlap. Strategy B uses 400-token chunks with 75-token overlap. Users typically ask short, specific questions. Which strategy should you test first, and why?',
           type: 'mc',
           options: [
-            'Strategy A — smaller chunks provide precision for specific queries, though adding overlap prevents boundary context loss',
-            'Strategy B — larger chunks always produce superior RAG quality across all query types',
-            'Neither — chunk size does not significantly affect retrieval quality in practice',
-            'Strategy A — zero overlap is optimal because it prevents duplicate information retrieval'
+            'Strategy A because smaller chunks provide precision though adding overlap prevents boundary context loss',
+            'Strategy B because larger chunks always produce superior RAG quality across all query types',
+            'Neither strategy because chunk size does not significantly affect retrieval quality in practice',
+            'Strategy A because zero overlap is optimal preventing duplicate information retrieval'
           ],
           correct: 0,
           explanation: 'For short, specific questions, smaller chunks tend to perform better because each retrieved chunk is more focused on a single topic, reducing noise. However, the lack of overlap in Strategy A risks splitting relevant information across chunk boundaries. The best starting point would be Strategy A\'s size with some overlap (e.g., 150 tokens with 30-token overlap). Strategy B\'s larger chunks may retrieve too much irrelevant context for precise queries.',

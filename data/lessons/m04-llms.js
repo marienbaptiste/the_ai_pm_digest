@@ -95,7 +95,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'Word2Vec is too old to be useful for any modern NLP application',
-            'Word2Vec produces static embeddings that cannot capture context-dependent meaning — sarcasm, negation, and polysemy will all be poorly handled compared to contextual models like BERT or modern LLMs',
+            'Word2Vec produces static embeddings missing context like sarcasm, negation, and polysemy',
             'Word2Vec requires too much training data for practical deployment',
             'Word2Vec cannot process text in non-English languages effectively'
           ],
@@ -108,10 +108,10 @@ export const lessons = {
           question: 'The progression from Word2Vec (2013) to GPT-3 (2020) involved multiple innovations. Which of the following correctly describes the most important conceptual shift that enabled in-context learning in GPT-3?',
           type: 'mc',
           options: [
-            'GPT-3 used a fundamentally different neural network architecture than previous models had',
+            'GPT-3 used a fundamentally different neural network architecture than previous models',
             'GPT-3 was trained on higher quality and more carefully curated data than any previous model',
-            'The combination of massive scale (175B parameters), diverse training data, and the autoregressive next-token prediction objective produced emergent capabilities like in-context learning that were not present at smaller scales',
-            'GPT-3 was explicitly trained to perform in-context learning through a specialized training objective function'
+            'Massive scale with diverse data produced emergent in-context learning not present at smaller scales',
+            'GPT-3 was explicitly trained for in-context learning through a specialized training objective'
           ],
           correct: 2,
           explanation: 'GPT-3 used the same decoder-only Transformer architecture and next-token prediction objective as GPT-2 — just much bigger. The in-context learning ability emerged from scale, not from architectural innovation or specialized training. This demonstrated that quantitative scaling can produce qualitative capability changes, a finding that reshaped the field and drove the "scaling laws" research agenda.',
@@ -146,10 +146,10 @@ export const lessons = {
           question: 'You are building a roadmap for an AI product that needs to classify support tickets (understanding task) and generate suggested replies (generation task). Given the evolution from BERT to modern LLMs, what is the most cost-effective architectural strategy?',
           type: 'mc',
           options: [
-            'Use BERT for classification and GPT for generation — always use specialized models for each task',
-            'Use a single modern decoder-only LLM for both tasks through prompting, but evaluate whether a small fine-tuned BERT for classification might be more cost-effective if classification volume is very high',
+            'Use BERT for classification and GPT for generation — always use specialized models',
+            'Use a single modern LLM for both tasks, but consider fine-tuned BERT for high-volume classification',
             'Build a custom architecture from scratch specifically for the support ticket domain',
-            'Use Word2Vec embeddings with a traditional ML classifier for both classification and generation tasks'
+            'Use Word2Vec embeddings with traditional ML classifiers for both classification and generation'
           ],
           correct: 1,
           explanation: 'A modern LLM can handle both tasks through prompting, which simplifies the stack. However, if classification volume is very high (millions of tickets/day), running a large LLM for simple classification may be prohibitively expensive. A small fine-tuned BERT (~110M parameters) can classify tickets at 100x lower cost per request than a large LLM. The PM should evaluate the volume/cost tradeoff and potentially use a hybrid approach: BERT for high-volume classification, LLM for generation.',

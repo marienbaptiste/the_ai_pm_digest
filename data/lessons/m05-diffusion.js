@@ -226,10 +226,10 @@ export const lessons = {
           question: 'What is the primary reason VAE outputs tend to appear blurry compared to GAN outputs?',
           type: 'mc',
           options: [
-            'VAEs use smaller neural networks than GANs',
-            'The reconstruction loss optimizes for the average of possible outputs, smoothing high-frequency details',
+            'VAEs use smaller neural networks than GANs for computational efficiency',
+            'The reconstruction loss optimizes for output averages smoothing high-frequency details',
             'VAEs cannot learn hierarchical features due to the KL divergence term',
-            'The latent space in a VAE is too high-dimensional'
+            'The latent space in a VAE is too high-dimensional for detail preservation'
           ],
           correct: 1,
           explanation: 'VAEs minimize a pixel-wise reconstruction loss (typically MSE) plus a KL regularizer. When the true data distribution is multimodal — e.g., a face could have slightly different hair positions — the model learns to average over modes, producing blurry outputs. GANs avoid this by using an adversarial loss that rewards sharpness directly.',

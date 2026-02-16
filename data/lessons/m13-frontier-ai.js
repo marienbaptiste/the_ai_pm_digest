@@ -129,7 +129,7 @@ where L_load_balance = N * sum_i( f_i * P_i )
           type: 'mc',
           options: [
             'MoE models cannot perform text prediction tasks at all',
-            'The total model size (14B parameters) far exceeds mobile device memory constraints &mdash; wrong tradeoff for edge deployment',
+            'The total model size far exceeds mobile device memory constraints for edge deployment',
             'The model will be too accurate for a keyboard prediction task',
             'MoE routing adds so much latency that the model will always be slower than dense'
           ],

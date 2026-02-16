@@ -176,9 +176,9 @@ export const lessons = {
           question: 'Your Gemini integration with a popular messaging app breaks because the app updated its UI layout. This is the third time this quarter. What strategic approach should you take?',
           type: 'mc',
           options: [
-            'Contact the messaging app team and demand they stop making UI changes',
-            'Remove the integration since it is too unstable to maintain reliably',
-            'Build a semantic understanding layer interpreting screen content by meaning rather than layout, with automated testing and graceful degradation',
+            'Contact the messaging app team and demand they stop making frequent UI changes',
+            'Remove the integration since it is too unstable to maintain reliably over time',
+            'Build a semantic understanding layer with automated testing and graceful degradation',
             'Assign a developer to manually fix the integration each time it breaks'
           ],
           correct: 2,
@@ -190,10 +190,10 @@ export const lessons = {
           question: 'Which of the following best describes the "Trust Tax" concept for developer platforms?',
           type: 'mc',
           options: [
-            'The monetary cost of implementing security features for the platform',
-            'The accumulated extra effort developers invest in error handling and workarounds after experiencing reliability issues',
-            'The fee charged to developers for premium support and services',
-            'The time required to pass a platform\'s security review process'
+            'The monetary cost of implementing security features for the platform infrastructure',
+            'The accumulated extra effort developers invest in error handling and workarounds',
+            'The fee charged to developers for premium support and services on the platform',
+            'The time required to pass a platform\'s security review process successfully'
           ],
           correct: 1,
           explanation: 'The Trust Tax is the hidden cost that accumulates when developers lose confidence in a platform\'s reliability. After experiencing downtime or breaking changes, developers build defensive code: extra error handling, fallback systems, caching layers, and manual workarounds. This effort compounds over time and eventually makes alternative platforms more attractive, even if switching costs are high.',

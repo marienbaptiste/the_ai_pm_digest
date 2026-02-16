@@ -107,10 +107,10 @@ export const lessons = {
           question: 'Which of the following best describes the "one-way door vs. two-way door" decision framework?',
           type: 'mc',
           options: [
-            'One-way doors require single-person decisions while two-way doors need consensus from two approvers',
-            'One-way doors are irreversible or costly to reverse and warrant careful analysis; two-way doors are easily reversible and should be decided quickly',
-            'One-way doors impact single teams with focused scope while two-way doors create dependencies across multiple teams',
-            'One-way doors are annual strategic commitments while two-way doors are weekly tactical adjustments to plans'
+            'One-way doors require single-person decisions while two-way doors need consensus',
+            'One-way doors are costly to reverse warranting careful analysis while two-way doors are easily reversed',
+            'One-way doors impact single teams while two-way doors create dependencies across multiple teams',
+            'One-way doors are annual strategic commitments while two-way doors are weekly tactical adjustments'
           ],
           correct: 1,
           explanation: 'The one-way/two-way door framework, popularized by Amazon, classifies decisions by reversibility. One-way doors (Type 1) are irreversible or very expensive to reverse — they warrant careful analysis, broad consultation, and deliberate decision-making. Two-way doors (Type 2) are easily reversible — they should be decided quickly because the cost of delay exceeds the cost of a wrong decision. A PM\'s key skill is correctly classifying which type each decision is.',
