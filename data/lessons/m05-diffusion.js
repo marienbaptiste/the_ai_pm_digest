@@ -573,7 +573,7 @@ export const lessons = {
   <strong>DALL-E 2</strong> (OpenAI, April 2022), <strong>Imagen</strong> (Google Brain, May 2022),
   and <strong><span class="term" data-term="stable-diffusion">Stable Diffusion</span></strong>
   (Stability AI / CompVis / Runway, August 2022). Each took a fundamentally different architectural
-  approach while achieving remarkably similar quality. Understanding these differences is essential
+  approach while achieving remarkably similar quality. As of 2025, these have evolved significantly (DALL-E 3, Stable Diffusion 3/3.5, Imagen 3), but understanding the foundational architectural differences remains essential
   for any AI PM evaluating generative image capabilities.
 </p>
 

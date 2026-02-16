@@ -555,7 +555,7 @@ export const lessons = {
         {
           question: 'Scenario: Your team has deployed a BatchNorm-based image classifier in production. Performance was excellent during testing but has degraded over 6 months. Investigation reveals that the types of images submitted by users have gradually shifted (e.g., more low-light images than in the training data). How does BatchNorm specifically contribute to this degradation, and what should you do?',
           type: 'scenario',
-          correct: 'BatchNorm uses running statistics (mean and variance) computed during training to normalise inputs at inference time. These statistics reflect the training data distribution. As the production data distribution shifts (more low-light images with different pixel value distributions), the running statistics become stale — they no longer accurately normalise the incoming data, causing feature maps to have unexpected scales that degrade downstream predictions. Solutions: (1) Periodically retrain or fine-tune the model on recent production data to update both the model weights and BatchNorm running statistics. (2) Implement online BatchNorm statistic updates using recent production data (test-time adaptation). (3) Consider replacing BatchNorm with GroupNorm or LayerNorm, which compute statistics per-example and are therefore immune to distribution shift in the batch statistics. (4) Set up monitoring that detects distribution shift early (e.g., tracking the distribution of pixel intensities, model confidence scores, or prediction entropy over time).',
+          correct: 'BatchNorm uses running statistics (mean and variance) computed during training to normalise inputs at inference time. These statistics reflect the training data distribution. As the production data distribution shifts (more low-light images with different pixel value distributions), the running statistics become stale — they no longer accurately normalise the incoming data, causing feature maps to have unexpected scales that degrade downstream predictions. Solutions: (1) Implement continuous distribution monitoring using quantitative metrics: Population Stability Index (PSI) to detect feature drift (PSI > 0.1 = minor drift, > 0.25 = major drift requiring action), KL divergence between training and production distributions, or Kolmogorov-Smirnov tests on pixel intensity distributions. (2) Periodically retrain or fine-tune the model on recent production data to update both model weights and BatchNorm running statistics — trigger retraining when PSI exceeds 0.25 or accuracy degrades >3% from baseline. (3) Implement test-time adaptation: update BatchNorm running statistics using exponential moving average over recent production batches. (4) Consider replacing BatchNorm with GroupNorm or LayerNorm for future models, as they compute statistics per-example and are immune to distribution shift.',
           explanation: 'This is a concrete example of how a training technique (BatchNorm) creates a deployment vulnerability. The running statistics are a snapshot of the training distribution — when production data drifts away from that distribution, the normalisation becomes inappropriate. This is a subtle but common production issue.',
           difficulty: 'expert',
           expertNote: 'A DeepMind-calibre PM would implement a continuous monitoring pipeline comparing the distribution of incoming data against the training distribution (using metrics like KL divergence or Population Stability Index) and establish automated alerts when drift exceeds a threshold, triggering model retraining.'
@@ -576,18 +576,18 @@ export const lessons = {
           expertNote: 'Label smoothing is now standard in large-scale training (used in training Inception, EfficientNet, and many transformers). A PM should understand that the smoothing parameter (e.g., 0.1) is another hyperparameter that affects model calibration and should be tuned.'
         },
         {
-          question: 'A junior engineer proposes using a dropout rate of 0.9 (dropping 90% of neurons) to eliminate overfitting. Why is this likely to be counterproductive?',
+          question: 'Your model is overfitting significantly on the training data. A team member suggests increasing the dropout rate from 0.3 to 0.7 to force stronger regularization. What is the primary risk of this approach?',
           type: 'mc',
           options: [
-            'Dropout rates above 0.5 cause numerical overflow in the weight gradient computations',
-            'With 90% dropped the effective network capacity becomes too small to learn patterns and underfits',
-            'Dropout rates must be exactly 0.5 to maintain the mathematical guarantees of regularization',
+            'Dropout rates above 0.5 cause numerical overflow in gradient computations',
+            'High dropout severely reduces effective model capacity and may cause underfitting',
+            'Dropout rates must be exactly 0.5 to maintain mathematical regularization guarantees',
             'High dropout rates prevent BatchNorm from computing accurate statistics during training'
           ],
           correct: 1,
-          explanation: 'With a dropout rate of 0.9, only 10% of neurons are active during each training step. This creates an extremely low-capacity sub-network at each step, likely insufficient to capture the complexity of the data. The model will underfit — failing to learn even the training data, let alone generalising. Typical dropout rates range from 0.1-0.5, balancing regularisation against learning capacity.',
+          explanation: 'With a dropout rate of 0.7, only 30% of neurons are active during each training step. This creates an extremely constrained sub-network that may be insufficient to capture the complexity of the data. Instead of fixing overfitting, the model will likely underfit — failing to learn even the training data patterns. Typical dropout rates range from 0.1-0.5. When overfitting persists, better solutions include: more training data, stronger L2 regularization, early stopping, or reducing model size.',
           difficulty: 'foundational',
-          expertNote: 'The optimal dropout rate depends on model size and data quantity. Larger models with less data benefit from higher dropout (up to 0.5); smaller models or data-rich regimes may need little to no dropout. This is an empirical choice guided by validation performance.'
+          expertNote: 'The optimal dropout rate depends on model size and data quantity. Larger models with less data benefit from higher dropout (up to 0.5); smaller models or data-rich regimes may need little to no dropout. When a PM hears "let\'s just increase regularization," they should push back with "what validation metric are we optimizing, and what alternatives did we consider?"'
         }
       ]
     }
@@ -785,18 +785,18 @@ export const lessons = {
           expertNote: 'Understanding these as distinct mechanisms is important because both appear in modern architectures simultaneously — diffusion model U-Nets use U-Net-style encoder-decoder skips AND ResNet-style residual connections within each block.'
         },
         {
-          question: 'A GAN trained on celebrity faces consistently generates only young, light-skinned female faces despite the training dataset containing diverse demographics. What is the most likely technical cause?',
+          question: 'A GAN trained to generate diverse interior design styles consistently produces only modern minimalist designs, ignoring the Victorian, Art Deco, and Industrial styles present in the training data. What is the most likely technical cause?',
           type: 'mc',
           options: [
-            'The discriminator is too weak to detect demographic differences in face generation',
-            'Mode collapse where the generator found a narrow output distribution ignoring underrepresented modes',
+            'The discriminator is too weak to distinguish between different interior design styles',
+            'Mode collapse where the generator found a narrow output distribution that satisfies the discriminator',
             'The training data was not preprocessed correctly before the GAN training began',
-            'GANs are inherently unable to generate diverse outputs across demographic categories'
+            'GANs are inherently unable to generate diverse outputs across multiple style categories'
           ],
           correct: 1,
-          explanation: 'Mode collapse is the GAN-specific pathology where the generator collapses to producing only a narrow range of outputs. If certain demographics are overrepresented in the training data or are easier for the generator to model (e.g., young female faces may be more prevalent in celebrity datasets), the generator can satisfy the discriminator by producing only those types, ignoring the rest of the distribution. This is both a technical problem (mode collapse) and a data problem (dataset imbalance).',
+          explanation: 'Mode collapse is the GAN-specific pathology where the generator collapses to producing only a narrow range of outputs that reliably fool the discriminator, ignoring the full diversity of the training distribution. If the discriminator can\'t reliably distinguish modern minimalist from other styles (or if those outputs are easier for the generator to produce), the generator exploits this by generating only that narrow mode. Solutions include: improved discriminator architectures, minibatch discrimination, unrolled GANs, or switching to diffusion models which don\'t suffer from mode collapse.',
           difficulty: 'applied',
-          expertNote: 'A PM for a generative product must audit both the training data demographics AND the model outputs for representational fairness. Techniques like conditional generation, diversity-promoting losses, and post-generation filtering can mitigate this, but the root cause often lies in training data curation.'
+          expertNote: 'Mode collapse is why many production systems moved away from GANs to diffusion models for diverse generation tasks. GANs are still preferred for real-time applications (single forward pass), but diffusion models provide much better mode coverage. A PM should recognize mode collapse as a fundamental architectural limitation, not just a training bug.'
         },
         {
           question: 'Why has the residual connection design pattern from ResNet become ubiquitous across nearly all modern deep learning architectures, including Transformers?',

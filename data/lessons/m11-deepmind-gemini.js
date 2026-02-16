@@ -242,7 +242,7 @@ export const lessons = {
 
 <h2>Long Context Windows: 1 Million+ Tokens</h2>
 <p>
-  One of Gemini 1.5's most significant technical achievements is its support for <span class="term" data-term="long-context">extremely long context windows</span> — up to 1 million tokens in production, with research demonstrations at 10 million tokens. To put this in perspective: 1 million tokens is approximately 700,000 words, or roughly 10 average-length novels, or 1 hour of video, or an entire large codebase.
+  One of Gemini's most significant technical achievements (introduced in Gemini 1.5, continued in Gemini 2.0) is support for <span class="term" data-term="long-context">extremely long context windows</span> — up to 1 million tokens in production, with research demonstrations at 10 million tokens. To put this in perspective: 1 million tokens is approximately 700,000 words, or roughly 10 average-length novels, or 1 hour of video, or an entire large codebase. As of early 2025, Gemini 2.0 builds on these capabilities with improved multimodal reasoning and agentic capabilities.
 </p>
 <p>
   This capability is enabled by several architectural innovations:

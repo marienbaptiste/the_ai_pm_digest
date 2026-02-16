@@ -7,7 +7,7 @@ export const lessons = {
     title: 'Mixture of Experts — How Gemini & Mixtral Scale Efficiently',
     content: `
 <h2>The Scaling Dilemma: Why Dense Models Hit a Wall</h2>
-<p>The scaling laws that have driven AI progress since GPT-3 present a brutal tradeoff: to make a model smarter, you need more parameters, but more parameters means proportionally more compute for every single token processed. A dense 1.8-trillion-parameter model like GPT-4 (rumored) activates <em>all</em> 1.8 trillion parameters for every token &mdash; whether the user asks "what is 2+2?" or "derive the Navier-Stokes equations from first principles." This is extraordinarily wasteful. The human brain does not activate all 86 billion neurons to tie a shoelace.</p>
+<p>The scaling laws that have driven AI progress since GPT-3 present a brutal tradeoff: to make a model smarter, you need more parameters, but more parameters means proportionally more compute for every single token processed. A large dense model activates <em>all</em> of its parameters for every token &mdash; whether the user asks "what is 2+2?" or "derive the Navier-Stokes equations from first principles." This is extraordinarily wasteful. The human brain does not activate all 86 billion neurons to tie a shoelace.</p>
 
 <p>This is the core tension that <span class="term" data-term="mixture-of-experts">Mixture of Experts (MoE)</span> architectures resolve. The key insight is deceptively simple: <strong>decouple the total parameter count from the per-token compute cost</strong>. A model can have trillions of parameters but only activate a small fraction of them for any given input. This allows you to scale model capacity (and therefore capability) without proportionally scaling inference cost.</p>
 
