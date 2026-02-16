@@ -166,10 +166,10 @@ export const lessons = {
           question: 'Your research team has achieved state-of-the-art results on an academic benchmark for code generation. Product leadership wants to announce a launch date. The model has not been tested on real user codebases. What is your recommended next step?',
           type: 'mc',
           options: [
-            'Commit to a launch date 3 months out to give the team a forcing function',
-            'Move to prototyping with real user data to validate feasibility before committing to any date',
-            'Launch a beta immediately since benchmark results prove the model works',
-            'Ask the research team to achieve even higher benchmark scores before considering productization'
+            'Commit to a launch date 3 months out to create urgency and motivate the team',
+            'Move to prototyping with real user data to validate feasibility before committing to dates',
+            'Launch a beta immediately since benchmark results demonstrate the model is production-ready',
+            'Ask the research team to achieve higher benchmark scores before productization'
           ],
           correct: 1,
           explanation: 'Academic benchmarks and real-world performance are often poorly correlated. The correct next step is prototyping with real data to discover failure modes, latency issues, and UX gaps before making any commitments. Premature date commitments create harmful pressure; demanding higher benchmarks wastes time on the wrong metric.',
@@ -195,10 +195,10 @@ export const lessons = {
           question: 'What is the primary purpose of the prototyping stage in the AI product lifecycle?',
           type: 'mc',
           options: [
-            'To produce a polished demo for executive stakeholders',
+            'To produce a polished demonstration suitable for executive stakeholders',
             'To validate that model capabilities actually solve user problems on real-world data',
-            'To finalize the model architecture for production deployment',
-            'To complete the data labeling pipeline'
+            'To finalize and lock the model architecture for production deployment',
+            'To complete the data labeling and annotation pipeline'
           ],
           correct: 1,
           explanation: 'The prototyping stage exists to bridge the gap between research results and user value. Its purpose is to test whether the model capabilities translate to real problem-solving when confronted with messy, real-world data, not to polish demos or finalize architectures.',
@@ -218,7 +218,7 @@ export const lessons = {
           question: 'When estimating timelines for moving an AI model from research to production, what multiplier does the lesson recommend applying to ML team estimates?',
           type: 'mc',
           options: [
-            '1.5x — standard software buffer',
+            '1.5x — standard software development buffer',
             '2x — double for AI uncertainty',
             '3x — the research-to-production gap is consistently underestimated',
             '5x — AI timelines are fundamentally unpredictable'
@@ -564,10 +564,10 @@ export const lessons = {
           question: 'You are building a content moderation system for a social platform. Which metric should you prioritize, and why?',
           type: 'mc',
           options: [
-            'Accuracy — it gives the best overall picture of model performance',
-            'Recall — missing harmful content (false negatives) poses safety risks to users',
+            'Accuracy — it provides the best overall picture of model performance',
+            'Recall — missing harmful content (false negatives) creates safety risks for users',
             'Precision — flagging innocent content (false positives) frustrates users and suppresses speech',
-            'F1-score — it provides the best balance of precision and recall'
+            'F1-score — it provides the optimal balance of precision and recall'
           ],
           correct: 1,
           explanation: 'For content moderation, the highest priority is recall (catching harmful content), because the cost of a false negative (harmful content reaching users) is far greater than the cost of a false positive (innocent content flagged for review). However, precision still matters; a system with very low precision would overwhelm human reviewers. The key insight is that the PM must choose the primary optimization target based on the asymmetric costs of different error types.',
@@ -612,9 +612,9 @@ export const lessons = {
           type: 'mc',
           options: [
             'Changes in the marketing team\'s messaging about the feature',
-            'Shifts in the input data distribution compared to training data',
-            'Decrease in daily active users',
-            'Increase in customer support tickets'
+            'Shifts in the input data distribution compared to training data distributions',
+            'Decrease in daily active users across the product',
+            'Increase in customer support tickets about the feature'
           ],
           correct: 1,
           explanation: 'Data distribution shifts are a leading indicator of quality degradation. By the time quality problems show up in user satisfaction surveys (lagging indicator), support tickets (lagging), or DAU declines (very lagging), the damage is already done. Monitoring input distributions and detecting drift proactively allows you to address problems before users notice.',
@@ -625,10 +625,10 @@ export const lessons = {
           question: 'An Elo rating system for comparing LLMs (like Chatbot Arena) has which advantages over BLEU/ROUGE-based evaluation?',
           type: 'mc',
           options: [
-            'Elo is computationally cheaper and can be fully automated',
-            'Elo captures real user preferences on open-ended tasks where no single "correct" output exists',
-            'Elo provides absolute quality scores while BLEU only provides relative comparisons',
-            'Elo eliminates the need for human evaluation entirely'
+            'Elo is computationally cheaper and can be fully automated without human input',
+            'Elo captures real user preferences on open-ended tasks where no single correct output exists',
+            'Elo provides absolute quality scores while BLEU only provides relative comparisons between models',
+            'Elo eliminates the need for human evaluation entirely by using algorithmic comparisons'
           ],
           correct: 1,
           explanation: 'Elo ratings are based on head-to-head human comparisons, making them ideal for open-ended generation tasks where there is no single correct answer. BLEU/ROUGE require reference texts and measure surface-level overlap. Elo does require human evaluation (it does not eliminate it), provides relative rather than absolute scores, and is more expensive than automated metrics.',
@@ -792,9 +792,9 @@ export const lessons = {
           type: 'mc',
           options: [
             'Provide a conservative date with 50% buffer to account for research uncertainty',
-            'Explain the research risk and propose capability-gated milestones with a target range instead of a fixed date',
-            'Refuse to give any timeline until research is complete',
-            'Commit to an aggressive date to motivate the team and plan to negotiate later if needed'
+            'Explain the research risk and propose capability-gated milestones with a target range',
+            'Refuse to give any timeline until research is complete and validated',
+            'Commit to an aggressive date to motivate the team and plan to negotiate later'
           ],
           correct: 1,
           explanation: 'The best approach is transparent communication: explain the research risk, propose milestones tied to capability gates, and provide a target range. A fixed date with buffer still creates a false sense of certainty. Refusing any timeline is uncooperative. An aggressive date creates harmful pressure and erodes trust when missed.',
@@ -806,9 +806,9 @@ export const lessons = {
           type: 'mc',
           options: [
             'A feature that is fully built and awaiting launch approval',
-            'A feature that depends on ongoing model improvements with promising early results, shared as directional intent',
-            'A moonshot feature that requires fundamental research breakthroughs',
-            'A feature from a competitor that you plan to replicate'
+            'A feature depending on ongoing model improvements with promising early results, shared as directional intent',
+            'A moonshot feature requiring fundamental research breakthroughs',
+            'A competitive feature from a rival that you plan to replicate'
           ],
           correct: 1,
           explanation: 'Horizon 2 represents medium-confidence items (3-6 months out) that depend on model improvements already showing promise. They are shared as directional intent, not commitments. Horizon 1 covers proven capabilities; Horizon 3 covers research-dependent aspirations.',
@@ -828,10 +828,10 @@ export const lessons = {
           question: 'Which of the following is NOT one of the four primary sources of uncertainty in AI development?',
           type: 'mc',
           options: [
-            'Research risk — unknown whether the capability is achievable',
-            'Data risk — unknown whether sufficient quality data can be obtained',
-            'Market risk — unknown whether customers will pay for the feature',
-            'Scaling risk — capability works in research but may not scale to production'
+            'Research risk — unknown whether the capability is achievable with current methods',
+            'Data risk — unknown whether sufficient quality data can be obtained or labeled',
+            'Market risk — unknown whether customers will pay for the feature at scale',
+            'Scaling risk — capability works in research but may not scale to production constraints'
           ],
           correct: 2,
           explanation: 'The four AI-specific sources of uncertainty are research risk, data risk, scaling risk, and evaluation risk. Market risk is a general product management concern, not specific to AI development. While market risk matters, it is not one of the unique uncertainty sources that distinguish AI roadmapping from traditional roadmapping.',
@@ -842,10 +842,10 @@ export const lessons = {
           question: 'What is the primary purpose of "kill criteria" in a parallel-bets AI roadmap?',
           type: 'mc',
           options: [
-            'To punish teams whose approaches fail to meet targets',
+            'To punish teams whose approaches fail to meet defined targets',
             'To prevent sunk-cost fallacy by defining objective, pre-committed decision points for resource reallocation',
-            'To set aggressive targets that maximize team motivation',
-            'To ensure all approaches converge on the same architecture'
+            'To set aggressive targets that maximize team motivation and urgency',
+            'To ensure all approaches converge on the same architecture design'
           ],
           correct: 1,
           explanation: 'Kill criteria are pre-committed decision rules that prevent teams from continuing to invest in failing approaches out of emotional attachment or sunk-cost fallacy. They are not punitive; they are rational resource allocation tools. By defining them early (before emotional investment builds), teams can make objective decisions about when to redirect effort.',
@@ -1013,10 +1013,10 @@ export const lessons = {
           question: 'You are launching a Gemini-powered feature for enterprise customers. Your model achieves 92% accuracy on the target task. How should you position this in your GTM messaging?',
           type: 'mc',
           options: [
-            'Emphasize the 92% accuracy number as a key selling point',
-            'Position the feature as a productivity enhancer that handles routine cases, with clear guidance on where human review is still needed',
-            'Wait until accuracy reaches 99% before launching to avoid negative perception',
-            'Launch without mentioning accuracy and let users discover the quality themselves'
+            'Emphasize the 92% accuracy number as the key selling point for customers',
+            'Position the feature as a productivity enhancer handling routine cases, with clear guidance on human review needs',
+            'Wait until accuracy reaches 99% before launching to avoid negative customer perception',
+            'Launch without mentioning accuracy and let users discover the quality themselves through experience'
           ],
           correct: 1,
           explanation: 'The best approach is to position the feature honestly: it handles most cases well and enhances productivity, but humans should review critical outputs. This manages expectations while still communicating value. Raw accuracy numbers can be misleading to non-technical users, waiting for 99% may never happen, and launching without transparency erodes trust.',
@@ -1027,9 +1027,9 @@ export const lessons = {
           question: 'Which launch approach is most appropriate for a new AI capability with known quality limitations?',
           type: 'mc',
           options: [
-            'Big-bang launch with massive marketing to maximize initial adoption',
+            'Big-bang launch with massive marketing to maximize initial adoption quickly',
             'Progressive disclosure: internal dogfood, trusted testers, limited beta, then GA',
-            'Stealth launch with no marketing to avoid setting expectations',
+            'Stealth launch with no marketing to avoid setting high expectations',
             'Launch exclusively to enterprise customers who have higher tolerance for imperfection'
           ],
           correct: 1,
@@ -1050,10 +1050,10 @@ export const lessons = {
           question: 'What is the primary advantage of usage-based pricing (per-token or per-query) for AI API products?',
           type: 'mc',
           options: [
-            'It is simpler for customers to budget for',
-            'It aligns cost with value delivered and scales naturally with customer usage',
-            'It guarantees higher revenue than subscription models',
-            'It eliminates the need for a free tier'
+            'It is simpler for customers to budget for compared to subscription models',
+            'It aligns cost with value delivered and scales naturally with customer usage patterns',
+            'It guarantees higher revenue than subscription models across all customer segments',
+            'It eliminates the need for a free tier for customer acquisition'
           ],
           correct: 1,
           explanation: 'Usage-based pricing aligns cost with value: customers who use the API more (and presumably derive more value) pay more. It also allows small developers to start cheaply and large enterprises to scale without renegotiating contracts. The downside is budget unpredictability for customers, which is why hybrid models (usage-based with spend caps) are increasingly common.',
@@ -1242,7 +1242,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'They are cheaper to run than building a real AI model',
-            'They allow you to study user behavior and set quality bars before the model is ready, testing different capability levels',
+            'They allow studying user behavior and setting quality bars before model readiness, testing capability levels',
             'They are the only valid UXR method for AI products',
             'They help train the AI model by collecting interaction data'
           ],
@@ -1256,8 +1256,8 @@ export const lessons = {
           type: 'mc',
           options: [
             'Users trust the AI 100% of the time for maximum efficiency',
-            'Users never trust the AI and always verify its outputs',
-            'Users trust the AI appropriately — relying on it when likely correct, double-checking when it might be wrong',
+            'Users never trust the AI and always verify its outputs manually',
+            'Users trust the AI appropriately — relying on it when likely correct, double-checking when uncertain',
             'Users trust the AI more over time as the model improves'
           ],
           correct: 2,
@@ -1294,7 +1294,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'AI models change frequently so you need to re-test constantly',
-            'Initial "wow" reactions give way to nuanced assessments as users discover capabilities and limitations over time',
+            'Initial "wow" reactions give way to nuanced assessments as users discover capabilities and limitations',
             'It is the only way to collect enough data for statistical significance',
             'Users need weeks to learn how to type prompts correctly'
           ],

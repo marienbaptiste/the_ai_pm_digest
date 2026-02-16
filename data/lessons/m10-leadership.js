@@ -107,10 +107,10 @@ export const lessons = {
           question: 'Which of the following best describes the "one-way door vs. two-way door" decision framework?',
           type: 'mc',
           options: [
-            'One-way doors are decisions made by one person; two-way doors require two people to agree.',
-            'One-way doors are irreversible or very costly to reverse and deserve extensive analysis; two-way doors are easily reversible and should be decided quickly.',
-            'One-way doors are decisions that affect one team; two-way doors affect multiple teams.',
-            'One-way doors are strategic decisions made annually; two-way doors are tactical decisions made weekly.'
+            'One-way doors require single-person decisions while two-way doors need consensus from two approvers',
+            'One-way doors are irreversible or costly to reverse and warrant careful analysis; two-way doors are easily reversible and should be decided quickly',
+            'One-way doors impact single teams with focused scope while two-way doors create dependencies across multiple teams',
+            'One-way doors are annual strategic commitments while two-way doors are weekly tactical adjustments to plans'
           ],
           correct: 1,
           explanation: 'The one-way/two-way door framework, popularized by Amazon, classifies decisions by reversibility. One-way doors (Type 1) are irreversible or very expensive to reverse — they warrant careful analysis, broad consultation, and deliberate decision-making. Two-way doors (Type 2) are easily reversible — they should be decided quickly because the cost of delay exceeds the cost of a wrong decision. A PM\'s key skill is correctly classifying which type each decision is.',
@@ -121,10 +121,10 @@ export const lessons = {
           question: 'A PM at a frontier AI lab finds that 80% of product decisions are being escalated to them for approval, creating a bottleneck. What is the most effective intervention?',
           type: 'mc',
           options: [
-            'Hire an additional PM to share the decision load.',
-            'Create clear decision frameworks and RACI charts that empower team leads to make decisions within defined boundaries, reserving PM involvement for cross-functional tradeoffs.',
-            'Schedule more meetings to process decisions faster.',
-            'Delegate all decisions to the engineering lead to reduce the bottleneck.'
+            'Hire an additional PM to increase decision capacity and split the approval workload between two people',
+            'Create clear decision frameworks and RACI charts that empower team leads to make decisions within defined boundaries',
+            'Schedule additional approval meetings throughout the week to increase decision processing throughput and reduce delays',
+            'Delegate all product decisions to the engineering lead to eliminate the PM as a bottleneck entirely'
           ],
           correct: 1,
           explanation: 'The root cause is not insufficient PM capacity — it is insufficient decision-making infrastructure. When teams escalate every decision to the PM, it means they lack clarity about what decisions they are empowered to make, what criteria to apply, and what boundaries exist. The fix is structural: create explicit decision frameworks, RACI charts, and decision boundaries that enable team leads to make the 80% of decisions that do not require cross-functional tradeoff analysis. The PM should focus on the 20% that genuinely require their synthesis.',
@@ -135,10 +135,10 @@ export const lessons = {
           question: 'In the influence stack described in this lesson, why is technical credibility identified as the foundational layer for AI PMs?',
           type: 'mc',
           options: [
-            'Because PMs need to be able to write code and train models themselves.',
-            'Because AI researchers and engineers assess PM credibility through technical understanding, and without it, higher layers of influence (strategic clarity, execution trust, relational capital) lack foundation.',
-            'Because technical credibility is the easiest form of influence to build.',
-            'Because the PM\'s primary job is to make technical architecture decisions.'
+            'Because PMs need hands-on coding ability and direct model training experience to contribute to implementation work',
+            'Because AI researchers and engineers assess PM credibility through technical understanding before trusting strategic or execution guidance',
+            'Because technical credibility requires less effort to build compared to strategic clarity or relational capital',
+            'Because the PM role primarily involves making detailed technical architecture decisions for the engineering team'
           ],
           correct: 1,
           explanation: 'In AI organizations, researchers and engineers are the primary collaborators a PM must influence. These professionals assess credibility significantly through technical understanding — not because the PM needs to do their job, but because understanding the technology is a prerequisite for asking good questions, making informed tradeoffs, and proposing realistic plans. Without technical credibility, a PM\'s strategic vision feels uninformed, their execution commitments feel unreliable, and their relationships feel shallow.',
@@ -149,10 +149,10 @@ export const lessons = {
           question: 'Which of the following are valid uses of the "disagree and commit" principle? (Select all that apply)',
           type: 'multi',
           options: [
-            'An engineering lead who disagreed with the PM\'s prioritization decision executes the plan with full energy after being heard and having their concerns documented.',
-            'A PM overrules a safety team\'s recommendation to delay launch, and the safety team is told to "disagree and commit" to shipping without addressing their concerns.',
-            'After a thorough SPADE process, the designated decider makes a call that not everyone agrees with, and the team commits to executing while monitoring for signals that the decision should be revisited.',
-            'A junior team member who was not consulted before a decision is told to "disagree and commit" to a direction they had no input on.'
+            'An engineering lead who disagreed with prioritization executes the plan fully after being heard and documenting concerns',
+            'A PM overrules safety recommendations to delay launch and tells the safety team to commit to shipping anyway',
+            'After a thorough SPADE process, the designated decider makes a call and the team commits to executing and monitoring',
+            'A junior team member excluded from consultation is told to disagree and commit to a direction without prior input'
           ],
           correct: [0, 2],
           explanation: 'Options A and C represent valid applications of disagree and commit — in both cases, the dissenter was heard, the process was transparent, and the decision was made by an appropriate person with clear reasoning. Option B is invalid because safety concerns should not be overridden by disagree-and-commit — safety is a domain where the safety team has a legitimate veto or escalation path. Option D is invalid because disagree and commit requires that people were consulted and heard before the decision; it cannot be applied retroactively to silence people who were excluded.',
@@ -278,10 +278,10 @@ export const lessons = {
           question: 'Which of the following is the most effective way to manage research roadmap uncertainty when communicating to leadership?',
           type: 'mc',
           options: [
-            'Present only high-confidence commitments and avoid discussing uncertain research directions.',
-            'Use a "confidence cone" — near-term plans are specific and high-confidence, medium-term plans are directional with moderate confidence, and long-term vision is a strategic bet with explicit uncertainty.',
-            'Present research timelines with buffer multipliers (e.g., multiply all research estimates by 2x).',
-            'Wait until research results are complete before adding anything to the roadmap.'
+            'Present only high-confidence commitments while avoiding discussion of uncertain research directions to manage expectations',
+            'Use a "confidence cone" with near-term specificity and high confidence, medium-term direction and moderate confidence, and explicit strategic uncertainty',
+            'Present research timelines with consistent buffer multipliers like 2x to account for inherent estimation difficulty',
+            'Wait until research results are complete before adding deliverables to the roadmap to ensure accuracy'
           ],
           correct: 1,
           explanation: 'The confidence cone approach is most effective because it provides leadership with the information they need (direction, expected outcomes, risks) at the appropriate level of precision for each time horizon. Option A hides important strategic information. Option C is mechanistic and does not communicate the nature of the uncertainty. Option D makes planning impossible and creates the impression that the PM is not managing the roadmap proactively.',
@@ -292,10 +292,10 @@ export const lessons = {
           question: 'A researcher on your team complains: "The PM keeps asking me for timeline estimates, but I can\'t predict when a research breakthrough will happen. This isn\'t software engineering." What is the most effective PM response?',
           type: 'mc',
           options: [
-            'Explain that all teams must provide timeline estimates and the researcher needs to adapt to the product development process.',
-            'Stop asking for timeline estimates entirely and let the research proceed at its own pace.',
-            'Reframe the conversation: instead of asking "when will this be done?" ask "what are the key milestones and go/no-go decision points? What\'s your confidence that each milestone is achievable in the next N weeks?"',
-            'Ask the research manager to provide estimates on behalf of the team.'
+            'Explain that timeline estimates are required from all teams and researchers need to adapt to standard product processes',
+            'Stop asking for timeline estimates entirely and allow the research to proceed at its natural pace',
+            'Reframe from "when will this be done?" to "what are the milestones, decision points, and confidence levels?"',
+            'Ask the research manager to provide timeline estimates on behalf of the team to reduce friction'
           ],
           correct: 2,
           explanation: 'Option C addresses the researcher\'s legitimate concern (research breakthroughs are unpredictable) while still meeting the PM\'s legitimate need (planning and resource allocation). By reframing from "timeline to completion" to "milestones and confidence levels," you acknowledge uncertainty while creating structure. This approach also introduces natural checkpoints where the team can assess progress and pivot if needed — which is ultimately better for the researcher too.',
@@ -306,11 +306,11 @@ export const lessons = {
           question: 'Which of the following are common failure modes in the research-to-product pipeline? (Select all that apply)',
           type: 'multi',
           options: [
-            'A research capability works in a Jupyter notebook but fails at production scale due to latency or cost constraints.',
-            'The researcher who developed the capability transfers to a new project before knowledge transfer is complete.',
-            'The research team publishes a paper about the capability before the product team has finished development.',
-            'Safety evaluation discovers significant issues late in the productization process, requiring substantial rework.',
-            'The PM defines too broad a v1 scope, causing the incubation team to lose focus and momentum.'
+            'Research capabilities work in notebooks but fail at production scale due to latency or cost constraints',
+            'Researchers transfer to new projects before knowledge transfer is complete, creating capability gaps',
+            'Research teams publish papers about capabilities before product teams have finished development work',
+            'Safety evaluation discovers significant issues late in productization, requiring substantial rework efforts',
+            'PMs define overly broad v1 scope, causing incubation teams to lose focus and momentum'
           ],
           correct: [0, 1, 3, 4],
           explanation: 'Options A, B, D, and E are all well-documented failure modes in research-to-product pipelines. Option C (publishing before product launch) is typically not a failure — it is the normal research publication process and can even generate positive attention for the upcoming product. The publication timeline and product timeline are managed independently, and research teams should generally not be asked to delay publications for product launch coordination.',
@@ -321,10 +321,10 @@ export const lessons = {
           question: 'What is the primary purpose of a "v1 scope" definition in the research-to-product pipeline?',
           type: 'mc',
           options: [
-            'To ship the minimum possible product to check a box and move on to the next project.',
-            'To define a focused initial use case that demonstrates user value, creates team momentum, and validates the direction — earning continued investment for the full vision.',
-            'To limit the research team\'s scope so they can meet product deadlines.',
-            'To create a competitive response to a rival product\'s launch.'
+            'To ship the minimum possible product to satisfy requirements and move on to the next project',
+            'To define a focused initial use case that demonstrates user value, validates direction, and earns investment',
+            'To limit the research team\'s scope and complexity so they can meet product deadlines',
+            'To create a competitive response to a rival product\'s launch in the market'
           ],
           correct: 1,
           explanation: 'The v1 scope serves multiple strategic purposes: it provides a concrete, achievable target that motivates the team; it validates the product hypothesis with real users before full investment; it creates a proof point that earns continued resources; and it generates momentum and learning that accelerate subsequent iterations. It is NOT about shipping something minimal or limiting research — it is about finding the fastest path to a credible proof of user value.',
@@ -468,10 +468,10 @@ export const lessons = {
           question: 'What does the term "stakeholder currency" refer to in the context of PM stakeholder management?',
           type: 'mc',
           options: [
-            'The budget allocated to each stakeholder\'s team.',
-            'The thing each stakeholder function values most and is measured on — understanding this helps PMs frame proposals in terms that resonate with each function.',
-            'The political capital a PM has accumulated with each stakeholder.',
-            'The compensation structure that motivates different stakeholders.'
+            'The budget resources allocated to each stakeholder\'s team for project execution and operations',
+            'The thing each stakeholder function values most and is measured on for performance evaluation',
+            'The political capital and influence a PM has accumulated with each stakeholder over time',
+            'The compensation structure and incentives that motivate different stakeholders in the organization'
           ],
           correct: 1,
           explanation: 'Stakeholder "currency" is a mental model for understanding what each function values and optimizes for. Engineering\'s currency is technical quality and reliability. Design\'s currency is user experience. Legal\'s currency is risk mitigation. Marketing\'s currency is market narrative and impact. When a PM frames proposals in terms of each stakeholder\'s currency (e.g., presenting a feature to engineering in terms of technical elegance, and the same feature to marketing in terms of market narrative), alignment becomes much easier.',
@@ -482,10 +482,10 @@ export const lessons = {
           question: 'An engineering lead tells you: "We can\'t ship this feature without refactoring the authentication system first, which will take 6 weeks." You suspect this is over-engineering. What is the most effective PM response?',
           type: 'mc',
           options: [
-            'Overrule the engineering lead and instruct the team to ship the feature with the existing authentication system.',
-            'Accept the 6-week timeline and adjust the roadmap accordingly.',
-            'Ask probing questions: "Help me understand — what specific technical risks does the current authentication system pose for this feature? What would happen if we shipped without the refactor and planned the refactor for next quarter? Is there a partial refactor that addresses the critical risks in less time?"',
-            'Escalate to the VP of Engineering to get the timeline reduced.'
+            'Overrule the engineering lead and instruct the team to ship the feature with existing authentication',
+            'Accept the 6-week timeline and adjust the roadmap to accommodate the refactoring work',
+            'Ask probing questions about specific technical risks, alternatives, and whether a partial refactor addresses critical concerns',
+            'Escalate to the VP of Engineering to get the timeline reduced through leadership pressure'
           ],
           correct: 2,
           explanation: 'Option C is the most effective because it respects the engineering lead\'s expertise while probing the underlying reasoning. Often, "we need to refactor first" is a legitimate technical concern, but the scope of the refactor can be negotiated once the PM understands the specific risks. Option A overrides technical judgment without understanding. Option B accepts without understanding. Option D escalates prematurely, damaging the relationship. The probing approach builds mutual understanding and often leads to a creative middle ground.',
@@ -496,11 +496,11 @@ export const lessons = {
           question: 'Which of the following are indicators that a PM\'s stakeholder management approach is failing? (Select all that apply)',
           type: 'multi',
           options: [
-            'Stakeholders frequently say they were "surprised" by decisions or changes.',
-            'The PM is the bottleneck for all cross-functional communication — no direct communication happens between functions.',
-            'Stakeholders occasionally push back on PM proposals during planning discussions.',
-            'Legal raises concerns about a feature during the design phase, allowing time for adjustments.',
-            'The PM needs to escalate to resolve disagreements more than once a quarter.'
+            'Stakeholders frequently express surprise about decisions or changes, indicating communication gaps',
+            'The PM is the sole bottleneck for cross-functional communication with no direct collaboration between functions',
+            'Stakeholders occasionally push back on PM proposals during planning discussions and review meetings',
+            'Legal raises concerns about a feature during the design phase, allowing time for adjustments',
+            'The PM needs to escalate disagreements to leadership for resolution more than once per quarter'
           ],
           correct: [0, 1, 4],
           explanation: 'Options A, B, and E are failure indicators. Stakeholder surprise (A) indicates inadequate proactive communication. Being the sole communication bottleneck (B) indicates the PM is gatekeeping rather than facilitating — healthy teams have direct cross-functional relationships. Frequent escalation (E) suggests the PM lacks the influence or frameworks to resolve disagreements at their level. Option C is healthy — pushback during planning means stakeholders are engaged and the PM is not operating in an echo chamber. Option D is success — legal raising concerns during design phase is exactly when they should.',
@@ -511,10 +511,10 @@ export const lessons = {
           question: 'Why is the biweekly written stakeholder update described as the "highest-leverage communication artifact" a PM produces?',
           type: 'mc',
           options: [
-            'Because it replaces the need for meetings, saving time for everyone.',
-            'Because it creates a searchable record of decisions, forces the PM to synthesize progress, surfaces issues proactively, and demonstrates competence — all in a single artifact.',
-            'Because stakeholders prefer written communication to meetings.',
-            'Because it is a regulatory requirement for AI products under the EU AI Act.'
+            'Because it replaces the need for recurring meetings and saves valuable time for everyone',
+            'Because it creates a searchable record, forces synthesis, surfaces issues proactively, and demonstrates competence',
+            'Because stakeholders consistently prefer written communication over in-person meeting formats',
+            'Because it is a regulatory requirement for AI products under the EU AI Act'
           ],
           correct: 1,
           explanation: 'The written update is high-leverage because it serves multiple purposes simultaneously: it forces the PM to synthesize (writing is thinking), it creates institutional memory (searchable record), it surfaces issues early (proactive communication), it builds trust (consistent cadence), and it demonstrates competence (stakeholders can see the PM has command of the product). No other single communication artifact achieves this breadth of impact. It does not replace meetings — it makes meetings more productive by providing a shared context.',

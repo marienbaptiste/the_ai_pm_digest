@@ -313,7 +313,7 @@ export const lessons = {
           options: [
             'It is completely wrong — Q, K, V have no relationship to database concepts',
             'It is a useful analogy with one critical caveat: unlike a database lookup that returns one exact match, attention returns a weighted combination of ALL values, with weights determined by query-key similarity',
-            'It is perfect and needs no caveats',
+            'It is a perfect analogy that needs no caveats or additional explanation',
             'It is misleading because Queries and Keys are the same thing in self-attention'
           ],
           correct: 1,

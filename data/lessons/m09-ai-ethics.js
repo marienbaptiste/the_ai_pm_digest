@@ -111,7 +111,7 @@ export const lessons = {
             'It is impossible to build an AI system that is completely free of bias.',
             'When base rates differ across groups, demographic parity, equalized odds, and predictive parity cannot all hold simultaneously.',
             'Fairness and accuracy are always in tension — improving one necessarily degrades the other.',
-            'Individual fairness and group fairness are logically contradictory and cannot coexist in the same system.'
+            'Individual fairness and group fairness are logically contradictory and cannot coexist.'
           ],
           correct: 1,
           explanation: 'The impossibility theorem (Chouldechova 2017, Kleinberg et al. 2016) specifically proves that when the base rate of the positive class differs between groups, three common group fairness definitions — demographic parity, equalized odds, and predictive parity — cannot all be satisfied at once. This is a precise mathematical result, not a general claim about bias or accuracy tradeoffs.',
@@ -146,7 +146,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'To provide marketing materials that highlight the model\'s best performance metrics.',
-            'To document intended use, training data characteristics, evaluation results across subgroups, and known limitations in a standardized format.',
+            'To document intended use, training data characteristics, evaluation results across subgroups, and known limitations in standardized format.',
             'To satisfy regulatory requirements by listing the model\'s parameters and architecture details.',
             'To provide end users with instructions on how to prompt the model for optimal results.'
           ],
@@ -266,9 +266,9 @@ export const lessons = {
           question: 'Which of the following best describes the relationship between RLHF and Constitutional AI (CAI) as alignment techniques?',
           type: 'mc',
           options: [
-            'RLHF and CAI are competing approaches — teams should choose one or the other based on their resources.',
-            'CAI is a strictly superior replacement for RLHF that eliminates the need for human feedback entirely.',
-            'CAI extends the RLHF paradigm by using AI-generated feedback guided by explicit principles, reducing but not eliminating the need for human oversight.',
+            'RLHF and CAI are competing approaches — teams should choose one based on their resources.',
+            'CAI is a strictly superior replacement for RLHF that eliminates human feedback entirely.',
+            'CAI extends the RLHF paradigm by using AI-generated feedback guided by explicit principles, reducing but not eliminating human oversight needs.',
             'RLHF handles safety alignment while CAI handles capability alignment — they serve different purposes.'
           ],
           correct: 2,
@@ -280,10 +280,10 @@ export const lessons = {
           question: 'A colleague argues: "We don\'t need interpretability research — we just need to train models with better RLHF and test them thoroughly. If the model behaves correctly on our test set, we can trust it." What is the strongest counterargument?',
           type: 'mc',
           options: [
-            'Behavioral testing can only verify behavior on tested inputs; it cannot guarantee behavior on untested inputs or reveal latent capabilities the model has learned but not yet expressed. Interpretability provides assurance about the model\'s internal mechanisms, not just its observed outputs.',
+            'Behavioral testing can only verify behavior on tested inputs; it cannot guarantee behavior on untested inputs or reveal latent capabilities. Interpretability provides assurance about internal mechanisms, not just observed outputs.',
             'Interpretability is required by the EU AI Act for all high-risk AI systems.',
             'Behavioral testing is too expensive to scale — interpretability is cheaper in the long run.',
-            'RLHF is known to be unreliable, so we cannot trust behavioral testing that relies on RLHF-trained models.'
+            'RLHF is known to be unreliable, so we cannot trust behavioral testing on RLHF-trained models.'
           ],
           correct: 0,
           explanation: 'The fundamental limitation of behavioral testing is that it can only assess the model on inputs you think to test. It provides no assurance about the vast space of untested inputs. Interpretability tools allow you to examine the model\'s internal representations and mechanisms, potentially revealing capabilities, biases, or failure modes that no finite test set would uncover. This is analogous to the difference between black-box testing and code review in software engineering — both are necessary.',
@@ -309,7 +309,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'Training the model on a very large and diverse dataset so it can handle any input safely.',
-            'Using multiple, independent layers of safety mechanisms (input filtering, model-level safety training, output filtering, monitoring) so that if any single layer fails, others still provide protection.',
+            'Using multiple, independent layers of safety mechanisms (input filtering, model-level safety training, output filtering, monitoring) so if any single layer fails, others provide protection.',
             'Ensuring the model has deep understanding of safety concepts so it can self-regulate its behavior.',
             'Conducting very thorough pre-launch testing to identify all possible failure modes before deployment.'
           ],
@@ -462,8 +462,8 @@ export const lessons = {
           type: 'mc',
           options: [
             'Models trained with more than 10^25 FLOPs are banned from the EU market.',
-            'Models trained with more than 10^25 FLOPs are presumed to pose systemic risk and face additional obligations including adversarial testing, risk mitigation, incident reporting, and cybersecurity requirements.',
-            'The threshold determines whether a model qualifies as "general-purpose" — below it, models are considered narrow AI.',
+            'Models trained with more than 10^25 FLOPs are presumed to pose systemic risk and face additional obligations including adversarial testing, risk mitigation, incident reporting, and cybersecurity.',
+            'The threshold determines whether a model qualifies as "general-purpose" — below it, models are narrow AI.',
             'Models below this threshold are exempt from all EU AI Act requirements.'
           ],
           correct: 1,
@@ -475,10 +475,10 @@ export const lessons = {
           question: 'A PM building a global AI product argues: "We should build separate compliance systems for each jurisdiction — EU version, US version, etc." Why is this approach suboptimal, and what alternative strategy should a PM advocate?',
           type: 'mc',
           options: [
-            'It is suboptimal because different jurisdictions have conflicting requirements that make multi-version compliance impossible.',
-            'It is suboptimal because maintaining multiple compliance variants is expensive and error-prone. The PM should advocate for building to the highest common denominator (typically the EU AI Act) as a single global standard, which will likely satisfy requirements everywhere.',
+            'It is suboptimal because different jurisdictions have conflicting requirements making multi-version compliance impossible.',
+            'It is suboptimal because maintaining multiple compliance variants is expensive and error-prone. The PM should advocate building to the highest common denominator (typically EU AI Act) as a single global standard, satisfying requirements everywhere.',
             'It is suboptimal because only the EU has AI regulation, so other versions are unnecessary.',
-            'It is suboptimal because users might move between jurisdictions. The PM should build no compliance features and wait for a unified global AI regulation.'
+            'It is suboptimal because users might move between jurisdictions. The PM should build no compliance features and wait for unified global regulation.'
           ],
           correct: 1,
           explanation: 'Building jurisdiction-specific variants multiplies engineering, testing, and documentation costs. Since the EU AI Act is currently the most comprehensive AI regulation, building to its standards typically satisfies or exceeds requirements in other jurisdictions. This "highest common denominator" approach reduces complexity, ensures consistency, and provides a margin of safety as other jurisdictions develop their own regulations (likely influenced by the EU approach).',
@@ -490,7 +490,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'It is a legally binding federal regulation that all AI companies in the US must follow.',
-            'It is a voluntary framework that provides structured guidance for managing AI risks, organized into four functions: Govern, Map, Measure, and Manage.',
+            'It is a voluntary framework providing structured guidance for managing AI risks, organized into four functions: Govern, Map, Measure, and Manage.',
             'It is a certification standard — companies must pass a NIST audit to deploy AI in the US.',
             'It only applies to government agencies and contractors, not private sector companies.'
           ],
@@ -643,7 +643,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'Input classification filters — because they require retraining on new data.',
-            'Model-level safety training (RLHF/CAI) — because updating it requires retraining or fine-tuning the model itself.',
+            'Model-level safety training (RLHF/CAI) — because updating it requires retraining or fine-tuning the model.',
             'Output classification filters — because they must handle the full diversity of model outputs.',
             'System instructions (system prompt) — because changing them requires redeployment.'
           ],
@@ -658,7 +658,7 @@ export const lessons = {
           options: [
             'Over-refusal has no significant downsides — it is always better to be too safe than too permissive.',
             'Over-refusal reduces compute costs, which makes the product less profitable.',
-            'Users lose trust, find workarounds that bypass safety measures entirely, or switch to less cautious competitors — ultimately reducing the product\'s safety impact by reducing its user base.',
+            'Users lose trust, find workarounds bypassing safety measures entirely, or switch to less cautious competitors — ultimately reducing the product\'s safety impact by reducing its user base.',
             'Over-refusal triggers regulatory scrutiny because the EU AI Act penalizes products that restrict user access.'
           ],
           correct: 2,

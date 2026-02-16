@@ -177,8 +177,8 @@ export const lessons = {
           type: 'mc',
           options: [
             'Contact the messaging app team and demand they stop making UI changes',
-            'Remove the integration since it is too unstable to maintain',
-            'Build a semantic understanding layer that interprets screen content by meaning rather than layout position, with automated regression testing and graceful degradation',
+            'Remove the integration since it is too unstable to maintain reliably',
+            'Build a semantic understanding layer interpreting screen content by meaning rather than layout, with automated testing and graceful degradation',
             'Assign a developer to manually fix the integration each time it breaks'
           ],
           correct: 2,
@@ -190,10 +190,10 @@ export const lessons = {
           question: 'Which of the following best describes the "Trust Tax" concept for developer platforms?',
           type: 'mc',
           options: [
-            'The monetary cost of implementing security features',
-            'The accumulated extra effort developers invest in error handling and workarounds after experiencing platform reliability issues',
-            'The fee charged to developers for premium support',
-            'The time required to pass a platform\'s security review'
+            'The monetary cost of implementing security features for the platform',
+            'The accumulated extra effort developers invest in error handling and workarounds after experiencing reliability issues',
+            'The fee charged to developers for premium support and services',
+            'The time required to pass a platform\'s security review process'
           ],
           correct: 1,
           explanation: 'The Trust Tax is the hidden cost that accumulates when developers lose confidence in a platform\'s reliability. After experiencing downtime or breaking changes, developers build defensive code: extra error handling, fallback systems, caching layers, and manual workarounds. This effort compounds over time and eventually makes alternative platforms more attractive, even if switching costs are high.',
@@ -213,10 +213,10 @@ export const lessons = {
           question: 'According to the documentation framework, what are the four types of documentation a developer platform should provide?',
           type: 'mc',
           options: [
-            'README, FAQ, API spec, and changelog',
+            'README, FAQ, API spec, and changelog for version tracking',
             'Tutorials (learning), how-to guides (tasks), reference (specs), and explanation (concepts)',
-            'Quickstart, advanced guide, troubleshooting, and release notes',
-            'Code samples, video walkthroughs, blog posts, and community wiki'
+            'Quickstart, advanced guide, troubleshooting, and release notes documentation',
+            'Code samples, video walkthroughs, blog posts, and community wiki content'
           ],
           correct: 1,
           explanation: 'The four documentation types serve distinct needs: Tutorials are learning-oriented for beginners, How-to Guides are task-oriented for solving specific problems, Reference is information-oriented for complete API specs, and Explanation is understanding-oriented for conceptual background. This framework (from Divio/Diataxis) ensures documentation serves developers at every stage of their journey.',
@@ -472,9 +472,9 @@ export const lessons = {
           question: 'A developer complains that their Gemini API integration broke after a platform update, even though no API endpoint or request format changed. What most likely happened?',
           type: 'mc',
           options: [
-            'The developer\'s API key expired',
+            'The developer\'s API key expired and requires renewal',
             'A silent breaking change: the underlying model was updated, changing output behavior without changing the API contract',
-            'The developer exceeded their rate limit',
+            'The developer exceeded their rate limit for API calls',
             'A DNS propagation issue caused temporary connectivity problems'
           ],
           correct: 1,
@@ -486,8 +486,8 @@ export const lessons = {
           question: 'Why is streaming response support (SSE) particularly important for AI APIs compared to traditional APIs?',
           type: 'mc',
           options: [
-            'Streaming reduces server-side compute costs',
-            'AI models generate tokens sequentially, so streaming lets users see results as they are produced, dramatically improving perceived latency for long responses',
+            'Streaming reduces server-side compute costs significantly',
+            'AI models generate tokens sequentially, so streaming lets users see results as produced, dramatically improving perceived latency',
             'Streaming is required by the HTTP/2 specification',
             'Streaming ensures responses are always correct before showing them to users'
           ],
@@ -511,8 +511,8 @@ export const lessons = {
           options: [
             'URL path versioning (e.g., /v1/, /v2/) because model changes are always major breaking changes',
             'No versioning needed since AI outputs are non-deterministic by nature',
-            'Model version pinning (specifying a model version like "gemini-1.5-pro-001") combined with API versioning for contract changes',
-            'Query parameter versioning for maximum flexibility'
+            'Model version pinning (specifying versions like "gemini-1.5-pro-001") combined with API versioning for contract changes',
+            'Query parameter versioning for maximum flexibility across use cases'
           ],
           correct: 2,
           explanation: 'AI platforms need two independent versioning axes: API versioning (for contract changes like new endpoints, field names) and model versioning (for the underlying model checkpoint). Combining model version pinning with API versioning gives developers control over both dimensions. API changes are handled through URL path versioning, while model changes are handled through explicit model version identifiers.',
@@ -523,10 +523,10 @@ export const lessons = {
           question: 'What is the primary design goal of an SDK compared to a raw API?',
           type: 'mc',
           options: [
-            'SDKs are more secure than direct API calls',
-            'SDKs provide language-idiomatic abstractions that handle authentication, serialization, error handling, and streaming so developers focus on application logic',
+            'SDKs are more secure than direct API calls for authentication',
+            'SDKs provide language-idiomatic abstractions handling authentication, serialization, error handling, and streaming so developers focus on application logic',
             'SDKs are required because raw API calls are not permitted',
-            'SDKs provide faster response times through local caching'
+            'SDKs provide faster response times through local caching mechanisms'
           ],
           correct: 1,
           explanation: 'SDKs abstract away the mechanical complexity of API interaction (HTTP requests, JSON serialization, authentication headers, error parsing) into language-idiomatic patterns. A well-designed SDK lets developers make their first API call in 3-5 lines of code instead of 20+ lines of raw HTTP handling. This dramatically reduces time-to-first-value and developer friction.',
@@ -755,8 +755,8 @@ export const lessons = {
           question: 'Your AI platform\'s analytics show that 60% of developers who sign up never make a single API call. What is the most likely root cause, and what should you investigate first?',
           type: 'mc',
           options: [
-            'The model quality is insufficient for developer needs',
-            'The pricing is too expensive for most developers',
+            'The model quality is insufficient for developer needs and use cases',
+            'The pricing is too expensive for most developers to afford',
             'Onboarding friction: the path from signup to first API call has too many steps or unclear guidance',
             'Developers are signing up for competitive research, not actual usage'
           ],
@@ -769,10 +769,10 @@ export const lessons = {
           question: 'What is the "copy-paste-run" test for documentation code samples?',
           type: 'mc',
           options: [
-            'A testing framework for validating API responses',
-            'A requirement that every code sample can be literally copied, pasted, and executed without modification (except the API key)',
-            'A method for detecting plagiarism in developer documentation',
-            'A performance benchmark for SDK initialization speed'
+            'A testing framework for validating API responses automatically',
+            'A requirement that every code sample can be literally copied, pasted, and executed without modification (except API key)',
+            'A method for detecting plagiarism in developer documentation content',
+            'A performance benchmark for SDK initialization speed measurements'
           ],
           correct: 1,
           explanation: 'The copy-paste-run test is a quality bar for documentation: every code sample should work when literally copied and pasted into a developer\'s environment. Samples that require finding missing imports, fixing variable names, or understanding implicit context fail this test and create friction. This should be tested regularly through automated documentation testing.',
@@ -793,9 +793,9 @@ export const lessons = {
           type: 'mc',
           options: [
             'AI APIs are always more expensive than traditional SaaS products',
-            'Developers need to test output quality for their specific use case before committing, and a credit card wall prevents this evaluation',
+            'Developers need to test output quality for their specific use case before committing, and credit card walls prevent evaluation',
             'Credit card processing fees are higher for API platforms',
-            'AI platforms have more security vulnerabilities that make credit card storage risky'
+            'AI platforms have more security vulnerabilities making credit card storage risky'
           ],
           correct: 1,
           explanation: 'AI API platforms face a unique evaluation challenge: developers cannot know if the platform works for their use case until they test it with their specific data and prompts. Unlike traditional SaaS where features are deterministic and demos are sufficient, AI output quality varies by use case. A credit card wall prevents the critical evaluation step, causing 50-70% of potential users to abandon the signup flow.',
@@ -806,10 +806,10 @@ export const lessons = {
           question: 'Which of the following is the most impactful DX metric for an AI API platform?',
           type: 'mc',
           options: [
-            'Number of documentation pages published per month',
+            'Number of documentation pages published per month on the platform',
             'Time to first successful API call from initial signup',
-            'Total number of registered developer accounts',
-            'Average response time for support tickets'
+            'Total number of registered developer accounts on the platform',
+            'Average response time for support tickets from developers'
           ],
           correct: 1,
           explanation: 'Time to first successful API call is the North Star DX metric because it captures the entire onboarding experience in a single number. It reflects signup friction, documentation quality, API key accessibility, quickstart clarity, and SDK usability. Total accounts (vanity metric), docs published (output not outcome), and support response time (reactive, not proactive) are less impactful.',
@@ -1070,10 +1070,10 @@ export const lessons = {
           question: 'What is "Sherlocking" in the context of platform strategy, and why is it damaging?',
           type: 'mc',
           options: [
-            'Using analytics to identify developer behavior patterns',
-            'The platform building a feature that duplicates what a successful third-party developer already provides, destroying their business',
-            'Investigating security vulnerabilities in developer applications',
-            'Copying a competitor\'s API design for compatibility'
+            'Using analytics to identify developer behavior patterns on the platform',
+            'The platform building a feature duplicating what a successful third-party developer already provides, destroying their business',
+            'Investigating security vulnerabilities in developer applications systematically',
+            'Copying a competitor\'s API design for compatibility purposes'
           ],
           correct: 1,
           explanation: '"Sherlocking" (named after Apple\'s Watson/Sherlock incident) is when a platform builds first-party functionality that directly competes with and undermines a successful ecosystem developer. This damages trust across the entire ecosystem because every developer begins to fear that their successful application could be killed by the platform. The long-term ecosystem health cost far outweighs the short-term feature gain.',
@@ -1093,7 +1093,7 @@ export const lessons = {
           question: 'Which type of network effect is strongest and most defensible for AI platforms?',
           type: 'mc',
           options: [
-            'Direct network effects from developer-to-developer interactions',
+            'Direct network effects from developer-to-developer interactions on the platform',
             'Indirect network effects from more applications attracting more users',
             'Data network effects where more usage improves models, which attracts more developers',
             'Cross-platform network effects from integrations with other services'
@@ -1108,7 +1108,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'Fallback models should be invisible to developers so they never know the difference',
-            'Developers must be informed about fallback behavior via response metadata so their applications can handle quality differences appropriately',
+            'Developers must be informed about fallback behavior via response metadata so applications can handle quality differences appropriately',
             'Fallback should only happen with explicit developer opt-in for each request',
             'Fallback models should always be free to compensate for reduced quality'
           ],

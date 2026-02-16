@@ -193,12 +193,12 @@ export const lessons = {
       questions: [
         {
           question: 'Your team is building a RAG system over 5 million technical documents. The engineering lead proposes using 3072-dimensional embeddings for maximum quality. What concern should you raise as a PM?',
-          type: 'scenario',
+          type: 'mc',
           options: [
-            'Higher-dimensional embeddings always produce worse results on technical content',
-            'The storage and search latency costs — 5M documents at 3072 dims (float32) requires ~60GB, doubling both storage and approximate-nearest-neighbor search time compared to 1536 dims. You need to verify the quality improvement justifies this cost.',
-            '3072-dimensional embeddings cannot represent technical terminology',
-            'Embedding models with more dimensions require GPU-accelerated inference, which is too expensive'
+            'Higher-dimensional embeddings always produce worse results on technical content due to the curse of dimensionality',
+            'Storage and search latency costs double — 5M docs at 3072 dims requires ~60GB vs ~30GB at 1536 dims, and ANN search time scales proportionally. Verify the quality gain justifies infrastructure costs.',
+            '3072-dimensional embeddings cannot represent technical terminology accurately compared to lower-dimensional representations',
+            'Embedding models with higher dimensions require GPU-accelerated inference hardware, which is prohibitively expensive at scale'
           ],
           correct: 1,
           explanation: 'Higher dimensionality means more storage (each vector is 12KB at 3072 dims vs. 6KB at 1536), more memory for the vector index, and slower search. For 5M documents, this is the difference between ~30GB and ~60GB. The PM should ask for benchmarks showing the quality improvement (e.g., recall@10 on a representative query set) before accepting the additional infrastructure cost. The answer may well be worth it, but it should be a data-driven decision.',
@@ -209,10 +209,10 @@ export const lessons = {
           question: 'What was the key limitation of Word2Vec that contextual embedding models like BERT addressed?',
           type: 'mc',
           options: [
-            'Word2Vec could not handle words with more than 10 characters',
-            'Word2Vec assigned a single fixed vector per word regardless of context, making it unable to distinguish polysemous words',
-            'Word2Vec required labeled training data while BERT is fully unsupervised',
-            'Word2Vec embeddings were too high-dimensional for practical use'
+            'Word2Vec could not process words exceeding ten characters in length',
+            'Word2Vec assigned a single fixed vector per word regardless of context, making polysemous words indistinguishable',
+            'Word2Vec required labeled training data while BERT uses unsupervised learning',
+            'Word2Vec embeddings were too high-dimensional for practical applications'
           ],
           correct: 1,
           explanation: 'Word2Vec produces one static embedding per word. The word "bank" always gets the same vector whether it means a financial institution or a riverbank. BERT and other contextual models produce different embeddings for the same word depending on its surrounding context, capturing the actual meaning in each usage.',
@@ -223,10 +223,10 @@ export const lessons = {
           question: 'You are evaluating two chunking strategies for a customer support RAG system. Strategy A uses 150-token chunks with no overlap. Strategy B uses 400-token chunks with 75-token overlap. Users typically ask short, specific questions. Which strategy should you test first, and why?',
           type: 'mc',
           options: [
-            'Strategy A — smaller chunks are more precise for specific queries, though you may want to add overlap to prevent context loss at boundaries',
-            'Strategy B — larger chunks always produce better RAG quality',
-            'Neither — chunk size does not affect retrieval quality significantly',
-            'Strategy A — no overlap is always better because it prevents duplicate information'
+            'Strategy A — smaller chunks provide precision for specific queries, though adding overlap prevents boundary context loss',
+            'Strategy B — larger chunks always produce superior RAG quality across all query types',
+            'Neither — chunk size does not significantly affect retrieval quality in practice',
+            'Strategy A — zero overlap is optimal because it prevents duplicate information retrieval'
           ],
           correct: 0,
           explanation: 'For short, specific questions, smaller chunks tend to perform better because each retrieved chunk is more focused on a single topic, reducing noise. However, the lack of overlap in Strategy A risks splitting relevant information across chunk boundaries. The best starting point would be Strategy A\'s size with some overlap (e.g., 150 tokens with 30-token overlap). Strategy B\'s larger chunks may retrieve too much irrelevant context for precise queries.',
@@ -251,10 +251,10 @@ export const lessons = {
           question: 'A developer on your team proposes using Euclidean distance instead of cosine similarity for your text retrieval system, arguing it captures magnitude information. Under what circumstances would this be appropriate?',
           type: 'mc',
           options: [
-            'Always — Euclidean distance is strictly superior for text retrieval',
-            'When the embedding model is specifically trained with Euclidean distance and magnitude carries meaningful signal, such as document specificity or confidence',
-            'Never — Euclidean distance cannot be used for text embeddings',
-            'Only when the documents are very short (fewer than 50 tokens)'
+            'Always — Euclidean distance is strictly superior for all text retrieval tasks',
+            'When the embedding model is specifically trained with Euclidean distance and magnitude encodes meaningful signals like specificity',
+            'Never — Euclidean distance fundamentally cannot be used with text embeddings',
+            'Only when documents are very short, typically fewer than 50 tokens'
           ],
           correct: 1,
           explanation: 'Cosine similarity is standard for text embeddings because most models are trained with cosine-based losses, and direction (not magnitude) captures semantic meaning. However, if a model is specifically trained with a Euclidean loss and the magnitude of vectors encodes useful information (like specificity), Euclidean distance can be appropriate. The key is matching the distance metric to the training objective of the embedding model.',

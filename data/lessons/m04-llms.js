@@ -94,10 +94,10 @@ export const lessons = {
           question: 'You are evaluating a vendor who claims their NLP product uses "advanced word embeddings powered by Word2Vec" for a customer sentiment analysis system. What is the most important technical concern you should raise?',
           type: 'mc',
           options: [
-            'Word2Vec is too old to be useful for any modern application',
+            'Word2Vec is too old to be useful for any modern NLP application',
             'Word2Vec produces static embeddings that cannot capture context-dependent meaning — sarcasm, negation, and polysemy will all be poorly handled compared to contextual models like BERT or modern LLMs',
-            'Word2Vec requires too much training data',
-            'Word2Vec cannot process text in languages other than English'
+            'Word2Vec requires too much training data for practical deployment',
+            'Word2Vec cannot process text in non-English languages effectively'
           ],
           correct: 1,
           explanation: 'Word2Vec produces one fixed vector per word regardless of context. This means "not good" will have similar representation to "good" (since the embeddings of "not" and "good" are independently looked up), sarcasm will be missed, and polysemous words will conflate their senses. For sentiment analysis, where context fundamentally determines meaning, this is a critical limitation.',
@@ -108,10 +108,10 @@ export const lessons = {
           question: 'The progression from Word2Vec (2013) to GPT-3 (2020) involved multiple innovations. Which of the following correctly describes the most important conceptual shift that enabled in-context learning in GPT-3?',
           type: 'mc',
           options: [
-            'GPT-3 used a fundamentally different neural network architecture than previous models',
-            'GPT-3 was trained on higher quality data than any previous model',
+            'GPT-3 used a fundamentally different neural network architecture than previous models had',
+            'GPT-3 was trained on higher quality and more carefully curated data than any previous model',
             'The combination of massive scale (175B parameters), diverse training data, and the autoregressive next-token prediction objective produced emergent capabilities like in-context learning that were not present at smaller scales',
-            'GPT-3 was explicitly trained to perform in-context learning through a specialized objective function'
+            'GPT-3 was explicitly trained to perform in-context learning through a specialized training objective function'
           ],
           correct: 2,
           explanation: 'GPT-3 used the same decoder-only Transformer architecture and next-token prediction objective as GPT-2 — just much bigger. The in-context learning ability emerged from scale, not from architectural innovation or specialized training. This demonstrated that quantitative scaling can produce qualitative capability changes, a finding that reshaped the field and drove the "scaling laws" research agenda.',
@@ -146,10 +146,10 @@ export const lessons = {
           question: 'You are building a roadmap for an AI product that needs to classify support tickets (understanding task) and generate suggested replies (generation task). Given the evolution from BERT to modern LLMs, what is the most cost-effective architectural strategy?',
           type: 'mc',
           options: [
-            'Use BERT for classification and GPT for generation — always use specialized models',
+            'Use BERT for classification and GPT for generation — always use specialized models for each task',
             'Use a single modern decoder-only LLM for both tasks through prompting, but evaluate whether a small fine-tuned BERT for classification might be more cost-effective if classification volume is very high',
-            'Build a custom architecture from scratch',
-            'Use Word2Vec embeddings with a traditional ML classifier for both tasks'
+            'Build a custom architecture from scratch specifically for the support ticket domain',
+            'Use Word2Vec embeddings with a traditional ML classifier for both classification and generation tasks'
           ],
           correct: 1,
           explanation: 'A modern LLM can handle both tasks through prompting, which simplifies the stack. However, if classification volume is very high (millions of tickets/day), running a large LLM for simple classification may be prohibitively expensive. A small fine-tuned BERT (~110M parameters) can classify tickets at 100x lower cost per request than a large LLM. The PM should evaluate the volume/cost tradeoff and potentially use a hybrid approach: BERT for high-volume classification, LLM for generation.',
@@ -284,10 +284,10 @@ export const lessons = {
           question: 'A non-technical stakeholder asks: "Why does pre-training cost $100M+? Can\'t we just train on less data to save money?" What is the best technical explanation?',
           type: 'mc',
           options: [
-            'We could train on less data but we choose not to because more data is always better regardless of cost',
+            'We could train on less data but we choose not to because more data is always better regardless of cost considerations',
             'Scaling laws show a predictable relationship between compute, data, and model quality — reducing training data would proportionally degrade the model\'s capabilities, potentially below the quality threshold needed for the product to be competitive',
-            'The cost is entirely due to GPU electricity bills and cannot be reduced',
-            'Pre-training costs are fixed regardless of data volume'
+            'The cost is entirely due to GPU electricity bills and cannot be reduced through any optimization',
+            'Pre-training costs are fixed regardless of data volume or compute allocation decisions'
           ],
           correct: 1,
           explanation: 'Scaling laws (Kaplan et al., Chinchilla) demonstrate that model quality improves predictably with more compute, data, and parameters. Reducing any of these degrades quality in a measurable way. If the product requires frontier-level capabilities to be competitive, there is a minimum compute budget below which the model simply will not be good enough. The PM must help stakeholders understand that the training budget is not arbitrary — it is determined by the quality bar required for the product.',
@@ -313,10 +313,10 @@ export const lessons = {
           question: 'During a pre-training run for a new Gemini model, the training loss spikes dramatically at step 500,000 of a planned 1,000,000 steps. The ML team proposes rolling back to step 490,000 and continuing from there. As PM, what should you understand about the impact on the project timeline?',
           type: 'mc',
           options: [
-            'This will have no impact — training will resume seamlessly from step 490,000',
+            'This will have no impact — training will resume seamlessly from step 490,000 without delay',
             'The rollback means losing 10,000 steps of progress, and the team needs to investigate the cause to prevent recurrence, which may add days or weeks to the timeline depending on whether the spike was caused by bad data, a hardware failure, or a fundamental stability issue',
-            'The entire training run must restart from step 0',
-            'Loss spikes are always beneficial and indicate the model is learning faster'
+            'The entire training run must restart from step 0 due to corruption',
+            'Loss spikes are always beneficial and indicate the model is learning faster than expected'
           ],
           correct: 1,
           explanation: 'Rolling back loses the compute invested in steps 490K-500K and requires investigation to prevent recurrence. If caused by a bad data batch, it may be a quick fix (exclude the batch and resume). If caused by fundamental numerical instability, it may require hyperparameter changes that necessitate restarting from an earlier checkpoint or even from scratch. The PM should get a root cause analysis and timeline estimate before updating stakeholders.',
@@ -433,10 +433,10 @@ export const lessons = {
           question: 'What is the primary advantage of RLHF over supervised fine-tuning (SFT) alone?',
           type: 'mc',
           options: [
-            'RLHF is cheaper and requires less human annotation',
-            'RLHF teaches the model new factual knowledge that SFT cannot',
+            'RLHF is cheaper and requires less human annotation overall',
+            'RLHF teaches the model new factual knowledge that SFT cannot provide',
             'RLHF can learn from comparative judgments (which response is better), which is easier for humans to provide than writing perfect responses, and can optimize for qualities that are hard to demonstrate explicitly',
-            'RLHF eliminates all safety risks from the model'
+            'RLHF eliminates all safety risks from the model permanently'
           ],
           correct: 2,
           explanation: 'The key insight of RLHF is that judging (ranking) is easier than demonstrating (writing). Humans can reliably say "response A is better than response B" even when they cannot write the perfect response themselves. This allows RLHF to optimize for subtle qualities like nuance, tone, and judgment that are difficult to capture in SFT demonstrations. RLHF does NOT teach new facts (those come from pre-training) and does NOT eliminate all safety risks.',
@@ -462,10 +462,10 @@ export const lessons = {
           question: 'Direct Preference Optimization (DPO) has emerged as an alternative to RLHF. What is the primary practical advantage of DPO?',
           type: 'mc',
           options: [
-            'DPO produces fundamentally better aligned models than RLHF in all cases',
-            'DPO eliminates the need for any human preference data',
+            'DPO produces fundamentally better aligned models than RLHF in all deployment cases',
+            'DPO eliminates the need for any human preference data entirely',
             'DPO simplifies the alignment pipeline by removing the need for a separate reward model and RL training loop, directly optimizing the language model on preference data',
-            'DPO can align models without any pre-training'
+            'DPO can align models without any pre-training or base capabilities'
           ],
           correct: 2,
           explanation: 'DPO\'s main advantage is simplicity — it directly optimizes the language model using preference data, avoiding the complexity of training a separate reward model and running a reinforcement learning loop (PPO). This makes it easier to implement, more stable to train, and faster to iterate. It still requires human preference data (option B is false), and whether it matches RLHF at the frontier is debated (option A is false).',
@@ -476,10 +476,10 @@ export const lessons = {
           question: 'You are reviewing the annotation guidelines for RLHF preference labeling on a Gemini model that will be deployed globally. The annotator team is primarily based in the US and UK. What is the most important risk you should flag?',
           type: 'mc',
           options: [
-            'The annotators might prefer longer responses, biasing the model toward verbosity',
+            'The annotators might prefer longer responses, biasing the model toward verbosity in all situations',
             'The cultural values, communication norms, and sensitivity judgments of US/UK annotators may not generalize globally, leading to a model that is over-aligned for some cultures and under-aligned for others',
-            'US/UK annotators cannot evaluate technical accuracy',
-            'English-speaking annotators cannot provide preference data for multilingual models'
+            'US/UK annotators cannot evaluate technical accuracy of model responses',
+            'English-speaking annotators cannot provide preference data for multilingual models effectively'
           ],
           correct: 1,
           explanation: 'RLHF alignment encodes the values and preferences of the annotators. If the annotator pool is culturally homogeneous, the resulting model will reflect those cultural norms — what is considered "polite," "appropriate," or "sensitive" varies significantly across cultures. A globally deployed model needs diverse annotator representation to avoid systematic cultural bias in its alignment. This is both an ethical concern and a product quality concern for international markets.',

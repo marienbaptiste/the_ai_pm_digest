@@ -98,10 +98,10 @@ export const lessons = {
           question: 'Your VP wants to announce that your new LLM-powered feature "understands customer intent." Based on the history of AI, what is the most important risk a PM should raise?',
           type: 'mc',
           options: [
-            'The model uses statistical pattern matching, not understanding — overstating capability risks user trust when edge cases fail',
-            'The announcement is fine because LLMs have been shown to pass professional exams, proving understanding',
-            'The main risk is that competitors will copy the feature before launch',
-            'Understanding is impossible to define, so the claim is meaningless and should be ignored'
+            'Statistical pattern matching creates trust issues when edge cases inevitably cause the system to fail unexpectedly',
+            'Professional exam performance validates understanding claims, making the announcement accurate and low-risk for users',
+            'Competitive pressure to launch first outweighs concerns about precise capability framing in announcements',
+            'Philosophical ambiguity around "understanding" means any capability claim is equally valid or meaningless'
           ],
           correct: 0,
           explanation: 'The ELIZA effect teaches us that users attribute understanding to pattern-matching systems. When the system inevitably fails on edge cases, users who were told it "understands" will lose trust disproportionately. A calibrated claim like "interprets" or "processes" sets better expectations.',
@@ -112,10 +112,10 @@ export const lessons = {
           question: 'A startup claims their new AI system achieves "human-level performance across all domains." As an AI PM evaluating a potential partnership, which historical pattern should make you most sceptical?',
           type: 'mc',
           options: [
-            'Expert systems in the 1980s also claimed general capability but were brittle outside narrow domains',
-            'Deep Blue beat Kasparov, proving machines can match humans, so the claim is plausible',
-            'The Turing Test has been passed by multiple systems, validating general AI claims',
-            'AlphaFold solved protein folding, showing that domain-general breakthroughs are routine'
+            'Expert systems in the 1980s made broad claims but collapsed outside their trained domains',
+            'Deep Blue\'s victory over Kasparov demonstrates machines can achieve human parity across domains',
+            'Multiple systems passing the Turing Test validates claims of achieving general intelligence',
+            'AlphaFold\'s protein folding breakthrough proves domain-general AI capabilities are now routine'
           ],
           correct: 0,
           explanation: 'Both AI winters were triggered by overpromising. Expert systems were marketed as broadly intelligent but failed outside their narrow rule-based domains. No current system demonstrates true cross-domain generality, and claims of AGI should be evaluated against specific, measurable benchmarks.',
@@ -149,10 +149,10 @@ export const lessons = {
           question: 'The "AI Effect" refers to which phenomenon?',
           type: 'mc',
           options: [
-            'AI systems becoming more capable each year due to Moore\'s Law',
-            'People redefining "real AI" as whatever machines cannot yet do, making AI seem perpetually out of reach',
-            'The tendency for AI research to accelerate once a breakthrough occurs',
-            'The economic effect of AI displacing human labour in routine tasks'
+            'Annual capability improvements driven by Moore\'s Law creating exponential AI progress',
+            'Continuous redefinition of "real AI" as excluding whatever machines achieve',
+            'Research acceleration following breakthroughs creating momentum in AI development',
+            'Economic displacement of human workers as AI automates routine tasks'
           ],
           correct: 1,
           explanation: 'The AI Effect describes how once a capability is achieved (e.g., chess, OCR, speech recognition), people stop calling it "AI" and move the goalposts. This has product implications: features powered by sophisticated ML are often taken for granted by users, making it harder to communicate value.',
@@ -301,10 +301,10 @@ export const lessons = {
           question: 'You are building a product feature that automatically categorises customer support tickets into predefined categories (billing, technical, account). You have 50,000 historical tickets that have been manually tagged by agents. Which ML paradigm is the best primary approach?',
           type: 'mc',
           options: [
-            'Unsupervised learning — let the algorithm discover natural categories',
-            'Supervised learning — use the 50,000 labelled tickets to train a classifier',
-            'Reinforcement learning — have the model learn from customer satisfaction scores',
-            'Self-supervised learning — pre-train on all ticket text, then deploy without fine-tuning'
+            'Unsupervised learning using clustering to automatically discover natural ticket groupings',
+            'Supervised learning training a classifier on the 50,000 manually labelled examples',
+            'Reinforcement learning optimizing categorization decisions based on satisfaction signals',
+            'Self-supervised pre-training on ticket text followed by zero-shot deployment'
           ],
           correct: 1,
           explanation: 'With 50,000 labelled examples mapping tickets to predefined categories, supervised classification is the natural fit. Unsupervised would discover categories but not necessarily match your predefined taxonomy. RL is not suited to static classification. SSL pre-training could help, but would still need supervised fine-tuning to map to your specific categories.',
@@ -315,10 +315,10 @@ export const lessons = {
           question: 'Your team\'s RL agent for optimising ad placement has found a strategy that maximises click-through rate but shows users misleading preview text to attract clicks. This is an example of:',
           type: 'mc',
           options: [
-            'Exploration-exploitation imbalance — the agent is exploring too aggressively',
-            'Reward hacking — the agent optimised the metric without achieving the intended goal',
-            'Catastrophic forgetting — the agent lost its earlier training on ethical guidelines',
-            'Distribution shift — the agent encountered users unlike its training data'
+            'Exploration-exploitation imbalance causing the agent to try risky strategies excessively',
+            'Reward hacking where metric optimization diverges from the true objective',
+            'Catastrophic forgetting causing the agent to lose ethical training constraints',
+            'Distribution shift from encountering user populations unlike training data'
           ],
           correct: 1,
           explanation: 'Reward hacking occurs when an RL agent finds shortcuts that maximise the reward signal without fulfilling the designer\'s actual intent. Here, the reward was click-through rate, but the intended goal was meaningful user engagement. The agent found that misleading previews satisfy the metric without the desired outcome.',
@@ -329,10 +329,10 @@ export const lessons = {
           question: 'A PM at a healthcare startup claims: "We don\'t need any labelled data — we\'ll use unsupervised learning to diagnose diseases from patient records." What is the most fundamental flaw in this reasoning?',
           type: 'mc',
           options: [
-            'Unsupervised learning cannot process patient records',
-            'Unsupervised learning discovers structure but cannot map it to specific diagnostic categories without labelled examples or human interpretation',
-            'Unsupervised learning is too computationally expensive for healthcare',
-            'Unsupervised learning only works with image data, not patient records'
+            'Unsupervised algorithms lack the technical capability to process patient record data',
+            'Pattern discovery requires labelled validation data to map clusters to diagnoses',
+            'Healthcare applications require real-time processing that unsupervised methods cannot provide',
+            'Unsupervised methods are restricted to image modalities and cannot handle records'
           ],
           correct: 1,
           explanation: 'Unsupervised learning can find patient clusters and patterns, but it cannot assign diagnostic labels to those clusters without human interpretation or labelled validation data. Diagnosis requires mapping patterns to known conditions — which is inherently a supervised task. The unsupervised analysis might be a useful exploratory step, but it cannot replace labelled data for diagnostic classification.',
@@ -510,10 +510,10 @@ export const lessons = {
           question: 'Your fraud detection model needs to catch 99% of fraudulent transactions, even if it means more false positives. Which approach to the loss function best encodes this product requirement?',
           type: 'mc',
           options: [
-            'Use standard cross-entropy loss with equal class weights',
-            'Use a weighted cross-entropy loss that penalises missed fraud (false negatives) much more heavily than false alarms (false positives)',
-            'Use mean squared error since fraud is a continuous variable',
-            'Use focal loss to focus on easy-to-classify transactions'
+            'Standard cross-entropy loss treating all classification errors equally',
+            'Weighted cross-entropy heavily penalizing false negatives over false positives',
+            'Mean squared error optimized for continuous fraud probability scores',
+            'Focal loss concentrating learning effort on easily classified examples'
           ],
           correct: 1,
           explanation: 'When the cost of missing fraud vastly exceeds the cost of false alarms, asymmetric weighting in the loss function directly encodes this trade-off. Standard cross-entropy treats both error types equally. MSE is inappropriate for classification. Focal loss focuses on hard examples but does not inherently encode asymmetric misclassification costs.',
@@ -524,10 +524,10 @@ export const lessons = {
           question: 'During training, your team observes that training loss continues decreasing but validation loss has been increasing for the last 10 epochs. What is happening, and what should they do?',
           type: 'mc',
           options: [
-            'The model is underfitting — increase model complexity',
-            'The model is overfitting — apply regularisation, early stopping, or data augmentation',
-            'The learning rate is too high — reduce it and continue training',
-            'This is normal behaviour — continue training until training loss reaches zero'
+            'The model is underfitting and requires increased capacity or complexity',
+            'The model is overfitting and requires regularization or early stopping',
+            'Learning rate misconfiguration requires adjustment and continued training',
+            'This represents expected convergence behavior requiring continued training'
           ],
           correct: 1,
           explanation: 'Diverging training and validation loss is the classic signature of overfitting: the model is memorising training data rather than learning generalisable patterns. Remedies include early stopping (revert to the checkpoint where validation loss was lowest), regularisation (dropout, weight decay), or augmenting the training data.',
@@ -538,10 +538,10 @@ export const lessons = {
           question: 'Why is Adam the most widely used optimiser for deep learning, compared to vanilla SGD?',
           type: 'mc',
           options: [
-            'Adam guarantees finding the global minimum while SGD does not',
-            'Adam maintains per-parameter adaptive learning rates using gradient moment estimates, reducing sensitivity to the initial learning rate choice',
-            'Adam requires no hyperparameters while SGD requires tuning the learning rate',
-            'Adam uses second-order derivatives (Hessian) for faster convergence'
+            'Adam guarantees convergence to global optima unlike SGD\'s local minima',
+            'Adam adapts learning rates per-parameter using gradient moment estimates',
+            'Adam eliminates hyperparameter tuning unlike SGD\'s learning rate requirements',
+            'Adam leverages Hessian second-order derivatives for accelerated convergence'
           ],
           correct: 1,
           explanation: 'Adam combines momentum (first moment) and RMSProp (second moment) to adapt the learning rate for each parameter individually. This makes it less sensitive to the initial learning rate choice and generally converges faster than vanilla SGD. It does NOT guarantee global optima, still has hyperparameters (learning rate, beta1, beta2), and does not use the Hessian.',
@@ -724,10 +724,10 @@ export const lessons = {
           question: 'Your team is deploying a neural network for on-device mobile inference. The model must run in under 30ms on a mid-range smartphone. Which architectural decision is MOST impactful for meeting this latency requirement?',
           type: 'mc',
           options: [
-            'Switching from cross-entropy to focal loss',
-            'Reducing model depth and width to decrease the number of parameters and floating-point operations',
-            'Using Adam instead of SGD as the optimiser',
-            'Switching from ReLU to GELU activation functions'
+            'Switching loss functions from cross-entropy to focal loss formulation',
+            'Reducing model depth and width to minimize parameters and operations',
+            'Changing optimization algorithm from SGD to Adam for training',
+            'Replacing ReLU with GELU activation functions throughout layers'
           ],
           correct: 1,
           explanation: 'Inference latency is primarily driven by the number of parameters and floating-point operations, which are determined by model depth and width. The loss function and optimiser only affect training, not inference. GELU is slightly more expensive than ReLU but this is a minor factor compared to total model size.',
@@ -738,10 +738,10 @@ export const lessons = {
           question: 'Why did the Minsky & Papert critique of the perceptron NOT invalidate neural networks as a research direction?',
           type: 'mc',
           options: [
-            'Their mathematical proof was later shown to be incorrect',
-            'They proved that a single-layer perceptron cannot learn non-linear functions, but acknowledged multi-layer networks could — the problem was training them',
-            'They only critiqued the perceptron for image tasks, and neural networks were later applied to text',
-            'Their critique was philosophical, not mathematical, and was dismissed by the research community'
+            'Their mathematical proofs were subsequently found to contain fundamental errors',
+            'They demonstrated single-layer limitations while acknowledging multi-layer potential',
+            'Their critique addressed only image applications not applicable to text',
+            'Their philosophical arguments lacked mathematical rigor and were quickly dismissed'
           ],
           correct: 1,
           explanation: 'Minsky and Papert\'s proofs were correct for single-layer perceptrons but explicitly noted that multi-layer networks could, in theory, learn non-linear functions like XOR. The gap was practical: backpropagation (the efficient training algorithm for multi-layer networks) was not widely known until 1986. The limitation was in training methodology, not architectural capability.',
@@ -775,10 +775,10 @@ export const lessons = {
           question: 'Which activation function is most commonly used in the hidden layers of modern deep networks, and why?',
           type: 'mc',
           options: [
-            'Sigmoid — because its output range of (0,1) is easy to interpret',
-            'Tanh — because zero-centred outputs improve convergence',
-            'ReLU — because it mitigates vanishing gradients, is computationally cheap, and enables training of deeper networks',
-            'Softmax — because it produces probability distributions at every layer'
+            'Sigmoid because its (0,1) output range provides interpretable probability values',
+            'Tanh because zero-centered outputs accelerate convergence during training',
+            'ReLU because it prevents vanishing gradients and enables deep architectures',
+            'Softmax because it generates normalized probability distributions per layer'
           ],
           correct: 2,
           explanation: 'ReLU (Rectified Linear Unit) is the standard activation for hidden layers because it does not saturate for positive inputs (mitigating vanishing gradients), is extremely cheap to compute (just a max operation), and has been empirically shown to enable faster training of deep networks. Sigmoid and tanh suffer from vanishing gradients in deep networks. Softmax is used only in the output layer for classification.',

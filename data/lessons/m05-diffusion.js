@@ -546,10 +546,10 @@ export const lessons = {
           question: 'A DeepMind researcher proposes changing the noise schedule from linear to cosine for your image generation model. What is the primary motivation for this change?',
           type: 'mc',
           options: [
-            'Cosine schedules are computationally cheaper to implement',
+            'Cosine schedules are computationally cheaper to implement in production',
             'Cosine schedules destroy information more gradually in early steps, preserving more coarse structure for longer and improving sample quality',
             'Cosine schedules make the forward process deterministic instead of stochastic',
-            'Cosine schedules eliminate the need for classifier-free guidance'
+            'Cosine schedules eliminate the need for classifier-free guidance entirely'
           ],
           correct: 1,
           explanation: 'The linear schedule adds noise somewhat aggressively in early steps, destroying important coarse structure before the model has a chance to capture it. The cosine schedule proposed by Nichol & Dhariwal (2021) preserves more signal-to-noise ratio in early timesteps, giving the reverse process more information to work with. This leads to measurably better FID scores, especially on high-resolution images.',
@@ -799,10 +799,10 @@ export const lessons = {
           question: 'What was Imagen\'s most significant research finding regarding model scaling?',
           type: 'mc',
           options: [
-            'Larger U-Net models produced proportionally better image quality',
+            'Larger U-Net models produced proportionally better image quality across all benchmarks',
             'Scaling the text encoder improved image quality and text-image alignment more than scaling the image generation model',
-            'Super-resolution cascades were unnecessary when using larger base models',
-            'CLIP-based text encoders were superior to language model-based encoders for text understanding'
+            'Super-resolution cascades were unnecessary when using larger base models exclusively',
+            'CLIP-based text encoders were superior to language model-based encoders for all text understanding tasks'
           ],
           correct: 1,
           explanation: 'Imagen systematically demonstrated that scaling T5 (the text encoder) from Small to XXL improved both FID scores and text-image alignment far more than scaling the U-Net. This finding reshaped the field — subsequent systems invested heavily in text encoders, with SD3 using three text encoders totaling 5B+ parameters.',
@@ -813,10 +813,10 @@ export const lessons = {
           question: 'DALL-E 3 significantly improved text-image alignment compared to DALL-E 2. What was the primary technique responsible?',
           type: 'mc',
           options: [
-            'Switching from a diffusion to an autoregressive architecture',
+            'Switching from a diffusion to an autoregressive architecture for generation',
             'Training a custom captioning model to recaption all training images with highly detailed descriptions',
-            'Doubling the size of the CLIP text encoder',
-            'Using classifier guidance instead of classifier-free guidance'
+            'Doubling the size of the CLIP text encoder parameters',
+            'Using classifier guidance instead of classifier-free guidance mechanisms'
           ],
           correct: 1,
           explanation: 'DALL-E 3\'s main innovation was data-centric: they trained a specialized captioning model to create detailed, accurate descriptions for training images, replacing noisy web-scraped alt-text. This "recaptioning" approach dramatically improved the model\'s ability to follow complex prompts. It is a textbook example of data quality mattering more than architectural changes.',
@@ -842,10 +842,10 @@ export const lessons = {
           question: 'A product designer asks you why users cannot simply "edit one object" in a generated image without affecting the rest. Which architectural capability would you point to as the solution?',
           type: 'mc',
           options: [
-            'Increasing the guidance scale to focus the model on specific objects',
+            'Increasing the guidance scale to focus the model on specific objects exclusively',
             'Using ControlNet with a segmentation mask combined with inpainting to isolate and regenerate specific regions',
-            'Switching from latent diffusion to pixel-space diffusion for higher fidelity',
-            'Retraining the model on a dataset that contains only single-object images'
+            'Switching from latent diffusion to pixel-space diffusion for significantly higher fidelity',
+            'Retraining the model on a dataset that contains only single-object images exclusively'
           ],
           correct: 1,
           explanation: 'Inpainting allows the model to regenerate only masked regions while keeping the rest of the image fixed. Combining this with ControlNet (which can accept segmentation masks, edge maps, or depth maps) gives precise spatial control over which object is regenerated and how. This is the standard approach for object-level editing in production diffusion systems.',
@@ -856,10 +856,10 @@ export const lessons = {
           question: 'Your team has built a latent diffusion model. During testing, users report that images look slightly "soft" or lacking fine detail compared to pixel-space models. What is the most likely cause and the standard mitigation?',
           type: 'mc',
           options: [
-            'The U-Net is too small — double its parameters',
+            'The U-Net is too small — double its parameters to improve quality',
             'The VAE decoder introduces reconstruction artifacts when decompressing from latent space; a refiner model or VAE fine-tuning can address this',
-            'The text encoder is not powerful enough to describe fine details',
-            'Classifier-free guidance is set too low, causing the model to generate generic outputs'
+            'The text encoder is not powerful enough to describe fine details accurately',
+            'Classifier-free guidance is set too low, causing the model to generate generic outputs consistently'
           ],
           correct: 1,
           explanation: 'The VAE compression is lossy — going from 512x512x3 to 64x64x4 and back inevitably loses some high-frequency detail. This manifests as slight softness. Standard mitigations include: (1) fine-tuning the VAE decoder for sharper reconstruction, (2) using a refiner model (as SDXL does) that adds detail in a second pass, or (3) training with a higher-resolution latent space. This is a known trade-off of the latent diffusion approach.',

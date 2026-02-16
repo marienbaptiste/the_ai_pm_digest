@@ -153,10 +153,10 @@ export const lessons = {
           question: "When adapting the CIRCLES framework for AI product design, which additional consideration is MOST critical at the 'Evaluate trade-offs' step?",
           type: "mc",
           options: [
-            "The color scheme and visual design of the AI feature",
-            "The failure mode analysis — what happens when the model is wrong, and how does the product degrade gracefully?",
-            "The number of API endpoints required for the feature",
-            "The programming language used for the model's inference server"
+            "The color scheme and visual design of the AI feature interface",
+            "The failure mode analysis and graceful degradation strategies when the model is wrong",
+            "The number of API endpoints required for the feature implementation",
+            "The programming language used for the model's inference server backend"
           ],
           correct: 1,
           explanation: "AI products are inherently probabilistic — they will be wrong some percentage of the time. The most important AI-specific consideration when evaluating solutions is understanding and designing for failure modes. How does the product behave when the model outputs incorrect, offensive, or irrelevant content? Graceful degradation strategies (showing confidence scores, offering fallback options, letting users correct the model) are essential for AI product design.",
@@ -167,10 +167,10 @@ export const lessons = {
           question: "A Gemini PM must define success metrics for a new 'meeting summarization' feature in Google Meet. Which combination best represents a well-designed metrics hierarchy?",
           type: "mc",
           options: [
-            "North Star: Number of summaries generated. Supporting: Summary length. Guardrail: Server uptime.",
-            "North Star: % of meeting participants who read and find the summary useful. Supporting: Summary accuracy (human eval), time saved vs. manual note-taking, feature adoption rate. Guardrail: Hallucination rate (factual errors in summaries), participant privacy violations.",
-            "North Star: Revenue from Google Meet subscriptions. Supporting: Number of meetings. Guardrail: Customer complaints.",
-            "North Star: Model accuracy on summarization benchmarks. Supporting: ROUGE score. Guardrail: Inference latency."
+            "North Star: Number of summaries generated. Supporting: Summary length. Guardrail: Server uptime metrics.",
+            "North Star: % of participants finding summaries useful. Supporting: Accuracy, time saved, adoption. Guardrail: Hallucination rate, privacy violations.",
+            "North Star: Revenue from Google Meet subscriptions. Supporting: Number of meetings. Guardrail: Customer complaints received.",
+            "North Star: Model accuracy on benchmarks. Supporting: ROUGE score metrics. Guardrail: Inference latency thresholds."
           ],
           correct: 1,
           explanation: "Option B correctly structures the metrics hierarchy. The North Star captures actual user value (usefulness of summaries), not vanity metrics (count of summaries generated). Supporting metrics decompose what drives the North Star (accuracy, time savings, adoption). Guardrail metrics protect against harms that could undermine trust (hallucinations, privacy violations) — these should never degrade even as the North Star improves.",
@@ -181,10 +181,10 @@ export const lessons = {
           question: "In AI product execution planning, why is a 'staged rollout' approach (1% → 10% → 100%) MORE important for AI features than for traditional software features?",
           type: "mc",
           options: [
-            "AI features require more server capacity, so gradual rollout prevents overload",
-            "AI models can have failure modes that only appear at scale or in specific user populations — staged rollout catches edge cases, bias issues, and unexpected behaviors before they affect all users",
-            "Staged rollout is legally required for AI features under the EU AI Act",
-            "AI features take longer to develop, so staged rollout reduces time to market"
+            "AI features require more server capacity, so gradual rollout prevents infrastructure overload",
+            "AI models have failure modes that emerge at scale or in specific populations — staged rollout catches issues early",
+            "Staged rollout is legally required for AI features under the EU AI Act regulations",
+            "AI features take longer to develop, so staged rollout reduces overall time to market"
           ],
           correct: 1,
           explanation: "AI models are probabilistic and can fail in ways that are hard to predict during development. A model that performs perfectly on evaluation data might produce biased, offensive, or nonsensical outputs for certain user populations, input patterns, or edge cases that only emerge at scale. Staged rollout with careful monitoring at each stage catches these issues before they affect millions of users. This is more critical for AI than traditional features because the failure space is much larger and less predictable.",
@@ -195,11 +195,11 @@ export const lessons = {
           question: "Select ALL elements that should be included in a model monitoring plan for a launched AI feature:",
           type: "multi",
           options: [
-            "Tracking accuracy/quality metrics over time to detect model degradation",
-            "Monitoring latency percentiles (p50, p95, p99) to catch serving issues",
-            "Measuring bias metrics across demographic groups on an ongoing basis",
-            "Waiting for user complaints before investigating model issues",
-            "Setting up automated alerts when key metrics drop below thresholds"
+            "Tracking accuracy and quality metrics over time to detect model degradation patterns",
+            "Monitoring latency percentiles (p50, p95, p99) to catch serving performance issues",
+            "Measuring bias metrics across demographic groups on an ongoing continuous basis",
+            "Waiting for user complaints before investigating model issues and taking action",
+            "Setting up automated alerts when key metrics drop below predefined thresholds"
           ],
           correct: [0, 1, 2, 4],
           explanation: "Options A, B, C, and E are all essential components of a model monitoring plan. Tracking accuracy over time catches data/concept drift. Latency monitoring catches serving degradation. Ongoing bias measurement catches distributional shifts. Automated alerts enable proactive response. Option D (waiting for complaints) is reactive and insufficient — by the time users complain, many have already been affected and may have churned.",
@@ -395,9 +395,9 @@ export const lessons = {
           question: "A PM at Google DeepMind is building Gemini's ability to interact with Instagram on Android. Instagram pushes UI updates weekly. Which approach best balances capability with resilience?",
           type: "mc",
           options: [
-            "Build a pixel-perfect model of Instagram's UI and update it manually every week when Instagram changes",
-            "Use only Instagram's official API for all interactions, avoiding screen reading entirely",
-            "Use a hybrid approach: general visual understanding as the foundation (resilient), supplemented by semantic knowledge of top-10 apps (deep) with automated change detection and graceful degradation to the generic layer when breakage is detected",
+            "Build a pixel-perfect model of Instagram's UI and update it manually each week",
+            "Use only Instagram's official API for all interactions, avoiding screen reading completely",
+            "Use a hybrid approach with general visual understanding (resilient) plus top-app knowledge (deep) with automated change detection",
             "Avoid supporting third-party apps entirely to eliminate the maintenance burden"
           ],
           correct: 2,
@@ -409,9 +409,9 @@ export const lessons = {
           question: "Using the 'AI Shipping Quadrant' framework, how would you classify a feature where Gemini automatically schedules meetings by reading the user's email thread and sending calendar invites without confirmation?",
           type: "mc",
           options: [
-            "Low blast radius + easy to verify — ship early and iterate",
-            "Low blast radius + hard to verify — ship with monitoring",
-            "High blast radius + easy to verify — ship with human-in-the-loop confirmation",
+            "Low blast radius + easy to verify — ship early and iterate quickly",
+            "Low blast radius + hard to verify — ship with extensive monitoring systems",
+            "High blast radius + easy to verify — ship with human-in-the-loop confirmation required",
             "High blast radius + hard to verify — do not ship until quality is very high"
           ],
           correct: 2,
@@ -423,10 +423,10 @@ export const lessons = {
           question: "In the privacy trade-offs case study, what principle should guide the DEFAULT setting for how much context Gemini retains between sessions?",
           type: "mc",
           options: [
-            "Maximum context by default, since more data makes the AI more helpful and users can opt out if concerned",
-            "No context by default (session-only), with clear opt-in settings for users who want persistent memory — following 'privacy by default, capability by choice'",
-            "Let the model decide how much context to retain based on its assessment of what's useful",
-            "Store all context in the cloud but encrypt it, since encryption solves all privacy concerns"
+            "Maximum context by default since more data makes AI more helpful and users can opt out",
+            "No context by default (session-only) with clear opt-in following 'privacy by default, capability by choice'",
+            "Let the model decide how much context to retain based on its assessment of usefulness",
+            "Store all context in the cloud but encrypt it since encryption solves privacy concerns"
           ],
           correct: 1,
           explanation: "The 'privacy by default, capability by choice' principle means the default setting should be the most privacy-preserving option (session-only context), with clear settings for users to opt into more context if they choose. This aligns with GDPR's data minimization principle, Google's own AI Principles, and builds user trust. Option A violates privacy-by-default. Option C gives the model control over a decision that should be the user's. Option D conflates encryption with privacy — encrypted data is still collected.",
@@ -437,11 +437,11 @@ export const lessons = {
           question: "Select ALL factors that make the third-party app integration problem particularly difficult for AI assistants like Gemini:",
           type: "multi",
           options: [
-            "Third-party apps update their UIs frequently and without notice to Google, breaking screen-context understanding",
-            "Deep integrations provide better user experiences but create linear maintenance scaling as more apps are supported",
+            "Third-party apps update UIs frequently without notice to Google, breaking screen-context understanding",
+            "Deep integrations provide better experiences but create linear maintenance scaling as apps multiply",
             "App developers may intentionally change UIs to break AI assistant integrations they didn't authorize",
-            "Google's own apps change too frequently for integration to work",
-            "API versioning means even API-based integrations can break when the third party deprecates API versions"
+            "Google's own apps change too frequently for integration to work reliably",
+            "API versioning means even API-based integrations can break when third parties deprecate versions"
           ],
           correct: [0, 1, 2, 4],
           explanation: "Options A, B, C, and E all represent real challenges. Frequent UI changes (A) break screen-context understanding. Deep integration maintenance costs scale linearly (B). App developers may intentionally break integrations (C) — some companies view AI assistants as competitive threats or unauthorized users of their platform. API deprecation (E) makes even structured integrations fragile. Option D is incorrect — Google controls its own apps and can coordinate changes with the Gemini team.",
@@ -597,9 +597,9 @@ export const lessons = {
           type: "mc",
           options: [
             "This is correct — fine-tuning on domain-specific data eliminates hallucinations for that domain",
-            "Fine-tuning can reduce hallucinations in the specific domain but cannot eliminate them, and it risks catastrophic forgetting of the model's broader capabilities. RAG-style grounding is more reliable for factual accuracy because it provides verifiable source material at inference time",
+            "Fine-tuning reduces but can't eliminate hallucinations and risks forgetting; RAG provides verifiable sources",
             "Fine-tuning has no effect on hallucinations — only RLHF can address this problem",
-            "Hallucinations are not a real problem and users can always detect them"
+            "Hallucinations are not a real problem and users can always detect them easily"
           ],
           correct: 1,
           explanation: "Fine-tuning teaches the model patterns from your data but doesn't give it a reliable mechanism to distinguish what it 'knows' from what it's confabulating. It can improve accuracy in the fine-tuned domain while degrading performance elsewhere (catastrophic forgetting). RAG is more reliable for factual accuracy because the model generates responses grounded in retrieved documents that can be verified and cited.",
@@ -610,8 +610,8 @@ export const lessons = {
           question: "When explaining diffusion models to a non-technical VP of marketing, which analogy is MOST accurate and least likely to create misunderstandings?",
           type: "mc",
           options: [
-            "'The AI is like a painter that creates images from its imagination based on your description'",
-            "'The AI learned from millions of images and generates new ones by starting with random static and gradually refining it into a picture that matches your description — like a sculptor revealing a statue from a block of marble'",
+            "'The AI is like a painter creating images from imagination based on your description'",
+            "'The AI starts with random static and gradually refines it — like a sculptor revealing a statue from marble'",
             "'The AI searches the internet for existing images and modifies them to match your prompt'",
             "'The AI stores all images it's seen and retrieves the closest match to your prompt'"
           ],
@@ -624,9 +624,9 @@ export const lessons = {
           question: "Select ALL valid reasons why RAG is often preferred over fine-tuning for enterprise knowledge bases:",
           type: "multi",
           options: [
-            "RAG provides verifiable source citations, enabling users to fact-check AI responses",
+            "RAG provides verifiable source citations enabling users to fact-check AI responses",
             "RAG can incorporate new information immediately without retraining the model",
-            "RAG is always cheaper than fine-tuning regardless of scale",
+            "RAG is always cheaper than fine-tuning regardless of deployment scale",
             "RAG keeps the base model's general capabilities intact while adding domain knowledge",
             "RAG allows different users to access different knowledge bases with the same model"
           ],
@@ -639,10 +639,10 @@ export const lessons = {
           question: "An ML engineer on your team says: 'We should just scale the model to 10 trillion parameters to improve quality.' As a PM, what questions should you ask before agreeing?",
           type: "mc",
           options: [
-            "Only ask about the timeline — bigger models just need more training time",
-            "Ask about Chinchilla scaling laws (do we have enough training data?), inference cost impact (how does 10x parameter increase affect serving cost per query?), latency impact (can we still meet user-facing latency requirements?), and whether the quality improvement justifies the investment versus alternatives like better data curation or architectural improvements",
+            "Only ask about the training timeline — bigger models just need more time",
+            "Ask about scaling laws, data needs, inference cost impact, latency requirements, and alternative quality improvements",
             "Defer entirely to the ML engineer's judgment since this is a technical decision",
-            "Reject the proposal because larger models are always worse due to overfitting"
+            "Reject the proposal because larger models are always worse due to overfitting issues"
           ],
           correct: 1,
           explanation: "Scaling model size is not free — it requires proportionally more training data (Chinchilla scaling), dramatically increases inference cost and latency, and may not be the most efficient path to quality improvement. A good PM asks about the trade-offs: cost, latency, data requirements, and whether alternative approaches (better data, architecture improvements, fine-tuning) could achieve similar quality gains more efficiently. This is not deferring or overriding — it's asking the right questions.",
@@ -839,10 +839,10 @@ export const lessons = {
           question: "In the mock question about launching Gemini for healthcare, the model answer recommends a multi-year launch timeline. Which aspect of this answer would MOST differentiate a strong candidate from an average one?",
           type: "mc",
           options: [
-            "Mentioning FDA regulatory requirements",
-            "Proposing a phased rollout",
-            "Suggesting that the AI should never make autonomous clinical decisions — the human-in-the-loop requirement for high-stakes domains",
-            "Recommending partnership with academic medical centers"
+            "Mentioning FDA regulatory requirements and compliance processes",
+            "Proposing a phased rollout approach with multiple stages",
+            "Suggesting AI should never make autonomous clinical decisions — human-in-the-loop for high-stakes domains",
+            "Recommending partnerships with academic medical centers for validation"
           ],
           correct: 2,
           explanation: "While all four elements are good, the human-in-the-loop principle is what most differentiates strong candidates. Many candidates mention FDA and phased rollouts (expected knowledge), but explicitly stating that AI should NEVER make autonomous clinical decisions shows deep understanding of AI safety principles in high-stakes domains. This principle — that AI should augment human judgment, not replace it, in high-stakes contexts — is a core belief at Google DeepMind and signals alignment with the organization's values.",
@@ -862,9 +862,9 @@ export const lessons = {
           question: "In the mock pricing question, the model answer suggests aggressive free-tier pricing for AI Studio. What is the strategic risk of a very generous free tier?",
           type: "mc",
           options: [
-            "There is no risk — free tiers always lead to paid conversions",
-            "The free tier could attract users who consume expensive GPU compute but never convert to paid customers, creating an unsustainable cost structure",
-            "Free tiers are illegal under EU competition law",
+            "There is no risk — free tiers always lead to paid conversions eventually",
+            "The free tier could attract users consuming expensive GPU compute without converting, creating unsustainable costs",
+            "Free tiers are illegal under EU competition law and regulatory frameworks",
             "Free tier users will overwhelm the system and degrade performance for paid customers"
           ],
           correct: 1,
@@ -878,8 +878,8 @@ export const lessons = {
           options: [
             "Side with the VP — business timelines take priority over research perfection",
             "Side with the researcher — quality should never be compromised for competitive pressure",
-            "Find a creative compromise: propose launching with a narrower scope that avoids the quality concerns the researcher identified, while still meeting the competitive timeline, with explicit quality gates for expanding scope later",
-            "Escalate to the CEO and let them decide"
+            "Find a creative compromise with narrower scope that avoids quality concerns while meeting competitive timeline",
+            "Escalate to the CEO and let them decide between the two positions"
           ],
           correct: 2,
           explanation: "The best PMs find creative compromises rather than choosing sides. By narrowing the launch scope (e.g., launching to 5% of users, or excluding the query types where quality is weakest), you can meet the competitive timeline while respecting the researcher's quality concerns. Explicit quality gates for expansion give the researcher confidence that their concerns will be addressed. This approach also generates real-world data that can improve the model faster than additional lab work.",
@@ -890,11 +890,11 @@ export const lessons = {
           question: "Select ALL qualities that the model answers in this lesson consistently demonstrate, which interviewers at Google DeepMind evaluate:",
           type: "multi",
           options: [
-            "Structured thinking using explicit frameworks (CIRCLES, RICE, shipping quadrant)",
-            "AI-specific considerations (graceful degradation, hallucination mitigation, human-in-the-loop)",
-            "Quantitative metrics with clear North Star, supporting, and guardrail levels",
-            "Memorization of Google product specifications and exact pricing",
-            "Nuanced competitive awareness that acknowledges strengths AND weaknesses of Google's position"
+            "Structured thinking using explicit frameworks like CIRCLES, RICE, and shipping quadrant",
+            "AI-specific considerations including graceful degradation, hallucination mitigation, and human-in-the-loop design",
+            "Quantitative metrics hierarchy with clear North Star, supporting, and guardrail levels",
+            "Memorization of Google product specifications, exact pricing, and current feature sets",
+            "Nuanced competitive awareness that acknowledges both strengths AND weaknesses of Google's position"
           ],
           correct: [0, 1, 2, 4],
           explanation: "Options A, B, C, and E represent the core evaluation criteria for AI PM interviews at Google DeepMind. Structured frameworks (A) show systematic thinking. AI-specific considerations (B) show domain expertise. Metrics hierarchy (C) shows product rigor. Nuanced competitive analysis (E) shows strategic maturity. Option D (memorizing specs) is not valued — interviewers care about reasoning ability, not recall. Specs change constantly; the ability to reason about trade-offs is durable.",

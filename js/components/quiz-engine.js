@@ -295,7 +295,7 @@ function renderQuestion(q, index, state) {
           <div class="quiz__feedback-icon">${isCorrect ? '\u2705' : '\u274C'}</div>
           <div class="quiz__feedback-text">
             <strong>${isCorrect ? 'Correct!' : 'Incorrect'}</strong>
-            <p>${q.explanation}</p>
+            ${formatModelAnswer(q.explanation)}
           </div>
         </div>
         ${q.expertNote ? `
@@ -304,7 +304,7 @@ function renderQuestion(q, index, state) {
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <div class="quiz__expert-content" style="max-height: 0px;">
-            <p>${q.expertNote}</p>
+            ${formatModelAnswer(q.expertNote)}
           </div>
         ` : ''}
       ` : ''}
@@ -354,6 +354,16 @@ function renderChoices(q, index, state) {
 
 function renderTextInput(q, index, state) {
   const isChecked = state.checked[index];
+  // Escape HTML to prevent XSS
+  const escapeHtml = (str) => {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  };
 
   return `
     <div class="quiz__text-input">
@@ -363,15 +373,59 @@ function renderTextInput(q, index, state) {
         placeholder="${q.type === 'scenario' ? 'Describe your approach...' : 'Type your answer...'}"
         rows="${q.type === 'scenario' ? 5 : 3}"
         ${isChecked ? 'disabled' : ''}
-      >${state.answers[index] || ''}</textarea>
+      >${escapeHtml(state.answers[index])}</textarea>
       ${isChecked ? `
         <div class="quiz__model-answer">
           <strong style="color: var(--accent-primary);">Model Answer:</strong>
-          <p>${q.correct}</p>
+          ${formatModelAnswer(q.correct)}
         </div>
       ` : ''}
     </div>
   `;
+}
+
+function formatModelAnswer(text) {
+  // Check if text contains numbered points like (1), (2), (3) or 1., 2., 3.
+  const numberedPattern = /\((\d+)\)\s+/g;
+  const dotPattern = /(\d+)\.\s+/g;
+
+  if (numberedPattern.test(text)) {
+    // Split by (1), (2), etc.
+    const parts = text.split(/\((\d+)\)\s+/).filter(p => p.trim() && !/^\d+$/.test(p));
+    if (parts.length > 1) {
+      const items = parts.map(part => `<li>${part.trim()}</li>`).join('');
+      return `<ol>${items}</ol>`;
+    }
+  } else if (dotPattern.test(text)) {
+    // Split by 1., 2., etc.
+    const parts = text.split(/\d+\.\s+/).filter(p => p.trim());
+    if (parts.length > 1) {
+      const items = parts.map(part => `<li>${part.trim()}</li>`).join('');
+      return `<ol>${items}</ol>`;
+    }
+  }
+
+  // Check for bullet points (-, *, •)
+  const lines = text.split('\n');
+  const bulletPattern = /^[\-\*\•]\s+/;
+  const bulletLines = lines.filter(line => bulletPattern.test(line.trim()));
+
+  if (bulletLines.length > 0) {
+    const formatted = lines.map(line => {
+      const trimmed = line.trim();
+      if (bulletPattern.test(trimmed)) {
+        return `<li>${trimmed.replace(bulletPattern, '')}</li>`;
+      } else if (trimmed) {
+        return `<p>${trimmed}</p>`;
+      }
+      return '';
+    }).filter(l => l).join('');
+
+    return formatted.includes('<li>') ? formatted.replace(/(<li>.*<\/li>)+/g, match => `<ul>${match}</ul>`) : `<p>${text}</p>`;
+  }
+
+  // No special formatting needed
+  return `<p>${text}</p>`;
 }
 
 function attachChoiceListeners(questions, state, container, rerender, persistState) {

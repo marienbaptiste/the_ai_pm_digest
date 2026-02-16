@@ -172,10 +172,10 @@ export const lessons = {
           question: 'Your team must choose a CNN backbone for a mobile app that identifies plant species from photos. The app runs on-device with no internet connection. Inference must complete in under 100ms on a typical smartphone. Which architectural consideration should MOST heavily influence your choice?',
           type: 'mc',
           options: [
-            'The number of training epochs required to reach convergence',
+            'The number of training epochs required to reach convergence during development',
             'The model\'s parameter count and floating-point operations (FLOPs), which determine inference speed and memory usage on mobile hardware',
-            'Whether the model was originally trained on ImageNet or on a plant-specific dataset',
-            'The activation function used in hidden layers'
+            'Whether the model was originally pre-trained on ImageNet or on a plant-specific dataset',
+            'The choice of activation function used in the hidden layers throughout the network'
           ],
           correct: 1,
           explanation: 'For on-device mobile inference with a strict latency budget, the primary constraint is the model\'s computational footprint: parameter count (affects memory and download size) and FLOPs (affects inference latency). Architectures like MobileNet and EfficientNet-B0 are specifically designed for this constraint. Training details, original dataset, and activation choice are secondary to the fundamental size/speed constraint.',
