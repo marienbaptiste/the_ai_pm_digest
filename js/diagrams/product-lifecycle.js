@@ -5,7 +5,7 @@ export function render(container) {
         <style>
           .pl-fade { animation: plFadeIn 0.6s ease forwards; opacity: 0; }
           .pl-stage { animation: plSlideUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; opacity: 0; transform: translateY(20px); }
-          .pl-gate { animation: plGateIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; opacity: 0; transform: rotate(0deg) scale(0); transform-origin: center; }
+          .pl-gate { animation: plFadeIn 0.5s ease forwards; opacity: 0; }
           .pl-arrow { stroke-dasharray: 6 3; animation: plFlow 1.2s linear infinite; }
           .pl-activity { animation: plFadeIn 0.5s ease forwards; opacity: 0; }
           .pl-label { font-family: var(--font-mono); font-size: 10px; fill: var(--text-dim); }
@@ -13,7 +13,6 @@ export function render(container) {
           .pl-icon { font-size: 18px; }
           @keyframes plFadeIn { to { opacity: 1; } }
           @keyframes plSlideUp { to { opacity: 1; transform: translateY(0); } }
-          @keyframes plGateIn { to { opacity: 1; transform: rotate(45deg) scale(1); } }
           @keyframes plFlow { to { stroke-dashoffset: -18; } }
           @keyframes plGateSpin { from { transform: rotate(45deg); } to { transform: rotate(405deg); } }
         </style>
@@ -54,16 +53,15 @@ export function render(container) {
           <text x="55" y="84" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="#fff" font-weight="700">1</text>
         </g>
 
-        <!-- Gate 1 diamond -->
+        <!-- Arrow 1 to Arrow 2 -->
+        <line x1="155" y1="120" x2="200" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow" marker-end="url(#pl-arrowhead)"/>
+
+        <!-- Gate 1 diamond (on timeline) -->
         <g class="pl-gate" style="animation-delay: 0.7s;">
-          <rect x="165" y="108" width="16" height="16" rx="2" fill="#F0B429" stroke="#F0B42980" stroke-width="1" transform="rotate(45, 173, 116)">
-            <animateTransform attributeName="transform" type="rotate" values="45 173 116; 405 173 116" dur="3s" begin="0.7s" fill="freeze"/>
+          <rect x="172.5" y="115" width="10" height="10" rx="1" fill="#F0B429" stroke="#F0B42980" stroke-width="1.5" transform="rotate(45, 177.5, 120)">
+            <animateTransform attributeName="transform" type="rotate" values="45 177.5 120; 405 177.5 120; 45 177.5 120" dur="4s" repeatCount="indefinite"/>
           </rect>
         </g>
-
-        <!-- Arrow 1->2 -->
-        <line x1="155" y1="120" x2="162" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow"/>
-        <line x1="184" y1="120" x2="198" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow" marker-end="url(#pl-arrowhead)"/>
 
         <!-- ========== Stage 2: Prototype ========== -->
         <g class="pl-stage" style="animation-delay: 0.6s;">
@@ -80,16 +78,15 @@ export function render(container) {
           <text x="210" y="84" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="#fff" font-weight="700">2</text>
         </g>
 
-        <!-- Gate 2 diamond -->
+        <!-- Arrow 2 to Arrow 3 -->
+        <line x1="310" y1="120" x2="355" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow" marker-end="url(#pl-arrowhead)"/>
+
+        <!-- Gate 2 diamond (on timeline) -->
         <g class="pl-gate" style="animation-delay: 1.1s;">
-          <rect x="320" y="108" width="16" height="16" rx="2" fill="#F0B429" stroke="#F0B42980" stroke-width="1" transform="rotate(45, 328, 116)">
-            <animateTransform attributeName="transform" type="rotate" values="45 328 116; 405 328 116" dur="3s" begin="1.1s" fill="freeze"/>
+          <rect x="327.5" y="115" width="10" height="10" rx="1" fill="#F0B429" stroke="#F0B42980" stroke-width="1.5" transform="rotate(45, 332.5, 120)">
+            <animateTransform attributeName="transform" type="rotate" values="45 332.5 120; 405 332.5 120; 45 332.5 120" dur="4s" repeatCount="indefinite"/>
           </rect>
         </g>
-
-        <!-- Arrow 2->3 -->
-        <line x1="310" y1="120" x2="318" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow"/>
-        <line x1="340" y1="120" x2="353" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow" marker-end="url(#pl-arrowhead)"/>
 
         <!-- ========== Stage 3: MVP ========== -->
         <g class="pl-stage" style="animation-delay: 1.0s;">
@@ -109,16 +106,15 @@ export function render(container) {
           <text x="365" y="84" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="#0C0A09" font-weight="700">3</text>
         </g>
 
-        <!-- Gate 3 diamond -->
+        <!-- Arrow 3 to Arrow 4 -->
+        <line x1="465" y1="120" x2="510" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow" marker-end="url(#pl-arrowhead)"/>
+
+        <!-- Gate 3 diamond (on timeline) -->
         <g class="pl-gate" style="animation-delay: 1.5s;">
-          <rect x="475" y="108" width="16" height="16" rx="2" fill="#F0B429" stroke="#F0B42980" stroke-width="1" transform="rotate(45, 483, 116)">
-            <animateTransform attributeName="transform" type="rotate" values="45 483 116; 405 483 116" dur="3s" begin="1.5s" fill="freeze"/>
+          <rect x="482.5" y="115" width="10" height="10" rx="1" fill="#F0B429" stroke="#F0B42980" stroke-width="1.5" transform="rotate(45, 487.5, 120)">
+            <animateTransform attributeName="transform" type="rotate" values="45 487.5 120; 405 487.5 120; 45 487.5 120" dur="4s" repeatCount="indefinite"/>
           </rect>
         </g>
-
-        <!-- Arrow 3->4 -->
-        <line x1="465" y1="120" x2="473" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow"/>
-        <line x1="495" y1="120" x2="508" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow" marker-end="url(#pl-arrowhead)"/>
 
         <!-- ========== Stage 4: Scale ========== -->
         <g class="pl-stage" style="animation-delay: 1.4s;">
@@ -136,16 +132,15 @@ export function render(container) {
           <text x="520" y="84" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="#0C0A09" font-weight="700">4</text>
         </g>
 
-        <!-- Gate 4 diamond -->
+        <!-- Arrow 4 to Arrow 5 -->
+        <line x1="620" y1="120" x2="660" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow" marker-end="url(#pl-arrowhead)"/>
+
+        <!-- Gate 4 diamond (on timeline) -->
         <g class="pl-gate" style="animation-delay: 1.9s;">
-          <rect x="630" y="108" width="16" height="16" rx="2" fill="#F0B429" stroke="#F0B42980" stroke-width="1" transform="rotate(45, 638, 116)">
-            <animateTransform attributeName="transform" type="rotate" values="45 638 116; 405 638 116" dur="3s" begin="1.9s" fill="freeze"/>
+          <rect x="635" y="115" width="10" height="10" rx="1" fill="#F0B429" stroke="#F0B42980" stroke-width="1.5" transform="rotate(45, 640, 120)">
+            <animateTransform attributeName="transform" type="rotate" values="45 640 120; 405 640 120; 45 640 120" dur="4s" repeatCount="indefinite"/>
           </rect>
         </g>
-
-        <!-- Arrow 4->5 -->
-        <line x1="620" y1="120" x2="628" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow"/>
-        <line x1="650" y1="120" x2="658" y2="120" stroke="var(--border-medium)" stroke-width="1.5" class="pl-arrow" marker-end="url(#pl-arrowhead)"/>
 
         <!-- ========== Stage 5: Mature ========== -->
         <g class="pl-stage" style="animation-delay: 1.8s;">
@@ -220,7 +215,7 @@ export function render(container) {
         <!-- Gate legend -->
         <g class="pl-fade" style="animation-delay: 3.3s;">
           <rect x="270" y="290" width="210" height="50" rx="8" fill="#0C0A0990" stroke="var(--border-subtle)" stroke-width="1"/>
-          <rect x="288" y="308" width="10" height="10" rx="1.5" fill="#F0B429" transform="rotate(45, 293, 313)"/>
+          <rect x="288" y="308" width="10" height="10" rx="1" fill="#F0B429" stroke="#F0B42980" stroke-width="1.5" transform="rotate(45, 293, 313)"/>
           <text x="310" y="318" font-family="var(--font-mono)" font-size="9" fill="var(--text-secondary)">= Milestone gate (Go/No-Go)</text>
           <text x="375" y="334" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--text-dim)">Each gate requires stakeholder approval</text>
         </g>
