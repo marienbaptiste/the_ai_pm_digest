@@ -99,12 +99,12 @@ export const lessons = {
           question: "DeepMind's AlphaGo Zero surpassed the original AlphaGo by training exclusively through self-play without human game data. As a PM, what is the most important product implication of this 'tabula rasa' learning approach?",
           type: "mc",
           options: [
-            "It proves human data is never needed for AI training so all data collection efforts can be eliminated",
+            "It proves human data is never needed for AI training, so all data collection efforts across every product domain can be safely eliminated",
+            "It means all AI products should avoid using human feedback or RLHF for alignment, since self-play produces superior results for any learning objective",
             "It demonstrates that removing human biases can unlock beyond-human performance, so product benchmarks shouldn't be capped at human-level",
-            "It means all AI products should avoid using human feedback or RLHF for alignment",
-            "It shows that reinforcement learning is always superior to supervised learning for any task"
+            "It shows that reinforcement learning is always superior to supervised learning for any task, making supervised approaches obsolete for product development"
           ],
-          correct: 1,
+          correct: 2,
           explanation: "AlphaGo Zero's success showed that human data can actually constrain AI performance by embedding suboptimal human biases. For PMs, this means product success metrics shouldn't be limited to matching human experts — AI can discover novel solutions. However, this doesn't mean human data is never useful; it depends on the domain and available compute.",
           difficulty: "applied",
           expertNote: "In practice, most real-world AI products still benefit enormously from human data, especially in domains where the reward signal is ambiguous (unlike Go, where winning is clear). The AlphaGo Zero lesson applies most directly to well-defined optimization problems. For subjective tasks like writing or conversation, RLHF remains essential."
@@ -113,12 +113,12 @@ export const lessons = {
           question: "Why did Google merge DeepMind and Google Brain in April 2023, and what competitive dynamic triggered the decision?",
           type: "mc",
           options: [
-            "AlphaFold's success showed that DeepMind's research approach was superior, so Brain was absorbed into DeepMind",
-            "The EU AI Act required consolidated AI governance and unified decision-making within single organizations",
             "OpenAI's ChatGPT launch exposed Google's fragmented AI efforts and created urgency to eliminate duplication and ship faster",
-            "Google Brain's TensorFlow framework was deprecated in favor of DeepMind's JAX framework for all AI work"
+            "AlphaFold's groundbreaking success in protein structure prediction demonstrated that DeepMind's research methodology was objectively superior, so Brain was strategically absorbed into DeepMind's organizational structure",
+            "EU AI Act regulatory requirements mandated consolidated AI governance and a single unified decision-making structure within large organizations operating in Europe",
+            "Google Brain's TensorFlow framework was formally deprecated across all Google AI work in favor of DeepMind's JAX framework, necessitating organizational consolidation"
           ],
-          correct: 2,
+          correct: 0,
           explanation: "ChatGPT's viral launch in November 2022 was a 'code red' moment for Google. Despite Google Brain researchers having invented the transformer architecture, Google's fragmented AI organization — with Brain and DeepMind operating semi-independently — slowed its response. The merger consolidated talent and eliminated duplication to accelerate Gemini's development.",
           difficulty: "foundational",
           expertNote: "The irony that Google's own researchers invented the transformer but OpenAI commercialized it first is one of the most discussed case studies in tech strategy. It illustrates how research excellence alone doesn't guarantee product leadership — organizational structure, incentives, and speed to market matter enormously."
@@ -151,12 +151,12 @@ export const lessons = {
           question: "AlphaFold 2 achieved a median GDT score of 92.4 at CASP14. A PM is tasked with deciding whether to open-source the model or keep it proprietary. What framework should guide this decision?",
           type: "mc",
           options: [
-            "Always open-source scientific tools because it's the ethically correct thing to do",
-            "Keep it proprietary to maximize licensing revenue from pharmaceutical companies and research institutions",
-            "Evaluate the strategic trade-off between adoption/goodwill and monetization, weighing indirect returns against direct revenue potential",
-            "Open-source the model weights but keep the training data proprietary to maintain competitive advantage"
+            "Always open-source scientific tools because it is universally the ethically correct decision and doing otherwise would damage the organization's research reputation",
+            "Keep it fully proprietary to maximize licensing revenue from pharmaceutical companies, research institutions, and biotechnology firms",
+            "Open-source the model weights but keep the training dataset proprietary, maintaining competitive advantage while appearing to contribute to the scientific community",
+            "Evaluate the strategic trade-off between adoption/goodwill and monetization, weighing indirect returns against direct revenue potential"
           ],
-          correct: 2,
+          correct: 3,
           explanation: "The open-source decision requires weighing direct monetization against indirect strategic value. Google chose to open-source AlphaFold because the indirect returns (talent attraction, brand credibility, regulatory goodwill, ecosystem growth) were deemed more valuable than licensing revenue. This is a pattern PMs at AI labs must frequently navigate.",
           difficulty: "applied",
           expertNote: "This exact question comes up in PM interviews at Google DeepMind. The key is showing you can reason about the trade-off framework rather than defaulting to a dogmatic position. Different products warrant different strategies — what worked for AlphaFold may not work for Gemini's commercial API."
@@ -316,12 +316,12 @@ export const lessons = {
           question: "A product team is debating whether to use Gemini's 1M-token context window to process entire documents versus building a RAG pipeline. What is the most accurate assessment of this trade-off?",
           type: "mc",
           options: [
-            "Long context always beats RAG because the model sees everything at once without any information loss",
-            "RAG is always better because it's more cost-effective and long context has degraded recall in the middle",
+            "Long context always beats RAG because the model sees everything at once without any information loss or retrieval error",
             "The choice depends on the use case: long context for holistic reasoning, RAG for large corpora and attribution",
-            "They are equivalent approaches that will converge and become interchangeable as technology improves"
+            "RAG is always better because it is more cost-effective and long context suffers from significantly degraded recall for information placed in the middle",
+            "They are equivalent approaches that will fully converge and become interchangeable as context window technology continues to improve in the next two years"
           ],
-          correct: 2,
+          correct: 1,
           explanation: "Neither approach dominates. Long context excels when the entire document must be reasoned about holistically (e.g., legal contract analysis) and eliminates chunking complexity. RAG is better for searching across very large corpora (millions of documents) where only a few are relevant, and naturally provides source citations. Cost, latency, and the specific reasoning task all factor into the decision.",
           difficulty: "applied",
           expertNote: "Research has shown that long-context models can exhibit a 'lost in the middle' effect where recall degrades for information placed in the middle of very long contexts. Google has worked to mitigate this in Gemini 1.5, but PMs should still design their prompts to place critical information at the beginning or end when possible."
@@ -330,12 +330,12 @@ export const lessons = {
           question: "What is the primary advantage of Gemini's natively multimodal architecture over the 'bolted-on' approach used by some competitors?",
           type: "mc",
           options: [
-            "It requires significantly less training data across all modalities for achieving multimodal capabilities",
             "It enables cross-modal reasoning learned during pre-training rather than through post-hoc adapters",
-            "It is computationally cheaper to train because all modalities share the same core parameters",
-            "It eliminates the need for tokenization and encoding of non-text inputs like images"
+            "It requires significantly less training data across all modalities to reach multimodal capability thresholds, reducing data collection costs",
+            "It is computationally cheaper to train because all modalities share the same transformer parameters, lowering total GPU hours needed",
+            "It eliminates the need for any tokenization or encoding of non-text inputs such as images and audio, simplifying the preprocessing pipeline"
           ],
-          correct: 1,
+          correct: 0,
           explanation: "Native multimodality means the model learns relationships between text, images, audio, and video during pre-training, so cross-modal reasoning is foundational rather than retrofitted. A bolted-on approach can miss subtle inter-modal relationships because the base LLM never learned them. However, native multimodality is NOT cheaper to train — it's actually more expensive due to the diversity and volume of training data required.",
           difficulty: "foundational",
           expertNote: "The debate over native vs. bolted-on multimodality is not settled in the research community. Some researchers argue that with sufficiently good adapters and alignment training, bolted-on approaches can match native performance. Gemini's results suggest native has advantages, but the field is evolving rapidly."
@@ -353,10 +353,10 @@ export const lessons = {
           question: "How does Mixture-of-Experts (MoE) architecture help Gemini achieve long context windows?",
           type: "mc",
           options: [
-            "MoE compresses the context window so fewer tokens need to be processed overall",
-            "MoE eliminates the need for positional encodings in long sequences entirely",
+            "MoE dynamically compresses the context window using expert-specific compression ratios, reducing the total number of tokens that must be processed per request",
+            "MoE eliminates the need for positional encodings in long sequences by allowing each expert to independently track token position within its assigned context slice",
             "MoE decouples model capacity from per-token compute cost, making long-sequence processing affordable",
-            "MoE divides the context window among different experts so each expert sees only a portion"
+            "MoE divides the context window into equal-length segments and assigns each segment to a dedicated expert, with a final expert aggregating the results"
           ],
           correct: 2,
           explanation: "MoE's key benefit is that a model with, say, 1 trillion total parameters might only activate ~100 billion per token. This means you get the capacity and knowledge of an enormous model at a fraction of the compute cost per token. When processing 1 million tokens, this compute savings is what makes long context practically feasible — a dense model of equivalent capability would be prohibitively expensive.",
@@ -551,12 +551,12 @@ export const lessons = {
           question: "What is the primary strategic purpose of Google AI Studio in the Gemini product ecosystem?",
           type: "mc",
           options: [
-            "It's a production deployment platform for enterprise AI workloads and scaling",
-            "It serves as a low-friction funnel converting curious developers into paying Vertex AI customers",
-            "It's a research tool for Google's internal AI teams to test new models",
-            "It's a consumer-facing product that competes directly with ChatGPT"
+            "It is a production-grade deployment platform designed for enterprise AI workloads requiring SLAs and compliance at scale",
+            "It is a research environment built exclusively for Google's internal AI teams to test and benchmark new experimental models before release",
+            "It is a consumer-facing product primarily designed to compete directly with ChatGPT for everyday users seeking a general-purpose assistant",
+            "It serves as a low-friction funnel converting curious developers into paying Vertex AI customers"
           ],
-          correct: 1,
+          correct: 3,
           explanation: "Google AI Studio is deliberately designed as the top of the developer acquisition funnel. It has a free tier, requires minimal setup (just a Google account), and allows rapid experimentation. The goal is to get developers building with Gemini quickly, then convert them to Vertex AI when they need production-grade features (SLAs, data governance, compliance). This developer funnel is a core business metric for the Gemini platform team.",
           difficulty: "applied",
           expertNote: "The AI Studio to Vertex AI conversion funnel mirrors the Firebase to Google Cloud funnel. Google has refined this 'free prototyping tool to paid enterprise platform' playbook over many years. Understanding this pattern is valuable for any platform PM interview."
@@ -565,12 +565,12 @@ export const lessons = {
           question: "A PM is designing a feature that needs to work offline on Android devices. Which aspects of Gemini Nano make it suitable for on-device deployment, and what are its limitations?",
           type: "mc",
           options: [
-            "Nano has the same capabilities as Pro but runs locally; the only limitation is processing speed",
             "Nano is optimized for small size and low latency with privacy benefits, but has lower capability ceiling and limited context",
-            "Nano only works on Pixel devices and cannot be deployed on other Android phones",
-            "Nano requires a constant internet connection for model weight updates and synchronization"
+            "Nano has the same reasoning and generation capabilities as Gemini Pro but runs locally on-device; the only meaningful limitation is slower processing speed",
+            "Nano only works on Google Pixel devices and cannot be licensed or deployed on other Android manufacturers' phones due to hardware exclusivity agreements",
+            "Nano requires a constant internet connection for periodic model weight updates and cloud-side synchronization to maintain accuracy"
           ],
-          correct: 1,
+          correct: 0,
           explanation: "Gemini Nano's strengths are privacy (data stays on device), low latency (no network round-trip), and offline availability. Its limitations are reduced capability (it can't match Pro/Ultra on complex reasoning), limited context window (constrained by device RAM), and restricted to tasks that fit its smaller model size. It's suitable for Smart Reply, summarization, and simple classification, not for complex analysis or generation.",
           difficulty: "foundational",
           expertNote: "On-device models are a growing area where hardware constraints directly shape product decisions. The Apple Neural Engine, Qualcomm AI Engine, and Google Tensor chips are all competing to enable more capable on-device AI. PMs must understand the hardware landscape to know what's possible on-device today vs. next year."
@@ -780,12 +780,12 @@ export const lessons = {
           question: "Meta's decision to open-source the Llama model family is best explained by which competitive strategy?",
           type: "mc",
           options: [
-            "Meta wants to build goodwill and improve its reputation after privacy controversies",
-            "Meta is applying 'commoditize your complement' by preventing AI monopolization and protecting its advertising business",
-            "Meta lacks the engineering talent to build a competitive closed-source model",
-            "Open-source is required by EU AI Act regulations for models above a certain parameter count"
+            "Meta wants to rebuild goodwill and repair its public reputation after a series of high-profile privacy controversies and regulatory fines",
+            "Meta lacks the engineering talent and compute resources necessary to build a commercially competitive closed-source model that could challenge GPT-4",
+            "Open-source release is required by EU AI Act regulations for foundation models above a certain parameter count threshold operating in European markets",
+            "Meta is applying 'commoditize your complement' by preventing AI monopolization and protecting its advertising business"
           ],
-          correct: 1,
+          correct: 3,
           explanation: "Meta's open-source strategy is a textbook 'commoditize your complement' play. Meta doesn't sell cloud AI services, so it loses nothing by making models free. But if Google or Microsoft monopolized AI models, they could charge Meta for access or disadvantage Meta's products. By commoditizing models, Meta ensures abundant, cheap AI that powers its advertising business. This is strategically brilliant and well-understood by Meta's leadership.",
           difficulty: "applied",
           expertNote: "The 'commoditize your complement' framework was articulated by Joel Spolsky and is a staple of tech strategy. Other examples: Google open-sourcing Android to commoditize mobile operating systems (protecting Search distribution), and Amazon pushing AWS to commoditize computing infrastructure."
@@ -803,12 +803,12 @@ export const lessons = {
           question: "Which of the following is the MOST accurate description of how the competitive landscape affects Google's Gemini product strategy?",
           type: "mc",
           options: [
-            "Google should focus exclusively on making Gemini the highest-scoring model on all benchmarks",
+            "Google should focus exclusively on making Gemini the highest-scoring model on every available benchmark, treating model quality as the only meaningful differentiator",
+            "Google should open-source Gemini entirely to match Meta's Llama strategy, winning the developer community and making up for lost time with ChatGPT",
             "Google should prioritize distribution and ecosystem integration leveraging Android, Search, Workspace, and Cloud",
-            "Google should open-source Gemini to match Meta's Llama strategy and win the developer community",
-            "Google should acquire Anthropic to eliminate the strongest competitor"
+            "Google should immediately acquire Anthropic to eliminate the strongest safety-focused competitor and consolidate frontier AI talent"
           ],
-          correct: 1,
+          correct: 2,
           explanation: "While maintaining competitive model quality is necessary (table stakes), Google's strongest strategic cards are its unmatched distribution channels (3B+ Android devices, dominant search engine, Workspace, Cloud). As frontier models converge in capability, the winning strategy is making Gemini the default AI experience through deep integration across Google's product suite, not winning benchmarks alone.",
           difficulty: "applied",
           expertNote: "This mirrors the 'good enough' principle in technology adoption: once all frontier models clear a quality threshold for most tasks, distribution and user experience become the primary differentiators. Historical parallel: Google Search wasn't dramatically better than AltaVista — it was better distributed (default in Firefox, Chrome, Android)."
@@ -817,10 +817,10 @@ export const lessons = {
           question: "Mistral's Mixtral 8x7B model uses Mixture-of-Experts to match much larger dense models. Why is this efficiency focus strategically important for Mistral specifically?",
           type: "mc",
           options: [
-            "Efficient models are always technically superior to large dense models in all use cases",
+            "Efficient models built with sparse architectures are always technically superior to large dense models across all use cases and deployment scenarios",
             "As a smaller company with limited compute, MoE allows Mistral to compete without massive GPU fleets while offering lower inference costs",
-            "EU regulations require models to be under a certain parameter count threshold",
-            "MoE models are easier to fine-tune than dense models, which is Mistral's primary business"
+            "EU regulations under the AI Act require commercial foundation models to stay under a specific parameter count threshold, forcing Mistral toward efficient architectures",
+            "MoE models are significantly easier to fine-tune than dense models using standard LoRA techniques, and fine-tuning services represent Mistral's primary revenue stream"
           ],
           correct: 1,
           explanation: "Mistral's efficiency focus is directly tied to their competitive position as a smaller player. They can't outspend Google or Meta on training compute, so MoE allows them to produce competitive models with fewer resources. Additionally, the lower inference cost is a selling point for cost-conscious enterprises. This is a classic 'asymmetric strategy' — competing on a different axis than the market leaders.",

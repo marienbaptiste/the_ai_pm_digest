@@ -101,12 +101,12 @@ export const lessons = {
           question: 'You are a PM evaluating a proposal to replace an LSTM-based text classification pipeline with a Transformer model. The dataset consists of legal documents averaging 5,000 tokens. Your ML lead says the Transformer will be "strictly better." What is the most important technical nuance you should push back on?',
           type: 'mc',
           options: [
-            'Transformers cannot process over 512 tokens ever',
             'O(n²) complexity makes 5K tokens expensive needing strategies',
-            'LSTMs always beat Transformers on long documents',
+            'Transformers cannot process more than 512 tokens under any circumstance because the standard attention implementation uses fixed-size matrices that cannot be dynamically resized during inference',
+            'LSTMs always outperform Transformers on long documents because their sequential hidden-state processing retains all historical context with zero memory overhead growth per additional token',
             'Transformers need much more training data than LSTMs'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'Self-attention has O(n²) complexity with respect to sequence length. At 5,000 tokens, the attention matrix has 25 million entries per layer per head, making compute and memory significant concerns. A good PM would push for discussion of efficient attention variants, chunking strategies, or hierarchical approaches before committing to the migration.',
           difficulty: 'applied',
           expertNote: 'A world-class AI PM would also consider whether the task even requires full bidirectional attention over the entire document, or if a sparse/local attention pattern could suffice — and would know about methods like Longformer or BigBird that address this.'
@@ -139,9 +139,9 @@ export const lessons = {
           question: 'The original "Attention Is All You Need" paper achieved state-of-the-art results on machine translation. What was the most significant practical advantage of the Transformer over previous SOTA models beyond raw accuracy?',
           type: 'mc',
           options: [
-            'Required no pre-training and worked in zero-shot mode',
+            'Required no pre-training phase and worked directly in zero-shot mode without any fine-tuning or task-specific adaptation on the translation dataset',
             'Reduced training time via full sequence parallelization',
-            'Eliminated the need for tokenization entirely',
+            'Eliminated the need for tokenization entirely by operating directly on raw character bytes rather than subword tokens, dramatically simplifying the preprocessing pipeline',
             'Used fewer parameters than any comparable prior model'
           ],
           correct: 1,
@@ -153,12 +153,12 @@ export const lessons = {
           question: 'Your team is building a real-time document analysis feature for Gemini. Users will submit documents of highly variable lengths — some 200 tokens, others 50,000 tokens. Given the Transformer\'s computational profile, which product strategy best addresses this?',
           type: 'mc',
           options: [
-            'Universal 50K window for all requests ensuring no truncation',
+            'Universal 50K window for all requests ensuring no truncation, padding shorter documents to the maximum length so that all requests follow an identical computational path through the serving infrastructure',
+            'Limit all documents to 2K tokens for predictable costs and simplified infrastructure, since most actionable content can be extracted from the opening sections of any business document',
             'Tiered processing by actual length with efficient attention',
-            'Limit all documents to 2K tokens for predictable costs',
             'RNN for long documents, Transformer for short documents'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'Dynamic compute allocation is the correct product strategy. Using a fixed 50,000-token window wastes enormous compute on short documents (O(n²) means padding is costly). Truncating to 2,000 tokens destroys the value proposition for long-document users. Switching architectures creates maintenance burden and inconsistent quality. Tiered processing with efficient attention variants (sparse attention, sliding window) for long documents is the standard industry approach.',
           difficulty: 'expert',
           expertNote: 'At DeepMind, this is exactly the kind of tradeoff PMs navigate daily with Gemini. The PM should also consider whether to expose context-window tiers as a pricing dimension in the API, and should understand techniques like KV-cache optimization that reduce serving costs for long-context inference.'
@@ -288,12 +288,12 @@ export const lessons = {
           question: 'In the self-attention formula Attention(Q, K, V) = softmax(QK^T / √d_k) · V, what would happen if the scaling factor √d_k were removed?',
           type: 'mc',
           options: [
-            'The model would be unable to learn any attention patterns',
-            'The softmax outputs would become one-hot losing the ability to aggregate multiple sources',
-            'The model would attend equally to all tokens regardless of content',
-            'Training would become faster due to simplified computation'
+            'The model would be entirely unable to learn any meaningful attention patterns because unscaled dot products would cause all softmax outputs to collapse to uniform zero-gradient regions',
+            'The model would attend with perfectly uniform weights to all tokens regardless of content, since without scaling the dot products are all equally large and the softmax normalizes them to 1/n',
+            'Training would become substantially faster due to the simplified computation graph, since removing the square root operation eliminates a non-linear step from every attention head in every layer',
+            'The softmax outputs would become one-hot losing the ability to aggregate multiple sources'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'Without scaling, as d_k grows, the dot products grow in variance, causing the softmax inputs to have large magnitudes. Softmax with large inputs produces near-one-hot distributions (one value close to 1, rest close to 0). This means each token would attend almost exclusively to one other token, losing the crucial ability to blend information from multiple context positions.',
           difficulty: 'applied',
           expertNote: 'This is also related to the "entropy collapse" problem in attention. A world-class PM should understand that attention temperature tuning and scaling are actively researched areas, especially for very deep models where attention patterns can degenerate in later layers.'
@@ -311,12 +311,12 @@ export const lessons = {
           question: 'A junior engineer on your team says: "The Query, Key, and Value matrices in self-attention are like a database lookup — the Query searches for matching Keys, and returns the corresponding Values." How would you evaluate this analogy?',
           type: 'mc',
           options: [
-            'Completely wrong; Q, K, V have no relationship to database concepts',
             'Useful analogy but returns weighted combinations, not exact matches',
+            'Completely wrong; Q, K, V have no relationship to database concepts because attention was designed as a purely mathematical operation with no connection to information retrieval systems or query languages',
             'Perfect analogy requiring no caveats or additional explanation',
-            'Misleading because Queries and Keys are identical in self-attention'
+            'Misleading because Queries and Keys are derived from the same linear projection and are therefore always identical vectors, making the distinction between them conceptually meaningless in practice'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'The database analogy captures the core idea well: Q represents "what I\'m looking for," K represents "what I have to offer," and V represents "the content to retrieve." But the critical difference is that attention performs soft retrieval — it returns a blended mixture of all values, not a single exact match. This blending is what makes attention so powerful for capturing nuanced contextual relationships.',
           difficulty: 'foundational',
           expertNote: 'An expert PM would also note that Q, K, and V are all derived from the same input through different learned projections in self-attention, whereas in cross-attention, Q comes from one sequence and K, V come from another — a distinction important for encoder-decoder architectures.'
@@ -340,9 +340,9 @@ export const lessons = {
           question: 'You are reviewing attention visualization heatmaps from a model that frequently misclassifies sarcastic product reviews as positive. What pattern in the attention maps would most likely explain this failure?',
           type: 'mc',
           options: [
-            'The attention maps show uniform attention across all tokens',
+            'The attention maps show perfectly uniform attention distributed equally across all tokens in the review, indicating the model treats every word as equally relevant and cannot prioritize sentiment-bearing terms',
             'The model strongly attends to positive sentiment words (e.g., "great," "love") while failing to attend to negation cues and contextual markers of sarcasm (e.g., "oh sure," "as if," "yeah right")',
-            'The attention maps show perfect coreference resolution',
+            'The attention maps show perfect coreference resolution with all pronouns correctly linked to their antecedents, suggesting the model has strong contextual understanding but simply lacks sarcasm training data',
             'The model attends exclusively to punctuation marks'
           ],
           correct: 1,
@@ -473,12 +473,12 @@ export const lessons = {
           question: 'Your team is deciding between standard multi-head attention (MHA) and grouped-query attention (GQA) for a new model that will be served via API. The API must support 128K context windows. What is the primary trade-off the PM should understand?',
           type: 'mc',
           options: [
-            'GQA is always worse in quality — the choice is purely about cost savings',
+            'GQA is always significantly worse in quality than full MHA, so the architectural choice is purely a cost savings decision with an unavoidable and substantial accuracy trade-off for any task',
+            'GQA and MHA have identical memory profiles at inference time — the difference between the two architectures is only in training speed, since GQA uses fewer gradient computations per step',
             'GQA reduces the KV cache memory by sharing K and V across head groups, enabling longer context windows and more concurrent users per GPU, with minimal quality degradation in practice',
-            'GQA and MHA have identical memory profiles — the difference is only in training speed',
-            'GQA cannot be used with causal masking, limiting it to encoder-only models'
+            'GQA cannot be used with causal masking, restricting its application to encoder-only bidirectional models and making it incompatible with any autoregressive text generation use case'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'GQA shares K and V projections across groups of heads, reducing the KV cache by a factor equal to (number of heads / number of groups). For a 128K context window, this can mean the difference between fitting the model on available hardware or not. Empirically, GQA with 8 groups shows minimal quality loss compared to full MHA, making it the dominant choice for production LLMs that need long context support.',
           difficulty: 'applied',
           expertNote: 'At DeepMind, the KV cache is one of the primary constraints on serving Gemini at scale. A PM involved in capacity planning should be able to calculate approximate KV cache sizes: (2 × num_layers × num_kv_heads × d_head × seq_len × bytes_per_element) to understand the hardware implications of context window decisions.'
@@ -511,12 +511,12 @@ export const lessons = {
           question: 'Rotary Position Embedding (RoPE) has become the dominant positional encoding in modern LLMs like LLaMA and Gemini. What property of RoPE makes it particularly well-suited for language models compared to sinusoidal or learned encodings?',
           type: 'mc',
           options: [
-            'RoPE requires fewer parameters than any other positional encoding method',
-            'Relative position via rotation; extendable',
-            'RoPE completely eliminates the need for positional information',
-            'RoPE works only with English text for English-centric models'
+            'RoPE requires fewer additional parameters than any other positional encoding method because it encodes position through a lightweight lookup table shared across all layers and heads',
+            'RoPE completely eliminates the need for explicit positional information by allowing the model to infer token ordering purely from content similarity patterns in the training data',
+            'RoPE works only with English text for English-centric models',
+            'Relative position via rotation; extendable'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'RoPE applies position-dependent rotations to Q and K vectors such that the dot product QK naturally reflects the relative distance between tokens. This relative position encoding is linguistically natural (we care about how far apart words are, not their absolute positions). Additionally, RoPE can be extended beyond training length through interpolation methods like NTK-aware scaling and YaRN, enabling long-context applications.',
           difficulty: 'applied',
           expertNote: 'The PM should understand that RoPE extension techniques (like the scaling used to extend LLaMA from 4K to 128K context) require careful evaluation — the model\'s quality at extended lengths is not guaranteed and often degrades on tasks requiring precise long-range retrieval ("needle in a haystack" tests).'
@@ -525,12 +525,12 @@ export const lessons = {
           question: 'You are planning the next Gemini API pricing tier. Engineering tells you that switching from 8-group GQA to 4-group GQA (fewer groups = more sharing = less KV cache) would reduce serving cost by 30% but might reduce quality on multi-step reasoning benchmarks by 1-2%. How should you approach this decision?',
           type: 'mc',
           options: [
-            'Always prioritize cost reduction since 1-2% quality loss is negligible',
-            'Never compromise quality; maintain 8-group GQA regardless of cost',
             'Evaluate impact on customer use cases and decide based on product positioning',
-            'Let the ML team decide independently since this is purely technical'
+            'Always prioritize cost reduction since any quality loss below 5% is negligible for production systems and the 30% infrastructure savings far outweigh minor benchmark regressions',
+            'Never compromise quality under any circumstances; maintain 8-group GQA regardless of cost because enterprise customers will immediately detect and escalate any accuracy degradation',
+            'Let the ML team decide independently since this is a purely technical architecture decision that falls entirely outside the PM\'s area of responsibility'
           ],
-          correct: 2,
+          correct: 0,
           explanation: 'This is a classic PM tradeoff decision. A 30% cost reduction could translate to lower prices or better margins, but quality regressions on reasoning tasks could hurt enterprise customers who depend on multi-step analysis. The PM should drive a rigorous evaluation on task-specific benchmarks, consult with key customers or customer-facing teams, and make a data-informed decision aligned with the product strategy.',
           difficulty: 'expert',
           expertNote: 'A top AI PM would also consider offering both configurations as different API tiers — a cost-optimized tier and a quality-optimized tier — and would design the pricing and documentation to help customers self-select the appropriate tier for their use case.'
@@ -664,9 +664,9 @@ export const lessons = {
           question: 'Which of the following correctly describes the "prefill" and "decode" phases in decoder-only model inference?',
           type: 'mc',
           options: [
-            'Prefill generates output tokens, decode processes the input prompt',
+            'Prefill generates the output tokens one at a time, while decode processes the full input prompt in a single vectorized pass to build the initial context representation',
             'Parallel prompt processing vs. autoregressive generation',
-            'Prefill and decode are identical operations differing only in batch size',
+            'Prefill and decode are identical operations at the mathematical level, differing only in the batch size of tokens processed and the direction of gradient flow through the network',
             'Prefill is the pre-training phase and decode is the inference phase'
           ],
           correct: 1,
@@ -693,12 +693,12 @@ export const lessons = {
           question: 'A product manager proposes adding "10x longer context window" as a headline feature for the next Gemini release. Based on your understanding of architecture trade-offs, what is the most critical question you should raise?',
           type: 'mc',
           options: [
-            'Will marketing have sufficient time to prepare launch materials for the context window announcement?',
-            'Impact on latency, cost, and quality verification?',
-            'Should we file a patent application for the longer context window capability?',
-            'Can we simply increase decoder layers to support the extended context length?'
+            'Will marketing have sufficient time to prepare launch materials and press releases for the context window announcement before the competitor releases a similar feature?',
+            'Should we file a provisional patent application covering the longer context window capability to protect the company from competitors who might independently develop the same approach?',
+            'Can we simply increase the number of decoder layers in the existing model to support the extended context length without any changes to the positional encoding or attention mechanism?',
+            'Impact on latency, cost, and quality verification?'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'Extending context 10x has cascading impacts: O(n²) attention means ~100x more attention compute, the KV cache grows 10x (affecting memory and throughput), prefill latency increases proportionally, and the model may not maintain quality at the extended length. A responsible PM must demand evaluations like needle-in-a-haystack (can the model find specific information buried in long context?), long-range reasoning tests, and latency/cost analysis before committing to the feature.',
           difficulty: 'expert',
           expertNote: 'At DeepMind, long-context Gemini required extensive evaluation infrastructure including synthetic retrieval tasks at various depths, multi-document reasoning benchmarks, and real-user-scenario testing. The PM should also consider whether users actually need 10x longer context or whether RAG or summarization would serve the underlying use case more cost-effectively.'
@@ -707,12 +707,12 @@ export const lessons = {
           question: 'BERT uses an encoder-only architecture, while GPT uses a decoder-only architecture. If both models had the same number of parameters and were trained on the same data, which would you expect to perform better on a sentiment classification task where the full review text is available as input?',
           type: 'mc',
           options: [
-            'GPT, because autoregressive models are always superior',
+            'GPT, because autoregressive decoder-only models are universally superior to encoder-only models on all downstream tasks once parameter count and training data volume are held constant',
+            'They would perform identically because parameter count and training data are the only variables that matter for downstream task performance, regardless of attention architecture differences',
             'BERT, because bidirectional attention allows each token to attend to the full context (both before and after), producing richer representations for classification tasks',
-            'They would perform identically because parameter count is the only thing that matters',
             'Neither could perform sentiment classification'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'For classification tasks where the full input is available (no generation needed), bidirectional attention is a natural advantage. BERT can build representations where each token is informed by its complete surrounding context, while GPT can only condition on left context. At equivalent scale, this bidirectional advantage leads to better classification performance. This is why BERT-style models dominated NLU benchmarks for years. However, at very large scale, decoder-only models partially close this gap through their massive capacity and training data.',
           difficulty: 'foundational',
           expertNote: 'The practical nuance: in the real world, decoder-only models are typically much larger than encoder-only models (175B+ vs 340M), which can compensate for the architectural disadvantage. A PM should consider whether deploying a small, efficient BERT-style model is more cost-effective for a pure classification use case than using a massive decoder-only model.'

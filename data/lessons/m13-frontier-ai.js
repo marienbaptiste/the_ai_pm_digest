@@ -128,12 +128,12 @@ where L_load_balance = N * sum_i( f_i * P_i )
           question: 'You are a PM at Google DeepMind, and a partner team proposes deploying an MoE model for a latency-sensitive mobile keyboard prediction feature. The model has 8 experts totaling 14B parameters with 2B active per token. What is the most critical concern you should raise?',
           type: 'mc',
           options: [
-            'MoE models cannot perform text prediction at all',
-            'Total model size exceeds mobile memory constraints',
-            'The model will be too accurate for keyboard tasks',
-            'MoE routing adds latency making it slower than dense'
+            'MoE models cannot perform next-token text prediction tasks at all due to their conditional routing architecture',
+            'The model will be too accurate for simple keyboard prediction, wasting precision on a task that only needs moderate quality',
+            'MoE routing logic adds prohibitive latency at each token, making it structurally slower than an equivalent dense model for keyboard inference',
+            'Total model size exceeds mobile memory constraints'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'MoE trades memory for compute: the full model must be loaded into memory even though only a fraction activates per token. On mobile devices, memory is the primary constraint. A 14B-parameter MoE requires the same memory as a 14B dense model, despite only using 2B parameters per inference. A 2B dense model would be far more appropriate for edge deployment.',
           difficulty: 'applied',
           expertNote: 'A top PM would also explore whether expert offloading (keeping only active experts in fast memory) or MoE-to-dense distillation could make this work. The right answer is not just "no" but "not with this architecture &mdash; here are alternatives."'
@@ -166,12 +166,12 @@ where L_load_balance = N * sum_i( f_i * P_i )
           question: 'From a product economics perspective, why does MoE become increasingly advantageous as a model serves more concurrent users?',
           type: 'mc',
           options: [
-            'More users means more experts are needed and MoE can dynamically add experts at runtime',
             'The fixed memory cost is amortized across more requests while per-request compute savings compound',
-            'MoE models automatically become more accurate with more users due to online learning',
-            'Concurrent users allow different experts to process different users simultaneously achieving perfect parallelism'
+            'More concurrent users signal higher demand, so MoE can dynamically instantiate additional experts at runtime to scale capacity',
+            'MoE models automatically improve accuracy with more users through online learning, where expert weights update continuously from live traffic',
+            'Concurrent users allow different dedicated experts to process different users simultaneously, achieving near-perfect inference parallelism'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'MoE has higher fixed cost (memory for all experts) but lower marginal cost per token (only K experts compute). At low utilization, fixed cost dominates. At high utilization, per-token savings compound across millions of requests, making MoE significantly cheaper. This is a classic fixed-cost-vs-marginal-cost analysis that every PM should master.',
           difficulty: 'applied',
           expertNote: 'This economic analysis directly impacts pricing strategy. An MoE-powered API can offer lower per-token prices at high volume while maintaining margins. PMs should model the crossover point where MoE becomes cheaper than dense for their specific traffic patterns.'
@@ -338,12 +338,12 @@ y_k = C_k * x_k</code></pre>
           question: 'Your team is building an AI product that transcribes and summarizes 3-hour meeting recordings (approximately 2.8 million audio tokens at 16kHz). A Transformer-based approach would require segmenting the audio into chunks. An engineer proposes using a Mamba-based model instead. What is the strongest technical argument for the SSM approach?',
           type: 'mc',
           options: [
-            'Mamba models are always more accurate than Transformers on audio tasks',
+            'Mamba models are inherently more accurate than Transformers on all audio tasks due to their recurrent state architecture capturing temporal patterns more naturally',
+            'Mamba models require little to no domain-specific training data for audio tasks since their state-space formulation is derived from signal processing first principles',
             'Mamba processes the full 2.8M-token sequence in O(n) compute with constant memory, avoiding chunking loss',
-            'Mamba models require no training data for audio tasks',
-            'Mamba automatically understands meeting context better than Transformers'
+            'Mamba automatically develops a richer understanding of meeting context than Transformers because its sequential state updates model conversational flow more directly'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'At 2.8M tokens, Transformer attention would require ~7.8 trillion pairwise operations per layer &mdash; computationally infeasible. Chunking loses cross-chunk context (a topic mentioned in minute 5 referenced in minute 150 would be lost). Mamba processes the full sequence in linear time while maintaining a compressed state of the entire history, preserving long-range context without segmentation.',
           difficulty: 'applied',
           expertNote: 'A sophisticated PM would also ask about the quality tradeoff: Mamba compresses context into a fixed-size state, so information from minute 5 may be "fuzzier" than with attention. The PM should commission evaluations specifically testing cross-segment retrieval quality, not just aggregate summarization metrics.'
@@ -352,10 +352,10 @@ y_k = C_k * x_k</code></pre>
           question: 'What is the key innovation of Mamba over the original S4 architecture?',
           type: 'mc',
           options: [
-            'Mamba uses a much larger hidden state than S4 for increased capacity',
+            'Mamba uses a substantially larger hidden state dimension than S4, dramatically increasing model capacity at the cost of proportionally more memory consumption',
             'Mamba makes the state transition parameters (B, C, delta) input-dependent, enabling content-based gating',
-            'Mamba replaces the recurrence with attention for better quality',
-            'Mamba uses a completely different mathematical framework unrelated to state spaces'
+            'Mamba replaces the recurrent state update entirely with a sparse attention mechanism for improved long-range retrieval quality',
+            'Mamba adopts a completely different mathematical framework derived from control theory that is entirely unrelated to state-space model formalisms'
           ],
           correct: 1,
           explanation: 'S4 used fixed parameters for all tokens &mdash; the same transformation regardless of input content. Mamba makes B, C, and the discretization step delta functions of the current input, enabling the model to dynamically decide what to incorporate into its state and what to filter out. This is what makes Mamba competitive with Transformers on language tasks.',
@@ -390,12 +390,12 @@ y_k = C_k * x_k</code></pre>
           question: 'Jamba by AI21 uses a 7:1 ratio of Mamba layers to attention layers. Why not just use 100% Mamba layers for maximum efficiency?',
           type: 'mc',
           options: [
-            'Mamba layers cannot be stacked more than 7 layers deep due to vanishing gradients',
             'The few attention layers provide precise retrieval and in-context learning while SSM layers provide efficiency',
-            'Attention layers are needed to stabilize training but serve no purpose at inference time',
-            'Hardware limitations prevent running more than 7 consecutive Mamba layers on current GPUs'
+            'Mamba layers cannot be stacked more than 7 layers deep without catastrophic vanishing gradients that destabilize the entire training process',
+            'Attention layers are required only to stabilize gradient flow during training and serve no functional purpose at inference time once training is complete',
+            'Current GPU hardware limitations physically prevent running more than 7 consecutive Mamba recurrence layers in the same forward pass without triggering memory errors'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'Pure SSMs compress all context into a fixed-size state, making precise retrieval difficult. Even a small number of attention layers (which can directly attend to any position) dramatically improves performance on retrieval and in-context learning tasks. The hybrid ratio (mostly SSM, occasional attention) captures the best of both: SSM efficiency for most computation, attention precision where it matters most.',
           difficulty: 'applied',
           expertNote: 'The optimal ratio of SSM-to-attention layers is an active research question. Google DeepMind Griffin used different ratios and found that even 1 attention layer out of 20 significantly improved in-context learning. This suggests attention provides qualitatively different capabilities that SSMs cannot replicate, not just quantitatively different ones.'
@@ -551,12 +551,12 @@ There are 3 r's in "strawberry."</code></pre>
           question: 'Your team is launching a coding assistant powered by a reasoning model. During beta testing, you discover that 40% of user queries are simple questions ("how do I write a for loop in Python") that the reasoning model handles with unnecessary thinking time, adding 8 seconds of latency and 10x the cost. What is the best product strategy?',
           type: 'mc',
           options: [
-            'Accept the latency and cost — reasoning always improves quality',
-            'Remove the reasoning model entirely and use a standard model for all queries',
-            'Implement a routing layer that sends simple queries to a fast model and complex queries to reasoning model',
-            'Add a loading screen to hide the latency from users'
+            'Accept the latency and cost as unavoidable — reasoning models always improve output quality regardless of query complexity',
+            'Remove the reasoning model entirely and replace it with a standard model for all query types, accepting the quality reduction on complex problems',
+            'Add an engaging animated loading screen to hide the 8-second latency from users, making the wait feel intentional and premium',
+            'Implement a routing layer that sends simple queries to a fast model and complex queries to reasoning model'
           ],
-          correct: 2,
+          correct: 3,
           explanation: 'Model routing is the correct strategy. Simple queries (60% of traffic) should go to a fast, cheap standard model with sub-second latency. Complex algorithmic problems (40% of traffic) should go to the reasoning model where the extra cost and latency deliver genuine quality improvement. This reduces average cost by ~60% and average latency by ~50% while maintaining quality where it matters.',
           difficulty: 'applied',
           expertNote: 'Building an effective router is itself an ML problem: you need a classifier that predicts query difficulty fast enough that the routing overhead is negligible. This is an emerging discipline &mdash; several startups (Martian, Not Diamond) specialize in model routing. A PM at DeepMind should evaluate whether to build or buy this capability.'
@@ -589,12 +589,12 @@ There are 3 r's in "strawberry."</code></pre>
           question: 'Test-time compute scaling follows a log-linear relationship. What does this mean for product pricing strategy?',
           type: 'mc',
           options: [
-            'Pricing should be flat per query since compute usage is predictable',
+            'Pricing should be flat and uniform per query since reasoning compute usage is highly predictable and does not vary meaningfully with query complexity',
+            'Every query should receive the maximum configured reasoning tokens to guarantee the best possible output quality regardless of query difficulty',
             'The first few reasoning tokens deliver the most value per token with diminishing returns after',
-            'Every query should receive maximum reasoning tokens to ensure best quality',
-            'Reasoning tokens should be priced at the same rate as input tokens since they use the same model'
+            'Reasoning tokens should always be priced identically to input tokens since they run through the same model weights and incur no additional compute overhead'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'Log-linear scaling means doubling reasoning tokens yields a constant (not proportional) quality improvement. The first 1,000 reasoning tokens might improve accuracy from 60% to 80%, but going from 1,000 to 2,000 might only improve from 80% to 85%. This creates a natural product tiering: a "Standard" tier with modest reasoning achieves most of the benefit at low cost, while a "Premium" tier with extensive reasoning captures the remaining quality at much higher cost. The PM should price tiers based on this diminishing returns curve.',
           difficulty: 'expert',
           expertNote: 'This is analogous to video streaming quality tiers: 720p captures 90% of the viewing experience for most users at a fraction of the bandwidth of 4K. Similarly, "light reasoning" captures most of the quality benefit of reasoning for most queries. Pricing should exploit this diminishing returns curve, not force all users onto the expensive tier.'
@@ -603,12 +603,12 @@ There are 3 r's in "strawberry."</code></pre>
           question: 'Why did OpenAI choose to hide o1 reasoning tokens from users rather than showing the full reasoning chain?',
           type: 'mc',
           options: [
-            'The reasoning tokens would be too long for users to read',
-            'To protect intellectual property — the reasoning methodology is proprietary',
+            'The reasoning tokens would routinely run too long for users to read and the extreme length would create a confusing, unusable interface experience',
             'Multiple reasons: preventing prompt injection attacks, avoiding user confusion, maintaining flexibility, and preventing distillation',
-            'The reasoning tokens are generated in a special format that cannot be displayed as text'
+            'To protect OpenAI\'s core intellectual property — the specific reasoning methodology and chain-of-thought format are proprietary competitive assets',
+            'The reasoning tokens are generated in a specialized internal format that cannot be serialized or displayed as readable text to end users'
           ],
-          correct: 2,
+          correct: 1,
           explanation: 'Hiding reasoning tokens serves multiple strategic purposes: security (preventing adversarial manipulation of the reasoning chain), UX (intermediate reasoning can be confusing or alarming when the model considers wrong approaches before correcting itself), flexibility (OpenAI can improve the reasoning methodology without breaking user workflows), and competitive moats (preventing competitors from training on the reasoning traces).',
           difficulty: 'applied',
           expertNote: 'The decision to hide reasoning is controversial. Anthropic chose partial transparency (showing reasoning in a "thinking" block). This tradeoff between transparency and control is a core product decision that PM candidates should have an opinion on. The strongest answer acknowledges both approaches have merit and depends on the target user and use case.'
@@ -780,12 +780,12 @@ Action: respond("John Smith is on an active Enterprise plan and is eligible for 
           question: 'Your agent-based customer service product has a per-step accuracy of 92%. The average customer issue requires 12 agent steps to resolve. What is the approximate end-to-end success rate, and what product strategy should you pursue?',
           type: 'mc',
           options: [
-            '92% — per-step accuracy equals end-to-end accuracy',
             'Approximately 38% (0.92^12) — implement human-in-the-loop checkpoints and improve per-step accuracy to 98%',
-            'Approximately 80% — errors are independent so they partially cancel out',
-            'The success rate cannot be calculated without knowing the specific error types'
+            '92% — per-step accuracy is the correct proxy for end-to-end accuracy since errors in agentic pipelines do not compound multiplicatively',
+            'Approximately 80% — because individual errors are statistically independent and normally distributed, they partially cancel each other out across the 12 steps',
+            'The success rate cannot be calculated from this information alone without knowing the specific error types and their downstream propagation effects'
           ],
-          correct: 1,
+          correct: 0,
           explanation: '0.92^12 = ~0.38, meaning only 38% of customer issues would be fully resolved without errors. The compounding failure problem is the central challenge of agent products. The solution is two-pronged: (1) improve per-step accuracy (at 98% accuracy, 0.98^12 = 78%), and (2) add human checkpoints to catch and correct errors before they compound, resetting the compounding effect.',
           difficulty: 'applied',
           expertNote: 'In practice, not all errors are equally catastrophic. A PM should categorize errors by severity (recoverable vs. unrecoverable) and add checkpoints specifically before unrecoverable actions. This is more practical than checkpointing every N steps.'
@@ -818,12 +818,12 @@ Action: respond("John Smith is on an active Enterprise plan and is eligible for 
           question: 'Computer use agents interact with software via screenshots and GUI actions rather than APIs. What is the primary reason this technology is not yet ready for enterprise production deployment?',
           type: 'mc',
           options: [
-            'Screenshots are too large for language models to process efficiently',
+            'Raw screenshot images are far too large in file size for current language models to process with acceptable latency and token cost',
+            'Enterprises do not have meaningful needs for automating legacy GUI-based workflows since most enterprise software now exposes modern REST APIs',
             'Current success rates of 30-60% on complex tasks compound across multi-step workflows below enterprise thresholds',
-            'Enterprises do not need to automate GUI-based workflows at all',
-            'Computer use agents can only work with web browsers not desktop applications'
+            'Computer use agents are currently limited to web browser environments and fundamentally cannot interact with desktop applications or native GUIs'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'The compounding reliability problem is the core blocker. If each GUI step has 50% reliability and a task requires 10 steps, end-to-end success is 0.5^10 = 0.1% &mdash; essentially unusable. Enterprise workflows on legacy systems are exactly the high-value target, but the per-step reliability must improve significantly before production deployment is viable.',
           difficulty: 'applied',
           expertNote: 'Despite low reliability, computer use agents are already valuable for: (1) generating automated test scripts by recording human workflows, (2) assisting (not replacing) humans by pre-filling forms and suggesting next actions, and (3) processing one-off migration tasks where human oversight is available. A PM should look for these "human-in-the-loop" use cases rather than waiting for full autonomy.'
@@ -832,12 +832,12 @@ Action: respond("John Smith is on an active Enterprise plan and is eligible for 
           question: 'Why is LangGraph gaining adoption over simpler agent frameworks like AutoGPT for production agent systems?',
           type: 'mc',
           options: [
-            'LangGraph uses a more powerful language model than AutoGPT',
-            'LangGraph models agent workflows as explicit state machines with checkpointing and deterministic control flow',
-            'AutoGPT cannot use any tools or APIs',
-            'LangGraph is a Google DeepMind product with official support'
+            'LangGraph is built on top of a more powerful underlying language model than AutoGPT, giving it better reasoning capabilities for complex multi-step tasks',
+            'AutoGPT cannot integrate with any external tools or APIs, limiting it to purely text-based reasoning without the ability to take actions in the world',
+            'LangGraph is an official Google DeepMind product with enterprise support contracts, SLAs, and dedicated customer success teams for production deployments',
+            'LangGraph models agent workflows as explicit state machines with checkpointing and deterministic control flow'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'Production agent systems need explicit control flow (knowing exactly what state the agent is in), checkpointing (ability to resume from failures), human-in-the-loop insertion points (for approval of critical actions), and observability (monitoring and debugging). LangGraph provides all of these through its graph-based state machine abstraction. AutoGPT recursive self-prompting is unpredictable, unmonitorable, and unrecoverable &mdash; fine for demos, unacceptable for production.',
           difficulty: 'applied',
           expertNote: 'The broader lesson is that agent reliability comes from constraining the agent, not from making it more autonomous. The best agent products look less like "autonomous AI" and more like carefully designed workflows with AI-powered decision points. This is counterintuitive but essential for production quality.'
@@ -1052,12 +1052,12 @@ Action: respond("John Smith is on an active Enterprise plan and is eligible for 
           question: 'Sora can generate 60-second photorealistic videos from text prompts. A product manager proposes using it to generate all training videos for the company onboarding program. What is the most important concern?',
           type: 'mc',
           options: [
-            'The videos will be too short at 60 seconds for training content',
-            'Video generation is too slow for real-time use cases and workflows',
             'Current video generation models lack guaranteed factual accuracy and controllable details for training content',
-            'Generated videos cannot include audio or narration in the output'
+            'The maximum duration of 60 seconds per clip is far too short to cover any meaningful training module or procedure comprehensively',
+            'Video generation is too computationally slow for real-time or just-in-time content creation workflows used in corporate training programs',
+            'Generated videos fundamentally cannot include synchronized audio narration or voiceover in the output, limiting their usefulness for instructional content'
           ],
-          correct: 2,
+          correct: 0,
           explanation: 'For training videos, accuracy is paramount. A generated video showing the wrong procedure or an inconsistent product interface does not just fail to help &mdash; it actively misteaches. Video generation models prioritize visual plausibility over factual correctness. The PM should evaluate whether the content requires strict accuracy (procedures, product demos) vs. atmospheric accuracy (general scenes, mood-setting) and use generation only where factual errors are low-risk.',
           difficulty: 'applied',
           expertNote: 'The right answer is a hybrid approach: use video generation for non-critical visual elements (backgrounds, transitions, illustrative scenes) and human-recorded footage for accuracy-critical content (product demonstrations, safety procedures). This captures the cost savings of generation while maintaining accuracy where it matters.'
@@ -1066,12 +1066,12 @@ Action: respond("John Smith is on an active Enterprise plan and is eligible for 
           question: 'Google DeepMind released Genie 2, which generates interactive 3D worlds from single images. Why is this significant beyond just being an impressive demo?',
           type: 'mc',
           options: [
-            'It proves that 3D games can be fully automated eliminating the need for game developers',
+            'It proves that 3D game creation can be fully automated end-to-end, permanently eliminating the need for game developers and designers',
+            'It means Google can now directly compete with Netflix and streaming studios in entertainment content production at significantly lower cost',
             'Interactive world models could enable training embodied AI agents (robots) entirely in simulation',
-            'It means Google can now compete with Netflix in entertainment content production',
-            'Genie 2 is primarily significant as a consumer entertainment product for users'
+            'Genie 2 is primarily significant as a consumer entertainment product that will generate direct revenue for Google through user subscriptions'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'World models like Genie 2 have their highest-impact application in embodied AI / robotics training. Training robots in the physical world is slow (real-time), expensive (hardware wears out), and dangerous (robots can break things). A world model that accurately simulates physics allows training millions of robot episodes in simulation at GPU speed. This is the same principle that made AlphaGo possible &mdash; self-play in simulation &mdash; applied to the physical world.',
           difficulty: 'applied',
           expertNote: 'This connects to DeepMind long-term AGI mission. The path from AlphaGo (game world model) to AlphaFold (protein world model) to Genie (physical world model) represents a progression toward increasingly general world understanding. A PM should frame world model research in this strategic context when communicating with leadership.'
@@ -1080,10 +1080,10 @@ Action: respond("John Smith is on an active Enterprise plan and is eligible for 
           question: 'As AI capabilities expand across text, image, video, audio, and code, what is the most strategically important "moat" for an AI product company?',
           type: 'mc',
           options: [
-            'Having the largest model with the most parameters available',
+            'Having the largest model with the most total parameters, since raw model scale is the primary and most durable competitive differentiator in the AI market',
             'Proprietary training data and unique distribution channels that create compounding user value',
-            'Being first to market with each new capability and feature',
-            'Having the lowest API prices to attract the most developers'
+            'Being consistently first to market with each new capability and feature type, since early-mover advantage creates lasting winner-take-all dynamics in AI',
+            'Maintaining the lowest API token prices across all tiers to attract the largest possible developer community and lock in switching costs through integrations'
           ],
           correct: 1,
           explanation: 'As model capabilities commoditize (multiple labs produce similar quality), the durable competitive advantages shift to: (1) proprietary data that improves the product (user interactions, domain-specific datasets), (2) distribution (Google has Search, Apple has devices, Microsoft has Office), and (3) compounding user value (the more a user uses the product, the better it gets for them through personalization and memory). Model quality is necessary but not sufficient &mdash; it is table stakes, not a moat.',

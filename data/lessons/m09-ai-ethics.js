@@ -94,9 +94,9 @@ export const lessons = {
           question: 'Your team is building a content moderation model for a global product. Evaluation shows 96% aggregate accuracy, but when you request disaggregated metrics, you discover the false positive rate for African American Vernacular English (AAVE) is 3x higher than for Standard American English. Engineering argues the aggregate metric meets the launch bar. What is the most appropriate PM response?',
           type: 'mc',
           options: [
-            'Launch with the current model since 96% aggregate accuracy exceeds the threshold',
-            'Delay launch and require equal false positive rates across all demographic groups',
-            'Launch with monitoring dashboard and commit to reducing disparity within 90 days',
+            'Launch with the current model since 96% aggregate accuracy exceeds the threshold, and use post-launch monitoring to detect if the disparity causes any measurable uptick in user complaints or content appeal requests',
+            'Delay launch and require equal false positive rates across all demographic groups, implementing a strict demographic parity constraint that treats all groups identically regardless of differences in base rate or content distribution',
+            'Launch with monitoring dashboard and commit to reducing disparity within 90 days, since shipping with a known monitoring plan demonstrates product maturity and gives the safety team real production data to guide the remediation',
             'Delay launch, require equalized rates, and establish fairness rubric for future updates'
           ],
           correct: 3,
@@ -108,12 +108,12 @@ export const lessons = {
           question: 'Which of the following correctly describes the impossibility theorem in algorithmic fairness?',
           type: 'mc',
           options: [
-            'No AI system can be completely free of all bias',
             'Three fairness definitions cannot all hold when base rates differ',
-            'Fairness and accuracy always trade off against each other',
-            'Individual and group fairness are logically contradictory'
+            'No AI system can be completely free of all bias, because the data used for training always reflects historical societal patterns and structural inequities that are mathematically impossible to remove without distorting the underlying information content',
+            'Fairness and accuracy always trade off against each other, meaning that any improvement in demographic parity necessarily comes at the cost of overall predictive performance on the held-out test set',
+            'Individual and group fairness are logically contradictory, so teams must choose exactly one fairness framework and apply it consistently rather than attempting to satisfy both simultaneously in the same model'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'The impossibility theorem (Chouldechova 2017, Kleinberg et al. 2016) specifically proves that when the base rate of the positive class differs between groups, three common group fairness definitions — demographic parity, equalized odds, and predictive parity — cannot all be satisfied at once. This is a precise mathematical result, not a general claim about bias or accuracy tradeoffs.',
           difficulty: 'applied',
           expertNote: 'This theorem has profound implications for PM decision-making. It means you must explicitly choose which fairness definition is most appropriate for your specific use case and be prepared to justify that choice. For instance, in criminal justice, equalized odds might be prioritized (equal error rates), while in lending, predictive parity might matter more (equal meaning of a positive prediction). There is no universally "correct" choice.'
@@ -145,12 +145,12 @@ export const lessons = {
           question: 'What is the primary purpose of a model card in the context of AI fairness?',
           type: 'mc',
           options: [
-            'To provide marketing materials that highlight the model\'s best performance metrics',
+            'To provide marketing materials that highlight the model\'s best performance metrics, giving procurement teams the benchmark comparisons they need to justify purchasing decisions to their executive sponsors and finance departments',
+            'To satisfy regulatory requirements by listing the model\'s parameters and architecture details, enabling regulators and auditors to assess technical compliance with the high-risk AI system requirements of frameworks like the EU AI Act',
             'To document intended use, training data, evaluation across subgroups, and known limitations',
-            'To satisfy regulatory requirements by listing the model\'s parameters and architecture details',
-            'To provide end users with instructions on how to prompt the model for optimal results'
+            'To provide end users with instructions on how to prompt the model for optimal results, combining technical documentation with prompt engineering guidance so non-technical users can extract maximum value from the system'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'Model cards, introduced by Mitchell et al. (2019), are standardized documentation artifacts that provide transparency about a model\'s intended use, training data, evaluation methodology, disaggregated performance metrics, ethical considerations, and known limitations. They serve as a communication tool between model developers, deployers, and stakeholders — enabling informed decisions about whether and how to use a model.',
           difficulty: 'foundational',
           expertNote: 'At DeepMind and Google, model cards are a required part of the model release process. As a PM, you should be the primary author or reviewer of the "Intended Use" and "Limitations" sections, since these directly reflect product decisions. A well-written model card can also serve as a liability shield by documenting that the team considered and disclosed known risks.'
@@ -266,10 +266,10 @@ export const lessons = {
           question: 'Which of the following best describes the relationship between RLHF and Constitutional AI (CAI) as alignment techniques?',
           type: 'mc',
           options: [
-            'RLHF and CAI are competing approaches — teams should choose one based on their resources.',
-            'CAI is a strictly superior replacement for RLHF that eliminates human feedback entirely.',
+            'RLHF and CAI are competing approaches — teams should choose one based on their resources, since implementing both simultaneously doubles the alignment engineering overhead and creates conflicting optimization signals that can destabilize model behavior during fine-tuning.',
+            'CAI is a strictly superior replacement for RLHF that eliminates human feedback entirely, as the constitutional principles provide a sufficiently precise specification of desired behavior that AI-generated critiques fully replicate what human annotators would flag.',
             'CAI extends the RLHF paradigm by using AI-generated feedback guided by explicit principles, reducing but not eliminating human oversight needs.',
-            'RLHF handles safety alignment while CAI handles capability alignment — they serve different purposes.'
+            'RLHF handles safety alignment while CAI handles capability alignment — they serve different purposes, and the two systems operate on independent training pipelines that must be carefully scheduled to avoid interference during the post-training phase.'
           ],
           correct: 2,
           explanation: 'Constitutional AI was developed by Anthropic as an evolution of the RLHF paradigm. It uses a set of explicit principles (the "constitution") to guide AI-generated feedback, which then trains the model via RL — similar to RLHF but with AI feedback (RLAIF) instead of human feedback. This makes it more scalable and makes the alignment criteria more transparent and auditable. However, human oversight remains necessary for defining the principles, evaluating edge cases, and validating that the AI feedback is faithful to the constitution.',
@@ -281,9 +281,9 @@ export const lessons = {
           type: 'mc',
           options: [
             'Behavioral testing can only verify behavior on tested inputs; it cannot guarantee behavior on untested inputs or reveal latent capabilities. Interpretability provides assurance about internal mechanisms, not just observed outputs.',
-            'Interpretability is required by the EU AI Act for all high-risk AI systems.',
-            'Behavioral testing is too expensive to scale — interpretability is cheaper in the long run.',
-            'RLHF is known to be unreliable, so we cannot trust behavioral testing on RLHF-trained models.'
+            'Interpretability is required by the EU AI Act for all high-risk AI systems, and organizations that cannot provide mechanistic explanations of their model\'s decision-making will face fines and mandatory product withdrawal under the enforcement provisions.',
+            'Behavioral testing is too expensive to scale — interpretability is cheaper in the long run because a mechanistic understanding of the model allows engineers to predict failure modes analytically rather than discovering them through exhaustive empirical testing.',
+            'RLHF is known to be unreliable, so we cannot trust behavioral testing on RLHF-trained models, whose behavior is determined by reward signal quality rather than principled design and can therefore not be characterized through standard input-output evaluation methods.'
           ],
           correct: 0,
           explanation: 'The fundamental limitation of behavioral testing is that it can only assess the model on inputs you think to test. It provides no assurance about the vast space of untested inputs. Interpretability tools allow you to examine the model\'s internal representations and mechanisms, potentially revealing capabilities, biases, or failure modes that no finite test set would uncover. This is analogous to the difference between black-box testing and code review in software engineering — both are necessary.',
@@ -308,12 +308,12 @@ export const lessons = {
           question: 'In the context of AI safety, what does "defense in depth" mean and why is it essential for LLM-based products?',
           type: 'mc',
           options: [
-            'Training the model on a very large and diverse dataset so it can handle any input safely.',
-            'Using multiple, independent layers of safety mechanisms (input filtering, model-level safety training, output filtering, monitoring) so if any single layer fails, others provide protection.',
-            'Ensuring the model has deep understanding of safety concepts so it can self-regulate its behavior.',
-            'Conducting very thorough pre-launch testing to identify all possible failure modes before deployment.'
+            'Training the model on a very large and diverse dataset so it can handle any input safely, since broader training coverage reduces the probability that any individual adversarial input falls outside the distribution the model learned to handle during pre-training.',
+            'Ensuring the model has deep understanding of safety concepts so it can self-regulate its behavior, implementing constitutional principles at training time that give the model an internalized sense of boundaries that it applies autonomously without external filtering.',
+            'Conducting very thorough pre-launch testing to identify all possible failure modes before deployment, using a comprehensive red team exercise that systematically exhausts the known attack taxonomy so that the shipped model has no remaining exploitable vulnerabilities.',
+            'Using multiple, independent layers of safety mechanisms (input filtering, model-level safety training, output filtering, monitoring) so if any single layer fails, others provide protection.'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'Defense in depth is a security principle borrowed from cybersecurity and military strategy. In the context of LLM products, it means layering multiple independent safety mechanisms: input classification and filtering, safety-trained model behavior (RLHF/CAI), output filtering via classifiers, usage monitoring and anomaly detection, and human review for edge cases. No single layer is sufficient because adversarial users will find ways to bypass any individual mechanism. The strength of defense in depth is that an attacker must defeat every layer simultaneously.',
           difficulty: 'foundational',
           expertNote: 'At Google DeepMind, safety architecture for Gemini-based products typically includes at least four layers: (1) input-side safety classifiers, (2) the model\'s own safety training, (3) output-side safety classifiers, and (4) production monitoring with human escalation. Each layer catches failures that others miss, and the composition of imperfect layers produces a much more robust system than any single layer could achieve.'
@@ -461,10 +461,10 @@ export const lessons = {
           question: 'What is the significance of the 10^25 FLOPs threshold in the EU AI Act\'s GPAI provisions?',
           type: 'mc',
           options: [
-            'Models trained with more than 10^25 FLOPs are banned from the EU market.',
+            'Models trained with more than 10^25 FLOPs are banned from the EU market, preventing frontier labs from deploying their largest models to European customers unless they obtain a special exemption from the AI Office through a formal capability assessment process.',
             'Models trained with more than 10^25 FLOPs are presumed to pose systemic risk and face additional obligations including adversarial testing, risk mitigation, incident reporting, and cybersecurity.',
-            'The threshold determines whether a model qualifies as "general-purpose" — below it, models are narrow AI.',
-            'Models below this threshold are exempt from all EU AI Act requirements.'
+            'The threshold determines whether a model qualifies as "general-purpose" — below it, models are narrow AI and fall outside the GPAI provisions entirely, meaning they are regulated solely under the risk-tiered requirements applicable to their specific deployment context.',
+            'Models below this threshold are exempt from all EU AI Act requirements, since the regulation focuses exclusively on frontier systems whose training scale signals sufficient capability to pose societal-level risks that justify the compliance overhead.'
           ],
           correct: 1,
           explanation: 'The 10^25 FLOPs threshold is used to identify GPAI models that are presumed to pose "systemic risk" due to their high capabilities. These models face additional obligations beyond the base GPAI requirements: model evaluation including adversarial testing, systemic risk assessment and mitigation, serious incident reporting to the AI Office, and cybersecurity protections. The threshold can also be overridden by Commission designation based on capabilities.',
@@ -475,12 +475,12 @@ export const lessons = {
           question: 'A PM building a global AI product argues: "We should build separate compliance systems for each jurisdiction — EU version, US version, etc." Why is this approach suboptimal, and what alternative strategy should a PM advocate?',
           type: 'mc',
           options: [
-            'It is suboptimal because different jurisdictions have conflicting requirements making multi-version compliance impossible.',
+            'It is suboptimal because different jurisdictions have conflicting requirements making multi-version compliance impossible, as the EU AI Act\'s transparency mandates directly contradict US trade secret protections in ways that no single architecture can satisfy simultaneously.',
+            'It is suboptimal because only the EU has AI regulation, so other versions are unnecessary overhead that diverts engineering resources from product development without providing any corresponding risk reduction or market access benefit.',
             'It is suboptimal because maintaining multiple compliance variants is expensive and error-prone. The PM should advocate building to the highest common denominator (typically EU AI Act) as a single global standard, satisfying requirements everywhere.',
-            'It is suboptimal because only the EU has AI regulation, so other versions are unnecessary.',
-            'It is suboptimal because users might move between jurisdictions. The PM should build no compliance features and wait for unified global regulation.'
+            'It is suboptimal because users might move between jurisdictions, and a product that switches compliance modes based on detected user location creates a fragmented experience that erodes trust and creates legal liability during transition periods.'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'Building jurisdiction-specific variants multiplies engineering, testing, and documentation costs. Since the EU AI Act is currently the most comprehensive AI regulation, building to its standards typically satisfies or exceeds requirements in other jurisdictions. This "highest common denominator" approach reduces complexity, ensures consistency, and provides a margin of safety as other jurisdictions develop their own regulations (likely influenced by the EU approach).',
           difficulty: 'applied',
           expertNote: 'This is known as the "Brussels effect" — the EU\'s regulatory standards become de facto global standards because it is cheaper for companies to build one compliant version than to maintain multiple variants. GDPR had this effect on data privacy, and the EU AI Act is expected to have a similar effect on AI governance. PMs should factor this dynamic into their long-term product strategy.'
@@ -489,12 +489,12 @@ export const lessons = {
           question: 'Which of the following best describes the role of the NIST AI Risk Management Framework (AI RMF) in the US regulatory landscape?',
           type: 'mc',
           options: [
-            'It is a legally binding federal regulation that all AI companies in the US must follow.',
             'It is a voluntary framework providing structured guidance for managing AI risks, organized into four functions: Govern, Map, Measure, and Manage.',
-            'It is a certification standard — companies must pass a NIST audit to deploy AI in the US.',
-            'It only applies to government agencies and contractors, not private sector companies.'
+            'It is a legally binding federal regulation that all AI companies in the US must follow, with enforcement authority delegated to the FTC for commercial applications and NIST for government-contracted AI systems.',
+            'It is a certification standard — companies must pass a NIST audit to deploy AI in the US, similar to how FedRAMP certification gates cloud service providers from operating within federal government infrastructure.',
+            'It only applies to government agencies and contractors, not private sector companies, since NIST\'s statutory mandate covers federal technology standards rather than commercial product requirements.'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'The NIST AI RMF is a voluntary, non-binding framework that provides organizations with a structured approach to managing AI risks. Its four core functions — Govern (establish context and culture), Map (identify and classify risks), Measure (analyze and assess risks), and Manage (prioritize and act on risks) — offer a practical methodology for responsible AI development. While not legally binding, it is increasingly referenced in federal procurement requirements and state-level legislation, making it practically important.',
           difficulty: 'foundational',
           expertNote: 'Although voluntary, the NIST AI RMF is becoming a de facto standard for AI governance in the US through several channels: the Executive Order on AI Safety references it, government procurement requirements increasingly require alignment with it, and state-level AI bills (like Colorado\'s) cite it as a safe harbor framework. PMs at companies selling to government or enterprise customers should treat it as effectively mandatory.'
@@ -642,12 +642,12 @@ export const lessons = {
           question: 'Which layer in a guardrails stack is the most difficult to update quickly in response to a newly discovered safety failure?',
           type: 'mc',
           options: [
-            'Input classification filters — because they require retraining on new data.',
-            'Model-level safety training (RLHF/CAI) — because updating it requires retraining or fine-tuning the model.',
-            'Output classification filters — because they must handle the full diversity of model outputs.',
-            'System instructions (system prompt) — because changing them requires redeployment.'
+            'Input classification filters — because they require retraining on new data, meaning that any newly discovered attack pattern must be labeled by human annotators, used to train a new classifier, validated on a held-out test set, and deployed through the standard release pipeline.',
+            'Output classification filters — because they must handle the full diversity of model outputs, requiring continuous expansion of training data as the underlying generative model is updated and begins producing novel output patterns that earlier classifier versions cannot reliably categorize.',
+            'System instructions (system prompt) — because changing them requires redeployment of the entire inference stack and must be coordinated across all regional serving endpoints to prevent inconsistent behavior during the rollout window.',
+            'Model-level safety training (RLHF/CAI) — because updating it requires retraining or fine-tuning the model.'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'Model-level safety training is the most difficult to update quickly because it requires fine-tuning or retraining the model — a process that takes days to weeks and requires careful evaluation to avoid regressions. In contrast, input/output filters can be updated by retraining smaller classifier models or adding rules, and system prompts can be changed with a configuration update. This is precisely why the layered approach is important: the other layers compensate for the model layer\'s slow update cycle.',
           difficulty: 'applied',
           expertNote: 'This is why the guardrails stack is designed the way it is — fast-to-update layers (filters, system prompts, policy rules) provide immediate defense while slow-to-update layers (model training) provide deep, robust defense. A common pattern is to use filter-level patches as interim mitigations while model-level fixes are developed and validated. At Google, classifier updates can deploy in hours, while model updates take weeks.'
@@ -656,12 +656,12 @@ export const lessons = {
           question: 'What is the primary risk of setting guardrails too aggressively (over-refusal)?',
           type: 'mc',
           options: [
-            'Over-refusal has no significant downsides — it is always better to be too safe than too permissive.',
-            'Over-refusal reduces compute costs, which makes the product less profitable.',
+            'Over-refusal has no significant downsides — it is always better to be too safe than too permissive, since regulators and journalists evaluate AI products on the harms they enable rather than on the legitimate tasks they unnecessarily block.',
             'Users lose trust, find workarounds bypassing safety measures entirely, or switch to less cautious competitors — ultimately reducing the product\'s safety impact by reducing its user base.',
-            'Over-refusal triggers regulatory scrutiny because the EU AI Act penalizes products that restrict user access.'
+            'Over-refusal reduces compute costs, which makes the product less profitable, since declined requests still consume inference resources for the input classification layer even when the output generation stage is never reached.',
+            'Over-refusal triggers regulatory scrutiny because the EU AI Act penalizes products that restrict user access to information, containing specific provisions requiring that AI systems not be more restrictive than a human expert in the relevant domain would be.'
           ],
-          correct: 2,
+          correct: 1,
           explanation: 'Over-refusal creates a paradoxical safety problem: users who experience frequent false-positive refusals will find workarounds (including using jailbreaks), switch to competitor products with looser safety settings, or distrust the system\'s judgment entirely. The net effect is less safety, not more. The optimal safety calibration maximizes the product\'s positive safety impact across its entire user base, which requires maintaining enough utility that users actually use the product.',
           difficulty: 'applied',
           expertNote: 'This is one of the most counterintuitive insights in AI safety product management. Google, OpenAI, and Anthropic have all experienced this dynamic: products perceived as too restrictive saw users migrate to less-safe alternatives. The PM\'s job is to find the sweet spot where safety measures are effective but not so aggressive that they drive users away from the safer product. This requires continuous calibration using both violation rates AND over-refusal rates.'
@@ -685,12 +685,12 @@ export const lessons = {
           question: 'You are calibrating content policy guardrails for a creative writing assistant. A user requests the product generate a mystery novel scene involving a murder. Which approach best exemplifies proportional, context-sensitive guardrails?',
           type: 'mc',
           options: [
-            'Block all requests involving violence, murder, or death, with a message explaining these topics are restricted.',
-            'Allow the generation without any guardrails since creative writing is a low-risk use case.',
+            'Block all requests involving violence, murder, or death, with a message explaining these topics are restricted, applying a zero-tolerance policy that treats all depictions of harm equivalently regardless of whether they appear in a clearly fictional narrative or instructional context.',
             'Allow the generation for narrative fiction contexts while maintaining guardrails against graphic gratuitous violence, ensuring the output does not include real instructional content about committing violence, and refusing if the request appears to describe a real planned act.',
-            'Allow the generation but add a disclaimer to every output that the content is fictional and may be disturbing.'
+            'Allow the generation without any guardrails since creative writing is a low-risk use case, relying on the platform\'s terms of service and post-hoc content review to catch the small fraction of requests that attempt to abuse the creative framing for genuinely harmful outputs.',
+            'Allow the generation but add a disclaimer to every output that the content is fictional and may be disturbing, fulfilling the transparency obligation that prevents users from being deceived by AI-generated content while still allowing the full range of creative expression.'
           ],
-          correct: 2,
+          correct: 1,
           explanation: 'Option C demonstrates proportional, context-sensitive guardrails. It recognizes that a murder mystery is a legitimate creative writing genre (no blanket ban), distinguishes between fictional narrative and actionable harmful content, and maintains a critical boundary (refusing if the "fiction" framing appears to be masking a genuine harmful request). Option A is disproportionate (blocks legitimate creative use). Option B ignores valid safety concerns. Option D adds friction without addressing real risks.',
           difficulty: 'applied',
           expertNote: 'This is one of the most common calibration challenges in generative AI products. The key distinction is between content that depicts violence in a narrative context (fundamental to literature from Shakespeare to Agatha Christie) and content that functions as instructional material for real-world harm. Good guardrails make this distinction — bad guardrails either block all references to difficult topics (alienating creative users) or allow everything (exposing users to genuine harm). Training classifiers to distinguish narrative context from instructional content is an active area of research.'

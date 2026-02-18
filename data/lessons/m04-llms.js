@@ -94,12 +94,12 @@ export const lessons = {
           question: 'You are evaluating a vendor who claims their NLP product uses "advanced word embeddings powered by Word2Vec" for a customer sentiment analysis system. What is the most important technical concern you should raise?',
           type: 'mc',
           options: [
-            'Word2Vec is too old for any modern NLP applications',
+            'Word2Vec requires too much training data to deploy, needing corpora in the billions of tokens before producing useful semantic embeddings',
+            'Word2Vec cannot process non-English languages well, since most pre-trained models are English-only and multilingual versions have limited vocabulary coverage',
             'Static embeddings miss context, sarcasm, negation',
-            'Word2Vec requires too much training data to deploy',
-            'Word2Vec cannot process non-English languages well'
+            'Word2Vec is too old for any modern NLP applications and has been fully deprecated in current ML frameworks'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'Word2Vec produces one fixed vector per word regardless of context. This means "not good" will have similar representation to "good" (since the embeddings of "not" and "good" are independently looked up), sarcasm will be missed, and polysemous words will conflate their senses. For sentiment analysis, where context fundamentally determines meaning, this is a critical limitation.',
           difficulty: 'applied',
           expertNote: 'A world-class PM would also ask about the specific evaluation metrics being used and whether the vendor has benchmarked against contextual baselines. In 2024+, using Word2Vec for sentiment analysis is a red flag suggesting the vendor is not using current best practices.'
@@ -108,12 +108,12 @@ export const lessons = {
           question: 'The progression from Word2Vec (2013) to GPT-3 (2020) involved multiple innovations. Which of the following correctly describes the most important conceptual shift that enabled in-context learning in GPT-3?',
           type: 'mc',
           options: [
-            'GPT-3 used a fundamentally different neural network architecture than previous models',
-            'GPT-3 was trained on higher quality and more carefully curated data than any previous model',
             'Massive scale with diverse data produced emergent in-context learning not present at smaller scales',
-            'GPT-3 was explicitly trained for in-context learning through a specialized training objective'
+            'GPT-3 used a fundamentally different neural network architecture than previous models, introducing a novel attention mechanism specifically designed for long-range context',
+            'GPT-3 was trained on higher quality and more carefully curated data than any previous model, with human reviewers manually filtering the CommonCrawl corpus for factual accuracy',
+            'GPT-3 was explicitly trained for in-context learning through a specialized training objective that exposed the model to few-shot classification tasks during pre-training'
           ],
-          correct: 2,
+          correct: 0,
           explanation: 'GPT-3 used the same decoder-only Transformer architecture and next-token prediction objective as GPT-2 — just much bigger. The in-context learning ability emerged from scale, not from architectural innovation or specialized training. This demonstrated that quantitative scaling can produce qualitative capability changes, a finding that reshaped the field and drove the "scaling laws" research agenda.',
           difficulty: 'applied',
           expertNote: 'The emergence of in-context learning from pure next-token prediction is still not fully understood theoretically. A PM should know that emergent capabilities are unpredictable — both in terms of when they appear during scaling and which capabilities will emerge — which creates unique product planning challenges.'
@@ -146,12 +146,12 @@ export const lessons = {
           question: 'You are building a roadmap for an AI product that needs to classify support tickets (understanding task) and generate suggested replies (generation task). Given the evolution from BERT to modern LLMs, what is the most cost-effective architectural strategy?',
           type: 'mc',
           options: [
-            'Always use BERT for classification and GPT for generation',
-            'Single LLM for both, fine-tuned BERT for high volume',
-            'Build custom architecture from scratch for the domain',
-            'Word2Vec with traditional ML for both tasks'
+            'Always use BERT for classification and GPT for generation, maintaining two completely separate model stacks and inference endpoints for each task type',
+            'Build custom architecture from scratch for the domain, since off-the-shelf models lack the specific knowledge needed for support ticket classification and response generation',
+            'Word2Vec with traditional ML for both tasks, which provides interpretable feature vectors and fast inference without any dependency on large transformer models',
+            'Single LLM for both, fine-tuned BERT for high volume'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'A modern LLM can handle both tasks through prompting, which simplifies the stack. However, if classification volume is very high (millions of tickets/day), running a large LLM for simple classification may be prohibitively expensive. A small fine-tuned BERT (~110M parameters) can classify tickets at 100x lower cost per request than a large LLM. The PM should evaluate the volume/cost tradeoff and potentially use a hybrid approach: BERT for high-volume classification, LLM for generation.',
           difficulty: 'expert',
           expertNote: 'This hybrid approach — small specialized models for high-volume simple tasks, large general models for complex/generation tasks — is the standard industry pattern. A PM at DeepMind should know that not every use case justifies the cost of a frontier model, and that model selection is a key product economics decision.'
@@ -284,12 +284,12 @@ export const lessons = {
           question: 'A non-technical stakeholder asks: "Why does pre-training cost $100M+? Can\'t we just train on less data to save money?" What is the best technical explanation?',
           type: 'mc',
           options: [
-            'More data is always better regardless of cost considerations, so we maximize spending to ensure superiority',
+            'More data is always better regardless of cost considerations, so we maximize spending to ensure competitive model superiority in all benchmark categories',
+            'Training infrastructure electricity costs account for the entire budget and cannot be optimized or reduced through hardware efficiency improvements or alternative compute strategies',
             'Quality scales predictably with data via scaling laws',
-            'Training infrastructure electricity costs account for the entire budget and cannot be optimized or reduced through alternative approaches',
-            'Pre-training budgets are essentially fixed across all model architectures regardless of data volume or parameter choices'
+            'Pre-training budgets are essentially fixed across all model architectures regardless of data volume or parameter choices, since compute hardware costs have stabilized over recent years'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'Scaling laws (Kaplan et al., Chinchilla) demonstrate that model quality improves predictably with more compute, data, and parameters. Reducing any of these degrades quality in a measurable way. If the product requires frontier-level capabilities to be competitive, there is a minimum compute budget below which the model simply will not be good enough. The PM must help stakeholders understand that the training budget is not arbitrary — it is determined by the quality bar required for the product.',
           difficulty: 'applied',
           expertNote: 'A world-class PM would also know about the Chinchilla scaling laws, which showed that many models were undertrained relative to their parameter count. The optimal allocation of a fixed compute budget is roughly equal scaling of parameters and training tokens, not just making models bigger.'
@@ -313,12 +313,12 @@ export const lessons = {
           question: 'During a pre-training run for a new Gemini model, the training loss spikes dramatically at step 500,000 of a planned 1,000,000 steps. The ML team proposes rolling back to step 490,000 and continuing from there. As PM, what should you understand about the impact on the project timeline?',
           type: 'mc',
           options: [
-            'Training resumes seamlessly with no timeline impact',
-            '10K steps lost, investigation needed—timeline impact ranges from days to weeks depending on root cause (bad data batch vs fundamental instability)',
-            'Entire run must restart from step 0 due to corruption',
-            'Spikes are beneficial, indicating accelerated learning'
+            'Training resumes seamlessly with no timeline impact, since rolling back to the previous checkpoint fully restores the model state and the remaining steps can proceed on schedule',
+            'Entire run must restart from step 0 due to corruption, as any checkpoint taken after a loss spike contains invalid gradient information that cannot be recovered',
+            'Spikes are beneficial, indicating accelerated learning through a temporary instability that allows the model to escape local minima before converging faster afterward',
+            '10K steps lost, investigation needed—timeline impact ranges from days to weeks depending on root cause (bad data batch vs fundamental instability)'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'Rolling back loses the compute invested in steps 490K-500K and requires investigation to prevent recurrence. If caused by a bad data batch, it may be a quick fix (exclude the batch and resume). If caused by fundamental numerical instability, it may require hyperparameter changes that necessitate restarting from an earlier checkpoint or even from scratch. The PM should get a root cause analysis and timeline estimate before updating stakeholders.',
           difficulty: 'applied',
           expertNote: 'At frontier labs, loss spike investigation is a well-practiced discipline. Teams maintain detailed logging of data batches, learning rate, gradient norms, and hardware health at each step. A PM should ensure this monitoring infrastructure exists before the training run begins, not after the first failure.'
@@ -433,12 +433,12 @@ export const lessons = {
           question: 'What is the primary advantage of RLHF over supervised fine-tuning (SFT) alone?',
           type: 'mc',
           options: [
-            'RLHF is cheaper and requires less human annotation overall',
-            'RLHF teaches the model new factual knowledge that SFT cannot provide',
             'RLHF can learn from comparative judgments (which response is better), which is easier for humans to provide than writing perfect responses, and can optimize for qualities that are hard to demonstrate explicitly',
-            'RLHF eliminates all safety risks from the model permanently'
+            'RLHF is cheaper and requires less human annotation overall, since ranking pairs of responses takes far less annotator time than writing high-quality demonstrations from scratch',
+            'RLHF teaches the model new factual knowledge that SFT cannot provide, since the reward model encodes domain expertise that gets transferred into the language model weights',
+            'RLHF eliminates all safety risks from the model permanently by training a comprehensive reward model that penalizes every known category of harmful output'
           ],
-          correct: 2,
+          correct: 0,
           explanation: 'The key insight of RLHF is that judging (ranking) is easier than demonstrating (writing). Humans can reliably say "response A is better than response B" even when they cannot write the perfect response themselves. This allows RLHF to optimize for subtle qualities like nuance, tone, and judgment that are difficult to capture in SFT demonstrations. RLHF does NOT teach new facts (those come from pre-training) and does NOT eliminate all safety risks.',
           difficulty: 'foundational',
           expertNote: 'An expert PM would also know that the quality of RLHF is bounded by the quality of the reward model, which is bounded by the quality of the human preference data. Investing in annotator training, clear guidelines, and inter-annotator agreement metrics is as important as the RL algorithm itself.'
@@ -462,12 +462,12 @@ export const lessons = {
           question: 'Direct Preference Optimization (DPO) has emerged as an alternative to RLHF. What is the primary practical advantage of DPO?',
           type: 'mc',
           options: [
-            'DPO produces fundamentally better aligned models than RLHF in all deployment cases',
-            'DPO eliminates the need for any human preference data entirely',
+            'DPO produces fundamentally better aligned models than RLHF in all deployment cases, as confirmed by multiple independent evaluation studies across diverse task categories',
             'DPO simplifies the alignment pipeline by removing the need for a separate reward model and RL training loop, directly optimizing the language model on preference data',
-            'DPO can align models without any pre-training or base capabilities'
+            'DPO eliminates the need for any human preference data entirely, replacing annotator judgments with automatic quality signals derived from the model\'s own generations',
+            'DPO can align models without any pre-training or base capabilities, making it viable for training specialized assistants entirely from random initialization'
           ],
-          correct: 2,
+          correct: 1,
           explanation: 'DPO\'s main advantage is simplicity — it directly optimizes the language model using preference data, avoiding the complexity of training a separate reward model and running a reinforcement learning loop (PPO). This makes it easier to implement, more stable to train, and faster to iterate. It still requires human preference data (option B is false), and whether it matches RLHF at the frontier is debated (option A is false).',
           difficulty: 'applied',
           expertNote: 'A PM should understand that the choice between RLHF and DPO is partly an engineering decision (team expertise, infrastructure) and partly a quality decision (some evidence suggests RLHF is better for complex, multi-dimensional preferences). The PM should push for empirical comparison on the specific product\'s evaluation suite rather than relying on general claims.'
@@ -476,12 +476,12 @@ export const lessons = {
           question: 'You are reviewing the annotation guidelines for RLHF preference labeling on a Gemini model that will be deployed globally. The annotator team is primarily based in the US and UK. What is the most important risk you should flag?',
           type: 'mc',
           options: [
-            'The annotators might prefer longer responses, biasing the model toward verbosity in all situations',
+            'The annotators might prefer longer responses, biasing the model toward verbosity in all situations, which could increase API costs for enterprise customers paying per output token',
+            'US/UK annotators cannot evaluate technical accuracy of model responses, since annotators are selected for language proficiency rather than subject-matter expertise in science or medicine',
             'The cultural values, communication norms, and sensitivity judgments of US/UK annotators may not generalize globally, leading to a model that is over-aligned for some cultures and under-aligned for others',
-            'US/UK annotators cannot evaluate technical accuracy of model responses',
-            'English-speaking annotators cannot provide preference data for multilingual models effectively'
+            'English-speaking annotators cannot provide preference data for multilingual models effectively, because they cannot assess fluency and naturalness in languages they do not speak natively'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'RLHF alignment encodes the values and preferences of the annotators. If the annotator pool is culturally homogeneous, the resulting model will reflect those cultural norms — what is considered "polite," "appropriate," or "sensitive" varies significantly across cultures. A globally deployed model needs diverse annotator representation to avoid systematic cultural bias in its alignment. This is both an ethical concern and a product quality concern for international markets.',
           difficulty: 'expert',
           expertNote: 'At DeepMind, this is a recognized challenge for Gemini\'s global deployment. A world-class PM would advocate for region-specific evaluation suites, diverse annotator pools, and potentially region-adapted alignment strategies for major markets.'
@@ -592,12 +592,12 @@ export const lessons = {
           question: 'You are designing the system prompt for a new Gemini-powered medical information product. The product should provide general health information but must never provide specific diagnosis or treatment recommendations. Which approach is most robust?',
           type: 'mc',
           options: [
-            'Simply add "You are not a doctor" to the system prompt',
-            'Design a multi-layered system prompt that: (1) establishes the role as a health information assistant, (2) explicitly defines the boundary between general information and medical advice with examples, (3) specifies the refusal behavior with a helpful redirect ("I recommend consulting your doctor for this specific question"), and (4) includes test cases of boundary situations to establish the desired behavior pattern',
-            'Rely on RLHF alignment to handle medical safety without any system prompt guidance',
-            'Block all health-related queries entirely to avoid liability'
+            'Simply add "You are not a doctor" to the system prompt, which is sufficient to establish the model\'s identity and prevent it from providing clinical-level recommendations',
+            'Rely on RLHF alignment to handle medical safety without any system prompt guidance, since the model\'s training already encodes all necessary safety behaviors for health-related applications',
+            'Block all health-related queries entirely to avoid liability, directing users to consult a physician for any question that contains medical terminology or symptoms',
+            'Design a multi-layered system prompt that: (1) establishes the role as a health information assistant, (2) explicitly defines the boundary between general information and medical advice with examples, (3) specifies the refusal behavior with a helpful redirect ("I recommend consulting your doctor for this specific question"), and (4) includes test cases of boundary situations to establish the desired behavior pattern'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'A robust system prompt for a safety-critical domain requires multiple layers: clear role definition, explicit boundary examples, specific refusal language, and edge case coverage. A simple instruction is too vague and will fail on boundary cases. Relying solely on RLHF is insufficient for domain-specific safety. Blocking all health queries destroys the product value. The layered approach provides clear guidance for the model and is testable against known edge cases.',
           difficulty: 'expert',
           expertNote: 'A world-class PM would also implement additional safety layers beyond the system prompt — output classifiers that flag potential medical advice, mandatory disclaimers in the UI, and a monitoring system that tracks boundary violations for continuous improvement.'
@@ -606,12 +606,12 @@ export const lessons = {
           question: 'Chain-of-thought prompting improved GPT-3\'s accuracy on GSM8K math problems from ~17% to ~57%. What is the primary mechanism by which CoT improves reasoning performance?',
           type: 'mc',
           options: [
-            'CoT provides additional training data at inference',
             'CoT decomposes hard multi-step problems into easier sequential predictions, each conditioning on previous steps via autoregressive attention',
-            'CoT activates different neural pathways for reasoning',
-            'CoT increases parameter count during inference'
+            'CoT provides additional training data at inference time, effectively fine-tuning the model on reasoning examples embedded within the prompt context window',
+            'CoT activates different neural pathways for reasoning by routing tokens through specialized attention heads that were dormant during standard single-step generation',
+            'CoT increases parameter count during inference by dynamically allocating extra capacity to the layers responsible for arithmetic and logical deduction'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'CoT works by decomposition. Instead of predicting the final answer in one step (requiring the model to do all reasoning internally), the model generates intermediate reasoning tokens. Each step is conditioned on the previous steps via the autoregressive attention mechanism, effectively giving the model a "scratchpad" for computation. This converts one hard prediction into many easier predictions. No additional training or parameters are involved.',
           difficulty: 'foundational',
           expertNote: 'An expert PM should understand that CoT quality depends heavily on model scale — smaller models often produce plausible-looking but incorrect reasoning chains. This means CoT may actually decrease performance on smaller models (by generating confidently wrong reasoning) while dramatically improving larger models. The PM should evaluate CoT effectiveness at the specific model scale they are deploying.'
@@ -644,10 +644,10 @@ export const lessons = {
           question: 'When is prompting alone insufficient and fine-tuning or RAG becomes necessary? Select the most accurate answer.',
           type: 'mc',
           options: [
-            'Prompting handles every conceivable use case and eliminates the need for any fine-tuning approaches',
+            'Prompting handles every conceivable use case and eliminates the need for any fine-tuning approaches, since sufficiently detailed system prompts can substitute for model weight updates',
             'Specialized knowledge, consistent behavior, or cost constraints',
-            'Fine-tuning universally outperforms prompting across all tasks and scales regardless of data availability',
-            'RAG and fine-tuning solve identical problems and can be used completely interchangeably with no tradeoffs'
+            'Fine-tuning universally outperforms prompting across all tasks and scales regardless of data availability, making it the recommended first-choice approach for all production deployments',
+            'RAG and fine-tuning solve identical problems and can be used completely interchangeably with no tradeoffs, since both methods ultimately make factual information available to the model at inference time'
           ],
           correct: 1,
           explanation: 'Prompting has clear limitations: it cannot inject new knowledge the model lacks (use RAG for this), it can be brittle and inconsistent at scale (fine-tuning bakes in consistent behavior), and the per-request cost of long prompts with many examples can exceed the one-time cost of fine-tuning. The PM should evaluate the specific use case: if the model already knows the domain and only needs formatting/style guidance, prompting suffices. If new knowledge or consistent specialized behavior is needed, fine-tuning or RAG is warranted.',
@@ -770,12 +770,12 @@ export const lessons = {
           question: 'What is the primary insight behind LoRA that makes it so parameter-efficient?',
           type: 'mc',
           options: [
-            'Foundation models contain predominantly redundant parameters that can be pruned without capability loss',
+            'Foundation models contain predominantly redundant parameters that can be pruned without capability loss, and LoRA exploits this redundancy by identifying and removing low-value weights before adaptation',
+            'LoRA architecturally eliminates entire attention mechanisms to reduce computational overhead and parameter count, keeping only feed-forward layers active during fine-tuning',
             'Low-rank weight updates approximate full fine-tuning',
-            'LoRA architecturally eliminates entire attention mechanisms to reduce computational overhead and parameter count',
-            'Extreme quantization to 1-bit weight precision enables massive compression without accuracy degradation'
+            'Extreme quantization to 1-bit weight precision enables massive compression without accuracy degradation, making LoRA distinct from standard quantization approaches used in model serving'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'LoRA\'s key insight is that fine-tuning weight updates occupy a low-dimensional subspace. Instead of learning a full d × d update matrix, LoRA learns two matrices B (d × r) and A (r × d) where r << d. This low-rank decomposition captures the essential adaptation with ~128× fewer parameters. The original weights are frozen, preserving pre-trained capabilities.',
           difficulty: 'foundational',
           expertNote: 'An expert PM should understand that the choice of rank r is a quality-efficiency tradeoff: higher rank = more expressiveness but more parameters. Typical production values are r=8 for simple tasks, r=16-32 for moderate complexity, and r=64+ for tasks requiring significant adaptation. The PM should push for rank ablation studies during development.'
@@ -784,12 +784,12 @@ export const lessons = {
           question: 'Your team is deciding whether to fine-tune or use prompt engineering for a customer support chatbot that needs to handle product-specific queries. The product catalog changes monthly. Which approach is more appropriate?',
           type: 'mc',
           options: [
-            'Fine-tune the model on the full product catalog — this provides the most accurate responses',
-            'Use prompting with RAG — retrieve relevant product information at query time and include it in the prompt, since the catalog changes frequently and fine-tuning would require monthly retraining',
-            'Use neither — the base model should already know about your products',
-            'Fine-tune once and never update — the model will generalize to new products'
+            'Fine-tune the model on the full product catalog — this provides the most accurate responses by permanently encoding product specifications and pricing into the model weights',
+            'Use neither — the base model should already know about your products from pre-training on publicly available e-commerce and catalog data across the internet',
+            'Fine-tune once and never update — the model will generalize to new products based on category-level patterns learned during initial fine-tuning on historical catalog data',
+            'Use prompting with RAG — retrieve relevant product information at query time and include it in the prompt, since the catalog changes frequently and fine-tuning would require monthly retraining'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'When the underlying data changes frequently (monthly catalog updates), fine-tuning creates a maintenance burden — you would need to retrain monthly. RAG (retrieval-augmented generation) is the better approach: maintain a vector database of current product information, retrieve relevant items at query time, and include them in the prompt. The model always has access to current information without retraining. You might still fine-tune for the chatbot\'s tone and behavior, but not for the product knowledge itself.',
           difficulty: 'applied',
           expertNote: 'The optimal solution is often a hybrid: use LoRA fine-tuning to establish the chatbot\'s persona, response format, and escalation behavior (things that are stable), while using RAG for dynamic product information. The PM should build an evaluation suite that tests both the behavioral consistency and the accuracy of product information retrieval.'
@@ -813,12 +813,12 @@ export const lessons = {
           question: 'You are building a fine-tuning-as-a-service feature for the Gemini API, where enterprise customers can upload their data and receive a customized model. What is the most critical product risk you must mitigate?',
           type: 'mc',
           options: [
-            'The risk that customers will not have enough data to fine-tune',
             'The risk that fine-tuned models could be used to generate harmful content that bypasses the base model\'s safety alignment, requiring robust evaluation of every fine-tuned adapter against safety benchmarks before deployment',
-            'The risk that fine-tuning will be too slow for customers',
-            'The risk that customers will not understand what fine-tuning is'
+            'The risk that customers will not have enough data to fine-tune, since the API should enforce a minimum dataset size requirement and reject jobs below the threshold to prevent poor-quality adapters',
+            'The risk that fine-tuning will be too slow for customers, as enterprise buyers expect near-instant customization and may churn if the training pipeline takes longer than a few hours',
+            'The risk that customers will not understand what fine-tuning is, requiring extensive documentation and onboarding materials before the feature can achieve meaningful adoption'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'Fine-tuning can degrade safety alignment — a malicious customer could fine-tune a model on toxic data, effectively removing the safety guardrails established during RLHF. This is the most critical risk because it could expose the platform to reputational and legal liability. The PM must ensure every fine-tuned adapter is evaluated against safety benchmarks before serving, and potentially implement content filtering on fine-tuning data to prevent misuse.',
           difficulty: 'expert',
           expertNote: 'This is a real and ongoing challenge for API providers. OpenAI, Google, and Anthropic all grapple with the tension between offering customization and maintaining safety. A PM should advocate for automated safety evaluation pipelines that gate every fine-tuned adapter, and should understand that this evaluation itself has false positive/negative tradeoffs that must be calibrated.'
@@ -939,12 +939,12 @@ export const lessons = {
           question: 'DeepMind is planning the next Gemini model and has a fixed compute budget of 10²⁵ FLOPs. Based on scaling laws, how should this budget be allocated?',
           type: 'mc',
           options: [
-            'Maximize model size exclusively and minimize training data volume to achieve the highest parameter count',
-            'Train the smallest viable model architecture on the absolute maximum dataset size possible within compute constraints',
+            'Maximize model size exclusively and minimize training data volume to achieve the highest parameter count, since the Kaplan et al. scaling laws demonstrated that parameter count is the dominant predictor of model quality',
             'Balance parameters and data, consider inference cost',
-            'Budget allocation strategies have no measurable impact on final model quality or performance characteristics'
+            'Train the smallest viable model architecture on the absolute maximum dataset size possible within compute constraints, since data volume is the single most important factor according to all major scaling law studies',
+            'Budget allocation strategies have no measurable impact on final model quality or performance characteristics, since the loss function converges to the same value regardless of how compute is split between parameters and tokens'
           ],
-          correct: 2,
+          correct: 1,
           explanation: 'Chinchilla scaling provides the training-optimal allocation (equal scaling of parameters and tokens), but real product decisions must also consider inference cost. If the model will serve millions of users, a smaller model trained beyond the Chinchilla-optimal ratio (like LLaMA 3\'s approach) may be the better product decision — slightly lower training-optimal quality but significantly cheaper to serve. The PM should facilitate a discussion between research (who wants training-optimal) and infrastructure (who wants serving-optimal).',
           difficulty: 'expert',
           expertNote: 'A world-class PM would commission a cost analysis comparing total cost of ownership (training + inference) for different parameter-data splits, using projected query volumes and latency requirements. The training-optimal and inference-optimal points often differ significantly, and the right choice depends on the product\'s usage patterns.'
@@ -953,12 +953,12 @@ export const lessons = {
           question: 'The concept of "emergent abilities" in LLMs is controversial. Why does this debate matter for product management?',
           type: 'mc',
           options: [
-            'The debate determines whether models will develop consciousness, fundamentally changing ethical requirements',
+            'The debate determines whether models will develop consciousness, which has direct regulatory implications for AI deployment and would require entirely new compliance frameworks',
+            'Academic emergence research applies only to theoretical capabilities with no practical product implications, since PMs should focus on benchmark results rather than underlying theoretical debates',
             'Unpredictable capability thresholds affect roadmap planning',
-            'Academic emergence research applies only to theoretical capabilities with no practical product implications',
-            'The debate explains why larger models consistently underperform smaller models on basic reasoning tasks'
+            'The debate explains why larger models consistently underperform smaller models on basic reasoning tasks, contradicting the assumption that scaling always improves performance uniformly'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'The emergence debate directly impacts product planning. If capabilities truly emerge unpredictably at scale, a PM cannot reliably promise that the next model generation will solve a specific task — capabilities might appear at 2x scale or 10x scale. If emergence is an evaluation artifact and performance actually scales smoothly, the PM can make more confident predictions about when a capability will become product-ready. This affects roadmap commitments, feature planning, and resource allocation.',
           difficulty: 'applied',
           expertNote: 'In practice, experienced PMs at frontier labs take a pragmatic approach: track capability on specific evaluation suites across model scales, fit prediction curves, and commit to features only when internal evaluations show the capability has crossed the required quality threshold — not based on general scaling predictions.'
@@ -991,12 +991,12 @@ export const lessons = {
           question: 'As a PM at DeepMind, you need to decide whether to build a new feature on Gemini Ultra (highest quality, highest cost) or Gemini Flash (lower quality, much lower cost). The feature is a document summarization tool for enterprise customers. How should you approach this decision?',
           type: 'mc',
           options: [
-            'Always prioritize highest quality for enterprise customers',
-            'Benchmark both on real documents, measure quality-cost tradeoffs, decide if Ultra\'s premium justifies cost for this segment',
-            'Always choose cheapest model since cost matters most',
-            'Defer to engineering team on this technical choice'
+            'Always prioritize highest quality for enterprise customers, since they have larger budgets and expect the best possible outputs regardless of marginal cost differences',
+            'Always choose cheapest model since cost matters most for internal enterprise tools where users have lower quality expectations than consumer-facing products',
+            'Defer to engineering team on this technical choice, since model selection is a technical infrastructure decision that falls outside the PM\'s domain expertise',
+            'Benchmark both on real documents, measure quality-cost tradeoffs, decide if Ultra\'s premium justifies cost for this segment'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'Model selection is a product decision that requires data-driven analysis. The quality gap between Ultra and Flash may be significant on hard reasoning tasks but negligible on straightforward summarization. If Flash achieves 95% of Ultra\'s summarization quality at 20% of the cost, it is the clear choice for this feature. The PM should commission this evaluation and make the decision based on the specific use case requirements, customer willingness to pay, and competitive positioning.',
           difficulty: 'applied',
           expertNote: 'In practice, many AI products use model routing — sending easy requests to cheaper models and hard requests to frontier models. A sophisticated PM would explore this approach for the summarization feature: use Flash for standard documents and route to Ultra only for complex, multi-document, or highly technical summarization tasks.'

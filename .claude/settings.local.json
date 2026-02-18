@@ -22,7 +22,14 @@
       "Bash(xargs kill:*)",
       "Bash(grep:*)",
       "Bash(/tmp/length_report.md:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(/usr/local/bin/node:*)",
+      "Bash(/opt/homebrew/Cellar/node/23.11.0/bin/node -e \"const fs=require\\(''fs''\\); eval\\(fs.readFileSync\\(''data/lessons/m03-transformers.js'',''utf8''\\).replace\\(/^export /,''''\\)\\)\")",
+      "Bash(/opt/homebrew/Cellar/node/23.11.0/bin/node -e \"const fs=require\\(''fs''\\); eval\\(fs.readFileSync\\(''/Users/baptiste/github/the_ai_pm_digest/data/lessons/m03-transformers.js'',''utf8''\\).replace\\(/^export /,''''\\)\\)\")",
+      "Bash(/opt/homebrew/Cellar/node/23.11.0/bin/node -e \"const fs=require\\(''fs''\\); eval\\(fs.readFileSync\\(''/Users/baptiste/github/the_ai_pm_digest/data/lessons/m07-ai-product-mgmt.js'',''utf8''\\).replace\\(/^export /,''''\\)\\)\")",
+      "Bash(/opt/homebrew/Cellar/node/23.11.0/bin/node -e \"const fs=require\\(''fs''\\); eval\\(fs.readFileSync\\(''/Users/baptiste/github/the_ai_pm_digest/data/lessons/m08-sdk-platforms.js'',''utf8''\\).replace\\(/^export /,''''\\)\\)\")",
+      "Bash(/opt/homebrew/Cellar/node/23.11.0/bin/node -e \"const fs=require\\(''fs''\\); eval\\(fs.readFileSync\\(''/Users/baptiste/github/the_ai_pm_digest/data/lessons/m10-leadership.js'',''utf8''\\).replace\\(/^export /,''''\\)\\)\")",
+      "Bash(/opt/homebrew/Cellar/node/23.11.0/bin/node -e \"const fs=require\\(''fs''\\); eval\\(fs.readFileSync\\(''/Users/baptiste/github/the_ai_pm_digest/data/lessons/m13-frontier-ai.js'',''utf8''\\).replace\\(/^export /,''''\\)\\)\")"
     ]
   }
 }

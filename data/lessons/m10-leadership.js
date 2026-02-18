@@ -107,12 +107,12 @@ export const lessons = {
           question: 'Which of the following best describes the "one-way door vs. two-way door" decision framework?',
           type: 'mc',
           options: [
-            'One-way doors need single-person decisions, two-way need consensus',
             'One-way doors are costly to reverse, two-way are easily reversed',
-            'One-way doors impact single teams, two-way create dependencies',
-            'One-way doors are annual strategic, two-way are weekly tactical'
+            'One-way doors need single-person decisions requiring executive sign-off, while two-way doors require full team consensus before proceeding',
+            'One-way doors impact only a single team and their direct deliverables, while two-way doors create cross-functional dependencies across departments',
+            'One-way doors represent annual strategic planning cycles, while two-way doors are resolved in weekly tactical stand-ups and sprint planning'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'The one-way/two-way door framework, popularized by Amazon, classifies decisions by reversibility. One-way doors (Type 1) are irreversible or very expensive to reverse — they warrant careful analysis, broad consultation, and deliberate decision-making. Two-way doors (Type 2) are easily reversible — they should be decided quickly because the cost of delay exceeds the cost of a wrong decision. A PM\'s key skill is correctly classifying which type each decision is.',
           difficulty: 'foundational',
           expertNote: 'A common failure mode is treating too many decisions as one-way doors. Teams that deliberate extensively over two-way door decisions lose velocity and build a culture of analysis paralysis. At Google and other fast-moving companies, the expectation is that most product decisions are two-way doors and should be decided in days, not weeks. The PM\'s role is to create psychological safety for quick decisions by establishing that reversals are acceptable and learning-oriented, not failures.'
@@ -121,12 +121,12 @@ export const lessons = {
           question: 'A PM at a frontier AI lab finds that 80% of product decisions are being escalated to them for approval, creating a bottleneck. What is the most effective intervention?',
           type: 'mc',
           options: [
-            'Hire an additional PM to increase decision capacity and split the approval workload between two people',
+            'Hire an additional PM to increase decision capacity, splitting the approval queue so each PM handles alternating decisions by domain area',
+            'Schedule additional approval meetings throughout the week — such as daily 30-minute decision syncs — to increase throughput and prevent the queue from growing',
             'Create clear decision frameworks and RACI charts that empower team leads to make decisions within defined boundaries',
-            'Schedule additional approval meetings throughout the week to increase decision processing throughput and reduce delays',
-            'Delegate all product decisions to the engineering lead to eliminate the PM as a bottleneck entirely'
+            'Delegate all product decisions to the engineering lead and design lead on a rotating monthly basis to eliminate the PM as a bottleneck entirely'
           ],
-          correct: 1,
+          correct: 2,
           explanation: 'The root cause is not insufficient PM capacity — it is insufficient decision-making infrastructure. When teams escalate every decision to the PM, it means they lack clarity about what decisions they are empowered to make, what criteria to apply, and what boundaries exist. The fix is structural: create explicit decision frameworks, RACI charts, and decision boundaries that enable team leads to make the 80% of decisions that do not require cross-functional tradeoff analysis. The PM should focus on the 20% that genuinely require their synthesis.',
           difficulty: 'applied',
           expertNote: 'This pattern is especially common for new PMs who have not yet established decision frameworks, or for PMs who derive their sense of value from being the decision-maker. The counterintuitive truth is that a PM who makes fewer decisions is often more effective than one who makes many — the former has built systems that enable good decisions at scale, while the latter is a single point of failure. At Google, the expectation is that well-run teams should be largely self-directing on day-to-day decisions.'
@@ -135,12 +135,12 @@ export const lessons = {
           question: 'In the influence stack described in this lesson, why is technical credibility identified as the foundational layer for AI PMs?',
           type: 'mc',
           options: [
-            'PMs need hands-on coding and model training to contribute',
-            'Researchers assess PM credibility through technical understanding',
-            'Technical credibility requires less effort to build than strategy',
-            'PM role involves making detailed technical architecture decisions'
+            'PMs need hands-on coding and model training experience to make meaningful contributions to research-driven teams',
+            'Technical credibility is easier and faster to build than strategic credibility, making it the most efficient starting point for new PMs',
+            'The PM role at frontier AI labs involves making detailed technical architecture decisions that require deep coding expertise',
+            'Researchers assess PM credibility through technical understanding'
           ],
-          correct: 1,
+          correct: 3,
           explanation: 'In AI organizations, researchers and engineers are the primary collaborators a PM must influence. These professionals assess credibility significantly through technical understanding — not because the PM needs to do their job, but because understanding the technology is a prerequisite for asking good questions, making informed tradeoffs, and proposing realistic plans. Without technical credibility, a PM\'s strategic vision feels uninformed, their execution commitments feel unreliable, and their relationships feel shallow.',
           difficulty: 'applied',
           expertNote: 'This is especially pronounced at research-heavy organizations like DeepMind. The bar for technical credibility is higher here than at a typical product company. You do not need to be able to train models, but you do need to understand attention mechanisms, training dynamics, evaluation methodology, and safety techniques well enough to have substantive conversations. The good news: researchers generally love explaining their work to PMs who ask thoughtful questions. Curiosity is the fastest path to technical credibility.'
@@ -278,12 +278,12 @@ export const lessons = {
           question: 'Which of the following is the most effective way to manage research roadmap uncertainty when communicating to leadership?',
           type: 'mc',
           options: [
-            'Present only high-confidence commitments while avoiding discussion of uncertain research directions to manage expectations',
             'Use a "confidence cone" with near-term specificity and high confidence, medium-term direction and moderate confidence, and explicit strategic uncertainty',
-            'Present research timelines with consistent buffer multipliers like 2x to account for inherent estimation difficulty',
-            'Wait until research results are complete before adding deliverables to the roadmap to ensure accuracy'
+            'Present only high-confidence commitments to leadership, deliberately omitting uncertain research directions so that stakeholders maintain a stable, optimistic view of progress',
+            'Apply consistent buffer multipliers like 2x or 3x to all research timeline estimates, presenting the padded numbers to leadership as the official plan',
+            'Wait until research results are fully confirmed and peer-reviewed before adding any deliverables to the roadmap to ensure complete accuracy'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'The confidence cone approach is most effective because it provides leadership with the information they need (direction, expected outcomes, risks) at the appropriate level of precision for each time horizon. Option A hides important strategic information. Option C is mechanistic and does not communicate the nature of the uncertainty. Option D makes planning impossible and creates the impression that the PM is not managing the roadmap proactively.',
           difficulty: 'applied',
           expertNote: 'The confidence cone is particularly important at organizations like DeepMind where leadership must make resource allocation decisions about research programs that have uncertain outcomes. By explicitly communicating confidence levels, you enable better decisions (e.g., parallel bets on uncertain approaches, higher investment in high-confidence directions) and build trust through transparency. Leaders are much more forgiving of missed uncertain predictions than of missed confident promises.'
@@ -482,13 +482,13 @@ export const lessons = {
           question: 'An engineering lead tells you: "We can\'t ship this feature without refactoring the authentication system first, which will take 6 weeks." You suspect this is over-engineering. What is the most effective PM response?',
           type: 'mc',
           options: [
-            'Overrule the engineering lead and instruct the team to ship the feature with existing authentication',
-            'Accept the 6-week timeline and adjust the roadmap to accommodate the refactoring work',
-            'Ask probing questions about specific technical risks, alternatives, and whether a partial refactor addresses critical concerns',
-            'Escalate to the VP of Engineering to get the timeline reduced through leadership pressure'
+            'Overrule the engineering lead and instruct the team to ship the feature on top of the existing authentication without any refactoring work',
+            'Accept the full 6-week timeline and restructure the entire quarterly roadmap to accommodate the refactoring, pushing all other commitments out',
+            'Escalate to the VP of Engineering to apply managerial pressure and get the timeline reduced through top-down authority',
+            'Ask probing questions about specific technical risks, alternatives, and whether a partial refactor addresses critical concerns'
           ],
-          correct: 2,
-          explanation: 'Option C is the most effective because it respects the engineering lead\'s expertise while probing the underlying reasoning. Often, "we need to refactor first" is a legitimate technical concern, but the scope of the refactor can be negotiated once the PM understands the specific risks. Option A overrides technical judgment without understanding. Option B accepts without understanding. Option D escalates prematurely, damaging the relationship. The probing approach builds mutual understanding and often leads to a creative middle ground.',
+          correct: 3,
+          explanation: 'Option D is the most effective because it respects the engineering lead\'s expertise while probing the underlying reasoning. Often, "we need to refactor first" is a legitimate technical concern, but the scope of the refactor can be negotiated once the PM understands the specific risks. Option A overrides technical judgment without understanding. Option B accepts without understanding. Option C escalates prematurely, damaging the relationship. The probing approach builds mutual understanding and often leads to a creative middle ground.',
           difficulty: 'applied',
           expertNote: 'This is a classic PM-engineering interaction pattern. The key skill is asking "why" in a way that is curious rather than challenging. The distinction is in tone and framing: "Help me understand the risk so I can make an informed prioritization call" is collaborative. "Why do we need to do this?" can feel adversarial. Often, the probing reveals that the full refactor is not necessary — a targeted fix addressing the specific risk for this feature can be done in 2 weeks, with the full refactor planned later.'
         },
@@ -511,12 +511,12 @@ export const lessons = {
           question: 'Why is the biweekly written stakeholder update described as the "highest-leverage communication artifact" a PM produces?',
           type: 'mc',
           options: [
-            'Because it replaces the need for recurring meetings and saves valuable time for everyone',
             'Because it creates a searchable record, forces synthesis, surfaces issues proactively, and demonstrates competence',
-            'Because stakeholders consistently prefer written communication over in-person meeting formats',
-            'Because it is a regulatory requirement for AI products under the EU AI Act'
+            'Because it replaces the need for all recurring status meetings, consolidating communication into a single written artifact that saves everyone valuable calendar time',
+            'Because all stakeholder research consistently confirms that stakeholders prefer written communication over synchronous meeting formats when staying informed',
+            'Because documented written product updates are a regulatory requirement for AI products operating under the EU AI Act and Google\'s internal AI governance policies'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'The written update is high-leverage because it serves multiple purposes simultaneously: it forces the PM to synthesize (writing is thinking), it creates institutional memory (searchable record), it surfaces issues early (proactive communication), it builds trust (consistent cadence), and it demonstrates competence (stakeholders can see the PM has command of the product). No other single communication artifact achieves this breadth of impact. It does not replace meetings — it makes meetings more productive by providing a shared context.',
           difficulty: 'foundational',
           expertNote: 'At Google and other tech companies, the most effective PMs are consistently recognized for their written communication. The best product updates follow a consistent structure (shipped / learned / next / risks), are concise (one page or less), include concrete data, and are sent on a predictable cadence. Stakeholders who receive these updates regularly develop confidence in the PM\'s command of the product, which reduces the need for ad-hoc status checks that consume calendar time.'
@@ -713,12 +713,12 @@ Same accomplishment, different abstractions, each tuned to what the audience nee
           question: 'The "So What?" chain technique involves:',
           type: 'mc',
           options: [
-            'Asking "so what?" once to determine if a feature is worth building.',
             'Repeatedly asking "so what?" about a technical fact until you arrive at a statement that matters to your specific audience, connecting technical details to business or user impact.',
-            'Challenging researchers to justify their work by asking "so what?" about their research results.',
-            'A way to filter out unimportant features during prioritization.'
+            'Asking "so what?" a single time about a proposed feature to determine whether it is sufficiently valuable to include in the roadmap.',
+            'A confrontational technique for challenging researchers to justify the relevance of their work by repeatedly questioning the value of their published results.',
+            'A prioritization filter used during sprint planning to systematically eliminate features that do not directly contribute to immediate revenue or retention metrics.'
           ],
-          correct: 1,
+          correct: 0,
           explanation: 'The "So What?" chain is a communication technique for translating technical facts into audience-relevant insights. By repeatedly asking "so what?" about a technical detail, you trace the causal chain from implementation detail to user behavior to business metric. The chain ends when you reach a statement that resonates with your specific audience. For an executive, the chain might end at a business metric. For a designer, it might end at a user experience improvement. The technique ensures every technical communication is grounded in relevance.',
           difficulty: 'foundational',
           expertNote: 'The "So What?" chain is also a valuable tool for PM self-assessment. If you cannot trace a technical investment to user or business impact through a "So What?" chain, either the investment is not well-justified or you do not yet understand its impact. In either case, further investigation is needed before committing resources. At Google, product reviews often include implicit "so what?" questions: "How does this metric improvement translate to user behavior?" PMs who have pre-traced the chain answer confidently; those who have not get caught flat-footed.'
@@ -727,13 +727,13 @@ Same accomplishment, different abstractions, each tuned to what the audience nee
           question: 'Which of the following is the most effective approach when writing a PRD (Product Requirements Document) that will be read by both engineers and executives?',
           type: 'mc',
           options: [
-            'Write two separate documents — one technical version for engineers and one summary version for executives.',
-            'Write at the executive level throughout and schedule follow-up meetings with engineers for technical details.',
+            'Write two separate documents — a technical specification for engineers and a narrative summary document for executives — and maintain both in parallel throughout development.',
             'Use a layered structure: an executive summary (plain language, impact-focused) at the top, product description (moderate detail) in the middle, and a technical appendix (full technical depth) at the end.',
-            'Write at the engineering level throughout and highlight the key business points in bold for executives.'
+            'Write the entire PRD at the executive level with business-focused language, then schedule separate follow-up meetings with engineers to convey any technical details they need.',
+            'Write entirely at the engineering level with full technical depth, then highlight the key business impact points in bold text so executives can skim to what matters most.'
           ],
-          correct: 2,
-          explanation: 'The layered structure (option C) serves all audiences with a single document. Executives read the first page and have what they need. Engineers read the appendix and have what they need. This approach is more efficient than maintaining two documents (option A), more complete than deferring technical details (option B), and more accessible than writing for engineers only (option D). The layered approach also ensures consistency — there is one source of truth with multiple access points.',
+          correct: 1,
+          explanation: 'The layered structure (option B) serves all audiences with a single document. Executives read the first page and have what they need. Engineers read the appendix and have what they need. This approach is more efficient than maintaining two documents (option A), more complete than deferring technical details (option B), and more accessible than writing for engineers only (option D). The layered approach also ensures consistency — there is one source of truth with multiple access points.',
           difficulty: 'applied',
           expertNote: 'The layered document approach is standard practice at companies like Google, Amazon, and Meta. Amazon\'s famous "6-page memo" format uses a similar principle — the narrative structure ensures that every reader can extract value at their level of detail, and the document forces the writer to synthesize their thinking at multiple levels of abstraction. As a PM, your ability to write layered documents that serve multiple audiences is a career-defining skill.'
         }
