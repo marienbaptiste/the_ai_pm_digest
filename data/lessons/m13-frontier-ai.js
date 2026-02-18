@@ -461,7 +461,7 @@ There are 3 r's in "strawberry."</code></pre>
 <ul>
 <li><strong>Open weights and methodology:</strong> Unlike o1, R1's weights were publicly released, and the training methodology was documented in detail.</li>
 <li><strong>Training pipeline:</strong> R1 was trained through a multi-stage process: (1) supervised fine-tuning on chain-of-thought examples, (2) reinforcement learning using Group Relative Policy Optimization (GRPO), (3) rejection sampling to curate high-quality reasoning traces for further fine-tuning.</li>
-<li><strong>Distillation:</strong> DeepSeek demonstrated that R1's reasoning capability could be distilled into much smaller models (1.5B to 70B parameters), making reasoning accessible beyond frontier model scales.</li>
+<li><strong>Distillation:</strong> DeepSeek demonstrated that R1's reasoning capability (671B parameters) could be distilled into much smaller models ranging from 1.5B to 70B parameters, making reasoning accessible beyond frontier model scales.</li>
 <li><strong>Cost efficiency:</strong> R1 was reportedly trained at a fraction of o1's cost, challenging the notion that reasoning models require OpenAI-scale resources.</li>
 </ul>
 
