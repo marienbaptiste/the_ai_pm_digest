@@ -278,6 +278,8 @@
 /* Check answer button */
 .quiz__action-btn--check {
   margin-top: var(--space-4);
+  margin-left: auto;
+  display: flex;
   background: var(--bg-elevated);
   color: var(--accent-blue);
   border-color: var(--accent-blue);
@@ -291,6 +293,8 @@
 /* Retry button */
 .quiz__action-btn--retry {
   margin-top: var(--space-4);
+  margin-left: auto;
+  display: flex;
   background: transparent;
   color: var(--accent-warm);
   border-color: var(--accent-warm);
@@ -580,6 +584,11 @@
   display: flex;
   gap: var(--space-3);
   flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.quiz__self-grade-buttons .quiz__action-btn {
+  margin-left: 0;
 }
 
 /* Pending state — question awaiting self-grade */
