@@ -4,7 +4,7 @@ export const modules = [
     number: 1,
     title: 'AI & ML Foundations',
     description: 'From Turing to modern machine learning — understand the building blocks of artificial intelligence.',
-    icon: '\u{1F9E0}',
+    icon: 'brain',
     color: '#00d4aa',
     lessons: [
       { id: 'l01', title: 'What is AI? History from Turing to Today', diagram: 'ai-timeline' },
@@ -18,7 +18,7 @@ export const modules = [
     number: 2,
     title: 'Deep Learning',
     description: 'Convolutional networks, recurrent architectures, and the training techniques that make them work.',
-    icon: '\u{1F50D}',
+    icon: 'layers',
     color: '#3b82f6',
     lessons: [
       { id: 'l01', title: 'CNNs \u2014 Convolutions, Pooling & Feature Maps', diagram: 'cnn' },
@@ -32,7 +32,7 @@ export const modules = [
     number: 3,
     title: 'Transformers & Attention',
     description: 'The architecture that powers modern AI \u2014 understand self-attention, multi-head attention, and positional encoding.',
-    icon: '\u26A1',
+    icon: 'zap',
     color: '#a855f7',
     lessons: [
       { id: 'l01', title: 'The Attention Revolution \u2014 Why Attention Is All You Need', diagram: 'transformer' },
@@ -46,7 +46,7 @@ export const modules = [
     number: 4,
     title: 'Large Language Models',
     description: 'GPT, RLHF, prompting, fine-tuning, scaling laws \u2014 the complete LLM landscape.',
-    icon: '\u{1F4AC}',
+    icon: 'message-square',
     color: '#f59e0b',
     lessons: [
       { id: 'l01', title: 'From Word2Vec to GPT \u2014 The Evolution', diagram: 'word-embeddings' },
@@ -62,7 +62,7 @@ export const modules = [
     number: 5,
     title: 'Diffusion Models',
     description: 'How AI generates images \u2014 VAEs, GANs, diffusion processes, and multimodal models.',
-    icon: '\u{1F3A8}',
+    icon: 'sparkles',
     color: '#ec4899',
     lessons: [
       { id: 'l01', title: 'Generative Models Landscape \u2014 VAEs, GANs, Flows, Diffusion', diagram: 'diffusion' },
@@ -76,7 +76,7 @@ export const modules = [
     number: 6,
     title: 'RAG & Retrieval Systems',
     description: 'Embeddings, vector databases, and retrieval-augmented generation \u2014 grounding AI in real data.',
-    icon: '\u{1F50E}',
+    icon: 'database',
     color: '#06b6d4',
     lessons: [
       { id: 'l01', title: 'Embeddings \u2014 From Words to Vectors', diagram: 'word-embeddings' },
@@ -90,7 +90,7 @@ export const modules = [
     number: 7,
     title: 'AI Product Management',
     description: 'Roadmapping, metrics, evaluation, and go-to-market strategies specific to AI products.',
-    icon: '\u{1F4CB}',
+    icon: 'kanban',
     color: '#00d4aa',
     lessons: [
       { id: 'l01', title: 'AI Product Lifecycle \u2014 From Research to Production', diagram: 'product-lifecycle' },
@@ -105,7 +105,7 @@ export const modules = [
     number: 8,
     title: 'SDK & Developer Platforms',
     description: 'API design, developer experience, documentation strategy, and platform ecosystem thinking.',
-    icon: '\u{1F528}',
+    icon: 'code-2',
     color: '#3b82f6',
     lessons: [
       { id: 'l01', title: 'What Makes a Great Developer Platform', diagram: 'platform-flywheel' },
@@ -119,7 +119,7 @@ export const modules = [
     number: 9,
     title: 'AI Ethics, Safety & Responsible AI',
     description: 'Bias, fairness, alignment, regulation, and building safety into AI products.',
-    icon: '\u{1F6E1}\uFE0F',
+    icon: 'shield',
     color: '#ef4444',
     lessons: [
       { id: 'l01', title: 'Bias, Fairness & Representation in AI Systems', diagram: 'safety-layers' },
@@ -133,7 +133,7 @@ export const modules = [
     number: 10,
     title: 'Cross-functional Leadership',
     description: 'Leading without authority, stakeholder management, and translating research into product.',
-    icon: '\u{1F91D}',
+    icon: 'users',
     color: '#f59e0b',
     lessons: [
       { id: 'l01', title: 'Leading Without Authority \u2014 Influence & Decision Frameworks', diagram: 'stakeholder-map' },
@@ -147,7 +147,7 @@ export const modules = [
     number: 11,
     title: 'Frontier AI & Cutting-Edge Concepts',
     description: 'MoE architectures, state space models, reasoning at inference, AI agents, and the trends shaping 2025\u20132026.',
-    icon: '\u{1F680}',
+    icon: 'rocket',
     color: '#14b8a6',
     lessons: [
       { id: 'l01', title: 'Mixture of Experts \u2014 How Gemini & Mixtral Scale Efficiently', diagram: 'frontier-tech' },
@@ -162,7 +162,7 @@ export const modules = [
     number: 12,
     title: 'DeepMind & Gemini Deep Dive',
     description: 'DeepMind\'s journey, Gemini\'s architecture, product ecosystem, and competitive landscape.',
-    icon: '\u{1F48E}',
+    icon: 'gem',
     color: '#a855f7',
     lessons: [
       { id: 'l01', title: 'DeepMind\'s History \u2014 AlphaGo to Gemini', diagram: 'gemini-ecosystem' },
@@ -176,7 +176,7 @@ export const modules = [
     number: 13,
     title: 'Interview Prep & Case Studies',
     description: 'PM interview frameworks, AI case studies, and mock interview practice.',
-    icon: '\u{1F3AF}',
+    icon: 'target',
     color: '#ec4899',
     lessons: [
       { id: 'l01', title: 'PM Interview Frameworks \u2014 CIRCLES, RICE, Execution', diagram: 'interview-framework' },

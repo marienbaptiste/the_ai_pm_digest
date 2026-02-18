@@ -56,7 +56,7 @@ export function renderDashboard(container) {
             return `
               <a href="${href}" class="card card--interactive card--module" style="--module-color: ${mod.color};">
                 <div class="card__icon" style="background: ${mod.color}15; color: ${mod.color};">
-                  ${mod.icon}
+                  <i data-lucide="${mod.icon}" style="width:22px;height:22px;display:block;"></i>
                 </div>
                 <div class="card__body">
                   <span class="card__number">${String(mod.number).padStart(2, '0')}</span>
@@ -100,4 +100,6 @@ export function renderDashboard(container) {
       </section>
     </div>
   `;
+
+  if (window.lucide) window.lucide.createIcons();
 }

@@ -34,8 +34,8 @@
   --gradient-accent: linear-gradient(135deg, #F0B429 0%, #E8553A 100%);
   --gradient-warm:  linear-gradient(135deg, #E8553A 0%, #C4A7E7 100%);
 
-  /* === Typography — Syne (angular futuristic), Newsreader (editorial serif), Fira Code === */
-  --font-heading:   'Syne', system-ui, sans-serif;
+  /* === Typography — Chakra Petch (retro-digital retrofuturist), Newsreader (editorial serif), Fira Code === */
+  --font-heading:   'Oxanium', system-ui, sans-serif;
   --font-body:      'Newsreader', Georgia, serif;
   --font-mono:      'Fira Code', 'Consolas', monospace;
 
@@ -44,10 +44,10 @@
   --text-base: 1rem;
   --text-lg:   1.125rem;
   --text-xl:   1.25rem;
-  --text-2xl:  1.5rem;
-  --text-3xl:  1.875rem;
-  --text-4xl:  2.25rem;
-  --text-5xl:  3rem;
+  --text-2xl:  1.75rem;
+  --text-3xl:  2.25rem;
+  --text-4xl:  3rem;
+  --text-5xl:  4.5rem;
 
   --leading-tight:  1.25;
   --leading-normal: 1.6;

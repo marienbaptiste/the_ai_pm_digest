@@ -13,7 +13,7 @@ export function renderSidebar() {
     return `
       <div class="nav-module ${isOpen ? 'is-open' : ''}" data-module="${mod.id}">
         <button class="nav-module__header" aria-expanded="${isOpen}">
-          <span class="nav-module__icon" style="background: ${mod.color}20; color: ${mod.color};">${mod.icon}</span>
+          <span class="nav-module__icon" style="background: ${mod.color}20; color: ${mod.color};"><i data-lucide="${mod.icon}" style="width:15px;height:15px;display:block;"></i></span>
           <span class="nav-module__label">${mod.number}. ${mod.title}</span>
           ${modProgress.completed > 0 ? `<span class="tag tag--primary" style="margin-left: auto; margin-right: 4px;">${modProgress.completed}/${modProgress.total}</span>` : ''}
           <svg class="nav-module__chevron" viewBox="0 0 16 16" fill="none">
@@ -38,6 +38,9 @@ export function renderSidebar() {
       </div>
     `;
   }).join('');
+
+  // Render Lucide icons
+  if (window.lucide) window.lucide.createIcons();
 
   // Module toggle handlers
   nav.querySelectorAll('.nav-module__header').forEach(header => {
