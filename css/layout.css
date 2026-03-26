@@ -102,6 +102,20 @@
   display: block;
 }
 
+.sidebar__linkedin {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  color: var(--text-muted);
+  transition: color 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.sidebar__linkedin:hover {
+  color: #0A66C2;
+  transform: scale(1.15);
+}
+
 .sidebar__nav {
   flex: 1;
   overflow-y: auto;

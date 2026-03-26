@@ -185,8 +185,6 @@ function getModuleFileName(moduleId) {
     m08: 'sdk-platforms',
     m09: 'ai-ethics',
     m10: 'leadership',
-    m11: 'deepmind-gemini',
-    m12: 'interview-prep',
     m13: 'frontier-ai'
   };
   return names[moduleId] || moduleId;

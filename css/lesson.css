@@ -186,11 +186,15 @@
   pointer-events: none;
 }
 
-.lesson__content .key-concept strong {
+.lesson__content .key-concept strong:first-child {
   color: var(--accent-primary);
   font-family: var(--font-heading);
   display: block;
   margin-bottom: var(--space-2);
+}
+
+.lesson__content .key-concept strong:not(:first-child) {
+  color: var(--accent-primary);
 }
 
 /* Warning callout */
@@ -431,16 +435,14 @@
   margin-bottom: var(--space-6);
 }
 
-/* Module grid — two-column asymmetric */
+/* Module grid — two-column with last card spanning full width */
 .dashboard__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-4);
 }
 
-/* Every 3rd card spans full width for rhythm break */
-.dashboard__grid .card--module:nth-child(5),
-.dashboard__grid .card--module:nth-child(10) {
+.dashboard__grid .card--module:last-child:nth-child(odd) {
   grid-column: 1 / -1;
 }
 
@@ -453,15 +455,6 @@
   margin-bottom: var(--space-10);
 }
 
-.dashboard__target {
-  margin-bottom: var(--space-10);
-}
-
-.dashboard__skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
 
 /* === Responsive === */
 @media (max-width: 768px) {
@@ -469,8 +462,7 @@
     grid-template-columns: 1fr;
   }
 
-  .dashboard__grid .card--module:nth-child(5),
-  .dashboard__grid .card--module:nth-child(10) {
+  .dashboard__grid .card--module:last-child:nth-child(odd) {
     grid-column: 1;
   }
 }

@@ -13,7 +13,7 @@ export function renderDashboard(container) {
         <div class="dashboard__hero-content">
           <p class="dashboard__overline">AI Product Manager Training</p>
           <h1 class="dashboard__title">The AI PM Digest</h1>
-          <p class="dashboard__subtitle">Your accelerated path to becoming a world-class AI Product Manager at Google DeepMind. Master everything from neural network fundamentals to Gemini product strategy.</p>
+          <p class="dashboard__subtitle">Your accelerated path to becoming a world-class AI Product Manager. Master everything from neural network fundamentals to frontier AI product strategy.</p>
           <div class="dashboard__stats">
             <div class="stat">
               <div class="stat__value">${overall.completed}</div>
@@ -44,7 +44,7 @@ export function renderDashboard(container) {
 
       <section class="dashboard__modules">
         <h2 class="dashboard__section-title">Your Learning Path</h2>
-        <p class="dashboard__section-desc">12 modules taking you from AI fundamentals to DeepMind interview readiness.</p>
+        <p class="dashboard__section-desc">11 modules taking you from AI fundamentals to frontier AI mastery.</p>
         <div class="dashboard__grid orchestrate">
           ${modules.map((mod) => {
             const modProgress = storage.getModuleProgress(mod);
@@ -79,23 +79,6 @@ export function renderDashboard(container) {
               </a>
             `;
           }).join('')}
-        </div>
-      </section>
-
-      <section class="dashboard__target">
-        <div class="card" style="border-color: var(--accent-purple-dim);">
-          <h3 style="color: var(--accent-purple); margin-bottom: var(--space-3);">Target Role</h3>
-          <h4 style="margin-bottom: var(--space-2);">Product Manager, Gemini App Integrated Assistance</h4>
-          <p style="color: var(--text-secondary); font-size: var(--text-sm); margin-bottom: var(--space-4);">Google DeepMind \u2014 Zurich, Switzerland</p>
-          <div class="dashboard__skills orchestrate--wave">
-            <span class="tag tag--primary">LLMs</span>
-            <span class="tag tag--blue">SDK Design</span>
-            <span class="tag tag--purple">Diffusion Models</span>
-            <span class="tag tag--warm">RAG</span>
-            <span class="tag tag--primary">Product Vision</span>
-            <span class="tag tag--blue">Cross-functional</span>
-            <span class="tag tag--purple">AI Safety</span>
-          </div>
         </div>
       </section>
     </div>

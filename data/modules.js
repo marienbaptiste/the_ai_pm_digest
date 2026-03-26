@@ -156,34 +156,6 @@ export const modules = [
       { id: 'l04', title: 'AI Agents, Tool Use & Multi-Agent Systems', diagram: 'frontier-tech' },
       { id: 'l05', title: 'Frontier Trends \u2014 Synthetic Data, World Models, Video Gen & What\u2019s Next', diagram: 'frontier-tech' }
     ]
-  },
-  {
-    id: 'm11',
-    number: 12,
-    title: 'DeepMind & Gemini Deep Dive',
-    description: 'DeepMind\'s journey, Gemini\'s architecture, product ecosystem, and competitive landscape.',
-    icon: 'gem',
-    color: '#a855f7',
-    lessons: [
-      { id: 'l01', title: 'DeepMind\'s History \u2014 AlphaGo to Gemini', diagram: 'gemini-ecosystem' },
-      { id: 'l02', title: 'Gemini Architecture & Capabilities \u2014 Multimodal, Long Context', diagram: 'multimodal' },
-      { id: 'l03', title: 'Gemini Product Ecosystem \u2014 Android, iOS, Web, API', diagram: 'gemini-ecosystem' },
-      { id: 'l04', title: 'Competitive Landscape \u2014 OpenAI, Meta, Anthropic, Mistral', diagram: 'gemini-ecosystem' }
-    ]
-  },
-  {
-    id: 'm12',
-    number: 13,
-    title: 'Interview Prep & Case Studies',
-    description: 'PM interview frameworks, AI case studies, and mock interview practice.',
-    icon: 'target',
-    color: '#ec4899',
-    lessons: [
-      { id: 'l01', title: 'PM Interview Frameworks \u2014 CIRCLES, RICE, Execution', diagram: 'interview-framework' },
-      { id: 'l02', title: 'AI PM Case Studies \u2014 Real Product Decisions', diagram: 'product-lifecycle' },
-      { id: 'l03', title: 'Technical Deep Dive Prep \u2014 Explaining AI to Interviewers', diagram: 'transformer' },
-      { id: 'l04', title: 'Mock Questions with Model Answers', diagram: 'interview-framework' }
-    ]
   }
 ];
 
