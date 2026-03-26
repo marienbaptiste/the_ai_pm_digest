@@ -1,17 +1,17 @@
 export const lessons = {
 
   // ─────────────────────────────────────────────
-  // L01 — Generative Models Landscape
+  // L01 - Generative Models Landscape
   // ─────────────────────────────────────────────
   l01: {
-    title: 'Generative Models Landscape — VAEs, GANs, Flows, Diffusion',
+    title: 'Generative Models Landscape - VAEs, GANs, Flows, Diffusion',
     content: `
 <h2>Why Generative Models Matter for AI PMs</h2>
 <p>
   Generative models sit at the heart of the creative-AI revolution. As a product manager at a frontier lab
   like DeepMind, you will regularly evaluate trade-offs between different generative architectures.
   Understanding <em>why</em> the field moved from <span class="term" data-term="gan">GANs</span> to
-  <span class="term" data-term="diffusion-model">diffusion models</span> is not just academic trivia —
+  <span class="term" data-term="diffusion-model">diffusion models</span> is not just academic trivia -
   it shapes compute budgets, latency targets, safety constraints, and product capabilities you can promise
   to users.
 </p>
@@ -28,9 +28,9 @@ export const lessons = {
   and then reconstruct it. The architecture has two halves:
 </p>
 <ul>
-  <li><strong>Encoder</strong> — maps input <code>x</code> to a distribution <code>q(z|x)</code> in latent space,
+  <li><strong>Encoder</strong> - maps input <code>x</code> to a distribution <code>q(z|x)</code> in latent space,
       parameterized by a mean vector <code>&mu;</code> and variance <code>&sigma;&sup2;</code>.</li>
-  <li><strong>Decoder</strong> — maps a sampled latent vector <code>z</code> back to pixel space,
+  <li><strong>Decoder</strong> - maps a sampled latent vector <code>z</code> back to pixel space,
       producing <code>p(x|z)</code>.</li>
 </ul>
 <p>
@@ -42,7 +42,7 @@ export const lessons = {
 <div class="key-concept">
   <strong>Key Concept:</strong> The KL-divergence term in the VAE objective acts as a regularizer,
   forcing the latent space to be smooth and continuous. This is what allows you to <em>sample</em> from the
-  latent space at generation time — walk between two points and get meaningful interpolations.
+  latent space at generation time - walk between two points and get meaningful interpolations.
 </div>
 
 <p>
@@ -56,7 +56,7 @@ export const lessons = {
 <div class="pro-tip">
   <strong>PM Perspective:</strong> VAEs remain relevant in production pipelines even though they
   rarely serve as the final generative output. In Stable Diffusion, a VAE compresses images into
-  a latent space where diffusion then operates — dramatically reducing the compute needed. When
+  a latent space where diffusion then operates - dramatically reducing the compute needed. When
   scoping a project, ask: "Are we using the VAE as the generator or as a compression stage?"
 </div>
 
@@ -115,7 +115,7 @@ export const lessons = {
   <code>log p(x) = log p(z) + log |det(dz/dx)|</code>
 </p>
 <p>
-  The model chains together multiple invertible transformations — each "flow step" warps the
+  The model chains together multiple invertible transformations - each "flow step" warps the
   distribution a little further. Popular building blocks include affine coupling layers (RealNVP),
   autoregressive flows, and continuous normalizing flows (neural ODEs).
 </p>
@@ -156,7 +156,7 @@ export const lessons = {
 <div class="key-concept">
   <strong>Key Concept:</strong> Unlike GANs (which require a delicate adversarial balance) or flows
   (which require invertible architectures), diffusion models use a straightforward denoising objective.
-  This simplicity is a major reason they scaled so successfully — you can pour more compute into a
+  This simplicity is a major reason they scaled so successfully - you can pour more compute into a
   larger U-Net or Transformer without worrying about training collapse.
 </div>
 
@@ -201,7 +201,7 @@ export const lessons = {
 
 <div class="warning">
   <strong>Common Misconception:</strong> Diffusion models are often described as "completely new."
-  In fact, the mathematical foundations — stochastic differential equations and score matching — date
+  In fact, the mathematical foundations - stochastic differential equations and score matching - date
   back decades. The breakthroughs were in architecture (U-Nets, Transformers), conditioning (classifier-free
   guidance), and scaling, not in the underlying theory itself.
 </div>
@@ -232,7 +232,7 @@ export const lessons = {
             'Latent space is too high-dimensional for details, causing the decoder to spread probability mass too thinly across possible outputs'
           ],
           correct: 0,
-          explanation: 'VAEs minimize a pixel-wise reconstruction loss (typically MSE) plus a KL regularizer. When the true data distribution is multimodal — e.g., a face could have slightly different hair positions — the model learns to average over modes, producing blurry outputs. GANs avoid this by using an adversarial loss that rewards sharpness directly.',
+          explanation: 'VAEs minimize a pixel-wise reconstruction loss (typically MSE) plus a KL regularizer. When the true data distribution is multimodal - e.g., a face could have slightly different hair positions - the model learns to average over modes, producing blurry outputs. GANs avoid this by using an adversarial loss that rewards sharpness directly.',
           difficulty: 'foundational',
           expertNote: 'This is why modern systems like Stable Diffusion use the VAE only for compression (encoding to latent space), not for final generation. The diffusion process in latent space handles the actual generation, sidestepping the blurriness problem.'
         },
@@ -248,7 +248,7 @@ export const lessons = {
           correct: 2,
           explanation: 'Normalizing flows require every layer to be invertible with a tractable Jacobian determinant. This architectural constraint eliminates many powerful building blocks (e.g., standard convolutions, attention without modification). The result is typically lower sample quality compared to unconstrained architectures used in GANs or diffusion models.',
           difficulty: 'applied',
-          expertNote: 'Flow matching — a more recent approach used in Meta\'s Voicebox and other systems — relaxes some of these constraints by learning a vector field rather than an explicit invertible map. This hybridizes flow-like training with diffusion-like flexibility.'
+          expertNote: 'Flow matching - a more recent approach used in Meta\'s Voicebox and other systems - relaxes some of these constraints by learning a vector field rather than an explicit invertible map. This hybridizes flow-like training with diffusion-like flexibility.'
         },
         {
           question: 'Which of the following are true about diffusion models compared to GANs? Select all that apply.',
@@ -261,7 +261,7 @@ export const lessons = {
             'Diffusion models provide a principled probabilistic framework with a tractable training objective'
           ],
           correct: [0, 2, 3, 4],
-          explanation: 'Diffusion models train stably (no adversarial dynamics), avoid mode collapse through their probabilistic formulation, and optimize a well-defined denoising objective. However, they require many sequential denoising steps at inference. The claim that diffusion "always" beats GANs is false — on specific benchmarks and with specific metrics (e.g., FID on constrained domains like faces), well-tuned GANs can still be competitive.',
+          explanation: 'Diffusion models train stably (no adversarial dynamics), avoid mode collapse through their probabilistic formulation, and optimize a well-defined denoising objective. However, they require many sequential denoising steps at inference. The claim that diffusion "always" beats GANs is false - on specific benchmarks and with specific metrics (e.g., FID on constrained domains like faces), well-tuned GANs can still be competitive.',
           difficulty: 'foundational',
           expertNote: 'The "always better quality" myth persists because diffusion models excel on diverse benchmarks like ImageNet. On narrow domains (faces, specific textures), the quality difference is much smaller, and GANs win on speed.'
         },
@@ -284,22 +284,22 @@ export const lessons = {
   },
 
   // ─────────────────────────────────────────────
-  // L02 — How Diffusion Works
+  // L02 - How Diffusion Works
   // ─────────────────────────────────────────────
   l02: {
-    title: 'How Diffusion Works — Forward & Reverse Process',
+    title: 'How Diffusion Works - Forward & Reverse Process',
     content: `
 <h2>The Core Intuition</h2>
 <p>
   Imagine you have a photograph. You photocopy it, but each time you introduce a tiny bit of random
-  static. After thousands of copies-of-copies, the image is pure noise — indistinguishable from
+  static. After thousands of copies-of-copies, the image is pure noise - indistinguishable from
   random TV static. <span class="term" data-term="diffusion-model">Diffusion models</span> learn to
   run this process in reverse: given pure noise, iteratively remove the static until a coherent image
   emerges.
 </p>
 <p>
-  This two-phase structure — a <strong>forward process</strong> that destroys information and a
-  <strong>reverse process</strong> that reconstructs it — is the mathematical backbone of all
+  This two-phase structure - a <strong>forward process</strong> that destroys information and a
+  <strong>reverse process</strong> that reconstructs it - is the mathematical backbone of all
   diffusion-based generative models.
 </p>
 
@@ -312,7 +312,7 @@ export const lessons = {
   <code>q(x<sub>t</sub> | x<sub>t-1</sub>) = N(x<sub>t</sub>; &radic;(1-&beta;<sub>t</sub>) x<sub>t-1</sub>, &beta;<sub>t</sub> I)</code>
 </p>
 <p>
-  Here, <code>&beta;<sub>t</sub></code> is a <strong>noise schedule</strong> — a small positive value
+  Here, <code>&beta;<sub>t</sub></code> is a <strong>noise schedule</strong> - a small positive value
   that controls how much noise is added at step <code>t</code>. Common schedules include:
 </p>
 <ul>
@@ -328,13 +328,13 @@ export const lessons = {
   <code>&alpha;<sub>t</sub> = 1 - &beta;<sub>t</sub></code> and
   <code>&alpha;&#772;<sub>t</sub> = &prod; &alpha;<sub>s</sub></code> (cumulative product).
   Then: <code>q(x<sub>t</sub> | x<sub>0</sub>) = N(x<sub>t</sub>; &radic;&alpha;&#772;<sub>t</sub> x<sub>0</sub>, (1-&alpha;&#772;<sub>t</sub>) I)</code>.
-  This "closed-form sampling" is essential for efficient training — you randomly pick a timestep and
+  This "closed-form sampling" is essential for efficient training - you randomly pick a timestep and
   directly compute the noisy version.
 </div>
 
 <p>
   As <code>t &rarr; T</code>, the signal-to-noise ratio approaches zero, and
-  <code>x<sub>T</sub> &sim; N(0, I)</code> — pure isotropic Gaussian noise. The original image is
+  <code>x<sub>T</sub> &sim; N(0, I)</code> - pure isotropic Gaussian noise. The original image is
   completely destroyed.
 </p>
 
@@ -373,15 +373,15 @@ export const lessons = {
 </ol>
 
 <div class="warning">
-  <strong>Common Misconception:</strong> People often think the model is trained sequentially — first
+  <strong>Common Misconception:</strong> People often think the model is trained sequentially - first
   learning to denoise from step T, then T-1, etc. In reality, training samples random timesteps in
   every batch. The model simultaneously learns to denoise from any noise level. This is why timestep
-  <code>t</code> is provided as an input — the network must know <em>how noisy</em> the input is.
+  <code>t</code> is provided as an input - the network must know <em>how noisy</em> the input is.
 </div>
 
 <h2>The Denoising Network Architecture</h2>
 <p>
-  The workhorse architecture for diffusion is the <strong>U-Net</strong> — an encoder-decoder
+  The workhorse architecture for diffusion is the <strong>U-Net</strong> - an encoder-decoder
   convolutional network with skip connections. Key components:
 </p>
 <ul>
@@ -410,7 +410,7 @@ export const lessons = {
   To generate an image:
 </p>
 <ol>
-  <li>Sample <code>x<sub>T</sub> ~ N(0, I)</code> — start from pure noise.</li>
+  <li>Sample <code>x<sub>T</sub> ~ N(0, I)</code> - start from pure noise.</li>
   <li>For <code>t = T, T-1, ..., 1</code>:
     <ul>
       <li>Predict noise: <code>&epsilon;<sub>&theta;</sub>(x<sub>t</sub>, t)</code></li>
@@ -418,7 +418,7 @@ export const lessons = {
       <li>Add a small amount of random noise (except at the final step)</li>
     </ul>
   </li>
-  <li>Return <code>x<sub>0</sub></code> — the generated image.</li>
+  <li>Return <code>x<sub>0</sub></code> - the generated image.</li>
 </ol>
 <p>
   Original DDPM used <code>T = 1000</code> steps, making inference slow. Modern approaches
@@ -481,7 +481,7 @@ export const lessons = {
   Song et al. (2021) unified discrete-step diffusion (DDPM) and continuous-time score models under
   a single framework of <strong>stochastic differential equations (SDEs)</strong>. The forward process
   is an SDE that adds noise; the reverse is another SDE that removes it. This unification enabled
-  the probability flow ODE — a deterministic trajectory that allows exact likelihood computation.
+  the probability flow ODE - a deterministic trajectory that allows exact likelihood computation.
 </p>
 `,
     quiz: {
@@ -498,7 +498,7 @@ export const lessons = {
           correct: 3,
           explanation: 'Because the closed-form expression q(x_t | x_0) lets you jump to any timestep directly, there is no need to iterate through all steps. Random timestep sampling means every batch contains examples from across the entire noise spectrum, allowing the model to learn all denoising levels simultaneously. This is both more efficient and produces better gradients.',
           difficulty: 'foundational',
-          expertNote: 'Some recent work (like P2 weighting) suggests that not all timesteps are equally important — intermediate timesteps contribute most to perceptual quality. Importance sampling over timesteps can further improve training efficiency.'
+          expertNote: 'Some recent work (like P2 weighting) suggests that not all timesteps are equally important - intermediate timesteps contribute most to perceptual quality. Importance sampling over timesteps can further improve training efficiency.'
         },
         {
           question: 'Your team is building a consumer image generation product. Testing shows that 50-step DDIM sampling takes 4 seconds on target hardware, but the product requirement is under 1.5 seconds. Which approach should you prioritize investigating?',
@@ -532,13 +532,13 @@ export const lessons = {
           question: 'Which of the following correctly describe the relationship between the noise prediction and score function perspectives of diffusion? Select all that apply.',
           type: 'multi',
           options: [
-            'They are mathematically equivalent — predicting noise is proportional to predicting the score',
+            'They are mathematically equivalent - predicting noise is proportional to predicting the score',
             'The score function points toward higher-density regions of the data distribution',
             'Only the noise prediction formulation can be used for image generation',
             'The SDE framework unifies both perspectives and enables exact likelihood computation via the probability flow ODE'
           ],
           correct: [0, 1, 3],
-          explanation: 'The noise prediction epsilon_theta and score function are related by a simple scaling factor involving the noise schedule. Both can be used for generation. The SDE unification by Song et al. showed that the probability flow ODE — a deterministic version of the reverse SDE — enables exact log-likelihood computation, bridging the gap with normalizing flows.',
+          explanation: 'The noise prediction epsilon_theta and score function are related by a simple scaling factor involving the noise schedule. Both can be used for generation. The SDE unification by Song et al. showed that the probability flow ODE - a deterministic version of the reverse SDE - enables exact log-likelihood computation, bridging the gap with normalizing flows.',
           difficulty: 'expert',
           expertNote: 'The SDE/ODE duality is powerful: the stochastic sampler (SDE) often produces higher quality due to the injected randomness acting as a form of exploration, while the deterministic sampler (ODE) enables likelihood computation and more predictable outputs. Some systems let users choose between them.'
         },
@@ -561,10 +561,10 @@ export const lessons = {
   },
 
   // ─────────────────────────────────────────────
-  // L03 — Stable Diffusion, DALL-E, Imagen
+  // L03 - Stable Diffusion, DALL-E, Imagen
   // ─────────────────────────────────────────────
   l03: {
-    title: 'Stable Diffusion, DALL-E, Imagen — Architecture Deep Dive',
+    title: 'Stable Diffusion, DALL-E, Imagen - Architecture Deep Dive',
     content: `
 <h2>The Text-to-Image Revolution</h2>
 <p>
@@ -624,7 +624,7 @@ export const lessons = {
 </p>
 <ol>
   <li><strong>Text encoder:</strong> T5-XXL (4.6B parameters), a frozen large language model.
-      Critically, this is a <em>text-only</em> model — never trained on images.</li>
+      Critically, this is a <em>text-only</em> model - never trained on images.</li>
   <li><strong>Base diffusion model:</strong> A U-Net conditioned on T5 embeddings via cross-attention.
       Generates 64x64 images.</li>
   <li><strong>Super-resolution models:</strong> Two cascaded diffusion models upscale to 256x256
@@ -632,15 +632,15 @@ export const lessons = {
 </ol>
 
 <div class="key-concept">
-  <strong>Key Concept:</strong> Imagen's most important finding — published in the "Photorealistic
-  Text-to-Image Diffusion Models with Deep Language Understanding" paper — was that increasing the
+  <strong>Key Concept:</strong> Imagen's most important finding - published in the "Photorealistic
+  Text-to-Image Diffusion Models with Deep Language Understanding" paper - was that increasing the
   size of the text encoder (from T5-Small to T5-XXL) improved image quality and text-image alignment
   far more than increasing the size of the U-Net diffusion model. This suggests that text
   <em>understanding</em> is the bottleneck, not image <em>generation</em>.
 </div>
 
 <p>
-  Imagen also introduced <strong>dynamic thresholding</strong> — a technique for preventing pixel
+  Imagen also introduced <strong>dynamic thresholding</strong> - a technique for preventing pixel
   saturation when using high guidance scales. Without it, classifier-free guidance at scale 15+
   produces washed-out or artifact-heavy images. Dynamic thresholding clips the predicted
   <code>x<sub>0</sub></code> to a percentile-based range at each step.
@@ -693,7 +693,7 @@ export const lessons = {
 <div class="key-concept">
   <strong>Key Concept:</strong> The latent diffusion approach is why Stable Diffusion could run on
   consumer GPUs while DALL-E 2 and Imagen required massive infrastructure. By compressing to latent
-  space first, the diffusion U-Net operates on 48x fewer elements. This is not just a speedup — it
+  space first, the diffusion U-Net operates on 48x fewer elements. This is not just a speedup - it
   is an entire paradigm shift that democratized generative AI. The approach proved so successful that
   subsequent versions of virtually every major system adopted latent diffusion.
 </div>
@@ -707,7 +707,7 @@ export const lessons = {
   <li><strong>SD v2.0/2.1</strong> (Nov 2022): OpenCLIP text encoder, 768x768 support, depth-conditioned models.</li>
   <li><strong>SDXL</strong> (Jul 2023): Dual text encoders (CLIP ViT-L + OpenCLIP ViT-bigG), 2.6B U-Net,
       1024x1024 native resolution, refiner model for detail enhancement.</li>
-  <li><strong>SDXL Turbo</strong> (Nov 2023): Adversarial diffusion distillation — 1-4 step generation.</li>
+  <li><strong>SDXL Turbo</strong> (Nov 2023): Adversarial diffusion distillation - 1-4 step generation.</li>
   <li><strong>SD3</strong> (2024): Replaced U-Net with a Diffusion Transformer (DiT) using flow matching,
       triple text encoders (CLIP ViT-L, OpenCLIP ViT-bigG, T5-XXL).</li>
 </ul>
@@ -748,14 +748,14 @@ export const lessons = {
 </p>
 <ul>
   <li>Scales more predictably with compute (follows Transformer scaling laws)</li>
-  <li>Simpler architecture — no need for hand-designed skip connections and resolution stages</li>
+  <li>Simpler architecture - no need for hand-designed skip connections and resolution stages</li>
   <li>Better at handling variable resolutions and aspect ratios</li>
   <li>More compatible with existing Transformer infrastructure and optimizations</li>
 </ul>
 <p>
   DiT is the backbone of <strong>Sora</strong> (OpenAI's video model), <strong>SD3</strong>,
   and many next-generation systems. The trend is clear: the Transformer is becoming the universal
-  architecture for all modalities — text, images, video, and audio.
+  architecture for all modalities - text, images, video, and audio.
 </p>
 
 <h2>Conditioning Beyond Text</h2>
@@ -765,7 +765,7 @@ export const lessons = {
 <ul>
   <li><strong>ControlNet:</strong> Condition on spatial maps (edges, depth, pose, segmentation) by
       adding a trainable copy of the U-Net encoder.</li>
-  <li><strong>IP-Adapter:</strong> Image prompt conditioning — use a reference image to guide style.</li>
+  <li><strong>IP-Adapter:</strong> Image prompt conditioning - use a reference image to guide style.</li>
   <li><strong>Inpainting:</strong> Condition on a masked image to fill in regions.</li>
   <li><strong>Img2img:</strong> Start from a partially noised version of an existing image instead
       of pure noise, enabling editing.</li>
@@ -774,7 +774,7 @@ export const lessons = {
 <div class="pro-tip">
   <strong>PM Perspective:</strong> These conditioning mechanisms are what transform a research model
   into a product. Raw text-to-image is a creative toy. ControlNet + inpainting + img2img enable
-  professional workflows — architectural visualization, product photography, fashion design. When
+  professional workflows - architectural visualization, product photography, fashion design. When
   building a product roadmap, the conditioning modalities you support define your market. Think of
   the base diffusion model as a platform and conditioning mechanisms as features built on top.
 </div>
@@ -805,9 +805,9 @@ export const lessons = {
             'CLIP-based text encoders were superior to language model-based encoders for all text understanding tasks, because contrastive training on image-text pairs provides richer visual-semantic grounding than text-only pre-training'
           ],
           correct: 0,
-          explanation: 'Imagen systematically demonstrated that scaling T5 (the text encoder) from Small to XXL improved both FID scores and text-image alignment far more than scaling the U-Net. This finding reshaped the field — subsequent systems invested heavily in text encoders, with SD3 using three text encoders totaling 5B+ parameters.',
+          explanation: 'Imagen systematically demonstrated that scaling T5 (the text encoder) from Small to XXL improved both FID scores and text-image alignment far more than scaling the U-Net. This finding reshaped the field - subsequent systems invested heavily in text encoders, with SD3 using three text encoders totaling 5B+ parameters.',
           difficulty: 'foundational',
-          expertNote: 'This finding is counterintuitive — most engineers instinctively want to scale the "image part" of an image generation model. Imagen showed that the bottleneck was understanding what the user wanted, not generating the pixels. This insight has analogs across AI product development: the interface between intent and execution is often the hardest problem.'
+          expertNote: 'This finding is counterintuitive - most engineers instinctively want to scale the "image part" of an image generation model. Imagen showed that the bottleneck was understanding what the user wanted, not generating the pixels. This insight has analogs across AI product development: the interface between intent and execution is often the hardest problem.'
         },
         {
           question: 'DALL-E 3 significantly improved text-image alignment compared to DALL-E 2. What was the primary technique responsible?',
@@ -834,9 +834,9 @@ export const lessons = {
             'DiT requires significantly more parameters than a U-Net for equivalent quality'
           ],
           correct: [0, 1, 3],
-          explanation: 'DiT patchifies images into tokens and uses standard Transformer blocks with adaptive layer normalization for timestep conditioning. It follows Transformer scaling laws (predictable improvement with more compute), handles variable resolutions naturally, and supports all standard conditioning mechanisms including classifier-free guidance. It does not inherently require more parameters — in fact, at equivalent parameter counts, DiT models often match or exceed U-Net quality.',
+          explanation: 'DiT patchifies images into tokens and uses standard Transformer blocks with adaptive layer normalization for timestep conditioning. It follows Transformer scaling laws (predictable improvement with more compute), handles variable resolutions naturally, and supports all standard conditioning mechanisms including classifier-free guidance. It does not inherently require more parameters - in fact, at equivalent parameter counts, DiT models often match or exceed U-Net quality.',
           difficulty: 'applied',
-          expertNote: 'DiT\'s adoption in Sora and SD3 suggests it will become the dominant architecture for diffusion. For PMs, this means the same Transformer infrastructure (hardware, optimization techniques, serving frameworks) can be shared across text and image models — a significant operational advantage.'
+          expertNote: 'DiT\'s adoption in Sora and SD3 suggests it will become the dominant architecture for diffusion. For PMs, this means the same Transformer infrastructure (hardware, optimization techniques, serving frameworks) can be shared across text and image models - a significant operational advantage.'
         },
         {
           question: 'A product designer asks you why users cannot simply "edit one object" in a generated image without affecting the rest. Which architectural capability would you point to as the solution?',
@@ -850,7 +850,7 @@ export const lessons = {
           correct: 3,
           explanation: 'Inpainting allows the model to regenerate only masked regions while keeping the rest of the image fixed. Combining this with ControlNet (which can accept segmentation masks, edge maps, or depth maps) gives precise spatial control over which object is regenerated and how. This is the standard approach for object-level editing in production diffusion systems.',
           difficulty: 'applied',
-          expertNote: 'This is a common PM scenario — translating user needs ("I just want to change the color of the car") into architectural requirements (inpainting + segmentation conditioning). Products like Adobe Firefly and Canva\'s Magic Edit implement exactly this pipeline.'
+          expertNote: 'This is a common PM scenario - translating user needs ("I just want to change the color of the car") into architectural requirements (inpainting + segmentation conditioning). Products like Adobe Firefly and Canva\'s Magic Edit implement exactly this pipeline.'
         },
         {
           question: 'Your team has built a latent diffusion model. During testing, users report that images look slightly "soft" or lacking fine detail compared to pixel-space models. What is the most likely cause and the standard mitigation?',
@@ -862,24 +862,24 @@ export const lessons = {
             'Classifier-free guidance is set too low, causing the model to generate generic outputs that average over many possible interpretations rather than committing to sharp, specific visual details'
           ],
           correct: 1,
-          explanation: 'The VAE compression is lossy — going from 512x512x3 to 64x64x4 and back inevitably loses some high-frequency detail. This manifests as slight softness. Standard mitigations include: (1) fine-tuning the VAE decoder for sharper reconstruction, (2) using a refiner model (as SDXL does) that adds detail in a second pass, or (3) training with a higher-resolution latent space. This is a known trade-off of the latent diffusion approach.',
+          explanation: 'The VAE compression is lossy - going from 512x512x3 to 64x64x4 and back inevitably loses some high-frequency detail. This manifests as slight softness. Standard mitigations include: (1) fine-tuning the VAE decoder for sharper reconstruction, (2) using a refiner model (as SDXL does) that adds detail in a second pass, or (3) training with a higher-resolution latent space. This is a known trade-off of the latent diffusion approach.',
           difficulty: 'expert',
-          expertNote: 'SDXL addressed this with its "refiner" model — a second diffusion model specialized for adding high-frequency detail. SD3 used an improved VAE with a higher-dimensional latent space (16 channels vs. 4). Understanding where quality loss occurs in the pipeline is crucial for debugging generative systems.'
+          expertNote: 'SDXL addressed this with its "refiner" model - a second diffusion model specialized for adding high-frequency detail. SD3 used an improved VAE with a higher-dimensional latent space (16 channels vs. 4). Understanding where quality loss occurs in the pipeline is crucial for debugging generative systems.'
         }
       ]
     }
   },
 
   // ─────────────────────────────────────────────
-  // L04 — Multimodal Models
+  // L04 - Multimodal Models
   // ─────────────────────────────────────────────
   l04: {
-    title: 'Multimodal Models — Connecting Vision and Language',
+    title: 'Multimodal Models - Connecting Vision and Language',
     content: `
 <h2>What Are Multimodal Models?</h2>
 <p>
   A <span class="term" data-term="multimodal">multimodal model</span> is a system that can process,
-  understand, and generate content across multiple data types — typically text, images, audio, and
+  understand, and generate content across multiple data types - typically text, images, audio, and
   video. While text-to-image models like Stable Diffusion are technically multimodal (they connect
   text and vision), the term increasingly refers to models that can <em>reason</em> across modalities:
   answer questions about images, generate images from conversational context, transcribe speech while
@@ -906,7 +906,7 @@ export const lessons = {
 <p>
   The result is a <strong>shared embedding space</strong> where images and text describing similar
   concepts land near each other. This space is used for zero-shot classification, image search,
-  and — critically — as the text conditioning mechanism in diffusion models.
+  and - critically - as the text conditioning mechanism in diffusion models.
 </p>
 
 <div class="key-concept">
@@ -962,7 +962,7 @@ export const lessons = {
       Remarkably, a single linear layer is sufficient to connect the visual encoder to the language model.</li>
   <li><strong>Flamingo (DeepMind):</strong> Uses Perceiver Resampler modules to compress visual features
       and gated cross-attention layers interleaved with frozen LLM layers.</li>
-  <li><strong>BLIP-2:</strong> Introduces a Q-Former (Querying Transformer) — a lightweight Transformer
+  <li><strong>BLIP-2:</strong> Introduces a Q-Former (Querying Transformer) - a lightweight Transformer
       with learned query vectors that extract a fixed number of visual tokens from the frozen image encoder.</li>
 </ul>
 
@@ -971,7 +971,7 @@ export const lessons = {
   <p>In LLaVA, an image is processed by CLIP ViT-L/14 to produce 576 visual tokens (24x24 grid of
   patch embeddings). A linear projection maps these to the LLM's embedding dimension. The visual
   tokens are then prepended to the text tokens and processed by the LLM as if they were "visual words."
-  The LLM does not know it is looking at visual tokens — it simply processes a longer sequence where
+  The LLM does not know it is looking at visual tokens - it simply processes a longer sequence where
   the first 576 positions happen to encode visual information.</p>
 </div>
 
@@ -990,7 +990,7 @@ export const lessons = {
 <div class="key-concept">
   <strong>Key Concept:</strong> The distinction between "bolted-on" and "native" multimodality matters
   for product capabilities. Bolted-on systems (Pattern 1) can leverage the best pretrained vision and
-  language models but may have a "seam" between modalities — they can describe what they see but may
+  language models but may have a "seam" between modalities - they can describe what they see but may
   struggle with fine-grained spatial reasoning. Native multimodal systems (Pattern 2) can develop
   deeper cross-modal understanding but require training from scratch on massive multimodal datasets.
 </div>
@@ -1001,7 +1001,7 @@ export const lessons = {
 </p>
 <ul>
   <li><strong>Visual Question Answering (VQA):</strong> "What color is the car in the background?"</li>
-  <li><strong>Optical Character Recognition (OCR):</strong> Reading text in images — signs, documents, code.</li>
+  <li><strong>Optical Character Recognition (OCR):</strong> Reading text in images - signs, documents, code.</li>
   <li><strong>Spatial reasoning:</strong> "Is the cat on the left or right side of the table?"</li>
   <li><strong>Chart/diagram understanding:</strong> Interpreting data visualizations and technical diagrams.</li>
   <li><strong>Multi-image reasoning:</strong> Comparing, contrasting, or synthesizing information across
@@ -1039,7 +1039,7 @@ export const lessons = {
   <strong>Common Misconception:</strong> Many people assume that multimodal models like GPT-4V literally
   "see" images the way humans do. In reality, the vision encoder converts the image into a grid of
   embedding vectors that the language model processes as a sequence of tokens. The model has no
-  built-in understanding of 3D geometry, physics, or causation — it learns statistical associations
+  built-in understanding of 3D geometry, physics, or causation - it learns statistical associations
   between visual patterns and language. This matters for product decisions: do not promise capabilities
   (like reliable spatial reasoning or accurate counting) that the architecture does not guarantee.
 </div>
@@ -1074,7 +1074,7 @@ export const lessons = {
       are not present in an image. This is analogous to text hallucination but harder to detect
       because it requires comparing model output against visual ground truth.</li>
   <li><strong>Fine-grained spatial understanding:</strong> Counting objects, understanding relative
-      positions, reading small text — these remain unreliable even in frontier models.</li>
+      positions, reading small text - these remain unreliable even in frontier models.</li>
   <li><strong>Multimodal safety:</strong> Images can be used to jailbreak text safety filters. A model
       that refuses to describe how to pick a lock via text might comply when the instructions are
       embedded in an image.</li>
@@ -1087,7 +1087,7 @@ export const lessons = {
   <strong>Key Concept:</strong> Multimodal hallucination is one of the hardest unsolved problems in AI
   safety. When a text model hallucinates, you can sometimes catch it with retrieval or fact-checking.
   When a multimodal model hallucinates about image content, there is no straightforward automated
-  way to verify the claim against the image — you need either a second multimodal model or human review.
+  way to verify the claim against the image - you need either a second multimodal model or human review.
   This is a first-order product concern for any application involving visual understanding.
 </div>
 `,
@@ -1103,7 +1103,7 @@ export const lessons = {
             'Diffusion model conditioned on document images to generate cleaned-up versions, which can then be passed to a standard template-matching system for structured field extraction'
           ],
           correct: 0,
-          explanation: 'Document extraction with diverse layouts, handwriting, and tables requires deep visual reasoning — understanding spatial relationships, table structure, and handwritten text. A generative multimodal LLM can be prompted to extract specific fields, handle layout variations flexibly, and even explain its reasoning. CLIP is too limited (similarity matching only). Text-only LLM after OCR loses spatial/layout information. Diffusion models generate images, not structured data.',
+          explanation: 'Document extraction with diverse layouts, handwriting, and tables requires deep visual reasoning - understanding spatial relationships, table structure, and handwritten text. A generative multimodal LLM can be prompted to extract specific fields, handle layout variations flexibly, and even explain its reasoning. CLIP is too limited (similarity matching only). Text-only LLM after OCR loses spatial/layout information. Diffusion models generate images, not structured data.',
           difficulty: 'applied',
           expertNote: 'In practice, you would likely combine a specialized OCR model with a multimodal LLM. The OCR handles character recognition, while the LLM handles layout understanding and field extraction. This hybrid approach is more robust than either alone.'
         },
@@ -1117,7 +1117,7 @@ export const lessons = {
             'CLIP is trained on more data while Flamingo uses a curated smaller dataset, which is why CLIP generalizes better to zero-shot retrieval tasks despite having fewer total parameters'
           ],
           correct: 2,
-          explanation: 'CLIP learns a shared embedding space through contrastive loss — it can tell you how similar an image and text are, but it cannot generate explanations, answer questions, or reason. Flamingo (and similar generative multimodal models) learn to produce text tokens conditioned on visual input, enabling open-ended visual question answering, description, and reasoning.',
+          explanation: 'CLIP learns a shared embedding space through contrastive loss - it can tell you how similar an image and text are, but it cannot generate explanations, answer questions, or reason. Flamingo (and similar generative multimodal models) learn to produce text tokens conditioned on visual input, enabling open-ended visual question answering, description, and reasoning.',
           difficulty: 'foundational',
           expertNote: 'This distinction maps directly to product capabilities. If your feature needs ranking or retrieval (e.g., "find the most relevant image"), CLIP is sufficient and far more efficient. If your feature needs understanding (e.g., "explain what is happening in this photo"), you need a generative model.'
         },
@@ -1131,7 +1131,7 @@ export const lessons = {
             'Use CLIP to convert images to text descriptions, then feed those to the existing text model, leveraging CLIP\'s strong zero-shot captioning ability to bridge the modality gap without any architectural changes'
           ],
           correct: 1,
-          explanation: 'The bolted-on approach (Pattern 1) preserves the existing LLM weights entirely — the text capabilities remain unchanged. Only the vision encoder and adapter need training, which requires far less compute and data than training from scratch. This is exactly the approach taken by LLaVA, which achieved strong results with just a linear projection layer. Retraining from scratch is slow and risks regressing text quality. Replacing the model entirely changes the product unpredictably. CLIP-to-text loses too much visual information.',
+          explanation: 'The bolted-on approach (Pattern 1) preserves the existing LLM weights entirely - the text capabilities remain unchanged. Only the vision encoder and adapter need training, which requires far less compute and data than training from scratch. This is exactly the approach taken by LLaVA, which achieved strong results with just a linear projection layer. Retraining from scratch is slow and risks regressing text quality. Replacing the model entirely changes the product unpredictably. CLIP-to-text loses too much visual information.',
           difficulty: 'applied',
           expertNote: 'LLaVA demonstrated that even a simple linear projection between a frozen CLIP encoder and a frozen LLM could achieve surprisingly good results with minimal training. This validates the "bolt-on" approach as a legitimate rapid deployment strategy.'
         },
@@ -1139,7 +1139,7 @@ export const lessons = {
           question: 'Which of the following are genuine challenges with current multimodal models that a PM must account for in product design? Select all that apply.',
           type: 'multi',
           options: [
-            'Visual hallucination — models describe objects or attributes not present in the image',
+            'Visual hallucination - models describe objects or attributes not present in the image',
             'Multimodal models cannot process images larger than 256x256 pixels',
             'Images can be used as attack vectors to bypass text-based safety filters',
             'Fine-grained spatial reasoning (counting, relative positioning) remains unreliable',
@@ -1160,7 +1160,7 @@ export const lessons = {
             'Deeper cross-modal reasoning via architectural integration'
           ],
           correct: 3,
-          explanation: 'When modalities are trained jointly from the beginning, the model can learn rich cross-modal representations at every layer of the network. In a bolted-on approach, the connection between vision and language is limited to the adapter layer — a potential bottleneck for complex reasoning that requires deep integration of visual and textual information. Native multimodality allows the model to develop "visual thinking" throughout its entire depth.',
+          explanation: 'When modalities are trained jointly from the beginning, the model can learn rich cross-modal representations at every layer of the network. In a bolted-on approach, the connection between vision and language is limited to the adapter layer - a potential bottleneck for complex reasoning that requires deep integration of visual and textual information. Native multimodality allows the model to develop "visual thinking" throughout its entire depth.',
           difficulty: 'applied',
           expertNote: 'The trade-off is that native multimodal training requires massive multimodal datasets and compute from the start. You cannot easily reuse an existing strong text model. Google DeepMind invested in this approach because they had both the data and compute, and believed the deeper integration would yield fundamentally better cross-modal reasoning.'
         }

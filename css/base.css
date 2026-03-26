@@ -22,7 +22,7 @@ body {
   overflow-x: hidden;
 }
 
-/* === Ambient background — subtle layered depth === */
+/* === Ambient background - subtle layered depth === */
 .ambient-bg {
   position: fixed;
   inset: 0;
@@ -30,7 +30,7 @@ body {
   z-index: -2;
 }
 
-/* Soft radial vignette — warm center fading to dark edges */
+/* Soft radial vignette - warm center fading to dark edges */
 .ambient-bg::before {
   content: '';
   position: absolute;

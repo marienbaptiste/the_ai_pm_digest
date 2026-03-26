@@ -163,7 +163,7 @@ export function render(container) {
 
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Vector Database \u2014 Semantic Similarity Search in Embedding Space
+        Vector Database - Semantic Similarity Search in Embedding Space
       </p>
     </div>
   `;

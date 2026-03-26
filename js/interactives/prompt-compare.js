@@ -1,4 +1,4 @@
-// Prompt Comparison Tool — interactive side-by-side comparison of prompting strategies
+// Prompt Comparison Tool - interactive side-by-side comparison of prompting strategies
 // Shows zero-shot, few-shot, and chain-of-thought prompting applied to the same question
 
 const DEFAULT_QUESTION = 'What is the capital of the country that hosted the 2024 Olympics?';

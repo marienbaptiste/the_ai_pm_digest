@@ -215,11 +215,11 @@ export function render(container) {
         <!-- Bottom annotation -->
         <text x="${cx}" y="338" text-anchor="middle" class="sl-title" style="animation-delay: 3.5s;"
           fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">
-          Multiple layers of protection \u2014 no single point of failure
+          Multiple layers of protection - no single point of failure
         </text>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        AI Safety Layers \u2014 Concentric defense model
+        AI Safety Layers - Concentric defense model
       </p>
     </div>
   `;

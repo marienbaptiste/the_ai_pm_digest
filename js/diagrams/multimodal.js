@@ -220,7 +220,7 @@ export function render(container) {
 
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Multimodal Fusion \u2014 Vision + Language Cross-Attention Architecture
+        Multimodal Fusion - Vision + Language Cross-Attention Architecture
       </p>
     </div>
   `;

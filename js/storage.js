@@ -39,7 +39,7 @@ export const storage = {
     if (verify.progress[lessonKey]?.completed) {
       console.log(`[Storage] Save verified for ${lessonKey}`);
     } else {
-      console.error(`[Storage] Save FAILED for ${lessonKey} — localStorage may be unavailable`);
+      console.error(`[Storage] Save FAILED for ${lessonKey} - localStorage may be unavailable`);
     }
     window.dispatchEvent(new CustomEvent('progress-changed', { detail: { lessonKey, quizScore } }));
   },

@@ -166,7 +166,7 @@ export function render(container) {
         </g>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        AI Timeline \u2014 From Turing to ChatGPT
+        AI Timeline - From Turing to ChatGPT
       </p>
     </div>
   `;

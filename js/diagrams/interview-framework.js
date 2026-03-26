@@ -203,7 +203,7 @@ export function render(container) {
         </g>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        CIRCLES Method \u2014 7-step framework for PM interview answers
+        CIRCLES Method - 7-step framework for PM interview answers
       </p>
     </div>
   `;

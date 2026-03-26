@@ -162,7 +162,7 @@
   margin: var(--space-6) 0;
 }
 
-/* === Callout boxes — distinctive left-border + background treatment === */
+/* === Callout boxes - distinctive left-border + background treatment === */
 
 /* Key concept callout */
 .lesson__content .key-concept {
@@ -255,7 +255,7 @@
   font-size: var(--text-base);
 }
 
-/* === Comparison table — with hover glow === */
+/* === Comparison table - with hover glow === */
 .lesson__content table {
   width: 100%;
   border-collapse: collapse;
@@ -435,7 +435,7 @@
   margin-bottom: var(--space-6);
 }
 
-/* Module grid — two-column with last card spanning full width */
+/* Module grid - two-column with last card spanning full width */
 .dashboard__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

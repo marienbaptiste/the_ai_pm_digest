@@ -1,4 +1,4 @@
-// Interactive module loader — scans for <div class="interactive" data-interactive="name">
+// Interactive module loader - scans for <div class="interactive" data-interactive="name">
 // and mounts the corresponding interactive component
 
 const interactiveLoaders = {

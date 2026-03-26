@@ -1,4 +1,4 @@
-/* === Orchestrated page entrance — clip-path reveal === */
+/* === Orchestrated page entrance - clip-path reveal === */
 @keyframes revealUp {
   from {
     clip-path: inset(100% 0 0 0);
@@ -104,7 +104,7 @@
   100% { background-position: 200% 0; }
 }
 
-/* === Text reveal — letters unblur === */
+/* === Text reveal - letters unblur === */
 @keyframes textUnblur {
   from {
     filter: blur(8px);
@@ -270,7 +270,7 @@
 .orchestrate > *:nth-child(13) { animation-delay: 960ms; }
 .orchestrate > *:nth-child(14) { animation-delay: 1040ms; }
 
-/* === Cascade variant — wave motion from left === */
+/* === Cascade variant - wave motion from left === */
 .orchestrate--wave > * {
   opacity: 0;
   animation: revealLeft 0.6s var(--ease-out) forwards;

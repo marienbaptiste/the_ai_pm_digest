@@ -4,7 +4,7 @@ export const lessons = {
   // L01: AI Product Lifecycle
   // ─────────────────────────────────────────────
   l01: {
-    title: 'AI Product Lifecycle — From Research to Production',
+    title: 'AI Product Lifecycle - From Research to Production',
     content: `
 <h2>Introduction: Why AI Products Are Different</h2>
 <p>
@@ -233,10 +233,10 @@ export const lessons = {
   },
 
   // ─────────────────────────────────────────────
-  // L02: Defining Success — Metrics & Evaluation
+  // L02: Defining Success - Metrics & Evaluation
   // ─────────────────────────────────────────────
   l02: {
-    title: 'Defining Success — Metrics & Evaluation for AI Products',
+    title: 'Defining Success - Metrics & Evaluation for AI Products',
     content: `
 <h2>Why Metrics for AI Products Are Fundamentally Different</h2>
 <p>
@@ -564,10 +564,10 @@ export const lessons = {
           question: 'You are building a content moderation system for a social platform. Which metric should you prioritize, and why?',
           type: 'mc',
           options: [
-            'Accuracy — it provides the best overall picture of model performance, aggregating true positives and true negatives into a single convenient percentage that leadership and stakeholders can easily track on a dashboard',
-            'Precision — flagging innocent content (false positives) frustrates users and suppresses speech, and a trust audit found that users who experience a single wrongful removal are significantly less likely to re-engage with the platform',
-            'F1-score — it provides the optimal balance of precision and recall, and most regulatory frameworks now require a documented trade-off analysis showing the chosen metric optimizes across both error types simultaneously',
-            'Recall — missing harmful content (false negatives) creates safety risks for users'
+            'Accuracy - it provides the best overall picture of model performance, aggregating true positives and true negatives into a single convenient percentage that leadership and stakeholders can easily track on a dashboard',
+            'Precision - flagging innocent content (false positives) frustrates users and suppresses speech, and a trust audit found that users who experience a single wrongful removal are significantly less likely to re-engage with the platform',
+            'F1-score - it provides the optimal balance of precision and recall, and most regulatory frameworks now require a documented trade-off analysis showing the chosen metric optimizes across both error types simultaneously',
+            'Recall - missing harmful content (false negatives) creates safety risks for users'
           ],
           correct: 3,
           explanation: 'For content moderation, the highest priority is recall (catching harmful content), because the cost of a false negative (harmful content reaching users) is far greater than the cost of a false positive (innocent content flagged for review). However, precision still matters; a system with very low precision would overwhelm human reviewers. The key insight is that the PM must choose the primary optimization target based on the asymmetric costs of different error types.',
@@ -578,22 +578,22 @@ export const lessons = {
           question: 'Your team\'s LLM-based summarization feature has a BLEU score of 45 but users are reporting low satisfaction. Which of the following are plausible explanations? (Select all that apply)',
           type: 'multi',
           options: [
-            'BLEU measures lexical overlap, not semantic quality — good paraphrases score poorly',
+            'BLEU measures lexical overlap, not semantic quality - good paraphrases score poorly',
             'A BLEU score of 45 is actually very low and indicates a broken model',
             'The reference summaries used for BLEU calculation may not represent what users actually want',
-            'BLEU does not capture factual accuracy — the model may be hallucinating plausible-sounding text',
+            'BLEU does not capture factual accuracy - the model may be hallucinating plausible-sounding text',
             'BLEU scores are only valid for translation tasks and meaningless for summarization'
           ],
           correct: [0, 2, 3],
           explanation: 'BLEU has real limitations: it rewards lexical overlap rather than semantic meaning (A), the reference texts may not match user expectations (C), and it cannot detect hallucinations (D). A BLEU of 45 is actually quite high, not low (B is wrong). BLEU is used for summarization, though ROUGE is more standard for that task (E is an overstatement).',
           difficulty: 'applied',
-          expertNote: 'This scenario is extremely common. The disconnect between automated metrics and user satisfaction is a well-known problem in NLP. Modern evaluation increasingly relies on LLM-as-judge approaches (using a strong model to evaluate a weaker model\'s outputs) alongside human evaluation. At DeepMind, automated metrics are treated as necessary but insufficient — no model ships based on automated metrics alone.'
+          expertNote: 'This scenario is extremely common. The disconnect between automated metrics and user satisfaction is a well-known problem in NLP. Modern evaluation increasingly relies on LLM-as-judge approaches (using a strong model to evaluate a weaker model\'s outputs) alongside human evaluation. At DeepMind, automated metrics are treated as necessary but insufficient - no model ships based on automated metrics alone.'
         },
         {
           question: 'What does p99 latency of 2 seconds mean, and why does it matter more than average latency for production AI systems?',
           type: 'short',
           options: [],
-          correct: 'p99 latency of 2 seconds means that 99% of requests complete in 2 seconds or less — equivalently, 1 in 100 requests takes longer than 2 seconds. It matters more than average latency because: (1) Averages hide tail behavior — a few extremely slow requests can make the average look fine while many users suffer. (2) At scale, the 1% tail affects thousands of real users daily. (3) The slowest requests often correspond to the most complex, valuable use cases (long documents, multi-step reasoning). (4) SLAs and user perception are driven by worst-case experiences, not average ones.',
+          correct: 'p99 latency of 2 seconds means that 99% of requests complete in 2 seconds or less - equivalently, 1 in 100 requests takes longer than 2 seconds. It matters more than average latency because: (1) Averages hide tail behavior - a few extremely slow requests can make the average look fine while many users suffer. (2) At scale, the 1% tail affects thousands of real users daily. (3) The slowest requests often correspond to the most complex, valuable use cases (long documents, multi-step reasoning). (4) SLAs and user perception are driven by worst-case experiences, not average ones.',
           explanation: 'Percentile-based latency metrics reveal the distribution of response times, while averages can be misleading. The p99 captures the worst 1% of user experiences, which at scale affects significant numbers of users and often corresponds to the most complex (and valuable) queries.',
           difficulty: 'foundational',
           expertNote: 'At Google scale, p99 latency problems can affect millions of queries per day. The gap between p50 and p99 is often 5-10x for AI models because inference time varies with input complexity (longer prompts, more complex reasoning). Some teams also track p99.9 for critical services.'
@@ -602,7 +602,7 @@ export const lessons = {
           question: 'You are PM for a Gemini feature that answers questions about uploaded documents. After a model update, automated metrics show a 3% improvement in factual accuracy. However, your golden test set reveals that the model now consistently fails on financial documents containing tables. What should you do?',
           type: 'scenario',
           options: [],
-          correct: 'Do not ship the model update. Despite the aggregate improvement, the regression on financial documents with tables is a critical issue that likely affects high-value enterprise use cases. Recommended actions: (1) Block the rollout and flag the regression to the ML team. (2) Investigate why the new model fails on tabular financial data — it may be a training data gap or an architectural change that broke table parsing. (3) Create a dedicated test suite for financial table understanding to prevent future regressions. (4) Work with the ML team to fix the regression, then re-evaluate the model against both aggregate metrics AND the expanded golden test set. (5) Consider slice-based evaluation as a launch gate: no model ships if any critical slice regresses, even if aggregate metrics improve. This is a textbook example of why aggregate metrics alone are insufficient.',
+          correct: 'Do not ship the model update. Despite the aggregate improvement, the regression on financial documents with tables is a critical issue that likely affects high-value enterprise use cases. Recommended actions: (1) Block the rollout and flag the regression to the ML team. (2) Investigate why the new model fails on tabular financial data - it may be a training data gap or an architectural change that broke table parsing. (3) Create a dedicated test suite for financial table understanding to prevent future regressions. (4) Work with the ML team to fix the regression, then re-evaluate the model against both aggregate metrics AND the expanded golden test set. (5) Consider slice-based evaluation as a launch gate: no model ships if any critical slice regresses, even if aggregate metrics improve. This is a textbook example of why aggregate metrics alone are insufficient.',
           explanation: 'Aggregate improvements can hide critical regressions on specific data slices. Slice-based evaluation that checks performance across important input categories is essential for responsible AI deployment. A model that is 3% better on average but fails on a key use case is not ready to ship.',
           difficulty: 'expert',
           expertNote: 'At DeepMind and Google, this pattern is called "regression on a slice." Launch review processes include mandatory checks on predefined critical slices (languages, document types, demographic groups). Some teams implement automatic launch-blocking when any slice regresses beyond a threshold, regardless of aggregate improvements.'
@@ -643,7 +643,7 @@ export const lessons = {
   // L03: Roadmapping Under Uncertainty
   // ─────────────────────────────────────────────
   l03: {
-    title: 'Roadmapping Under Uncertainty — AI-Specific Challenges',
+    title: 'Roadmapping Under Uncertainty - AI-Specific Challenges',
     content: `
 <h2>Why Traditional Roadmaps Fail for AI Products</h2>
 <p>
@@ -749,9 +749,9 @@ export const lessons = {
   <div class="callout__header">Pro Tip: The "What / When / If" Framework</div>
   <div class="callout__body">
     Structure roadmap communications as:<br>
-    <strong>"What"</strong> we are building (the user problem we are solving — this is firm)<br>
-    <strong>"When"</strong> it might be ready (a range, not a date — this is directional)<br>
-    <strong>"If"</strong> it depends on (the technical conditions that must be met — this is transparent)<br>
+    <strong>"What"</strong> we are building (the user problem we are solving - this is firm)<br>
+    <strong>"When"</strong> it might be ready (a range, not a date - this is directional)<br>
+    <strong>"If"</strong> it depends on (the technical conditions that must be met - this is transparent)<br>
     Example: "We are building document summarization [what] targeting Q3 [when] contingent on achieving
     &lt;3% hallucination rate on enterprise documents [if]."
   </div>
@@ -769,7 +769,7 @@ export const lessons = {
     Imagine your team planned to build a feature using a fine-tuned model, but a new Gemini release
     includes improved capabilities that make fine-tuning unnecessary. A well-structured roadmap allows
     you to pivot from Horizon 2 (custom model development) to Horizon 1 (integration with improved
-    base model), accelerating your timeline and reducing cost. This is not a failure of planning — it is
+    base model), accelerating your timeline and reducing cost. This is not a failure of planning - it is
     the roadmap working as designed.
   </div>
 </div>
@@ -819,7 +819,7 @@ export const lessons = {
           question: 'Your team is pursuing two parallel approaches to build a document understanding feature. Approach A (fine-tuning) is at 82% accuracy after 4 weeks. Approach B (specialized architecture) is at 71% accuracy after 4 weeks but improving faster. Your kill criteria stated "if an approach doesn\'t reach 75% by week 6, redirect resources." What should you do at the week 4 checkpoint?',
           type: 'scenario',
           options: [],
-          correct: 'Continue both approaches through the week 6 gate. Approach A is already above the kill threshold and is the safer bet. Approach B is below threshold but its improvement trajectory suggests it may surpass 75% by week 6 — and if its trajectory continues, it could ultimately outperform Approach A. Specific actions: (1) Continue both as planned. (2) Ask the Approach B team for a data-driven projection of their accuracy trajectory. (3) Begin parallel work on integration architecture for Approach A (the safer bet) so you are ready to move quickly. (4) At week 6, apply kill criteria strictly — if Approach B has not reached 75%, redirect. (5) Consider whether the fast improvement of B suggests that with additional data or compute, it could be the better long-term choice even if you ship with A first.',
+          correct: 'Continue both approaches through the week 6 gate. Approach A is already above the kill threshold and is the safer bet. Approach B is below threshold but its improvement trajectory suggests it may surpass 75% by week 6 - and if its trajectory continues, it could ultimately outperform Approach A. Specific actions: (1) Continue both as planned. (2) Ask the Approach B team for a data-driven projection of their accuracy trajectory. (3) Begin parallel work on integration architecture for Approach A (the safer bet) so you are ready to move quickly. (4) At week 6, apply kill criteria strictly - if Approach B has not reached 75%, redirect. (5) Consider whether the fast improvement of B suggests that with additional data or compute, it could be the better long-term choice even if you ship with A first.',
           explanation: 'Portfolio thinking means maintaining parallel bets until predefined gates are reached. At week 4, neither approach has hit the kill criteria deadline, so both continue. The PM should track trajectories, prepare for the likelier outcome (shipping with A), but not prematurely kill the higher-upside approach.',
           difficulty: 'expert',
           expertNote: 'This scenario illustrates the difference between "parallel bets" and "indecision." The parallel approach is intentional and time-boxed with clear kill criteria. The week 6 gate is a commitment device that prevents sunk-cost fallacy. At DeepMind, research managers often use similar milestone-based decisions to allocate scarce GPU resources across competing approaches.'
@@ -828,10 +828,10 @@ export const lessons = {
           question: 'Which of the following is NOT one of the four primary sources of uncertainty in AI development?',
           type: 'mc',
           options: [
-            'Research risk — unknown whether the capability is achievable with current methods',
-            'Market risk — unknown whether customers will pay for the feature at scale',
-            'Data risk — unknown whether sufficient quality data can be obtained or labeled, including the hidden costs of cleaning, annotation quality control, and ensuring representative coverage across all relevant demographic groups',
-            'Scaling risk — capability works in research but may not scale to production constraints, encompassing latency requirements, cost per query, and multi-region availability demands that differ dramatically from lab conditions'
+            'Research risk - unknown whether the capability is achievable with current methods',
+            'Market risk - unknown whether customers will pay for the feature at scale',
+            'Data risk - unknown whether sufficient quality data can be obtained or labeled, including the hidden costs of cleaning, annotation quality control, and ensuring representative coverage across all relevant demographic groups',
+            'Scaling risk - capability works in research but may not scale to production constraints, encompassing latency requirements, cost per query, and multi-region availability demands that differ dramatically from lab conditions'
           ],
           correct: 1,
           explanation: 'The four AI-specific sources of uncertainty are research risk, data risk, scaling risk, and evaluation risk. Market risk is a general product management concern, not specific to AI development. While market risk matters, it is not one of the unique uncertainty sources that distinguish AI roadmapping from traditional roadmapping.',
@@ -860,13 +860,13 @@ export const lessons = {
   // L04: Go-to-Market for AI
   // ─────────────────────────────────────────────
   l04: {
-    title: 'Go-to-Market for AI — Launch Strategies & Developer Adoption',
+    title: 'Go-to-Market for AI - Launch Strategies & Developer Adoption',
     content: `
 <h2>The Unique GTM Challenges of AI Products</h2>
 <p>
   Launching an AI product is fundamentally different from launching traditional software. Users cannot easily
   predict what the product will do. Marketing cannot make deterministic feature claims. Sales cannot guarantee
-  outcomes. And the product's capabilities will evolve — sometimes dramatically — between launch and the next
+  outcomes. And the product's capabilities will evolve - sometimes dramatically - between launch and the next
   quarter. These realities require a rethought <span class="term" data-term="go-to-market">go-to-market</span>
   strategy that embraces uncertainty while building trust.
 </p>
@@ -887,8 +887,8 @@ export const lessons = {
     </tr>
     <tr>
       <td><strong>User expectations</strong></td>
-      <td>Deterministic — same input, same output</td>
-      <td>Probabilistic — outputs vary</td>
+      <td>Deterministic - same input, same output</td>
+      <td>Probabilistic - outputs vary</td>
     </tr>
     <tr>
       <td><strong>Trust building</strong></td>
@@ -1041,7 +1041,7 @@ export const lessons = {
           question: 'Your Gemini API is seeing strong initial adoption (10,000 developers signed up in week 1) but very low conversion to sustained usage (only 500 active after week 4). What is the most likely root cause, and what would you investigate first?',
           type: 'scenario',
           options: [],
-          correct: 'The most likely root cause is a gap between initial experimentation and finding real production value. The "aha moment" is not being reached. Investigation priorities: (1) Analyze the developer journey funnel — where do developers drop off? (2) Interview churned developers to understand why they stopped. (3) Check time-to-first-successful-API-call — high friction in setup causes early abandonment. (4) Examine the quality of documentation and code samples — can developers easily build what they need? (5) Look at error rates and latency — poor reliability kills developer trust quickly. (6) Check whether the free tier provides enough capability to build meaningful prototypes. The fix likely involves improving documentation, adding production-ready code samples, reducing onboarding friction, and ensuring developers can reach their first successful use case within minutes.',
+          correct: 'The most likely root cause is a gap between initial experimentation and finding real production value. The "aha moment" is not being reached. Investigation priorities: (1) Analyze the developer journey funnel - where do developers drop off? (2) Interview churned developers to understand why they stopped. (3) Check time-to-first-successful-API-call - high friction in setup causes early abandonment. (4) Examine the quality of documentation and code samples - can developers easily build what they need? (5) Look at error rates and latency - poor reliability kills developer trust quickly. (6) Check whether the free tier provides enough capability to build meaningful prototypes. The fix likely involves improving documentation, adding production-ready code samples, reducing onboarding friction, and ensuring developers can reach their first successful use case within minutes.',
           explanation: 'Developer platform adoption follows a funnel: awareness → sign-up → first API call → first meaningful project → production use. A large sign-up number with low sustained usage indicates a conversion problem between experimentation and real value delivery. The investigation should focus on identifying exactly where in the funnel developers are dropping off.',
           difficulty: 'expert',
           expertNote: 'This is an extremely common pattern for developer platforms. Stripe famously obsessed over "time to first successful charge" and optimized every step of the developer journey. For AI APIs, the equivalent is "time to first useful generation." If a developer cannot get a useful result within their first session, they are very unlikely to return.'
@@ -1068,7 +1068,7 @@ export const lessons = {
   // L05: User Research for AI Products
   // ─────────────────────────────────────────────
   l05: {
-    title: 'User Research for AI Products — Novel Interaction Paradigms',
+    title: 'User Research for AI Products - Novel Interaction Paradigms',
     content: `
 <h2>The UXR Challenge: Users Don't Know What AI Can Do</h2>
 <p>
@@ -1145,10 +1145,10 @@ export const lessons = {
   they vocalize their expectations, surprises, and frustrations. Listen for:
 </p>
 <ul>
-  <li><strong>Expectation statements:</strong> "I expect it to..." — reveals their mental model</li>
-  <li><strong>Surprise reactions:</strong> "Oh, I didn't know it could..." or "Why did it..." — reveals model gaps</li>
-  <li><strong>Trust calibration:</strong> "I'll double-check this because..." vs. "I'll just trust this" — reveals trust dynamics</li>
-  <li><strong>Recovery strategies:</strong> What users do when the AI fails — rephrasing, giving up, seeking help</li>
+  <li><strong>Expectation statements:</strong> "I expect it to..." - reveals their mental model</li>
+  <li><strong>Surprise reactions:</strong> "Oh, I didn't know it could..." or "Why did it..." - reveals model gaps</li>
+  <li><strong>Trust calibration:</strong> "I'll double-check this because..." vs. "I'll just trust this" - reveals trust dynamics</li>
+  <li><strong>Recovery strategies:</strong> What users do when the AI fails - rephrasing, giving up, seeking help</li>
 </ul>
 
 <h3>3. Longitudinal Studies</h3>
@@ -1249,13 +1249,13 @@ export const lessons = {
           correct: 2,
           explanation: 'Wizard of Oz studies allow AI PMs to study how users interact with AI capabilities, set quality targets grounded in user behavior, and test different failure modes, all before investing months in model development. The key insight is using WoZ to find the quality threshold where users transition from "frustrating" to "useful."',
           difficulty: 'applied',
-          expertNote: 'Google uses WoZ studies extensively in the early stages of AI feature development. One powerful application is testing how users react to different accuracy levels — a human operator behind the scenes can simulate an 80% accurate model by intentionally making mistakes in specific patterns. This reveals whether users can tolerate the expected error rate.'
+          expertNote: 'Google uses WoZ studies extensively in the early stages of AI feature development. One powerful application is testing how users react to different accuracy levels - a human operator behind the scenes can simulate an 80% accurate model by intentionally making mistakes in specific patterns. This reveals whether users can tolerate the expected error rate.'
         },
         {
           question: 'What is "calibrated trust" in the context of AI products?',
           type: 'mc',
           options: [
-            'Users trust the AI appropriately — relying on it when likely correct, double-checking when uncertain',
+            'Users trust the AI appropriately - relying on it when likely correct, double-checking when uncertain',
             'Users trust the AI 100% of the time for maximum efficiency, which is achievable once the model reaches sufficient accuracy that the cognitive overhead of verification consistently outweighs the risk of accepting an occasional error',
             'Users never trust the AI and always verify its outputs manually, representing the most risk-averse posture that organizations in high-stakes domains like legal, medical, and financial services should mandate for all AI-assisted workflows',
             'Users trust the AI more over time as the model improves, following a predictable adoption curve where confidence naturally increases with each positive interaction and decreases sharply only after a highly visible failure'
@@ -1263,13 +1263,13 @@ export const lessons = {
           correct: 0,
           explanation: 'Calibrated trust means the user\'s level of trust matches the AI\'s actual reliability. Over-trust leads to accepting errors; under-trust leads to wasted effort. The product should be designed to help users develop this calibration through transparency, confidence indicators, and graceful failure handling.',
           difficulty: 'foundational',
-          expertNote: 'Calibrated trust is borrowed from the decision science literature on expert judgment. Studies show that people are generally poorly calibrated about AI accuracy — they tend toward either over-trust (automation bias) or under-trust (algorithm aversion). Product design can significantly improve calibration through features like confidence scores, source citations, and "double-check" prompts.'
+          expertNote: 'Calibrated trust is borrowed from the decision science literature on expert judgment. Studies show that people are generally poorly calibrated about AI accuracy - they tend toward either over-trust (automation bias) or under-trust (algorithm aversion). Product design can significantly improve calibration through features like confidence scores, source citations, and "double-check" prompts.'
         },
         {
           question: 'You are conducting user research for a new Gemini feature that generates email replies. In think-aloud sessions, you observe that users consistently say "I wonder if it will understand my sarcasm" before sending inputs, and "Why did it take that literally?" after receiving outputs. What product insight should you extract from this?',
           type: 'scenario',
           options: [],
-          correct: 'The core insight is a mental model mismatch around the model\'s understanding of nuance and tone. Users expect the AI to understand implicit communicative cues (sarcasm, irony, subtext) but the model interprets inputs more literally. Product actions: (1) Set explicit expectations in the UI about how the model processes tone and nuance — e.g., "Works best with direct instructions." (2) Explore whether the model can be improved on tone detection, or whether a UI prompt can help users rephrase when tone is ambiguous. (3) Consider adding a "tone" parameter in the interface (formal, casual, matching tone) to give users explicit control rather than relying on implicit detection. (4) Design error recovery: when users indicate the reply missed their tone, offer easy ways to adjust. (5) Feed this finding back to the model team as a priority improvement area, since email communication heavily relies on tone understanding.',
+          correct: 'The core insight is a mental model mismatch around the model\'s understanding of nuance and tone. Users expect the AI to understand implicit communicative cues (sarcasm, irony, subtext) but the model interprets inputs more literally. Product actions: (1) Set explicit expectations in the UI about how the model processes tone and nuance - e.g., "Works best with direct instructions." (2) Explore whether the model can be improved on tone detection, or whether a UI prompt can help users rephrase when tone is ambiguous. (3) Consider adding a "tone" parameter in the interface (formal, casual, matching tone) to give users explicit control rather than relying on implicit detection. (4) Design error recovery: when users indicate the reply missed their tone, offer easy ways to adjust. (5) Feed this finding back to the model team as a priority improvement area, since email communication heavily relies on tone understanding.',
           explanation: 'Think-aloud studies reveal the gap between user mental models and model capabilities. The repeated "I wonder if..." / "Why did it..." pattern reveals a systematic expectation mismatch that should inform both product design (setting expectations, providing controls) and model development priorities (improving tone detection).',
           difficulty: 'expert',
           expertNote: 'This scenario illustrates a common pattern at Google and DeepMind: user research reveals a capability gap that is not visible in automated metrics. Tone and sarcasm detection is a notoriously difficult NLP problem. The pragmatic PM solution is to bridge the gap with UI design (explicit tone controls) while also filing the finding as a model improvement request. The best AI products compensate for model limitations with thoughtful UX.'

@@ -1,21 +1,21 @@
 export const lessons = {
 
   // ─────────────────────────────────────────────
-  // L01 — Embeddings: From Words to Vectors
+  // L01 - Embeddings: From Words to Vectors
   // ─────────────────────────────────────────────
   l01: {
-    title: 'Embeddings — From Words to Vectors',
+    title: 'Embeddings - From Words to Vectors',
     content: `
 <h2>Why Embeddings Are the Foundation of Modern AI</h2>
 <p>
   Before a machine can reason about text, images, or any data, it needs a numerical representation.
   An <span class="term" data-term="embedding-model">embedding</span> is a learned mapping from
   discrete, high-dimensional input (like words or documents) to dense, continuous vectors in a
-  lower-dimensional space. These vectors capture <em>semantic meaning</em> — similar concepts
+  lower-dimensional space. These vectors capture <em>semantic meaning</em> - similar concepts
   land near each other, and the geometric relationships between vectors encode meaningful analogies.
 </p>
 <p>
-  Embeddings are not just a preprocessing step — they are the core representation that determines
+  Embeddings are not just a preprocessing step - they are the core representation that determines
   what an AI system can and cannot do. As an AI PM, understanding embeddings will help you make
   critical decisions about search quality, retrieval performance, and the entire
   <span class="term" data-term="rag">RAG</span> pipeline.
@@ -29,19 +29,19 @@ export const lessons = {
 </p>
 <ul>
   <li><strong>No semantic similarity:</strong> "king" and "queen" are as distant as "king" and
-      "refrigerator" — every pair of words is equally far apart.</li>
+      "refrigerator" - every pair of words is equally far apart.</li>
   <li><strong>Dimensionality explosion:</strong> The vector size scales linearly with vocabulary size,
       making computation intractable.</li>
 </ul>
 <p>
-  The breakthrough came with <strong>distributed representations</strong> — the idea that meaning
+  The breakthrough came with <strong>distributed representations</strong> - the idea that meaning
   can be captured by patterns of activation across many dimensions, not by a single dimension.
 </p>
 
 <h3>Word2Vec (Mikolov et al., 2013)</h3>
 <p>
   Word2Vec trained a shallow neural network to predict a word from its context (CBOW) or predict
-  context from a word (Skip-gram). The hidden layer weights became the word embeddings — typically
+  context from a word (Skip-gram). The hidden layer weights became the word embeddings - typically
   100-300 dimensions.
 </p>
 <p>
@@ -102,7 +102,7 @@ export const lessons = {
   <h4>Example</h4>
   <p>Consider training an embedding model for a medical knowledge base. A query might be "symptoms of
   type 2 diabetes." A positive document describes insulin resistance and hyperglycemia. A simple
-  negative might be about car maintenance. A <em>hard</em> negative might be about type 1 diabetes —
+  negative might be about car maintenance. A <em>hard</em> negative might be about type 1 diabetes -
   semantically related but different enough that the retrieval system must distinguish them. Hard
   negatives are what make embedding models useful in practice.</p>
 </div>
@@ -149,7 +149,7 @@ export const lessons = {
 <div class="warning">
   <strong>Common Misconception:</strong> Many developers assume all embedding models produce
   normalized vectors and use dot product interchangeably with cosine similarity. This is not always
-  true — some models produce unnormalized embeddings where magnitude carries information (e.g.,
+  true - some models produce unnormalized embeddings where magnitude carries information (e.g.,
   confidence or specificity). Always check the embedding model's documentation and normalize
   explicitly if your vector database uses dot product distance.
 </div>
@@ -168,15 +168,15 @@ export const lessons = {
   <li><strong>Semantic chunking:</strong> Use embedding similarity between adjacent sentences to
       detect topic boundaries. Groups related content together.</li>
   <li><strong>Recursive/hierarchical chunking:</strong> Try to split on headers, then paragraphs,
-      then sentences — respecting document structure.</li>
+      then sentences - respecting document structure.</li>
   <li><strong>Overlapping windows:</strong> Include N tokens of overlap between adjacent chunks to
       preserve context at boundaries.</li>
 </ul>
 
 <div class="key-concept">
   <strong>Key Concept:</strong> Chunk size creates a precision-recall trade-off. Small chunks
-  (100-200 tokens) are more precise — each chunk covers one idea, so retrieval is more targeted.
-  Large chunks (500-1000 tokens) provide more context — the LLM gets a richer passage to reason
+  (100-200 tokens) are more precise - each chunk covers one idea, so retrieval is more targeted.
+  Large chunks (500-1000 tokens) provide more context - the LLM gets a richer passage to reason
   over, but retrieval may pull in irrelevant information. Most production systems settle on
   300-500 tokens with 50-100 token overlap as a starting point, then tune based on evaluation.
 </div>
@@ -184,7 +184,7 @@ export const lessons = {
 <div class="pro-tip">
   <strong>PM Perspective:</strong> Chunking is one of those "boring" infrastructure decisions that
   has an outsized impact on user-perceived quality. If your RAG system retrieves the wrong chunks,
-  the LLM will confidently generate wrong answers. Invest in chunking experimentation early —
+  the LLM will confidently generate wrong answers. Invest in chunking experimentation early -
   run retrieval evaluations with different chunk sizes and overlaps on representative queries
   before committing to a production configuration.
 </div>
@@ -245,15 +245,15 @@ export const lessons = {
           correct: [0, 1, 3],
           explanation: 'Hard negatives are retrieved documents that score high on surface similarity (e.g., sharing many keywords with the query) but are not relevant answers. Training with these examples forces the model to distinguish genuine semantic similarity from keyword overlap. Hard negatives are typically mined automatically (using a weaker retrieval model to find near-misses), not manually curated.',
           difficulty: 'foundational',
-          expertNote: 'The quality of hard negatives is one of the most important factors in embedding model quality. State-of-the-art training pipelines use iterative hard negative mining — train the model, use it to find hard negatives, retrain, repeat. This is why training a competitive embedding model is significantly more involved than simply fine-tuning BERT.'
+          expertNote: 'The quality of hard negatives is one of the most important factors in embedding model quality. State-of-the-art training pipelines use iterative hard negative mining - train the model, use it to find hard negatives, retrain, repeat. This is why training a competitive embedding model is significantly more involved than simply fine-tuning BERT.'
         },
         {
           question: 'A developer on your team proposes using Euclidean distance instead of cosine similarity for your text retrieval system, arguing it captures magnitude information. Under what circumstances would this be appropriate?',
           type: 'mc',
           options: [
-            'Always — Euclidean distance is strictly superior for all text retrieval tasks because it captures both direction and magnitude, providing a richer similarity signal than the angle-only measurement of cosine similarity',
+            'Always - Euclidean distance is strictly superior for all text retrieval tasks because it captures both direction and magnitude, providing a richer similarity signal than the angle-only measurement of cosine similarity',
             'When the embedding model is specifically trained with Euclidean distance and magnitude encodes meaningful signals like specificity',
-            'Never — Euclidean distance fundamentally cannot be used with text embeddings because the triangle inequality property breaks down in the high-dimensional spaces typically used for semantic representations',
+            'Never - Euclidean distance fundamentally cannot be used with text embeddings because the triangle inequality property breaks down in the high-dimensional spaces typically used for semantic representations',
             'Only when documents are very short, typically fewer than 50 tokens, since short texts produce low-magnitude vectors where directional similarity becomes numerically unstable'
           ],
           correct: 1,
@@ -266,16 +266,16 @@ export const lessons = {
   },
 
   // ─────────────────────────────────────────────
-  // L02 — Vector Databases
+  // L02 - Vector Databases
   // ─────────────────────────────────────────────
   l02: {
-    title: 'Vector Databases — FAISS, Pinecone, Chroma',
+    title: 'Vector Databases - FAISS, Pinecone, Chroma',
     content: `
 <h2>Why Vector Databases Exist</h2>
 <p>
   Once you have millions of document embeddings, you need infrastructure to store them and
   efficiently find the nearest neighbors to a query embedding. Traditional databases (PostgreSQL,
-  MongoDB) are optimized for exact matches and range queries — they cannot efficiently answer
+  MongoDB) are optimized for exact matches and range queries - they cannot efficiently answer
   "find the 10 vectors most similar to this query vector in a 1536-dimensional space."
 </p>
 <p>
@@ -287,7 +287,7 @@ export const lessons = {
 <h2>The Core Problem: Approximate Nearest Neighbor (ANN) Search</h2>
 <p>
   Exact nearest neighbor search in high-dimensional spaces requires comparing the query against
-  every stored vector — <code>O(n)</code> time. For 10 million vectors at 1536 dimensions, this
+  every stored vector - <code>O(n)</code> time. For 10 million vectors at 1536 dimensions, this
   means 10 million dot products per query. At scale, this is intractable.
 </p>
 <p>
@@ -301,7 +301,7 @@ export const lessons = {
 <h4>1. IVF (Inverted File Index)</h4>
 <p>
   Clusters vectors using k-means. At query time, only searches the nearest clusters rather than
-  all vectors. Controlled by <code>nprobe</code> — how many clusters to search. Higher nprobe
+  all vectors. Controlled by <code>nprobe</code> - how many clusters to search. Higher nprobe
   = better recall but slower.
 </p>
 
@@ -315,12 +315,12 @@ export const lessons = {
 <h4>3. PQ (Product Quantization)</h4>
 <p>
   Compresses vectors by splitting each into sub-vectors and quantizing each sub-vector independently.
-  A 1536-dim float32 vector (6KB) can be compressed to ~96 bytes — a 64x reduction. This enables
+  A 1536-dim float32 vector (6KB) can be compressed to ~96 bytes - a 64x reduction. This enables
   indexing billions of vectors in memory. Some quality loss from compression.
 </p>
 
 <div class="key-concept">
-  <strong>Key Concept:</strong> Most production systems combine these techniques — e.g., IVF-PQ
+  <strong>Key Concept:</strong> Most production systems combine these techniques - e.g., IVF-PQ
   (cluster, then compress) or HNSW with scalar quantization. The choice depends on your scale:
   at 1 million vectors, brute force or simple IVF may suffice. At 1 billion vectors, you need
   HNSW with quantization and potentially sharding across multiple machines.
@@ -330,7 +330,7 @@ export const lessons = {
 <p>
   <span class="term" data-term="faiss">FAISS</span>, developed by Meta AI Research, is the most
   widely used open-source library for vector similarity search. It is a <em>library</em>, not a
-  database — it runs in-process and provides indexing algorithms without persistence, replication,
+  database - it runs in-process and provides indexing algorithms without persistence, replication,
   or API layers.
 </p>
 <p>
@@ -430,7 +430,7 @@ export const lessons = {
   <strong>Common Misconception:</strong> People often assume that vector search replaces traditional
   search entirely. In reality, vector search struggles with exact matches (product IDs, legal
   citations, code identifiers) and performs best for fuzzy, semantic queries. Production systems
-  almost always combine vector search with keyword search — the question is how to merge the rankings.
+  almost always combine vector search with keyword search - the question is how to merge the rankings.
 </div>
 
 <h2>Operational Considerations for PMs</h2>
@@ -451,7 +451,7 @@ export const lessons = {
 
 <div class="pro-tip">
   <strong>PM Perspective:</strong> The vector database is often the most visible infrastructure cost
-  in a RAG system — more visible than embedding model inference or LLM calls because it scales
+  in a RAG system - more visible than embedding model inference or LLM calls because it scales
   directly with data volume. Build a simple cost model: (vectors × dimensions × bytes) for storage,
   (queries/second × p99 latency) for compute. Present this to stakeholders alongside your feature
   roadmap so infrastructure costs are never a surprise.
@@ -469,7 +469,7 @@ export const lessons = {
             '~5 seconds; switch to ANN index like HNSW'
           ],
           correct: 3,
-          explanation: 'Brute-force search is O(n) — scaling data by 100x scales latency by ~100x. At 5 seconds per query, the system is unusable for interactive applications. ANN algorithms like HNSW or IVF-PQ provide sub-linear search time, maintaining millisecond latency even at 50M vectors. The PM should recommend this architectural change well before hitting the scaling wall, ideally when the roadmap is set.',
+          explanation: 'Brute-force search is O(n) - scaling data by 100x scales latency by ~100x. At 5 seconds per query, the system is unusable for interactive applications. ANN algorithms like HNSW or IVF-PQ provide sub-linear search time, maintaining millisecond latency even at 50M vectors. The PM should recommend this architectural change well before hitting the scaling wall, ideally when the roadmap is set.',
           difficulty: 'applied',
           expertNote: 'A common anti-pattern is building with brute force during prototyping and discovering the scaling problem too late. Good PM practice: always ask "what happens at 10x and 100x our current data volume?" when reviewing system architecture.'
         },
@@ -483,7 +483,7 @@ export const lessons = {
             'PQ is GPU-exclusive and fundamentally incompatible with CPU-based search implementations due to the SIMD instructions required for efficient sub-quantizer lookup table operations'
           ],
           correct: 0,
-          explanation: 'Product Quantization compresses vectors by splitting them into sub-vectors and quantizing each independently. A 1536-dim float32 vector (6KB) can be compressed to ~96 bytes. This enables fitting billions of vectors in memory but introduces quantization error — the compressed vector is an approximation of the original, leading to some search accuracy loss (typically 1-5% recall reduction).',
+          explanation: 'Product Quantization compresses vectors by splitting them into sub-vectors and quantizing each independently. A 1536-dim float32 vector (6KB) can be compressed to ~96 bytes. This enables fitting billions of vectors in memory but introduces quantization error - the compressed vector is an approximation of the original, leading to some search accuracy loss (typically 1-5% recall reduction).',
           difficulty: 'foundational',
           expertNote: 'The key insight is that PQ error is bounded and controllable. More sub-quantizers = less compression but less error. Teams should benchmark PQ recall against their specific data distribution to find the right compression level.'
         },
@@ -498,7 +498,7 @@ export const lessons = {
             'Managed solutions like Pinecone can accelerate time-to-market for early-stage products'
           ],
           correct: [0, 1, 3, 4],
-          explanation: 'The managed vs. self-hosted decision involves trade-offs across operational burden, vendor lock-in, data residency compliance, cost economics at scale, and time-to-market. Pinecone does not inherently provide better search quality — both use similar underlying algorithms (HNSW, etc.). The choice is primarily about operational and business considerations, not search quality.',
+          explanation: 'The managed vs. self-hosted decision involves trade-offs across operational burden, vendor lock-in, data residency compliance, cost economics at scale, and time-to-market. Pinecone does not inherently provide better search quality - both use similar underlying algorithms (HNSW, etc.). The choice is primarily about operational and business considerations, not search quality.',
           difficulty: 'applied',
           expertNote: 'For a DeepMind PM, data residency and control are especially important. Working with sensitive or proprietary data often makes managed third-party solutions untenable. This is why Google built its own vector search infrastructure (Vertex AI Vector Search / ScaNN) rather than relying on third parties.'
         },
@@ -514,7 +514,7 @@ export const lessons = {
           correct: 2,
           explanation: 'HNSW builds a multi-layer proximity graph that enables efficient navigation from coarse to fine-grained similarity. This graph structure typically achieves 95-99% recall in microseconds, outperforming IVF at equivalent latency. The trade-off is that HNSW requires more memory (the full graph must be in RAM) and has slower index build times. IVF is preferred when memory is the binding constraint.',
           difficulty: 'foundational',
-          expertNote: 'The HNSW vs. IVF choice often comes down to operational constraints: HNSW wins on query performance, IVF wins on memory efficiency and build speed. DiskANN (Microsoft) offers a third option — near-HNSW performance with disk-based storage — for extreme-scale use cases.'
+          expertNote: 'The HNSW vs. IVF choice often comes down to operational constraints: HNSW wins on query performance, IVF wins on memory efficiency and build speed. DiskANN (Microsoft) offers a third option - near-HNSW performance with disk-based storage - for extreme-scale use cases.'
         },
         {
           question: 'A product manager at a SaaS company notices that their vector database costs have tripled in the last quarter despite only a 50% increase in data volume. What is the most likely cause?',
@@ -535,10 +535,10 @@ export const lessons = {
   },
 
   // ─────────────────────────────────────────────
-  // L03 — RAG Architecture End to End
+  // L03 - RAG Architecture End to End
   // ─────────────────────────────────────────────
   l03: {
-    title: 'RAG Architecture — End to End',
+    title: 'RAG Architecture - End to End',
     content: `
 <h2>What Is RAG and Why Does It Matter?</h2>
 <p>
@@ -559,14 +559,14 @@ export const lessons = {
       evidence to base answers on, reducing confabulation.</li>
   <li><strong>Domain specialization:</strong> Instead of fine-tuning an LLM on domain-specific data
       (expensive, slow), RAG lets you plug in any knowledge base.</li>
-  <li><strong>Auditability:</strong> RAG can cite sources, enabling users to verify answers — a
+  <li><strong>Auditability:</strong> RAG can cite sources, enabling users to verify answers - a
       critical requirement for enterprise and regulated industries.</li>
 </ul>
 
 <div class="key-concept">
-  <strong>Key Concept:</strong> RAG is not just a technique — it is the dominant paradigm for building
+  <strong>Key Concept:</strong> RAG is not just a technique - it is the dominant paradigm for building
   knowledge-grounded AI applications. ChatGPT with browsing, Google's AI Overviews, Perplexity,
-  enterprise copilots — all are RAG systems at their core. Understanding RAG architecture end-to-end
+  enterprise copilots - all are RAG systems at their core. Understanding RAG architecture end-to-end
   is arguably the most practically important skill for an AI PM today.
 </div>
 
@@ -581,7 +581,7 @@ export const lessons = {
   The ingestion pipeline prepares your knowledge base for retrieval:
 </p>
 <ol>
-  <li><strong>Data collection:</strong> Gather source documents — PDFs, web pages, databases, APIs,
+  <li><strong>Data collection:</strong> Gather source documents - PDFs, web pages, databases, APIs,
       internal wikis, support tickets, etc.</li>
   <li><strong>Parsing & extraction:</strong> Convert raw documents into clean text. Handle HTML
       stripping, PDF extraction (OCR if scanned), table parsing, metadata extraction.</li>
@@ -609,7 +609,7 @@ export const lessons = {
 
 <div class="warning">
   <strong>Common Misconception:</strong> Many teams treat ingestion as a one-time setup. In reality,
-  source data changes continuously — articles are updated, products launch, policies change. A
+  source data changes continuously - articles are updated, products launch, policies change. A
   production RAG system needs a continuous ingestion pipeline with incremental updates, change
   detection, and stale data cleanup. Failing to maintain data freshness is the most common cause
   of RAG quality degradation over time.
@@ -635,7 +635,7 @@ export const lessons = {
 <div class="key-concept">
   <strong>Key Concept:</strong> Retrieval quality is the single biggest determinant of RAG answer
   quality. If the right documents are not retrieved, no amount of LLM sophistication can produce a
-  correct answer. The phrase "garbage in, garbage out" applies forcefully — invest at least as much
+  correct answer. The phrase "garbage in, garbage out" applies forcefully - invest at least as much
   effort in retrieval quality as in prompt engineering.
 </div>
 
@@ -645,7 +645,7 @@ export const lessons = {
 </p>
 <ol>
   <li><strong>Context assembly:</strong> Arrange retrieved chunks into the LLM's prompt. Order
-      matters — some models attend more strongly to the beginning and end of the context.</li>
+      matters - some models attend more strongly to the beginning and end of the context.</li>
   <li><strong>System prompt:</strong> Instruct the LLM to answer based only on the provided context,
       cite sources, and say "I don't know" when the context is insufficient.</li>
   <li><strong>Generation:</strong> The LLM produces an answer grounded in the retrieved evidence.</li>
@@ -720,7 +720,7 @@ export const lessons = {
   <strong>Key Concept:</strong> Frameworks like RAGAS and TruLens provide automated RAG evaluation
   using LLM-as-judge approaches. They compute faithfulness, relevance, and correctness scores
   without human annotation. While not perfect, they enable continuous monitoring of RAG quality
-  in production — essential for catching regressions when data or models change.
+  in production - essential for catching regressions when data or models change.
 </div>
 
 <h2>Common Failure Modes</h2>
@@ -822,7 +822,7 @@ export const lessons = {
           correct: 0,
           explanation: 'RAG is ideal here because: (1) internal memos are frequently updated, requiring dynamic knowledge access; (2) access control metadata ensures researchers only retrieve documents they have permission to see; (3) the knowledge base is too large for long context; (4) fine-tuning cannot reliably memorize specific research findings and would need retraining whenever memos are updated. Continuous ingestion keeps the system current.',
           difficulty: 'applied',
-          expertNote: 'Access control in RAG is a frequently overlooked requirement. The retrieval step must respect document-level permissions — otherwise a junior researcher could ask a question and receive context from classified project documents. This requires metadata filtering at query time, not just at index time.'
+          expertNote: 'Access control in RAG is a frequently overlooked requirement. The retrieval step must respect document-level permissions - otherwise a junior researcher could ask a question and receive context from classified project documents. This requires metadata filtering at query time, not just at index time.'
         },
         {
           question: 'What is the "lost in the middle" problem and why does it matter for RAG system design?',
@@ -834,7 +834,7 @@ export const lessons = {
             'The middle pipeline steps like embedding and indexing introduce the most significant error rates, since these steps involve the most data transformations and each transformation adds compounding approximation error'
           ],
           correct: 2,
-          explanation: 'Liu et al. (2023) showed that when relevant information is placed in the middle of a long context surrounded by irrelevant chunks, LLM performance degrades significantly. This means retrieval precision (not just recall) matters enormously — retrieving 20 chunks with 3 relevant ones dilutes the signal. Fewer, higher-quality chunks placed strategically produce better answers.',
+          explanation: 'Liu et al. (2023) showed that when relevant information is placed in the middle of a long context surrounded by irrelevant chunks, LLM performance degrades significantly. This means retrieval precision (not just recall) matters enormously - retrieving 20 chunks with 3 relevant ones dilutes the signal. Fewer, higher-quality chunks placed strategically produce better answers.',
           difficulty: 'foundational',
           expertNote: 'This finding motivated several architectural innovations: (1) placing the most relevant chunks at the beginning and end of the context, (2) using reranking to improve precision before generation, and (3) context compression techniques that summarize retrieved passages.'
         },
@@ -845,11 +845,11 @@ export const lessons = {
             'RAG enables the system to cite sources, providing auditability required by compliance',
             'The knowledge base changes weekly, and fine-tuning would require expensive retraining each time',
             'RAG always produces higher quality answers than fine-tuned models on all tasks',
-            'Fine-tuning does not reliably inject specific facts — it primarily teaches style and reasoning patterns',
+            'Fine-tuning does not reliably inject specific facts - it primarily teaches style and reasoning patterns',
             'RAG allows you to update knowledge without retraining the base model'
           ],
           correct: [0, 1, 3, 4],
-          explanation: 'RAG provides citation/auditability, handles frequently changing knowledge without retraining, leverages external knowledge without parametric memorization, and allows knowledge updates without model changes. However, RAG does not always produce higher quality answers — for tasks that require deep domain-specific reasoning patterns (not just fact retrieval), fine-tuning can be superior. The two approaches are complementary.',
+          explanation: 'RAG provides citation/auditability, handles frequently changing knowledge without retraining, leverages external knowledge without parametric memorization, and allows knowledge updates without model changes. However, RAG does not always produce higher quality answers - for tasks that require deep domain-specific reasoning patterns (not just fact retrieval), fine-tuning can be superior. The two approaches are complementary.',
           difficulty: 'applied',
           expertNote: 'The most sophisticated enterprise systems combine RAG and fine-tuning: the model is fine-tuned to follow a specific response format, citation style, and reasoning pattern, while RAG provides the factual grounding. This separation of concerns produces the best results.'
         },
@@ -863,18 +863,18 @@ export const lessons = {
             'Increase embedding dimensionality from 768 to 1536 dimensions for finer-grained semantic similarity, which would allow the embedding model to separate topically related but answer-irrelevant documents from genuinely responsive ones'
           ],
           correct: 1,
-          explanation: 'The failure pattern described — high recall but low precision — is exactly what reranking solves. A cross-encoder reranker jointly encodes the query and each candidate document, producing a more accurate relevance score than the bi-encoder\'s cosine similarity. This filters out topically related but non-relevant chunks before they reach the LLM. Increasing top-k would worsen the precision problem. A more powerful LLM might help but does not address the root cause.',
+          explanation: 'The failure pattern described - high recall but low precision - is exactly what reranking solves. A cross-encoder reranker jointly encodes the query and each candidate document, producing a more accurate relevance score than the bi-encoder\'s cosine similarity. This filters out topically related but non-relevant chunks before they reach the LLM. Increasing top-k would worsen the precision problem. A more powerful LLM might help but does not address the root cause.',
           difficulty: 'expert',
-          expertNote: 'The bi-encoder (embedding model) vs. cross-encoder (reranker) distinction is fundamental. Bi-encoders are fast but approximate — they encode query and document independently. Cross-encoders jointly attend to both, capturing fine-grained relevance. The standard pattern is: bi-encoder for fast retrieval of 50-100 candidates, then cross-encoder reranking to select the top 5-10.'
+          expertNote: 'The bi-encoder (embedding model) vs. cross-encoder (reranker) distinction is fundamental. Bi-encoders are fast but approximate - they encode query and document independently. Cross-encoders jointly attend to both, capturing fine-grained relevance. The standard pattern is: bi-encoder for fast retrieval of 50-100 candidates, then cross-encoder reranking to select the top 5-10.'
         },
         {
           question: 'You notice that your RAG system gives correct answers from its knowledge base but sometimes contradicts retrieved context by relying on the LLM\'s pre-training knowledge instead. What is this failure mode called, and what is the standard mitigation?',
           type: 'mc',
           options: [
-            'Hallucination — mitigated by increasing the temperature parameter so that the model generates more diverse outputs and is less likely to confidently assert a single incorrect factual claim',
-            'Retrieval miss — mitigated by increasing top-k retrieval so that more candidate documents are surfaced and the probability of covering the correct answer in the context window improves',
-            'Embedding drift — mitigated by retraining the embedding model on fresh domain-specific data to realign the vector representations with the current distribution of queries and documents',
-            'Context override / parametric vs. contextual conflict — mitigated by explicit system prompts instructing the model to prioritize retrieved context, lower temperature, and using instruction-tuned models'
+            'Hallucination - mitigated by increasing the temperature parameter so that the model generates more diverse outputs and is less likely to confidently assert a single incorrect factual claim',
+            'Retrieval miss - mitigated by increasing top-k retrieval so that more candidate documents are surfaced and the probability of covering the correct answer in the context window improves',
+            'Embedding drift - mitigated by retraining the embedding model on fresh domain-specific data to realign the vector representations with the current distribution of queries and documents',
+            'Context override / parametric vs. contextual conflict - mitigated by explicit system prompts instructing the model to prioritize retrieved context, lower temperature, and using instruction-tuned models'
           ],
           correct: 3,
           explanation: 'When the LLM\'s parametric knowledge (from pretraining) conflicts with retrieved context, some models default to their pretraining. This is mitigated by: (1) explicit system prompts ("Answer ONLY based on the provided context"), (2) lower temperature to reduce creative elaboration, (3) using instruction-tuned models that are better at following grounding instructions, and (4) providing clear source labels to help the model distinguish context from its own knowledge.',
@@ -886,14 +886,14 @@ export const lessons = {
   },
 
   // ─────────────────────────────────────────────
-  // L04 — Advanced RAG
+  // L04 - Advanced RAG
   // ─────────────────────────────────────────────
   l04: {
-    title: 'Advanced RAG — Reranking, Hybrid Search, Agentic RAG',
+    title: 'Advanced RAG - Reranking, Hybrid Search, Agentic RAG',
     content: `
 <h2>Beyond Basic RAG: Why Advanced Techniques Matter</h2>
 <p>
-  A basic RAG pipeline — embed, retrieve, generate — works surprisingly well for simple use cases.
+  A basic RAG pipeline - embed, retrieve, generate - works surprisingly well for simple use cases.
   But production systems face challenges that basic RAG cannot handle:
 </p>
 <ul>
@@ -911,7 +911,7 @@ export const lessons = {
 <h2>Reranking: The Precision Layer</h2>
 <p>
   <span class="term" data-term="reranking">Reranking</span> adds a second scoring pass after
-  initial retrieval. The bi-encoder (embedding model) is fast but approximate — it encodes query
+  initial retrieval. The bi-encoder (embedding model) is fast but approximate - it encodes query
   and document independently and compares via cosine similarity. A <strong>cross-encoder</strong>
   reranker jointly processes the query and each candidate document, producing a much more accurate
   relevance score.
@@ -927,7 +927,7 @@ export const lessons = {
 
 <div class="key-concept">
   <strong>Key Concept:</strong> The bi-encoder vs. cross-encoder distinction is fundamental to
-  understanding retrieval quality. A bi-encoder encodes the query and document separately — like
+  understanding retrieval quality. A bi-encoder encodes the query and document separately - like
   summarizing each in a few numbers and comparing the summaries. A cross-encoder reads the query
   and document together, attending from every query token to every document token. This joint
   attention captures nuances that independent encoding misses (negation, conditionals, specific
@@ -952,7 +952,7 @@ export const lessons = {
 <div class="pro-tip">
   <strong>PM Perspective:</strong> Reranking typically improves end-to-end RAG quality by 5-15%
   (measured by answer correctness). The cost is 50-200ms of additional latency. For most products,
-  this is an excellent trade-off — the quality improvement is immediately noticeable to users, and
+  this is an excellent trade-off - the quality improvement is immediately noticeable to users, and
   the latency is acceptable for conversational interfaces (where users expect a brief "thinking"
   period). Prioritize implementing reranking before investing in more exotic retrieval improvements.
 </div>
@@ -1037,8 +1037,8 @@ export const lessons = {
   <li><strong>Self-RAG:</strong> The model generates an answer, then decides whether it needs
       additional retrieval. It can issue retrieval calls mid-generation when it encounters
       uncertainty.</li>
-  <li><strong>Tool-augmented RAG:</strong> The LLM has access to multiple retrieval tools — vector
-      search, SQL database, API calls, web search — and decides which to use based on the query.</li>
+  <li><strong>Tool-augmented RAG:</strong> The LLM has access to multiple retrieval tools - vector
+      search, SQL database, API calls, web search - and decides which to use based on the query.</li>
   <li><strong>Corrective RAG (CRAG):</strong> After retrieval, evaluate whether the retrieved
       documents are relevant. If not, try alternative search strategies or fall back to the
       LLM's parametric knowledge with appropriate caveats.</li>
@@ -1047,19 +1047,19 @@ export const lessons = {
 <div class="key-concept">
   <strong>Key Concept:</strong> Agentic RAG transforms the LLM from a passive consumer of retrieved
   context into an active researcher that plans retrieval strategies, evaluates results, and iterates.
-  This is the direction the field is moving — from single-turn retrieval to multi-turn research
+  This is the direction the field is moving - from single-turn retrieval to multi-turn research
   agents. Products like Perplexity and Google's AI Overviews already implement forms of agentic RAG.
 </div>
 
 <h2>Schema Drift and Source Resilience</h2>
 <p>
   One of the most underappreciated challenges in production RAG is
-  <span class="term" data-term="schema-drift">schema drift</span> — when the structure, format, or
+  <span class="term" data-term="schema-drift">schema drift</span> - when the structure, format, or
   accessibility of your source data changes over time. This is especially common when retrieving
   from external sources:
 </p>
 <ul>
-  <li><strong>API changes:</strong> A data source changes its API schema — field names change,
+  <li><strong>API changes:</strong> A data source changes its API schema - field names change,
       endpoints are deprecated, response formats are restructured. Your parser breaks silently,
       producing malformed chunks.</li>
   <li><strong>DOM/template changes:</strong> If you scrape web content, the source website may
@@ -1138,13 +1138,13 @@ export const lessons = {
   might work perfectly at launch and gradually degrade over months as sources change. Invest in
   monitoring from day one. A dashboard showing parse success rates, data freshness, and retrieval
   quality metrics for each source is as important as the feature itself. The first sign of trouble
-  is usually a spike in "I don't know" responses or a drop in user satisfaction — by then, the
+  is usually a spike in "I don't know" responses or a drop in user satisfaction - by then, the
   damage is done.
 </div>
 
 <h2>Graceful Degradation: When Retrieval Fails</h2>
 <p>
-  Every retrieval system will occasionally fail — sources go down, parsers break, indices become
+  Every retrieval system will occasionally fail - sources go down, parsers break, indices become
   stale. A production RAG system must handle these failures gracefully through
   <span class="term" data-term="graceful-degradation">graceful degradation</span>:
 </p>
@@ -1172,7 +1172,7 @@ export const lessons = {
 </ul>
 
 <div class="key-concept">
-  <strong>Key Concept:</strong> Graceful degradation is not optional in production RAG — it is a
+  <strong>Key Concept:</strong> Graceful degradation is not optional in production RAG - it is a
   core requirement. Users trust AI systems less when they give confidently wrong answers than when
   they honestly say "I'm not sure." Design your system to be transparent about its confidence level
   and the freshness of its information. This builds trust and prevents the worst failure mode: users
@@ -1199,7 +1199,7 @@ export const lessons = {
 <h3>Colbert / Late Interaction</h3>
 <p>
   Instead of compressing a document into a single embedding vector, Colbert stores one embedding
-  per token. At query time, it performs a MaxSim operation — computing similarity between each
+  per token. At query time, it performs a MaxSim operation - computing similarity between each
   query token and each document token, then summing the maximums. This preserves more fine-grained
   information than a single vector at the cost of higher storage.
 </p>
@@ -1226,7 +1226,7 @@ export const lessons = {
           correct: 0,
           explanation: 'This is a classic schema drift failure. Content validation would have caught the malformed data at ingestion time (missing or incorrect fields). Source health monitoring would have flagged the anomaly in parsed content statistics. Automated regression testing with golden queries (e.g., "What drugs interact with warfarin?") would have detected the quality drop within a day, not two weeks. Together, these practices form a defense-in-depth against schema drift.',
           difficulty: 'expert',
-          expertNote: 'In healthcare RAG, this failure mode is not just a quality issue — it is a safety issue. Incorrect drug interaction information could harm patients. This is why regulated industries require both monitoring AND human review processes for AI-generated medical information.'
+          expertNote: 'In healthcare RAG, this failure mode is not just a quality issue - it is a safety issue. Incorrect drug interaction information could harm patients. This is why regulated industries require both monitoring AND human review processes for AI-generated medical information.'
         },
         {
           question: 'What is the primary advantage of Reciprocal Rank Fusion (RRF) over linear score combination for hybrid search?',
@@ -1267,7 +1267,7 @@ export const lessons = {
             'Tiered fallback from primary retrieval to cached data to parametric knowledge with appropriate disclaimers'
           ],
           correct: [0, 1, 3, 4],
-          explanation: 'Graceful degradation includes confidence-based response tiers, staleness warnings, circuit breakers for failing sources, and explicit fallback strategies with transparency. Generating fabricated sources is the opposite of graceful degradation — it is deceptive and would destroy user trust. The core principle is: be transparent about limitations rather than masking them with fake confidence.',
+          explanation: 'Graceful degradation includes confidence-based response tiers, staleness warnings, circuit breakers for failing sources, and explicit fallback strategies with transparency. Generating fabricated sources is the opposite of graceful degradation - it is deceptive and would destroy user trust. The core principle is: be transparent about limitations rather than masking them with fake confidence.',
           difficulty: 'foundational',
           expertNote: 'Graceful degradation is a borrowed concept from distributed systems engineering (where it refers to maintaining partial functionality when components fail). Applying it to RAG means treating retrieval as an inherently unreliable component and designing the system to behave predictably when it degrades.'
         },
@@ -1281,7 +1281,7 @@ export const lessons = {
             'Multi-hop capability vs. latency, cost, unpredictability'
           ],
           correct: 3,
-          explanation: 'Agentic RAG enables multi-hop reasoning (e.g., finding that Google acquired DeepMind, then looking up Google\'s market cap) that single-turn RAG cannot perform. However, each additional retrieval step adds latency (typically 1-3 seconds per step) and cost (embedding + vector search + LLM reasoning per step). The LLM\'s retrieval decisions can be unpredictable — it might pursue irrelevant tangents or loop. Production agentic RAG requires careful guardrails: step limits, relevance checks between steps, and timeout budgets.',
+          explanation: 'Agentic RAG enables multi-hop reasoning (e.g., finding that Google acquired DeepMind, then looking up Google\'s market cap) that single-turn RAG cannot perform. However, each additional retrieval step adds latency (typically 1-3 seconds per step) and cost (embedding + vector search + LLM reasoning per step). The LLM\'s retrieval decisions can be unpredictable - it might pursue irrelevant tangents or loop. Production agentic RAG requires careful guardrails: step limits, relevance checks between steps, and timeout budgets.',
           difficulty: 'expert',
           expertNote: 'The unpredictability of agentic RAG is its biggest production challenge. Unlike single-turn RAG where latency and cost are bounded, agentic RAG can take 2-10+ retrieval steps depending on query complexity. PMs must define SLAs carefully: maximum steps per query, maximum total latency, and fallback behavior when the agent exceeds its budget.'
         },
@@ -1295,7 +1295,7 @@ export const lessons = {
             'Parent document translation enables seamless multi-lingual retrieval across all supported languages by storing each parent document in multiple translated versions indexed under the same parent ID'
           ],
           correct: 1,
-          explanation: 'Parent-child retrieval addresses a fundamental chunk size dilemma: small chunks (100-200 tokens) give precise retrieval scores (the chunk is about exactly one thing), but provide insufficient context for the LLM to generate a good answer. Large chunks (500-1000 tokens) give the LLM more context but dilute retrieval precision. Parent-child retrieval retrieves on small child chunks for precision, then expands to the parent section for generation context — getting the best of both.',
+          explanation: 'Parent-child retrieval addresses a fundamental chunk size dilemma: small chunks (100-200 tokens) give precise retrieval scores (the chunk is about exactly one thing), but provide insufficient context for the LLM to generate a good answer. Large chunks (500-1000 tokens) give the LLM more context but dilute retrieval precision. Parent-child retrieval retrieves on small child chunks for precision, then expands to the parent section for generation context - getting the best of both.',
           difficulty: 'applied',
           expertNote: 'This is one of the highest-impact RAG improvements for long-document use cases. Implementation requires storing both chunk levels and maintaining parent-child relationships via metadata. LlamaIndex and LangChain both provide built-in support for this pattern.'
         }

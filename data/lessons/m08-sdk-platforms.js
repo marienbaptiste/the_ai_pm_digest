@@ -12,7 +12,7 @@ export const lessons = {
   other developers build their applications. Stripe for payments, Twilio for communications, AWS for
   infrastructure, and now Google Cloud AI / Gemini API for intelligence. The quality of a developer platform
   determines not just its own success, but the success of every application built on top of it. This creates
-  enormous leverage — and enormous responsibility.
+  enormous leverage - and enormous responsibility.
 </p>
 <p>
   As a PM for a developer platform like Gemini, you are not building for end users directly. Your "users" are
@@ -25,8 +25,8 @@ export const lessons = {
 
 <h3>1. Reliability & Predictability</h3>
 <p>
-  Developers are building businesses on your platform. Unreliable behavior — whether crashes, unexpected
-  output changes, or API inconsistencies — directly translates to their users having bad experiences.
+  Developers are building businesses on your platform. Unreliable behavior - whether crashes, unexpected
+  output changes, or API inconsistencies - directly translates to their users having bad experiences.
   Reliability encompasses:
 </p>
 <ul>
@@ -41,7 +41,7 @@ export const lessons = {
     Every reliability incident imposes a "trust tax" on developers. After experiencing downtime or breaking
     changes, developers invest extra effort in error handling, fallback systems, and workarounds. This
     hidden cost accumulates and eventually drives developers to seek more reliable alternatives. Reliability
-    is not just an engineering metric — it is a competitive moat.
+    is not just an engineering metric - it is a competitive moat.
   </div>
 </div>
 
@@ -198,13 +198,13 @@ export const lessons = {
           correct: 3,
           explanation: 'The Trust Tax is the hidden cost that accumulates when developers lose confidence in a platform\'s reliability. After experiencing downtime or breaking changes, developers build defensive code: extra error handling, fallback systems, caching layers, and manual workarounds. This effort compounds over time and eventually makes alternative platforms more attractive, even if switching costs are high.',
           difficulty: 'foundational',
-          expertNote: 'The Trust Tax concept explains why reliability is a competitive moat rather than just an operational concern. AWS, Stripe, and Twilio all invested heavily in reliability early because they understood that once the Trust Tax accumulates, developers leave — not in a dramatic exodus, but through gradual architectural decisions that reduce dependency on the unreliable platform.'
+          expertNote: 'The Trust Tax concept explains why reliability is a competitive moat rather than just an operational concern. AWS, Stripe, and Twilio all invested heavily in reliability early because they understood that once the Trust Tax accumulates, developers leave - not in a dramatic exodus, but through gradual architectural decisions that reduce dependency on the unreliable platform.'
         },
         {
           question: 'You are PM for the Gemini API platform. A developer reports that their application\'s output quality degraded significantly after a model update, even though they made no code changes. What should your platform have provided to prevent this situation?',
           type: 'scenario',
           options: [],
-          correct: 'The platform should have provided: (1) Model versioning with pinning — developers should be able to pin to a specific model version and upgrade on their own schedule, rather than being silently upgraded. (2) A migration guide and changelog for each model version, detailing behavioral changes. (3) An evaluation playground where developers can test their prompts against new model versions before switching. (4) A deprecation timeline that gives developers adequate notice (e.g., 90 days) before old versions are retired. (5) Automated regression testing tools that let developers define expected behaviors and test against new versions. (6) Clear communication channels (email, dashboard alerts) for upcoming model changes. The root cause is that model updates on AI platforms are fundamentally different from software updates — they can change output quality in subtle, hard-to-predict ways. The platform must give developers control over when and how they adopt new models.',
+          correct: 'The platform should have provided: (1) Model versioning with pinning - developers should be able to pin to a specific model version and upgrade on their own schedule, rather than being silently upgraded. (2) A migration guide and changelog for each model version, detailing behavioral changes. (3) An evaluation playground where developers can test their prompts against new model versions before switching. (4) A deprecation timeline that gives developers adequate notice (e.g., 90 days) before old versions are retired. (5) Automated regression testing tools that let developers define expected behaviors and test against new versions. (6) Clear communication channels (email, dashboard alerts) for upcoming model changes. The root cause is that model updates on AI platforms are fundamentally different from software updates - they can change output quality in subtle, hard-to-predict ways. The platform must give developers control over when and how they adopt new models.',
           explanation: 'AI platform model updates are uniquely risky because they change behavior in subtle, non-deterministic ways. Unlike traditional API versioning where breaking changes are clearly defined, model updates can alter output quality without any API signature changes. The platform must provide version pinning, evaluation tools, and adequate migration timelines.',
           difficulty: 'expert',
           expertNote: 'OpenAI, Google, and Anthropic have all faced this challenge. OpenAI\'s approach of model version pinning (e.g., "gpt-4-0613") with deprecation timelines has become an industry standard. Google\'s Gemini API follows a similar pattern. The key insight is that for AI platforms, "version" must include the model checkpoint, not just the API contract.'
@@ -246,7 +246,7 @@ export const lessons = {
   // L02: API Design Principles
   // ─────────────────────────────────────────────
   l02: {
-    title: 'API Design Principles — REST, GraphQL, SDKs',
+    title: 'API Design Principles - REST, GraphQL, SDKs',
     content: `
 <h2>Why API Design Matters for AI Products</h2>
 <p>
@@ -373,7 +373,7 @@ export const lessons = {
     For AI platforms, the most dangerous breaking changes are <em>silent</em>: updating the underlying model
     without changing the API signature. The request format and response format stay the same, but the content
     of responses changes. Developers' applications may subtly degrade without any error being thrown. This is
-    why model version pinning is essential — it gives developers control over when they adopt model changes.
+    why model version pinning is essential - it gives developers control over when they adopt model changes.
   </div>
 </div>
 
@@ -478,7 +478,7 @@ export const lessons = {
             'A DNS propagation issue caused temporary connectivity problems, leading the application to fall back to cached responses from an older model version that had different formatting and length characteristics'
           ],
           correct: 2,
-          explanation: 'Silent breaking changes — model updates that change output quality or behavior without any API signature change — are the most dangerous type of breaking change on AI platforms. The developer\'s code still "works" technically (no errors), but the outputs are different, potentially breaking downstream logic that depends on specific output patterns.',
+          explanation: 'Silent breaking changes - model updates that change output quality or behavior without any API signature change - are the most dangerous type of breaking change on AI platforms. The developer\'s code still "works" technically (no errors), but the outputs are different, potentially breaking downstream logic that depends on specific output patterns.',
           difficulty: 'applied',
           expertNote: 'This is why model version pinning has become an industry standard. OpenAI, Google, and Anthropic all now offer the ability to pin to specific model versions (e.g., "gemini-1.5-pro-001"). The platform should default to a stable version and only upgrade developers when they explicitly opt in or when the old version reaches end-of-life.'
         },
@@ -541,13 +541,13 @@ export const lessons = {
   // L03: Developer Experience
   // ─────────────────────────────────────────────
   l03: {
-    title: 'Developer Experience — Documentation, Onboarding, Community',
+    title: 'Developer Experience - Documentation, Onboarding, Community',
     content: `
 <h2>Developer Experience as a Product</h2>
 <p>
   <span class="term" data-term="developer-experience">Developer Experience (DX)</span> is not a secondary
   concern bolted onto a platform after the API is built. It is the product. For most developers evaluating
-  an AI platform, their first interaction is not with the model's intelligence — it is with the documentation,
+  an AI platform, their first interaction is not with the model's intelligence - it is with the documentation,
   the signup flow, and the first code sample they try to run. If any of these fail, the developer leaves
   before ever experiencing the model's capabilities.
 </p>
@@ -786,7 +786,7 @@ export const lessons = {
           correct: 'This pattern indicates documentation gaps, not community management problems. The strategic response has multiple layers: (1) Immediate: Create dedicated documentation pages for each of the three error messages, with clear explanations of what causes them and step-by-step solutions. (2) Product: Improve the error messages themselves to be more descriptive and include links to relevant documentation. (3) SDK: Add built-in error handling that provides actionable guidance (e.g., "Rate limit exceeded. The SDK will automatically retry in 30 seconds."). (4) Proactive: Create a "common issues" or "troubleshooting" section in the docs based on community question analysis. (5) Process: Set up ongoing monitoring of community questions to detect new documentation gaps as they emerge. (6) Community: Pin solutions in the Discord channel and consider creating a community FAQ bot that answers known questions automatically. The goal is to turn reactive community support into proactive documentation and product improvements.',
           explanation: 'Repeated community questions are a leading indicator of documentation and product gaps. The community is generating free user research. The strategic response is to fix the root cause (documentation, error messages, and SDK design) rather than just answering questions faster.',
           difficulty: 'expert',
-          expertNote: 'This is the "documentation-driven development" philosophy: community questions should drive documentation priorities. Some teams track a "support deflection rate" — the percentage of questions that could have been answered by existing documentation. A low deflection rate means the docs are failing. A high rate of new question types means the product is evolving faster than docs can keep up.'
+          expertNote: 'This is the "documentation-driven development" philosophy: community questions should drive documentation priorities. Some teams track a "support deflection rate" - the percentage of questions that could have been answered by existing documentation. A low deflection rate means the docs are failing. A high rate of new question types means the product is evolving faster than docs can keep up.'
         },
         {
           question: 'Why is requiring a credit card during signup particularly harmful for AI API platforms compared to traditional SaaS?',
@@ -821,10 +821,10 @@ export const lessons = {
   },
 
   // ─────────────────────────────────────────────
-  // L04: Platform Strategy — Ecosystem Flywheel
+  // L04: Platform Strategy - Ecosystem Flywheel
   // ─────────────────────────────────────────────
   l04: {
-    title: 'Platform Strategy — Ecosystem Flywheel Effects',
+    title: 'Platform Strategy - Ecosystem Flywheel Effects',
     content: `
 <h2>Platforms vs. Products</h2>
 <p>
@@ -1058,7 +1058,7 @@ export const lessons = {
           options: [
             'The model is not good enough to attract developers, because sign-up numbers would be flat if capability were the bottleneck, whereas the high initial sign-ups suggest the model is compelling and the drop-off happens later in the journey',
             'Not enough marketing spend to drive developer awareness, since the flat sign-up growth indicates that the top of the funnel is undersized and incremental developer relations investment would compound into flywheel acceleration',
-            'The gap between "developers sign up" and "developers build applications" — likely a DX, documentation, or tooling problem',
+            'The gap between "developers sign up" and "developers build applications" - likely a DX, documentation, or tooling problem',
             'Pricing is too high for production use cases, causing developers who successfully complete prototypes to calculate that the total cost of ownership at scale would exceed their available engineering budget for external API dependencies'
           ],
           correct: 2,
@@ -1084,10 +1084,10 @@ export const lessons = {
           question: 'A major competitor launches an AI API with prices 40% lower than yours. Several of your high-volume developers are publicly considering switching. How should you respond as the platform PM?',
           type: 'scenario',
           options: [],
-          correct: 'Do not react with an immediate price war. Instead, take a strategic approach: (1) Understand the full picture: Is the competitor\'s pricing sustainable, or is it a loss-leader? Are they subsidizing growth with investor funding? (2) Talk to the at-risk developers directly. Understand their actual decision criteria — is it purely price, or is there a quality, reliability, or feature gap? (3) Calculate switching costs honestly: how much effort would these developers need to migrate their prompts, evaluations, and integrations? (4) Reinforce your value beyond price: reliability, safety, tooling, support, model quality. If your model is demonstrably better for their use case, quantify the value difference. (5) Consider targeted pricing: volume discounts, committed-use pricing, or enterprise agreements for high-value developers. (6) Invest in lock-in through value: provide tools (evaluation frameworks, prompt management, monitoring) that increase switching costs through genuine value rather than artificial barriers. (7) Long-term: ensure your pricing is sustainable and competitive, but compete on ecosystem value, not just price. Price wars in platform markets destroy value for everyone.',
+          correct: 'Do not react with an immediate price war. Instead, take a strategic approach: (1) Understand the full picture: Is the competitor\'s pricing sustainable, or is it a loss-leader? Are they subsidizing growth with investor funding? (2) Talk to the at-risk developers directly. Understand their actual decision criteria - is it purely price, or is there a quality, reliability, or feature gap? (3) Calculate switching costs honestly: how much effort would these developers need to migrate their prompts, evaluations, and integrations? (4) Reinforce your value beyond price: reliability, safety, tooling, support, model quality. If your model is demonstrably better for their use case, quantify the value difference. (5) Consider targeted pricing: volume discounts, committed-use pricing, or enterprise agreements for high-value developers. (6) Invest in lock-in through value: provide tools (evaluation frameworks, prompt management, monitoring) that increase switching costs through genuine value rather than artificial barriers. (7) Long-term: ensure your pricing is sustainable and competitive, but compete on ecosystem value, not just price. Price wars in platform markets destroy value for everyone.',
           explanation: 'Platform pricing competition requires strategic thinking, not reactive price matching. The key insight is that developers\' switching decisions depend on total cost of ownership (including migration effort, reliability risk, and feature access), not just per-token price. Competing on ecosystem value is more sustainable than competing on price alone.',
           difficulty: 'expert',
-          expertNote: 'This scenario mirrors real dynamics in the AI platform market as of 2024-2025, where aggressive pricing from new entrants created pressure on established platforms. The historical precedent from cloud computing (AWS vs. Azure vs. GCP) shows that price competition alone does not determine platform winners — ecosystem maturity, reliability, and tooling drive long-term adoption. The platform with the strongest flywheel typically prevails even at higher prices.'
+          expertNote: 'This scenario mirrors real dynamics in the AI platform market as of 2024-2025, where aggressive pricing from new entrants created pressure on established platforms. The historical precedent from cloud computing (AWS vs. Azure vs. GCP) shows that price competition alone does not determine platform winners - ecosystem maturity, reliability, and tooling drive long-term adoption. The platform with the strongest flywheel typically prevails even at higher prices.'
         },
         {
           question: 'Which type of network effect is strongest and most defensible for AI platforms?',

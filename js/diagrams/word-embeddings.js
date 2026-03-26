@@ -107,7 +107,7 @@ export function render(container) {
 
   container.innerHTML = `
     <div style="text-align: center; width: 100%;">
-      <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+      <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
         <style>
           .we-dot {
             animation: weDotIn 0.5s ease forwards;
@@ -285,26 +285,26 @@ export function render(container) {
 
         <!-- Analogy equation box -->
         <g class="we-analogy" style="animation-delay: 5.2s;">
-          <rect x="200" y="345" width="300" height="26" rx="6"
+          <rect x="200" y="375" width="300" height="30" rx="6"
             fill="var(--bg-elevated)" stroke="#C4A7E7" stroke-width="1" opacity="0.9"/>
-          <text x="350" y="363" text-anchor="middle"
-            fill="#C4A7E7" font-family="var(--font-mono)" font-size="11" font-weight="600">
+          <text x="350" y="395" text-anchor="middle"
+            fill="#C4A7E7" font-family="var(--font-mono)" font-size="12" font-weight="600">
             king \u2212 man + woman \u2248 queen
           </text>
         </g>
 
         <!-- Legend -->
         <g class="we-analogy" style="animation-delay: 3.2s;">
-          <circle cx="75" cy="355" r="4" fill="#7EB8DA"/>
-          <text x="85" y="359" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Animals</text>
-          <circle cx="140" cy="355" r="4" fill="#F0B429"/>
-          <text x="150" y="359" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Food</text>
-          <circle cx="195" cy="355" r="4" fill="#9CCFA4"/>
-          <text x="205" y="359" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Tech</text>
+          <circle cx="75" cy="350" r="4" fill="#7EB8DA"/>
+          <text x="85" y="354" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Animals</text>
+          <circle cx="140" cy="350" r="4" fill="#F0B429"/>
+          <text x="150" y="354" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Food</text>
+          <circle cx="195" cy="350" r="4" fill="#9CCFA4"/>
+          <text x="205" y="354" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">Tech</text>
         </g>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Word Embeddings \u2014 Semantic Similarity and Vector Arithmetic
+        Word Embeddings - Semantic Similarity and Vector Arithmetic
       </p>
     </div>
   `;

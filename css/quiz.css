@@ -90,7 +90,7 @@
   opacity: 0.3;
 }
 
-/* Checked states — subtle left border */
+/* Checked states - subtle left border */
 .quiz__question.quiz-correct {
   border-left: 3px solid var(--accent-green);
 }
@@ -117,7 +117,7 @@
   letter-spacing: 0.03em;
 }
 
-/* Check badge — appears after answer is checked */
+/* Check badge - appears after answer is checked */
 .quiz__check-badge {
   font-family: var(--font-heading);
   font-size: var(--text-xs);
@@ -172,7 +172,7 @@
   color: var(--text-primary);
 }
 
-/* === Choices — with left indicator on select === */
+/* === Choices - with left indicator on select === */
 .quiz__choices {
   display: flex;
   flex-direction: column;
@@ -255,7 +255,7 @@
   color: var(--text-primary);
 }
 
-/* === Quiz action buttons — unified style === */
+/* === Quiz action buttons - unified style === */
 .quiz__action-btn {
   display: inline-flex;
   align-items: center;
@@ -591,7 +591,7 @@
   margin-left: 0;
 }
 
-/* Pending state — question awaiting self-grade */
+/* Pending state - question awaiting self-grade */
 .quiz__question.quiz-pending {
   border-left: 3px solid var(--accent-blue);
 }

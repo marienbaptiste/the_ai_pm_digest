@@ -1,4 +1,4 @@
-// Confusion Matrix Explorer — interactive widget
+// Confusion Matrix Explorer - interactive widget
 // Users adjust TP, FP, TN, FN counts and see precision, recall, F1, accuracy in real-time.
 
 const SCENARIOS = {

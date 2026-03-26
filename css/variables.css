@@ -1,5 +1,5 @@
 :root {
-  /* === Colors — Warm obsidian palette with amber accent === */
+  /* === Colors - Warm obsidian palette with amber accent === */
   --bg-deep:        #0C0A09;
   --bg-surface:     #1C1917;
   --bg-elevated:    #292524;
@@ -34,7 +34,7 @@
   --gradient-accent: linear-gradient(135deg, #F0B429 0%, #E8553A 100%);
   --gradient-warm:  linear-gradient(135deg, #E8553A 0%, #C4A7E7 100%);
 
-  /* === Typography — Chakra Petch (retro-digital retrofuturist), Newsreader (editorial serif), Fira Code === */
+  /* === Typography - Chakra Petch (retro-digital retrofuturist), Newsreader (editorial serif), Fira Code === */
   --font-heading:   'Oxanium', system-ui, sans-serif;
   --font-body:      'Newsreader', Georgia, serif;
   --font-mono:      'Fira Code', 'Consolas', monospace;

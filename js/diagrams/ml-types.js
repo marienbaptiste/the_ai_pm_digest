@@ -141,8 +141,8 @@ export function render(container) {
 
         <!-- X->Y labels -->
         <g class="ml-label" style="animation-delay: 1.8s;">
-          <text x="75" y="85" fill="#7EB8DA" font-family="var(--font-mono)" font-size="10" font-weight="600">Class A</text>
-          <text x="155" y="210" fill="#F0B429" font-family="var(--font-mono)" font-size="10" font-weight="600">Class B</text>
+          <text x="90" y="78" fill="#7EB8DA" font-family="var(--font-mono)" font-size="10" font-weight="600">Class A</text>
+          <text x="170" y="230" fill="#F0B429" font-family="var(--font-mono)" font-size="10" font-weight="600">Class B</text>
           <text x="60" y="258" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">X \u2192 Y (labeled)</text>
         </g>
 

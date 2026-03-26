@@ -61,7 +61,7 @@ export function render(container) {
   yValues += kernelY;
 
   // Build feature map
-  const fmX = 280;
+  const fmX = 320;
   const fmY = 80;
   let featureGrid = '';
   featureColors.forEach((row, r) => {
@@ -75,7 +75,7 @@ export function render(container) {
   });
 
   // Build pooled map
-  const poolX = 450;
+  const poolX = 530;
   const poolY = 100;
   const poolCell = 34;
   let pooledGrid = '';
@@ -93,7 +93,7 @@ export function render(container) {
 
   container.innerHTML = `
     <div style="text-align: center; width: 100%;">
-      <svg viewBox="0 0 560 310" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+      <svg viewBox="0 0 650 310" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
         <style>
           .cnn-cell {
             animation: cnnCellIn 0.3s ease forwards;
@@ -153,7 +153,7 @@ export function render(container) {
         </defs>
 
         <!-- Title -->
-        <text x="280" y="22" text-anchor="middle" class="cnn-label" style="animation-delay: 0s;"
+        <text x="325" y="22" text-anchor="middle" class="cnn-label" style="animation-delay: 0s;"
           fill="var(--text-primary)" font-family="var(--font-heading)" font-size="15" font-weight="700">
           CNN Convolution + Pooling
         </text>
@@ -226,11 +226,11 @@ export function render(container) {
 
         <!-- Operation explanation at bottom -->
         <g class="cnn-label" style="animation-delay: 3.5s;">
-          <rect x="30" y="258" width="500" height="40" rx="8" fill="var(--bg-elevated)" stroke="var(--border-subtle)" stroke-width="1"/>
-          <text x="280" y="275" text-anchor="middle" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">
+          <rect x="60" y="258" width="530" height="40" rx="8" fill="var(--bg-elevated)" stroke="var(--border-subtle)" stroke-width="1"/>
+          <text x="325" y="275" text-anchor="middle" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">
             Convolution: element-wise multiply kernel \u00D7 receptive field, sum \u2192 single output value
           </text>
-          <text x="280" y="290" text-anchor="middle" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">
+          <text x="325" y="290" text-anchor="middle" fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">
             Max Pooling: take max value from each 2\u00D72 block \u2192 reduce spatial dimensions by half
           </text>
         </g>
@@ -248,7 +248,7 @@ export function render(container) {
         </rect>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Convolutional Neural Network \u2014 Convolution and Max Pooling Operations
+        Convolutional Neural Network - Convolution and Max Pooling Operations
       </p>
     </div>
   `;

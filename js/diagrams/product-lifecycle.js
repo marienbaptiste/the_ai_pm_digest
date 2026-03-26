@@ -228,7 +228,7 @@ export function render(container) {
 
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        AI Product Lifecycle \u2014 Stage-Gate Framework from Research to Maturity
+        AI Product Lifecycle - Stage-Gate Framework from Research to Maturity
       </p>
     </div>
   `;

@@ -114,7 +114,7 @@ export function render(container) {
         </text>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Diffusion Model \u2014 Forward & Reverse Process
+        Diffusion Model - Forward & Reverse Process
       </p>
     </div>
   `;

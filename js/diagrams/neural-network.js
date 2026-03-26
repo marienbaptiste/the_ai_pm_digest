@@ -82,7 +82,7 @@ export function render(container) {
 
   container.innerHTML = `
     <div style="text-align: center;">
-      <svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg"
+      <svg viewBox="80 -10 ${width - 160} ${height - 10}" xmlns="http://www.w3.org/2000/svg"
         style="max-width: 100%; height: auto;">
         <style>
           .nn-connection { animation: fadeIn 0.6s ease forwards; opacity: 0; }
@@ -102,7 +102,7 @@ export function render(container) {
         ${particles}
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Neural Network \u2014 Forward Pass Visualization
+        Neural Network - Forward Pass Visualization
       </p>
     </div>
   `;

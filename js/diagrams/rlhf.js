@@ -1,7 +1,7 @@
 export function render(container) {
   container.innerHTML = `
     <div style="text-align: center; width: 100%;">
-      <svg viewBox="0 0 750 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+      <svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
         <style>
           .rlhf-box { animation: rlhfFadeIn 0.7s ease forwards; opacity: 0; }
           .rlhf-arrow { stroke-dasharray: 8 4; animation: rlhfFlow 1.2s linear infinite; }
@@ -78,10 +78,7 @@ export function render(container) {
 
         <!-- Ranking indicators -->
         <g class="rlhf-box" style="animation-delay: 1.0s;">
-          <text x="632" y="74" font-family="var(--font-mono)" font-size="14" fill="#9CCFA4">&#9733;</text>
-          <text x="645" y="74" font-family="var(--font-mono)" font-size="14" fill="#9CCFA4">&#9733;</text>
-          <text x="658" y="74" font-family="var(--font-mono)" font-size="14" fill="#9CCFA4">&#9733;</text>
-          <text x="632" y="100" font-family="var(--font-mono)" font-size="10" fill="var(--text-dim)">A &gt; C &gt; B</text>
+          <text x="580" y="120" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--text-dim)">A &gt; C &gt; B</text>
         </g>
 
         <!-- Arrow: Responses -> Human -->
@@ -104,8 +101,8 @@ export function render(container) {
         </g>
 
         <!-- Arrow: Human -> Reward Model (right side, going down) -->
-        <path d="M 660 130 L 660 270 L 660 290" fill="none" stroke="var(--border-medium)" stroke-width="1.5" class="rlhf-arrow" marker-end="url(#rlhf-arrowhead)"/>
-        <text x="672" y="210" class="rlhf-label" fill="var(--text-dim)" font-size="9" transform="rotate(90, 672, 210)">Preference data</text>
+        <path d="M 670 130 L 670 270 L 670 290" fill="none" stroke="var(--border-medium)" stroke-width="1.5" class="rlhf-arrow" marker-end="url(#rlhf-arrowhead)"/>
+        <text x="682" y="210" class="rlhf-label" fill="var(--text-dim)" font-size="9" transform="rotate(90, 682, 210)">Preference data</text>
 
         <!-- Step 4: PPO/Policy Update (bottom-left) -->
         <g class="rlhf-box" style="animation-delay: 1.8s;">
@@ -152,7 +149,7 @@ export function render(container) {
 
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        RLHF Pipeline \u2014 Aligning Language Models with Human Preferences
+        RLHF Pipeline - Aligning Language Models with Human Preferences
       </p>
     </div>
   `;

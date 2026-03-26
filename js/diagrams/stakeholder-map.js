@@ -228,7 +228,7 @@ export function render(container) {
         </g>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Stakeholder Map \u2014 PM as the cross-functional hub
+        Stakeholder Map - PM as the cross-functional hub
       </p>
     </div>
   `;

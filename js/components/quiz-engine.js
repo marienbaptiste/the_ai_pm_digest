@@ -63,7 +63,7 @@ export function renderQuiz(container, quizData, lessonKey) {
         return false;
       }
     }
-    console.log(`[Quiz] allChecked: true — all ${totalQ} questions checked`);
+    console.log(`[Quiz] allChecked: true - all ${totalQ} questions checked`);
     return true;
   }
 
@@ -96,7 +96,7 @@ export function renderQuiz(container, quizData, lessonKey) {
         }
         showToast(`Lesson completed! Score: ${score.percent}%`);
       } else {
-        // Already completed — check for high score
+        // Already completed - check for high score
         const prevScore = storage.getQuizScore(lessonKey);
         if (score.percent > (prevScore || 0)) {
           storage.markLessonComplete(lessonKey, score.percent);
@@ -111,12 +111,12 @@ export function renderQuiz(container, quizData, lessonKey) {
 
     let subtitleText;
     if (isComplete) {
-      subtitleText = `Score: ${score.correct}/${score.total} (${score.percent}%) ${score.percent >= 70 ? '\u2014 Passed!' : '\u2014 Need 70% to pass.'}`;
+      subtitleText = `Score: ${score.correct}/${score.total} (${score.percent}%) ${score.percent >= 70 ? '- Passed!' : '- Need 70% to pass.'}`;
     } else if (checkedCount > 0) {
       const remaining = totalQ - checkedCount;
-      subtitleText = `${checkedCount}/${totalQ} checked \u2014 ${remaining} question${remaining !== 1 ? 's' : ''} remaining`;
+      subtitleText = `${checkedCount}/${totalQ} checked - ${remaining} question${remaining !== 1 ? 's' : ''} remaining`;
     } else {
-      subtitleText = `${totalQ} questions \u2014 answer & check all to complete. Need 70% to pass.`;
+      subtitleText = `${totalQ} questions - answer & check all to complete. Need 70% to pass.`;
     }
 
     container.innerHTML = `
@@ -144,7 +144,7 @@ export function renderQuiz(container, quizData, lessonKey) {
             <div class="quiz__score-card ${score.percent >= 70 ? 'quiz__score-card--pass' : 'quiz__score-card--fail'}">
               <div class="quiz__score-value">${score.percent}%</div>
               <div class="quiz__score-label">
-                ${score.percent >= 70 ? 'Passed! Great work.' : 'Not quite \u2014 review the explanations above and try again.'}
+                ${score.percent >= 70 ? 'Passed! Great work.' : 'Not quite - review the explanations above and try again.'}
               </div>
               ${score.percent < 70 ? `
                 <button class="quiz__action-btn quiz__action-btn--retry" id="quiz-retry">

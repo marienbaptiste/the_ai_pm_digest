@@ -95,7 +95,7 @@ export function render(container) {
         </g>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Machine Learning Training Loop \u2014 Data \u2192 Forward \u2192 Loss \u2192 Backward \u2192 Update
+        Machine Learning Training Loop - Data \u2192 Forward \u2192 Loss \u2192 Backward \u2192 Update
       </p>
     </div>
   `;

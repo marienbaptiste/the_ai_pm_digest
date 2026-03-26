@@ -20,7 +20,7 @@ export function render(container) {
   let heatmapLabelsLeft = '';
 
   for (let r = 0; r < 5; r++) {
-    // Row labels (left side — keys)
+    // Row labels (left side - keys)
     heatmapLabelsLeft += `<text
       x="${heatmapOriginX - 8}"
       y="${heatmapOriginY + r * (cellSize + cellGap) + cellSize / 2 + 4}"
@@ -29,7 +29,7 @@ export function render(container) {
       style="animation-delay: ${(1.6 + r * 0.06).toFixed(2)}s"
     >${tokens[r]}</text>`;
 
-    // Column labels (top — queries)
+    // Column labels (top - queries)
     heatmapLabelsTop += `<text
       x="${heatmapOriginX + r * (cellSize + cellGap) + cellSize / 2}"
       y="${heatmapOriginY - 10}"
@@ -429,7 +429,7 @@ export function render(container) {
             fill="var(--accent-warm-dim)" stroke="var(--accent-warm)" stroke-width="0.6" stroke-opacity="0.4"/>
           <text x="624" y="390" text-anchor="middle"
             style="font-family: var(--font-body, 'Newsreader'); font-size: 8.5px; fill: var(--accent-warm); font-style: italic;">
-            "sat" strongly attends to "cat" (0.6) \u2014 verb\u2192subject link
+            "sat" strongly attends to "cat" (0.6) - verb\u2192subject link
           </text>
         </g>
 
@@ -452,7 +452,7 @@ export function render(container) {
 
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3); letter-spacing: 0.04em;">
-        Transformer Block Architecture \u2014 Self-Attention Flow
+        Transformer Block Architecture - Self-Attention Flow
       </p>
     </div>
   `;

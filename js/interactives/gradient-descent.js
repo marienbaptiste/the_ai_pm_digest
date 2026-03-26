@@ -1,4 +1,4 @@
-// Gradient Descent Visualizer — interactive module
+// Gradient Descent Visualizer - interactive module
 // Exports mount(container) for the interactive loader
 
 // --- Loss function and its derivative ---
@@ -338,7 +338,7 @@ export function mount(container) {
     preserveAspectRatio: 'xMidYMid meet',
   });
 
-  // Defs — gradient fill for curve area
+  // Defs - gradient fill for curve area
   const defs = svgEl('defs');
   const grad = svgEl('linearGradient', { id: 'gd-curve-fill', x1: '0', y1: '0', x2: '0', y2: '1' });
   const stop1 = svgEl('stop', { offset: '0%', 'stop-color': 'var(--accent-warm, #E8553A)', 'stop-opacity': '0.18' });

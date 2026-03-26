@@ -1,4 +1,4 @@
-// Self-Attention Visualizer — interactive word-level attention weight explorer
+// Self-Attention Visualizer - interactive word-level attention weight explorer
 
 export function mount(container) {
   const words = ['The', 'cat', 'sat', 'on', 'the', 'mat', 'because', 'it', 'was', 'tired'];

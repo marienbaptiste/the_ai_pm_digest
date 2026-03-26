@@ -1,15 +1,15 @@
 export const lessons = {
 
   // ─────────────────────────────────────────────
-  // L01 — The Attention Revolution
+  // L01 - The Attention Revolution
   // ─────────────────────────────────────────────
   l01: {
-    title: 'The Attention Revolution — Why Attention Is All You Need',
+    title: 'The Attention Revolution - Why Attention Is All You Need',
     content: `
 <h2>The Problem with Sequential Processing</h2>
-<p>Before <span class="term" data-term="transformer">Transformers</span> arrived, the dominant architectures for sequence-to-sequence tasks — machine translation, text summarization, question answering — were Recurrent Neural Networks (RNNs), Long Short-Term Memory networks (LSTMs), and Gated Recurrent Units (GRUs). These models processed input one <span class="term" data-term="token">token</span> at a time, maintaining a hidden state that was passed from one time step to the next. This sequential bottleneck created two critical problems that limited the field for nearly a decade.</p>
+<p>Before <span class="term" data-term="transformer">Transformers</span> arrived, the dominant architectures for sequence-to-sequence tasks - machine translation, text summarization, question answering - were Recurrent Neural Networks (RNNs), Long Short-Term Memory networks (LSTMs), and Gated Recurrent Units (GRUs). These models processed input one <span class="term" data-term="token">token</span> at a time, maintaining a hidden state that was passed from one time step to the next. This sequential bottleneck created two critical problems that limited the field for nearly a decade.</p>
 
-<p>First, <strong>information loss over long sequences</strong>. Even with gating mechanisms like those in LSTMs, the hidden state had a fixed capacity. When translating a 100-word paragraph, by the time the model reached the end of the sentence, much of the information from the beginning had been compressed, overwritten, or lost. This manifested as poor performance on long-range dependencies — for instance, maintaining subject-verb agreement across many intervening clauses.</p>
+<p>First, <strong>information loss over long sequences</strong>. Even with gating mechanisms like those in LSTMs, the hidden state had a fixed capacity. When translating a 100-word paragraph, by the time the model reached the end of the sentence, much of the information from the beginning had been compressed, overwritten, or lost. This manifested as poor performance on long-range dependencies - for instance, maintaining subject-verb agreement across many intervening clauses.</p>
 
 <p>Second, <strong>inability to parallelize</strong>. Because each time step depended on the output of the previous step, RNN training could not be parallelized across the sequence dimension. A sentence of length 50 required 50 sequential forward passes. On modern GPU hardware designed for massive parallelism, this was catastrophically inefficient. Training on large datasets took weeks or months, and scaling up was practically infeasible.</p>
 
@@ -18,14 +18,14 @@ export const lessons = {
 <h2>The Birth of Attention (Before Transformers)</h2>
 <p>The attention mechanism actually predates the Transformer. In 2014, Bahdanau, Cho, and Bengio introduced <span class="term" data-term="attention">attention</span> in the context of neural machine translation. Their insight was elegant: instead of forcing the decoder to rely solely on the final hidden state of the encoder, allow the decoder to "look back" at all encoder hidden states and compute a weighted sum, focusing on the parts most relevant to the current decoding step.</p>
 
-<p>This additive attention mechanism dramatically improved translation quality, especially on longer sentences. The decoder could now attend to the word "cat" in the source sentence when generating "chat" in French, even if they were far apart in the sequence. However, this early form of attention was still used <em>on top of</em> an RNN — the underlying sequential processing remained.</p>
+<p>This additive attention mechanism dramatically improved translation quality, especially on longer sentences. The decoder could now attend to the word "cat" in the source sentence when generating "chat" in French, even if they were far apart in the sequence. However, this early form of attention was still used <em>on top of</em> an RNN - the underlying sequential processing remained.</p>
 
 <div class="example-box"><h4>Example</h4>
 <p>Consider translating "The cat sat on the mat" to French. In a vanilla RNN encoder-decoder, by the time the decoder generates the fifth French word, the hidden state has been updated many times, and early information may be degraded. With Bahdanau attention, the decoder can directly attend to the encoder's representation of "cat" at any step, preserving the critical association.</p>
 </div>
 
-<h2>"Attention Is All You Need" — The 2017 Revolution</h2>
-<p>In June 2017, Vaswani et al. at Google Brain published what would become one of the most influential papers in AI history: <em>"Attention Is All You Need."</em> The core claim was radical — you could build a state-of-the-art sequence-to-sequence model using <strong>only</strong> attention mechanisms, completely dispensing with recurrence and convolutions.</p>
+<h2>"Attention Is All You Need" - The 2017 Revolution</h2>
+<p>In June 2017, Vaswani et al. at Google Brain published what would become one of the most influential papers in AI history: <em>"Attention Is All You Need."</em> The core claim was radical - you could build a state-of-the-art sequence-to-sequence model using <strong>only</strong> attention mechanisms, completely dispensing with recurrence and convolutions.</p>
 
 <p>The paper introduced the <span class="term" data-term="transformer">Transformer</span> architecture, which consisted of stacked layers of <span class="term" data-term="self-attention">self-attention</span> and feed-forward networks. The key innovations were:</p>
 
@@ -41,9 +41,9 @@ export const lessons = {
 </tbody>
 </table>
 
-<p>The results were stunning. On the WMT 2014 English-to-German translation benchmark, the Transformer achieved a new state-of-the-art BLEU score of 28.4 — surpassing all previous models — while training in a fraction of the time. The English-to-French model trained in just 3.5 days on 8 GPUs, compared to weeks for equivalent RNN-based models.</p>
+<p>The results were stunning. On the WMT 2014 English-to-German translation benchmark, the Transformer achieved a new state-of-the-art BLEU score of 28.4 - surpassing all previous models - while training in a fraction of the time. The English-to-French model trained in just 3.5 days on 8 GPUs, compared to weeks for equivalent RNN-based models.</p>
 
-<div class="warning"><strong>Common Misconception:</strong> The Transformer did not simply "add attention to existing architectures." It eliminated the RNN entirely and showed that attention alone — combined with simple feed-forward layers and normalization — was sufficient for state-of-the-art sequence modeling. This was a paradigm shift, not an incremental improvement.</div>
+<div class="warning"><strong>Common Misconception:</strong> The Transformer did not simply "add attention to existing architectures." It eliminated the RNN entirely and showed that attention alone - combined with simple feed-forward layers and normalization - was sufficient for state-of-the-art sequence modeling. This was a paradigm shift, not an incremental improvement.</div>
 
 <h2>Why the Transformer Scaled Where RNNs Could Not</h2>
 <p>The Transformer's ability to parallelize across the sequence dimension was transformative for scaling. Consider the computational profile:</p>
@@ -52,10 +52,10 @@ export const lessons = {
 
 <p>This parallelism unlocked a new regime of scaling. Researchers could now train on far larger datasets, use far larger models, and iterate far faster. Within two years, this would lead to GPT-2, BERT, and eventually the large language model revolution.</p>
 
-<div class="pro-tip"><strong>PM Perspective:</strong> As a PM at DeepMind, understanding the Transformer's parallelism is critical for capacity planning and cost estimation. The <code>O(n²)</code> complexity of attention means that doubling the <span class="term" data-term="context-window">context window</span> quadruples the attention compute. This directly impacts serving costs, latency SLAs, and the feasibility of long-context features. When a stakeholder asks "why can't we just make the context window 10x longer?" — this is the answer.</div>
+<div class="pro-tip"><strong>PM Perspective:</strong> As a PM at DeepMind, understanding the Transformer's parallelism is critical for capacity planning and cost estimation. The <code>O(n²)</code> complexity of attention means that doubling the <span class="term" data-term="context-window">context window</span> quadruples the attention compute. This directly impacts serving costs, latency SLAs, and the feasibility of long-context features. When a stakeholder asks "why can't we just make the context window 10x longer?" - this is the answer.</div>
 
 <h2>The Transformer's Impact Beyond NLP</h2>
-<p>While the Transformer was designed for machine translation, its impact quickly spread far beyond NLP. The architecture's generality — it operates on sequences of vectors — meant it could be applied to any domain where data can be tokenized into sequences:</p>
+<p>While the Transformer was designed for machine translation, its impact quickly spread far beyond NLP. The architecture's generality - it operates on sequences of vectors - meant it could be applied to any domain where data can be tokenized into sequences:</p>
 
 <ul>
 <li><strong>Computer Vision:</strong> Vision Transformers (ViT) split images into patches, treat each patch as a token, and apply standard Transformer layers. This approach matched or exceeded CNNs on image classification.</li>
@@ -65,10 +65,10 @@ export const lessons = {
 <li><strong>Multimodal:</strong> Models like Gemini and GPT-4V process interleaved text, image, audio, and video tokens through unified Transformer backbones.</li>
 </ul>
 
-<div class="key-concept"><strong>Key Concept:</strong> The Transformer is not just an NLP architecture — it is a general-purpose sequence processor. Its dominance across vision, protein science, robotics, and code demonstrates that self-attention is a fundamental computational primitive, not a domain-specific trick. This universality is what makes it the backbone of modern AI.</div>
+<div class="key-concept"><strong>Key Concept:</strong> The Transformer is not just an NLP architecture - it is a general-purpose sequence processor. Its dominance across vision, protein science, robotics, and code demonstrates that self-attention is a fundamental computational primitive, not a domain-specific trick. This universality is what makes it the backbone of modern AI.</div>
 
 <h2>The Positional Encoding Problem and RoPE</h2>
-<p>Self-attention is <strong>permutation-invariant</strong> — it treats tokens as an unordered set, not a sequence. "Dog bites man" and "Man bites dog" would produce identical attention scores without positional information. The original Transformer solved this with <span class="term" data-term="positional-encoding">sinusoidal positional encodings</span>: deterministic sine and cosine functions that inject position information by adding a position-dependent vector to each token embedding.</p>
+<p>Self-attention is <strong>permutation-invariant</strong> - it treats tokens as an unordered set, not a sequence. "Dog bites man" and "Man bites dog" would produce identical attention scores without positional information. The original Transformer solved this with <span class="term" data-term="positional-encoding">sinusoidal positional encodings</span>: deterministic sine and cosine functions that inject position information by adding a position-dependent vector to each token embedding.</p>
 
 <p>But sinusoidal encodings had limitations. As the field pushed toward longer contexts (from 512 tokens in BERT to 128K+ in modern models), the original scheme struggled to generalise to sequence lengths beyond what was seen during training. This sparked an evolution of positional encoding methods that is one of the most consequential developments in post-2017 Transformer research:</p>
 
@@ -77,23 +77,23 @@ export const lessons = {
 <tr><th>Method</th><th>Mechanism</th><th>Length Generalisation</th><th>Used In</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>Sinusoidal</strong></td><td>Add fixed sin/cos vectors to input embeddings</td><td>Moderate — degrades beyond training length</td><td>Original Transformer (2017)</td></tr>
-<tr><td><strong>Learned Positions</strong></td><td>Learnable embedding per position slot</td><td>Poor — hard limit at max trained length</td><td>BERT, GPT-2</td></tr>
-<tr><td><strong>RoPE</strong> (Rotary Position Embedding)</td><td>Rotates Q and K vectors by position-dependent angles; relative distance encoded in dot product</td><td>Good — extendable via NTK-aware scaling, YaRN</td><td>LLaMA, Gemini, Mistral, Qwen</td></tr>
-<tr><td><strong>ALiBi</strong></td><td>Adds linear bias to attention scores based on token distance</td><td>Excellent — no learned parameters, zero-shot extrapolation</td><td>BLOOM, MPT</td></tr>
+<tr><td><strong>Sinusoidal</strong></td><td>Add fixed sin/cos vectors to input embeddings</td><td>Moderate - degrades beyond training length</td><td>Original Transformer (2017)</td></tr>
+<tr><td><strong>Learned Positions</strong></td><td>Learnable embedding per position slot</td><td>Poor - hard limit at max trained length</td><td>BERT, GPT-2</td></tr>
+<tr><td><strong>RoPE</strong> (Rotary Position Embedding)</td><td>Rotates Q and K vectors by position-dependent angles; relative distance encoded in dot product</td><td>Good - extendable via NTK-aware scaling, YaRN</td><td>LLaMA, Gemini, Mistral, Qwen</td></tr>
+<tr><td><strong>ALiBi</strong></td><td>Adds linear bias to attention scores based on token distance</td><td>Excellent - no learned parameters, zero-shot extrapolation</td><td>BLOOM, MPT</td></tr>
 </tbody>
 </table>
 
-<p><strong>RoPE</strong> (Su et al., 2021) has emerged as the dominant choice for modern LLMs. The core insight is elegant: instead of adding positional information to the token embeddings, RoPE applies a rotation matrix to the Query and Key vectors before the dot product. The rotation angle depends on the token's position in the sequence. Because the dot product of two rotated vectors naturally encodes the <em>relative</em> angular difference between them, the attention score between two tokens automatically reflects their relative distance — without learning any extra parameters. This means "how far apart are these tokens?" is baked into the geometry of the attention computation itself.</p>
+<p><strong>RoPE</strong> (Su et al., 2021) has emerged as the dominant choice for modern LLMs. The core insight is elegant: instead of adding positional information to the token embeddings, RoPE applies a rotation matrix to the Query and Key vectors before the dot product. The rotation angle depends on the token's position in the sequence. Because the dot product of two rotated vectors naturally encodes the <em>relative</em> angular difference between them, the attention score between two tokens automatically reflects their relative distance - without learning any extra parameters. This means "how far apart are these tokens?" is baked into the geometry of the attention computation itself.</p>
 
-<p>Critically, RoPE-based models can be extended to longer contexts after training through interpolation techniques like <strong>NTK-aware scaling</strong> (which adjusts the frequency base of the rotations) and <strong>YaRN</strong> (Yet another RoPE extensioN). This capability is what allows models trained on 8K contexts to be extended to 128K+ — a feature directly impacting product capabilities like long-document analysis and extended conversations in Gemini.</p>
+<p>Critically, RoPE-based models can be extended to longer contexts after training through interpolation techniques like <strong>NTK-aware scaling</strong> (which adjusts the frequency base of the rotations) and <strong>YaRN</strong> (Yet another RoPE extensioN). This capability is what allows models trained on 8K contexts to be extended to 128K+ - a feature directly impacting product capabilities like long-document analysis and extended conversations in Gemini.</p>
 
-<div class="pro-tip"><strong>PM Perspective:</strong> The choice of positional encoding has direct product impact. When a customer asks "Can Gemini analyse my entire codebase in a single prompt?", the answer depends on whether the model's positional encoding supports that context length — and at what quality. RoPE scaling enables extension, but quality degrades at extreme lengths. A PM must insist on "needle in a haystack" evaluations at the target length before committing to context-window claims in product marketing.</div>
+<div class="pro-tip"><strong>PM Perspective:</strong> The choice of positional encoding has direct product impact. When a customer asks "Can Gemini analyse my entire codebase in a single prompt?", the answer depends on whether the model's positional encoding supports that context length - and at what quality. RoPE scaling enables extension, but quality degrades at extreme lengths. A PM must insist on "needle in a haystack" evaluations at the target length before committing to context-window claims in product marketing.</div>
 
 <h2>From One Paper to Industry Transformation</h2>
 <p>The trajectory from the 2017 paper to today's multi-billion-dollar AI industry is remarkably direct. BERT (2018) showed that Transformer encoders could be pre-trained for powerful representations. GPT-2 (2019) showed that Transformer decoders could generate coherent text. GPT-3 (2020) showed that scaling these models to 175 billion parameters unlocked surprising emergent capabilities like <span class="term" data-term="few-shot">few-shot</span> learning. By 2023, Transformer-based <span class="term" data-term="llm">LLMs</span> were powering consumer products serving hundreds of millions of users.</p>
 
-<p>Every major AI lab — Google DeepMind, OpenAI, Anthropic, Meta AI, Mistral — uses Transformer variants as the foundation of their flagship models. Understanding this architecture is not optional for anyone working in AI — it is foundational literacy.</p>
+<p>Every major AI lab - Google DeepMind, OpenAI, Anthropic, Meta AI, Mistral - uses Transformer variants as the foundation of their flagship models. Understanding this architecture is not optional for anyone working in AI - it is foundational literacy.</p>
 `,
     quiz: {
       questions: [
@@ -109,7 +109,7 @@ export const lessons = {
           correct: 0,
           explanation: 'Self-attention has O(n²) complexity with respect to sequence length. At 5,000 tokens, the attention matrix has 25 million entries per layer per head, making compute and memory significant concerns. A good PM would push for discussion of efficient attention variants, chunking strategies, or hierarchical approaches before committing to the migration.',
           difficulty: 'applied',
-          expertNote: 'A world-class AI PM would also consider whether the task even requires full bidirectional attention over the entire document, or if a sparse/local attention pattern could suffice — and would know about methods like Longformer or BigBird that address this.'
+          expertNote: 'A world-class AI PM would also consider whether the task even requires full bidirectional attention over the entire document, or if a sparse/local attention pattern could suffice - and would know about methods like Longformer or BigBird that address this.'
         },
         {
           question: 'Which of the following were genuine limitations of RNN-based architectures that the Transformer addressed? Select all that apply.',
@@ -130,7 +130,7 @@ export const lessons = {
           question: 'A researcher at DeepMind proposes using a Transformer to model protein-protein interactions by treating amino acid residues as tokens. A skeptical colleague argues that "Transformers are a language model architecture and cannot work outside NLP." How would you evaluate this claim?',
           type: 'scenario',
           options: null,
-          correct: 'The claim is incorrect. The Transformer is a general-purpose sequence processor — it operates on sequences of vectors, not inherently on language. Any data that can be tokenized into a sequence of embeddings can be processed by a Transformer. AlphaFold2 already demonstrated this for protein structure prediction. The key insight is that self-attention captures pairwise relationships between elements, which is useful in many domains beyond NLP. The PM should support cross-domain exploration while ensuring the team has domain expertise to design appropriate tokenization and training schemes.',
+          correct: 'The claim is incorrect. The Transformer is a general-purpose sequence processor - it operates on sequences of vectors, not inherently on language. Any data that can be tokenized into a sequence of embeddings can be processed by a Transformer. AlphaFold2 already demonstrated this for protein structure prediction. The key insight is that self-attention captures pairwise relationships between elements, which is useful in many domains beyond NLP. The PM should support cross-domain exploration while ensuring the team has domain expertise to design appropriate tokenization and training schemes.',
           explanation: 'Transformers operate on abstract sequences of vectors. The self-attention mechanism computes pairwise interactions between any elements in a sequence, making it domain-agnostic. Success in vision (ViT), protein science (AlphaFold2), and audio (Whisper) confirms this generality.',
           difficulty: 'applied',
           expertNote: 'A top AI PM would recognize that the real challenge in cross-domain Transformer application is not the architecture itself but the design of appropriate tokenization, positional encoding, and training objectives for the new domain.'
@@ -147,10 +147,10 @@ export const lessons = {
           correct: 1,
           explanation: 'The Transformer trained in 3.5 days on 8 GPUs for English-to-French translation, compared to weeks for comparable RNN-based models. This speedup came from eliminating sequential dependencies, allowing all positions to be processed in parallel. This efficiency gain was arguably even more impactful than the accuracy improvement, because it unlocked the scaling regime that led to modern LLMs.',
           difficulty: 'foundational',
-          expertNote: 'A world-class PM understands that training efficiency is not just a research convenience — it directly determines the iteration speed of the product team, the cost of experimentation, and the feasibility of scaling to larger models and datasets.'
+          expertNote: 'A world-class PM understands that training efficiency is not just a research convenience - it directly determines the iteration speed of the product team, the cost of experimentation, and the feasibility of scaling to larger models and datasets.'
         },
         {
-          question: 'Your team is building a real-time document analysis feature for Gemini. Users will submit documents of highly variable lengths — some 200 tokens, others 50,000 tokens. Given the Transformer\'s computational profile, which product strategy best addresses this?',
+          question: 'Your team is building a real-time document analysis feature for Gemini. Users will submit documents of highly variable lengths - some 200 tokens, others 50,000 tokens. Given the Transformer\'s computational profile, which product strategy best addresses this?',
           type: 'mc',
           options: [
             'Universal 50K window for all requests ensuring no truncation, padding shorter documents to the maximum length so that all requests follow an identical computational path through the serving infrastructure',
@@ -168,29 +168,29 @@ export const lessons = {
   },
 
   // ─────────────────────────────────────────────
-  // L02 — Self-Attention: Q, K, V Matrices
+  // L02 - Self-Attention: Q, K, V Matrices
   // ─────────────────────────────────────────────
   l02: {
-    title: 'Self-Attention — Q, K, V Matrices Step by Step',
+    title: 'Self-Attention - Q, K, V Matrices Step by Step',
     content: `
 <h2>The Intuition Behind Self-Attention</h2>
 <p><span class="term" data-term="self-attention">Self-attention</span> is the core mechanism that gives <span class="term" data-term="transformer">Transformers</span> their power. The fundamental idea is deceptively simple: for each element in a sequence, compute how much "attention" it should pay to every other element, then use those attention weights to create a new, context-enriched representation of each element.</p>
 
-<p>Consider the sentence: "The animal didn't cross the street because <strong>it</strong> was too tired." What does "it" refer to? A human reader effortlessly resolves this — "it" refers to "the animal" (because animals get tired, streets do not). Self-attention provides the mechanism for a model to learn exactly this kind of contextual resolution. When processing the token "it," the self-attention mechanism can assign a high attention weight to "animal," effectively building a representation of "it" that encodes the information "this pronoun refers to the animal."</p>
+<p>Consider the sentence: "The animal didn't cross the street because <strong>it</strong> was too tired." What does "it" refer to? A human reader effortlessly resolves this - "it" refers to "the animal" (because animals get tired, streets do not). Self-attention provides the mechanism for a model to learn exactly this kind of contextual resolution. When processing the token "it," the self-attention mechanism can assign a high attention weight to "animal," effectively building a representation of "it" that encodes the information "this pronoun refers to the animal."</p>
 
-<div class="key-concept"><strong>Key Concept:</strong> Self-attention allows every token in a sequence to directly interact with every other token, regardless of their distance. This creates representations that are contextualized — the representation of a word changes depending on its surrounding context. The word "bank" gets a different representation in "river bank" vs. "bank account" because it attends to different context tokens.</div>
+<div class="key-concept"><strong>Key Concept:</strong> Self-attention allows every token in a sequence to directly interact with every other token, regardless of their distance. This creates representations that are contextualized - the representation of a word changes depending on its surrounding context. The word "bank" gets a different representation in "river bank" vs. "bank account" because it attends to different context tokens.</div>
 
 <h2>The Query-Key-Value Framework</h2>
 <p>The mathematical machinery of self-attention is built on three learned linear projections called <span class="term" data-term="query-key-value">Query (Q), Key (K), and Value (V)</span>. Understanding these is essential for any AI PM who needs to discuss model architecture with engineering teams.</p>
 
 <p>The analogy that works best: imagine a library search system.</p>
 <ul>
-<li><strong>Query (Q):</strong> "What am I looking for?" — Each token generates a query vector that represents what information it needs from the rest of the sequence.</li>
-<li><strong>Key (K):</strong> "What do I contain?" — Each token generates a key vector that advertises what information it has to offer.</li>
-<li><strong>Value (V):</strong> "Here is my actual content." — Each token generates a value vector containing the information that will be retrieved if the query matches the key.</li>
+<li><strong>Query (Q):</strong> "What am I looking for?" - Each token generates a query vector that represents what information it needs from the rest of the sequence.</li>
+<li><strong>Key (K):</strong> "What do I contain?" - Each token generates a key vector that advertises what information it has to offer.</li>
+<li><strong>Value (V):</strong> "Here is my actual content." - Each token generates a value vector containing the information that will be retrieved if the query matches the key.</li>
 </ul>
 
-<p>The attention score between two tokens is the dot product of one token's Query with another token's Key. High dot products mean the query and key are "aligned" — the information being sought matches the information being offered. These scores determine how much of each token's Value vector gets incorporated into the output.</p>
+<p>The attention score between two tokens is the dot product of one token's Query with another token's Key. High dot products mean the query and key are "aligned" - the information being sought matches the information being offered. These scores determine how much of each token's Value vector gets incorporated into the output.</p>
 
 <div class="example-box"><h4>Example</h4>
 <p>For the sentence "The cat sat on the mat":</p>
@@ -198,7 +198,7 @@ export const lessons = {
 <li>When processing "sat", its Query might encode "I need to know WHO is doing the sitting."</li>
 <li>"cat" generates a Key that encodes "I am an agent/subject."</li>
 <li>The dot product <code>Q("sat") · K("cat")</code> is high, meaning "sat" will attend strongly to "cat."</li>
-<li>The Value vector of "cat" — containing rich semantic information about this particular cat in context — then flows into the updated representation of "sat."</li>
+<li>The Value vector of "cat" - containing rich semantic information about this particular cat in context - then flows into the updated representation of "sat."</li>
 </ul>
 <p>The result: the output representation of "sat" now encodes not just the concept of sitting, but <em>who</em> is sitting. This is contextual representation in action.</p>
 </div>
@@ -221,7 +221,7 @@ export const lessons = {
 <p>The scores are divided by <code>√d_k</code> to prevent the dot products from growing too large in magnitude, which would cause the softmax to saturate into near-one-hot distributions:</p>
 <p><code>Scaled_Scores = Scores / √d_k</code></p>
 
-<div class="warning"><strong>Common Misconception:</strong> The scaling factor <code>√d_k</code> is not arbitrary. As the dimensionality <code>d_k</code> grows, the variance of dot products grows proportionally. Without scaling, the softmax would produce extremely peaked distributions, causing the model to attend to only one token and ignore all others. This is equivalent to losing the ability to combine information from multiple sources — defeating the purpose of attention.</div>
+<div class="warning"><strong>Common Misconception:</strong> The scaling factor <code>√d_k</code> is not arbitrary. As the dimensionality <code>d_k</code> grows, the variance of dot products grows proportionally. Without scaling, the softmax would produce extremely peaked distributions, causing the model to attend to only one token and ignore all others. This is equivalent to losing the ability to combine information from multiple sources - defeating the purpose of attention.</div>
 
 <p><strong>Step 4: Softmax</strong></p>
 <p>Apply softmax row-wise to convert scores into probability distributions:</p>
@@ -236,10 +236,10 @@ export const lessons = {
 <p>Putting it all together, the famous formula:</p>
 <p><code>Attention(Q, K, V) = softmax(Q · K^T / √d_k) · V</code></p>
 
-<div class="key-concept"><strong>Key Concept:</strong> The entire self-attention computation is a series of matrix multiplications and a softmax. There are no sequential dependencies — every token's output can be computed in parallel. This is why Transformers are so efficient on modern GPUs, which are optimized for large matrix operations.</div>
+<div class="key-concept"><strong>Key Concept:</strong> The entire self-attention computation is a series of matrix multiplications and a softmax. There are no sequential dependencies - every token's output can be computed in parallel. This is why Transformers are so efficient on modern GPUs, which are optimized for large matrix operations.</div>
 
 <h2>What the Attention Matrix Reveals</h2>
-<p>The <code>n × n</code> attention matrix is one of the most useful tools for interpreting Transformer behavior. Each row shows the attention distribution for one token — which other tokens it's "looking at." Researchers and engineers visualize these matrices as heatmaps to understand what the model has learned.</p>
+<p>The <code>n × n</code> attention matrix is one of the most useful tools for interpreting Transformer behavior. Each row shows the attention distribution for one token - which other tokens it's "looking at." Researchers and engineers visualize these matrices as heatmaps to understand what the model has learned.</p>
 
 <p>Common patterns that emerge in trained models:</p>
 <ul>
@@ -249,7 +249,7 @@ export const lessons = {
 <li><strong>Syntactic patterns:</strong> Verbs attending to their subjects, adjectives attending to the nouns they modify.</li>
 </ul>
 
-<div class="pro-tip"><strong>PM Perspective:</strong> Attention visualizations are a powerful tool for debugging and building trust with stakeholders. When a model makes an incorrect prediction, showing that it attended to the wrong part of the input provides an intuitive explanation — far more accessible than "the loss function had a high value." As a PM, you should know that attention-based explanations are approximate (they show correlation, not necessarily causation), but they are the most interpretable window into Transformer behavior and invaluable for responsible AI reviews.</div>
+<div class="pro-tip"><strong>PM Perspective:</strong> Attention visualizations are a powerful tool for debugging and building trust with stakeholders. When a model makes an incorrect prediction, showing that it attended to the wrong part of the input provides an intuitive explanation - far more accessible than "the loss function had a high value." As a PM, you should know that attention-based explanations are approximate (they show correlation, not necessarily causation), but they are the most interpretable window into Transformer behavior and invaluable for responsible AI reviews.</div>
 
 <div class="interactive" data-interactive="attention-viz"></div>
 
@@ -263,9 +263,9 @@ export const lessons = {
 <tr><th>Attention Type</th><th>Masking</th><th>Use Case</th><th>Example Models</th></tr>
 </thead>
 <tbody>
-<tr><td>Bidirectional (Full)</td><td>None — all tokens see all tokens</td><td>Understanding/encoding tasks</td><td>BERT, encoders in T5</td></tr>
-<tr><td>Causal (Masked)</td><td>Upper triangle masked — tokens see only left context</td><td>Text generation / autoregressive</td><td>GPT, Gemini, LLaMA</td></tr>
-<tr><td>Cross-Attention</td><td>Varies — decoder attends to encoder outputs</td><td>Encoder-decoder translation</td><td>Original Transformer, T5, Whisper</td></tr>
+<tr><td>Bidirectional (Full)</td><td>None - all tokens see all tokens</td><td>Understanding/encoding tasks</td><td>BERT, encoders in T5</td></tr>
+<tr><td>Causal (Masked)</td><td>Upper triangle masked - tokens see only left context</td><td>Text generation / autoregressive</td><td>GPT, Gemini, LLaMA</td></tr>
+<tr><td>Cross-Attention</td><td>Varies - decoder attends to encoder outputs</td><td>Encoder-decoder translation</td><td>Original Transformer, T5, Whisper</td></tr>
 </tbody>
 </table>
 
@@ -302,13 +302,13 @@ export const lessons = {
           question: 'Your team is debating whether to use bidirectional or causal (masked) attention for a new document understanding API. The API needs to classify document types, extract key entities, and generate summaries. Which attention strategy is most appropriate and why?',
           type: 'scenario',
           options: null,
-          correct: 'This use case has both understanding tasks (classification, entity extraction) and generation tasks (summarization). The optimal approach is to use a model with bidirectional attention for the encoding/understanding phases and causal attention for generation — essentially an encoder-decoder architecture or a decoder-only model used with careful prompting. A purely causal model can handle all tasks but may sacrifice encoding quality since each token cannot attend to future context. A PM should weigh the engineering complexity of maintaining two attention modes vs. the quality gains, and consider whether a strong decoder-only model with sufficient scale can handle all three tasks well enough through prompting.',
+          correct: 'This use case has both understanding tasks (classification, entity extraction) and generation tasks (summarization). The optimal approach is to use a model with bidirectional attention for the encoding/understanding phases and causal attention for generation - essentially an encoder-decoder architecture or a decoder-only model used with careful prompting. A purely causal model can handle all tasks but may sacrifice encoding quality since each token cannot attend to future context. A PM should weigh the engineering complexity of maintaining two attention modes vs. the quality gains, and consider whether a strong decoder-only model with sufficient scale can handle all three tasks well enough through prompting.',
           explanation: 'Classification and extraction benefit from bidirectional context (seeing the whole document), while summarization requires autoregressive generation (causal masking). An encoder-decoder setup naturally handles this, while a decoder-only model can approximate it by first processing the document as a "prompt" and then generating. The PM must balance architectural complexity against task quality.',
           difficulty: 'expert',
           expertNote: 'At DeepMind, Gemini uses a decoder-only architecture that handles both understanding and generation. The PM should know that modern decoder-only models at sufficient scale can rival encoder-decoder models on understanding tasks, simplifying the serving infrastructure.'
         },
         {
-          question: 'A junior engineer on your team says: "The Query, Key, and Value matrices in self-attention are like a database lookup — the Query searches for matching Keys, and returns the corresponding Values." How would you evaluate this analogy?',
+          question: 'A junior engineer on your team says: "The Query, Key, and Value matrices in self-attention are like a database lookup - the Query searches for matching Keys, and returns the corresponding Values." How would you evaluate this analogy?',
           type: 'mc',
           options: [
             'Useful analogy but returns weighted combinations, not exact matches',
@@ -317,15 +317,15 @@ export const lessons = {
             'Misleading because Queries and Keys are derived from the same linear projection and are therefore always identical vectors, making the distinction between them conceptually meaningless in practice'
           ],
           correct: 0,
-          explanation: 'The database analogy captures the core idea well: Q represents "what I\'m looking for," K represents "what I have to offer," and V represents "the content to retrieve." But the critical difference is that attention performs soft retrieval — it returns a blended mixture of all values, not a single exact match. This blending is what makes attention so powerful for capturing nuanced contextual relationships.',
+          explanation: 'The database analogy captures the core idea well: Q represents "what I\'m looking for," K represents "what I have to offer," and V represents "the content to retrieve." But the critical difference is that attention performs soft retrieval - it returns a blended mixture of all values, not a single exact match. This blending is what makes attention so powerful for capturing nuanced contextual relationships.',
           difficulty: 'foundational',
-          expertNote: 'An expert PM would also note that Q, K, and V are all derived from the same input through different learned projections in self-attention, whereas in cross-attention, Q comes from one sequence and K, V come from another — a distinction important for encoder-decoder architectures.'
+          expertNote: 'An expert PM would also note that Q, K, and V are all derived from the same input through different learned projections in self-attention, whereas in cross-attention, Q comes from one sequence and K, V come from another - a distinction important for encoder-decoder architectures.'
         },
         {
           question: 'Which of the following are valid approaches to reduce the computational cost of self-attention for long sequences? Select all that apply.',
           type: 'multi',
           options: [
-            'Flash Attention — hardware-aware fused kernels that reduce memory I/O without approximation',
+            'Flash Attention - hardware-aware fused kernels that reduce memory I/O without approximation',
             'Sparse attention patterns like sliding windows or global+local tokens',
             'Simply reducing the model\'s hidden dimension d to reduce d_k',
             'Using linear attention reformulations that avoid materializing the n×n matrix',
@@ -334,7 +334,7 @@ export const lessons = {
           correct: [0, 1, 3],
           explanation: 'Flash Attention, sparse attention, and linear attention are all established techniques for reducing attention cost. Reducing d_k (option C) would reduce compute per attention head but would also reduce the model\'s representational capacity and is not primarily an efficiency technique for long sequences. Removing softmax entirely (option E) would fundamentally change the attention mechanism\'s properties and is not a standard approach.',
           difficulty: 'applied',
-          expertNote: 'A top PM should know that Flash Attention specifically is critical to production systems — it provides 2-4x wall-clock speedups with no quality loss, making it a free lunch for serving efficiency. Understanding the difference between exact and approximate attention methods matters for quality guarantees in production.'
+          expertNote: 'A top PM should know that Flash Attention specifically is critical to production systems - it provides 2-4x wall-clock speedups with no quality loss, making it a free lunch for serving efficiency. Understanding the difference between exact and approximate attention methods matters for quality guarantees in production.'
         },
         {
           question: 'You are reviewing attention visualization heatmaps from a model that frequently misclassifies sarcastic product reviews as positive. What pattern in the attention maps would most likely explain this failure?',
@@ -348,20 +348,20 @@ export const lessons = {
           correct: 1,
           explanation: 'Sarcasm detection requires attending to subtle contextual cues that invert the surface sentiment. If attention maps show the model fixating on positive words while ignoring sarcastic markers, this explains the misclassification. The model is essentially doing shallow keyword matching rather than understanding the pragmatic context. This insight could guide targeted data augmentation or fine-tuning strategies.',
           difficulty: 'applied',
-          expertNote: 'A PM conducting a responsible AI review would use this attention analysis to build a case for targeted improvement — e.g., curating a sarcasm-focused evaluation dataset, and tracking the attention pattern shift after fine-tuning as evidence of genuine improvement rather than just metric gaming.'
+          expertNote: 'A PM conducting a responsible AI review would use this attention analysis to build a case for targeted improvement - e.g., curating a sarcasm-focused evaluation dataset, and tracking the attention pattern shift after fine-tuning as evidence of genuine improvement rather than just metric gaming.'
         }
       ]
     }
   },
 
   // ─────────────────────────────────────────────
-  // L03 — Multi-Head Attention & Positional Encoding
+  // L03 - Multi-Head Attention & Positional Encoding
   // ─────────────────────────────────────────────
   l03: {
     title: 'Multi-Head Attention & Positional Encoding',
     content: `
 <h2>Why One Attention Head Is Not Enough</h2>
-<p>A single <span class="term" data-term="self-attention">self-attention</span> head computes one set of attention weights — one "perspective" on how tokens relate to each other. But language (and data in general) has many simultaneous types of relationships. In the sentence "The lawyer who represented the defendant argued the case brilliantly," a single attention head would have to simultaneously capture syntactic structure (who → lawyer), semantic role (argued → lawyer as agent), and coreference (the case → the defendant's case). Asking one set of Q, K, V projections to capture all these diverse relationships is asking too much.</p>
+<p>A single <span class="term" data-term="self-attention">self-attention</span> head computes one set of attention weights - one "perspective" on how tokens relate to each other. But language (and data in general) has many simultaneous types of relationships. In the sentence "The lawyer who represented the defendant argued the case brilliantly," a single attention head would have to simultaneously capture syntactic structure (who → lawyer), semantic role (argued → lawyer as agent), and coreference (the case → the defendant's case). Asking one set of Q, K, V projections to capture all these diverse relationships is asking too much.</p>
 
 <p><span class="term" data-term="multi-head-attention">Multi-head attention</span> solves this by running multiple attention heads in parallel, each with its own learned <code>W_Q</code>, <code>W_K</code>, <code>W_V</code> projection matrices. Each head can specialize in capturing a different type of relationship. The outputs of all heads are then concatenated and linearly projected to produce the final output.</p>
 
@@ -401,9 +401,9 @@ export const lessons = {
 </tbody>
 </table>
 
-<p>This specialization is not explicitly programmed — it emerges naturally from training. Each head's projection matrices evolve to create Q, K, V spaces that are most useful for the relationships that head has learned to detect.</p>
+<p>This specialization is not explicitly programmed - it emerges naturally from training. Each head's projection matrices evolve to create Q, K, V spaces that are most useful for the relationships that head has learned to detect.</p>
 
-<div class="warning"><strong>Common Misconception:</strong> It is tempting to think that every attention head is equally important and captures a unique, essential pattern. In practice, research has shown that many heads in trained Transformers are redundant — some can be pruned (removed) with minimal impact on performance. This finding has important implications for model compression and efficient inference. Not all heads earn their compute budget.</div>
+<div class="warning"><strong>Common Misconception:</strong> It is tempting to think that every attention head is equally important and captures a unique, essential pattern. In practice, research has shown that many heads in trained Transformers are redundant - some can be pruned (removed) with minimal impact on performance. This finding has important implications for model compression and efficient inference. Not all heads earn their compute budget.</div>
 
 <h2>Grouped-Query Attention (GQA) and Multi-Query Attention (MQA)</h2>
 <p>A significant optimization in modern <span class="term" data-term="llm">LLMs</span> is reducing the memory cost of the KV cache during inference. In standard multi-head attention, each head has its own K and V projections, which must be cached for every token in the sequence during autoregressive generation. For a model with 96 heads and a 100K <span class="term" data-term="context-window">context window</span>, this KV cache can consume tens of gigabytes of GPU memory.</p>
@@ -463,9 +463,9 @@ export const lessons = {
 </tbody>
 </table>
 
-<div class="key-concept"><strong>Key Concept:</strong> Positional encoding is not a solved problem — it remains an active area of research, especially for enabling models to generalize to sequence lengths far beyond their training data. The choice of positional encoding method directly impacts a model's ability to handle long documents, multi-turn conversations, and other long-context applications that users increasingly demand.</div>
+<div class="key-concept"><strong>Key Concept:</strong> Positional encoding is not a solved problem - it remains an active area of research, especially for enabling models to generalize to sequence lengths far beyond their training data. The choice of positional encoding method directly impacts a model's ability to handle long documents, multi-turn conversations, and other long-context applications that users increasingly demand.</div>
 
-<div class="pro-tip"><strong>PM Perspective:</strong> When a user requests a feature involving very long contexts — like analyzing an entire codebase or processing a book-length document — the PM should understand that the model's positional encoding is often the binding constraint, not just the attention compute. A model trained with a 8K context window may not generalize well to 128K, even if you have the compute budget for the attention. Understanding RoPE scaling and its limitations helps a PM set realistic expectations and plan appropriate evaluation before launch.</div>
+<div class="pro-tip"><strong>PM Perspective:</strong> When a user requests a feature involving very long contexts - like analyzing an entire codebase or processing a book-length document - the PM should understand that the model's positional encoding is often the binding constraint, not just the attention compute. A model trained with a 8K context window may not generalize well to 128K, even if you have the compute budget for the attention. Understanding RoPE scaling and its limitations helps a PM set realistic expectations and plan appropriate evaluation before launch.</div>
 `,
     quiz: {
       questions: [
@@ -474,7 +474,7 @@ export const lessons = {
           type: 'mc',
           options: [
             'GQA is always significantly worse in quality than full MHA, so the architectural choice is purely a cost savings decision with an unavoidable and substantial accuracy trade-off for any task',
-            'GQA and MHA have identical memory profiles at inference time — the difference between the two architectures is only in training speed, since GQA uses fewer gradient computations per step',
+            'GQA and MHA have identical memory profiles at inference time - the difference between the two architectures is only in training speed, since GQA uses fewer gradient computations per step',
             'GQA reduces the KV cache memory by sharing K and V across head groups, enabling longer context windows and more concurrent users per GPU, with minimal quality degradation in practice',
             'GQA cannot be used with causal masking, restricting its application to encoder-only bidirectional models and making it incompatible with any autoregressive text generation use case'
           ],
@@ -488,7 +488,7 @@ export const lessons = {
           type: 'scenario',
           options: null,
           correct: 'The model will fail or produce degraded outputs on tokens beyond position 4,096 because learned positional embeddings have no representation for positions beyond the training maximum. The PM should recommend either: (1) Re-training or fine-tuning with extended context using a position encoding method that supports length extrapolation (like RoPE with NTK scaling or ALiBi), (2) Using a chunking/sliding-window strategy to process the document in segments, or (3) Using a RAG-based approach to retrieve relevant sections rather than processing the full document. The PM should evaluate these options based on quality requirements, latency budget, and engineering cost.',
-          explanation: 'Learned positional embeddings are fixed-size lookup tables — position 16,384 simply has no embedding, causing either an error or garbage outputs. This is a fundamental limitation of learned position encodings and one reason modern models prefer RoPE or ALiBi, which have better length generalization properties.',
+          explanation: 'Learned positional embeddings are fixed-size lookup tables - position 16,384 simply has no embedding, causing either an error or garbage outputs. This is a fundamental limitation of learned position encodings and one reason modern models prefer RoPE or ALiBi, which have better length generalization properties.',
           difficulty: 'applied',
           expertNote: 'A world-class PM would also know that even RoPE-based models degrade beyond their training length without explicit context extension techniques, and would insist on rigorous evaluation at the target length rather than assuming generalization.'
         },
@@ -500,7 +500,7 @@ export const lessons = {
             'The total compute of multi-head attention is roughly equivalent to a single head with full dimensionality',
             'Every attention head in a trained model captures a unique, essential pattern that cannot be pruned',
             'The outputs of all heads are concatenated and then linearly projected',
-            'Multi-head attention requires sequential processing — one head at a time'
+            'Multi-head attention requires sequential processing - one head at a time'
           ],
           correct: [0, 1, 3],
           explanation: 'Heads do specialize in different patterns (A), the total compute is comparable to a single full-dimension head (B), and outputs are concatenated then projected (D). However, research shows many heads are redundant and can be pruned (C is false), and all heads compute in parallel, not sequentially (E is false).',
@@ -519,7 +519,7 @@ export const lessons = {
           correct: 3,
           explanation: 'RoPE applies position-dependent rotations to Q and K vectors such that the dot product QK naturally reflects the relative distance between tokens. This relative position encoding is linguistically natural (we care about how far apart words are, not their absolute positions). Additionally, RoPE can be extended beyond training length through interpolation methods like NTK-aware scaling and YaRN, enabling long-context applications.',
           difficulty: 'applied',
-          expertNote: 'The PM should understand that RoPE extension techniques (like the scaling used to extend LLaMA from 4K to 128K context) require careful evaluation — the model\'s quality at extended lengths is not guaranteed and often degrades on tasks requiring precise long-range retrieval ("needle in a haystack" tests).'
+          expertNote: 'The PM should understand that RoPE extension techniques (like the scaling used to extend LLaMA from 4K to 128K context) require careful evaluation - the model\'s quality at extended lengths is not guaranteed and often degrades on tasks requiring precise long-range retrieval ("needle in a haystack" tests).'
         },
         {
           question: 'You are planning the next Gemini API pricing tier. Engineering tells you that switching from 8-group GQA to 4-group GQA (fewer groups = more sharing = less KV cache) would reduce serving cost by 30% but might reduce quality on multi-step reasoning benchmarks by 1-2%. How should you approach this decision?',
@@ -533,20 +533,20 @@ export const lessons = {
           correct: 0,
           explanation: 'This is a classic PM tradeoff decision. A 30% cost reduction could translate to lower prices or better margins, but quality regressions on reasoning tasks could hurt enterprise customers who depend on multi-step analysis. The PM should drive a rigorous evaluation on task-specific benchmarks, consult with key customers or customer-facing teams, and make a data-informed decision aligned with the product strategy.',
           difficulty: 'expert',
-          expertNote: 'A top AI PM would also consider offering both configurations as different API tiers — a cost-optimized tier and a quality-optimized tier — and would design the pricing and documentation to help customers self-select the appropriate tier for their use case.'
+          expertNote: 'A top AI PM would also consider offering both configurations as different API tiers - a cost-optimized tier and a quality-optimized tier - and would design the pricing and documentation to help customers self-select the appropriate tier for their use case.'
         }
       ]
     }
   },
 
   // ─────────────────────────────────────────────
-  // L04 — Encoder-Decoder vs Decoder-Only Architectures
+  // L04 - Encoder-Decoder vs Decoder-Only Architectures
   // ─────────────────────────────────────────────
   l04: {
     title: 'Encoder-Decoder vs Decoder-Only Architectures',
     content: `
 <h2>The Original Transformer: An Encoder-Decoder Architecture</h2>
-<p>The <span class="term" data-term="transformer">Transformer</span> introduced in "Attention Is All You Need" was an <span class="term" data-term="encoder">encoder</span>-<span class="term" data-term="decoder">decoder</span> architecture, designed specifically for sequence-to-sequence tasks like machine translation. Understanding the full encoder-decoder design is essential for appreciating why modern architectures have diverged into different variants — and why <span class="term" data-term="decoder">decoder-only</span> models have come to dominate.</p>
+<p>The <span class="term" data-term="transformer">Transformer</span> introduced in "Attention Is All You Need" was an <span class="term" data-term="encoder">encoder</span>-<span class="term" data-term="decoder">decoder</span> architecture, designed specifically for sequence-to-sequence tasks like machine translation. Understanding the full encoder-decoder design is essential for appreciating why modern architectures have diverged into different variants - and why <span class="term" data-term="decoder">decoder-only</span> models have come to dominate.</p>
 
 <p>The original architecture consists of two halves:</p>
 
@@ -578,13 +578,13 @@ export const lessons = {
 <div class="example-box"><h4>Example</h4>
 <p><strong>Why bidirectional context matters for understanding:</strong></p>
 <p>Consider: "The movie was not good, but the acting was [MASK]."</p>
-<p>A left-to-right model would only know "The movie was not good, but the acting was" — the word "but" suggests a contrast, but the model has limited information. A bidirectional model also sees the period after [MASK], confirming the sentence ends there, and can use the contrastive structure ("not good, but...") to strongly predict a positive word like "excellent" or "superb."</p>
+<p>A left-to-right model would only know "The movie was not good, but the acting was" - the word "but" suggests a contrast, but the model has limited information. A bidirectional model also sees the period after [MASK], confirming the sentence ends there, and can use the contrastive structure ("not good, but...") to strongly predict a positive word like "excellent" or "superb."</p>
 </div>
 
 <p>However, encoder-only models have a fundamental limitation: they cannot naturally <em>generate</em> text. They produce fixed-length representations, not sequential outputs. To use BERT for generation, you need workarounds that are slow and awkward. This limitation became increasingly problematic as the field shifted toward generation-centric applications.</p>
 
 <h2>Encoder-Decoder Models: T5 and Versatility</h2>
-<p>Google's T5 (Text-to-Text Transfer Transformer, 2020) took a different approach. By framing every NLP task as a text-to-text problem — where both input and output are text strings — T5 showed that a single encoder-decoder model could handle classification, translation, summarization, and question answering simultaneously.</p>
+<p>Google's T5 (Text-to-Text Transfer Transformer, 2020) took a different approach. By framing every NLP task as a text-to-text problem - where both input and output are text strings - T5 showed that a single encoder-decoder model could handle classification, translation, summarization, and question answering simultaneously.</p>
 
 <p>For classification, the input might be "classify: This movie is terrible" and the output "negative." For translation, "translate English to French: Hello world" → "Bonjour le monde." This unified framing was elegant and demonstrated that the encoder-decoder architecture was genuinely versatile.</p>
 
@@ -595,14 +595,14 @@ export const lessons = {
 
 <p>In a decoder-only model, there is no separate encoder. The input (prompt) and output (completion) are treated as a single continuous sequence. The model processes the prompt tokens with causal attention, then generates new tokens one at a time, each conditioned on all previous tokens (both prompt and already-generated tokens).</p>
 
-<div class="key-concept"><strong>Key Concept:</strong> The decoder-only model handles "understanding" and "generation" in the same architecture and with the same mechanism. The prompt is "understood" through causal self-attention as it's processed, and generation continues seamlessly from where the prompt ends. This simplicity — one architecture, one training objective, one serving path — is a major engineering advantage.</div>
+<div class="key-concept"><strong>Key Concept:</strong> The decoder-only model handles "understanding" and "generation" in the same architecture and with the same mechanism. The prompt is "understood" through causal self-attention as it's processed, and generation continues seamlessly from where the prompt ends. This simplicity - one architecture, one training objective, one serving path - is a major engineering advantage.</div>
 
 <h2>Why Decoder-Only Won (For Now)</h2>
-<p>By 2023, virtually all frontier <span class="term" data-term="llm">LLMs</span> — GPT-4, Gemini, Claude, LLaMA, Mistral — had converged on the decoder-only architecture. This convergence was driven by several factors:</p>
+<p>By 2023, virtually all frontier <span class="term" data-term="llm">LLMs</span> - GPT-4, Gemini, Claude, LLaMA, Mistral - had converged on the decoder-only architecture. This convergence was driven by several factors:</p>
 
 <p><strong>1. Scaling simplicity.</strong> A decoder-only model has one set of weights, one attention pattern, and one training objective. This simplicity makes it easier to scale to hundreds of billions of parameters, distribute across thousands of GPUs, and optimize serving infrastructure.</p>
 
-<p><strong>2. Emergent general-purpose capability.</strong> At sufficient scale, decoder-only models trained on next-token prediction exhibit remarkable <span class="term" data-term="emergent-abilities">emergent abilities</span>: <span class="term" data-term="in-context-learning">in-context learning</span>, <span class="term" data-term="chain-of-thought">chain-of-thought</span> reasoning, code generation, and more. The same model handles translation, summarization, QA, and creative writing through prompting — without architectural changes.</p>
+<p><strong>2. Emergent general-purpose capability.</strong> At sufficient scale, decoder-only models trained on next-token prediction exhibit remarkable <span class="term" data-term="emergent-abilities">emergent abilities</span>: <span class="term" data-term="in-context-learning">in-context learning</span>, <span class="term" data-term="chain-of-thought">chain-of-thought</span> reasoning, code generation, and more. The same model handles translation, summarization, QA, and creative writing through prompting - without architectural changes.</p>
 
 <p><strong>3. KV cache efficiency.</strong> During autoregressive generation, decoder-only models can cache the Key and Value computations for all previous tokens (the KV cache). Each new token only requires computing Q, K, V for that single token and attending to the cached K, V. With an encoder-decoder model, you must maintain both the encoder's output representations and the decoder's KV cache, complicating memory management.</p>
 
@@ -620,14 +620,14 @@ export const lessons = {
 <li><strong>Efficiency with very long inputs:</strong> For tasks like summarizing a 50-page document into a paragraph, the encoder processes the document once with bidirectional attention, and the decoder generates the short summary. A decoder-only model would need to attend to the entire document at every generation step, which is less efficient.</li>
 </ul>
 
-<div class="pro-tip"><strong>PM Perspective:</strong> Understanding the architectural trade-offs is essential for making product decisions. If you are building a translation product, an encoder-decoder model may be more efficient and higher quality than prompting a decoder-only LLM. If you are building a general-purpose assistant that needs to handle open-ended user requests, a decoder-only model's versatility is invaluable. The PM should resist the temptation to use a single architecture for everything — the right architecture depends on the use case, latency requirements, and cost constraints.</div>
+<div class="pro-tip"><strong>PM Perspective:</strong> Understanding the architectural trade-offs is essential for making product decisions. If you are building a translation product, an encoder-decoder model may be more efficient and higher quality than prompting a decoder-only LLM. If you are building a general-purpose assistant that needs to handle open-ended user requests, a decoder-only model's versatility is invaluable. The PM should resist the temptation to use a single architecture for everything - the right architecture depends on the use case, latency requirements, and cost constraints.</div>
 
 <h2>The Prefill-Decode Split in Modern Serving</h2>
 <p>In production serving of decoder-only models, there is an important distinction between two phases of inference:</p>
 
-<p><strong>Prefill (Prompt Processing):</strong> The model processes all prompt tokens in parallel, computing the KV cache for the entire prompt. This is compute-bound — it involves large matrix multiplications across all prompt tokens simultaneously.</p>
+<p><strong>Prefill (Prompt Processing):</strong> The model processes all prompt tokens in parallel, computing the KV cache for the entire prompt. This is compute-bound - it involves large matrix multiplications across all prompt tokens simultaneously.</p>
 
-<p><strong>Decode (Token Generation):</strong> The model generates one token at a time, each requiring a forward pass through all layers. This is memory-bandwidth-bound — it involves reading the entire KV cache for each new token but only computing attention for a single query.</p>
+<p><strong>Decode (Token Generation):</strong> The model generates one token at a time, each requiring a forward pass through all layers. This is memory-bandwidth-bound - it involves reading the entire KV cache for each new token but only computing attention for a single query.</p>
 
 <p>These two phases have very different computational profiles, which has led to sophisticated serving optimizations like:</p>
 <ul>
@@ -655,10 +655,10 @@ export const lessons = {
           question: 'Your team is building a new real-time translation feature for Google Meet using Gemini. An ML engineer proposes using the decoder-only Gemini model for translation since "it can do everything." A senior researcher suggests a specialized encoder-decoder model. As PM, how do you evaluate this?',
           type: 'scenario',
           options: null,
-          correct: 'Both approaches have merit, but for real-time translation specifically, the encoder-decoder architecture has structural advantages: the encoder can build a rich bidirectional representation of the full source utterance, cross-attention provides an efficient mechanism for the decoder to selectively attend to relevant source tokens, and the architecture naturally separates the input processing from output generation. The decoder-only approach would work but may be less efficient — it must re-attend to the source at every decoding step without the benefit of bidirectional encoding. The PM should propose an evaluation: benchmark both approaches on translation quality (BLEU, human eval), latency (time-to-first-token, total generation time), and serving cost per translation. If the decoder-only model matches quality at acceptable cost, its operational simplicity (one model to maintain) could be preferred. If the encoder-decoder model is significantly better or cheaper, the specialized model is justified.',
+          correct: 'Both approaches have merit, but for real-time translation specifically, the encoder-decoder architecture has structural advantages: the encoder can build a rich bidirectional representation of the full source utterance, cross-attention provides an efficient mechanism for the decoder to selectively attend to relevant source tokens, and the architecture naturally separates the input processing from output generation. The decoder-only approach would work but may be less efficient - it must re-attend to the source at every decoding step without the benefit of bidirectional encoding. The PM should propose an evaluation: benchmark both approaches on translation quality (BLEU, human eval), latency (time-to-first-token, total generation time), and serving cost per translation. If the decoder-only model matches quality at acceptable cost, its operational simplicity (one model to maintain) could be preferred. If the encoder-decoder model is significantly better or cheaper, the specialized model is justified.',
           explanation: 'Real-time translation is a classic encoder-decoder use case: the input (source language) and output (target language) are clearly delineated, the output length is similar to the input, and the task benefits from bidirectional encoding of the source. However, modern decoder-only models at scale can also translate well, so the decision should be data-driven.',
           difficulty: 'expert',
-          expertNote: 'A world-class PM would also consider the maintenance burden — if you build a specialized encoder-decoder for translation, you now have a separate model to train, evaluate, and serve alongside the main Gemini model. The operational cost of maintaining two model serving stacks could outweigh the efficiency gains of the specialized architecture.'
+          expertNote: 'A world-class PM would also consider the maintenance burden - if you build a specialized encoder-decoder for translation, you now have a separate model to train, evaluate, and serve alongside the main Gemini model. The operational cost of maintaining two model serving stacks could outweigh the efficiency gains of the specialized architecture.'
         },
         {
           question: 'Which of the following correctly describes the "prefill" and "decode" phases in decoder-only model inference?',
@@ -678,16 +678,16 @@ export const lessons = {
           question: 'Why has the decoder-only architecture become dominant for frontier LLMs despite the theoretical advantages of encoder-decoder models for understanding tasks? Select all valid reasons.',
           type: 'multi',
           options: [
-            'Scaling simplicity — one architecture, one training objective, one serving path',
+            'Scaling simplicity - one architecture, one training objective, one serving path',
             'Decoder-only models are always more accurate than encoder-decoder models on every task',
             'Emergent general-purpose capabilities at scale (in-context learning, chain-of-thought, etc.)',
             'Unified serving infrastructure is easier to optimize and deploy',
             'KV cache management is simpler with a single model stack'
           ],
           correct: [0, 2, 3, 4],
-          explanation: 'Decoder-only models dominate due to scaling simplicity, emergent capabilities, unified serving, and simpler KV cache management. However, they are NOT always more accurate — encoder-decoder models can outperform on specific tasks like translation or when input is much longer than output. The decoder-only dominance is about the practical advantages of simplicity at scale, not universal superiority.',
+          explanation: 'Decoder-only models dominate due to scaling simplicity, emergent capabilities, unified serving, and simpler KV cache management. However, they are NOT always more accurate - encoder-decoder models can outperform on specific tasks like translation or when input is much longer than output. The decoder-only dominance is about the practical advantages of simplicity at scale, not universal superiority.',
           difficulty: 'foundational',
-          expertNote: 'A top PM should recognize that the "decoder-only wins" narrative is partially driven by the AI lab business model — general-purpose models that handle many tasks through one API are more commercially viable than task-specific models, even if the latter are technically superior for individual tasks.'
+          expertNote: 'A top PM should recognize that the "decoder-only wins" narrative is partially driven by the AI lab business model - general-purpose models that handle many tasks through one API are more commercially viable than task-specific models, even if the latter are technically superior for individual tasks.'
         },
         {
           question: 'A product manager proposes adding "10x longer context window" as a headline feature for the next Gemini release. Based on your understanding of architecture trade-offs, what is the most critical question you should raise?',

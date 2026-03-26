@@ -1,7 +1,7 @@
 export function render(container) {
   container.innerHTML = `
     <div style="text-align: center; width: 100%;">
-      <svg viewBox="0 0 750 420" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+      <svg viewBox="0 0 750 480" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
         <style>
           .sl-fade { animation: slFadeIn 0.6s ease forwards; opacity: 0; }
           .sl-label { font-family: var(--font-mono); font-size: 10px; fill: var(--text-dim); }
@@ -54,12 +54,12 @@ export function render(container) {
 
         <!-- X-axis label -->
         <g class="sl-fade" style="animation-delay: 0.2s;">
-          <text x="355" y="310" text-anchor="middle" class="sl-title" fill="var(--text-secondary)">Compute (FLOPs) \u2192</text>
-          <text x="120" y="302" class="sl-axis">10\u00B9</text>
-          <text x="230" y="302" class="sl-axis">10\u00B9\u00B2</text>
-          <text x="340" y="302" class="sl-axis">10\u00B9\u2075</text>
-          <text x="450" y="302" class="sl-axis">10\u00B9\u2078</text>
-          <text x="560" y="302" class="sl-axis">10\u00B2\u00B9</text>
+          <text x="355" y="325" text-anchor="middle" class="sl-title" fill="var(--text-secondary)">Compute (FLOPs) \u2192</text>
+          <text x="120" y="305" class="sl-axis">10\u00B9</text>
+          <text x="230" y="305" class="sl-axis">10\u00B9\u00B2</text>
+          <text x="340" y="305" class="sl-axis">10\u00B9\u2075</text>
+          <text x="450" y="305" class="sl-axis">10\u00B9\u2078</text>
+          <text x="560" y="305" class="sl-axis">10\u00B2\u00B9</text>
         </g>
 
         <!-- Main scaling law curve (power law) -->
@@ -105,46 +105,46 @@ export function render(container) {
 
         <!-- Emergent Abilities Section (below chart) -->
         <g class="sl-fade" style="animation-delay: 4.5s;">
-          <text x="355" y="340" text-anchor="middle" class="sl-title" fill="#F0B429">Emergent Abilities</text>
-          <text x="355" y="355" text-anchor="middle" class="sl-label">Capabilities that suddenly appear at scale</text>
+          <text x="355" y="365" text-anchor="middle" class="sl-title" fill="#F0B429">Emergent Abilities</text>
+          <text x="355" y="382" text-anchor="middle" class="sl-label">Capabilities that suddenly appear at scale</text>
         </g>
 
         <!-- Reasoning ability -->
         <g class="sl-emerge" style="animation-delay: 4.8s;">
-          <rect x="130" y="365" width="110" height="40" rx="8" fill="#F0B42915" stroke="#F0B429" stroke-width="1.5"/>
-          <text x="151" y="383" font-size="14">&#129504;</text>
-          <text x="172" y="388" font-family="var(--font-heading)" font-size="11" fill="#F0B429" font-weight="600">Reasoning</text>
-          <text x="185" y="400" text-anchor="middle" class="sl-label" fill="#F0B429">Chain-of-thought</text>
+          <rect x="130" y="395" width="110" height="40" rx="8" fill="#F0B42915" stroke="#F0B429" stroke-width="1.5"/>
+          <text x="151" y="413" font-size="14">&#129504;</text>
+          <text x="172" y="418" font-family="var(--font-heading)" font-size="11" fill="#F0B429" font-weight="600">Reasoning</text>
+          <text x="185" y="430" text-anchor="middle" class="sl-label" fill="#F0B429">Chain-of-thought</text>
         </g>
 
         <!-- Coding ability -->
         <g class="sl-emerge" style="animation-delay: 5.1s;">
-          <rect x="260" y="365" width="90" height="40" rx="8" fill="#F0B42915" stroke="#F0B429" stroke-width="1.5"/>
-          <text x="278" y="383" font-size="14">&#128187;</text>
-          <text x="303" y="388" font-family="var(--font-heading)" font-size="11" fill="#F0B429" font-weight="600">Coding</text>
-          <text x="305" y="400" text-anchor="middle" class="sl-label" fill="#F0B429">Program synth</text>
+          <rect x="260" y="395" width="90" height="40" rx="8" fill="#F0B42915" stroke="#F0B429" stroke-width="1.5"/>
+          <text x="278" y="413" font-size="14">&#128187;</text>
+          <text x="303" y="418" font-family="var(--font-heading)" font-size="11" fill="#F0B429" font-weight="600">Coding</text>
+          <text x="305" y="430" text-anchor="middle" class="sl-label" fill="#F0B429">Program synth</text>
         </g>
 
         <!-- Math ability -->
         <g class="sl-emerge" style="animation-delay: 5.4s;">
-          <rect x="370" y="365" width="90" height="40" rx="8" fill="#F0B42915" stroke="#F0B429" stroke-width="1.5"/>
-          <text x="388" y="383" font-size="14">&#128202;</text>
-          <text x="417" y="388" font-family="var(--font-heading)" font-size="11" fill="#F0B429" font-weight="600">Math</text>
-          <text x="415" y="400" text-anchor="middle" class="sl-label" fill="#F0B429">Multi-step</text>
+          <rect x="370" y="395" width="90" height="40" rx="8" fill="#F0B42915" stroke="#F0B429" stroke-width="1.5"/>
+          <text x="388" y="413" font-size="14">&#128202;</text>
+          <text x="417" y="418" font-family="var(--font-heading)" font-size="11" fill="#F0B429" font-weight="600">Math</text>
+          <text x="415" y="430" text-anchor="middle" class="sl-label" fill="#F0B429">Multi-step</text>
         </g>
 
         <!-- Translation ability -->
         <g class="sl-emerge" style="animation-delay: 5.7s;">
-          <rect x="480" y="365" width="120" height="40" rx="8" fill="#F0B42915" stroke="#F0B429" stroke-width="1.5"/>
-          <text x="498" y="383" font-size="14">&#127760;</text>
-          <text x="534" y="388" font-family="var(--font-heading)" font-size="11" fill="#F0B429" font-weight="600">Translation</text>
-          <text x="540" y="400" text-anchor="middle" class="sl-label" fill="#F0B429">Zero-shot</text>
+          <rect x="480" y="395" width="120" height="40" rx="8" fill="#F0B42915" stroke="#F0B429" stroke-width="1.5"/>
+          <text x="498" y="413" font-size="14">&#127760;</text>
+          <text x="534" y="418" font-family="var(--font-heading)" font-size="11" fill="#F0B429" font-weight="600">Translation</text>
+          <text x="540" y="430" text-anchor="middle" class="sl-label" fill="#F0B429">Zero-shot</text>
         </g>
 
         <!-- Connecting arrows from threshold to abilities -->
         <g class="sl-fade" style="animation-delay: 4.6s;">
-          <line x1="380" y1="290" x2="380" y2="340" stroke="#EB6F92" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
-          <polygon points="376,338 380,345 384,338" fill="#EB6F92" opacity="0.5"/>
+          <line x1="380" y1="290" x2="380" y2="365" stroke="#EB6F92" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+          <polygon points="376,363 380,370 384,363" fill="#EB6F92" opacity="0.5"/>
         </g>
 
         <!-- Legend -->
@@ -160,7 +160,7 @@ export function render(container) {
 
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Neural Scaling Laws \u2014 Power-Law Performance &amp; Emergent Abilities
+        Neural Scaling Laws - Power-Law Performance &amp; Emergent Abilities
       </p>
     </div>
   `;

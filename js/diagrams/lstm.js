@@ -99,7 +99,7 @@ export function render(container) {
         <text x="375" y="28" text-anchor="middle"
           fill="var(--text-primary)" font-family="var(--font-heading)" font-size="16" font-weight="700"
           class="lstm-label" style="animation-delay: 0s;">
-          LSTM Cell \u2014 Gate Mechanisms
+          LSTM Cell - Gate Mechanisms
         </text>
 
         <!-- ===== Cell State Line (top horizontal) ===== -->
@@ -284,7 +284,7 @@ export function render(container) {
         </g>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        LSTM Cell \u2014 Forget, Input, and Output Gate Mechanisms
+        LSTM Cell - Forget, Input, and Output Gate Mechanisms
       </p>
     </div>
   `;

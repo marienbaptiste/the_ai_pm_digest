@@ -1,4 +1,4 @@
-// Embedding Projector — Interactive 2D embedding space explorer
+// Embedding Projector - Interactive 2D embedding space explorer
 // Users click two words to measure cosine similarity between position vectors
 
 export function mount(container) {
@@ -79,9 +79,9 @@ export function mount(container) {
   }
 
   function similarityColor(cos) {
-    if (cos > 0.9) return '#00d4aa';   // green — similar
-    if (cos >= 0.7) return '#f59e0b';  // amber — moderate
-    return '#ef4444';                   // red — dissimilar
+    if (cos > 0.9) return '#00d4aa';   // green - similar
+    if (cos >= 0.7) return '#f59e0b';  // amber - moderate
+    return '#ef4444';                   // red - dissimilar
   }
 
   function similarityLabel(cos) {

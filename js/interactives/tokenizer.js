@@ -1,4 +1,4 @@
-// Tokenizer Explorer — interactive BPE-like tokenization demo
+// Tokenizer Explorer - interactive BPE-like tokenization demo
 // Users type text and see it broken into colored token spans in real-time
 
 const DEFAULT_TEXT = 'The transformer architecture revolutionized natural language processing by introducing self-attention mechanisms.';
@@ -40,7 +40,7 @@ function tokenize(text) {
 
   const tokens = [];
 
-  // Step 1: Split into coarse segments — words, whitespace runs, and punctuation
+  // Step 1: Split into coarse segments - words, whitespace runs, and punctuation
   const segments = text.match(/\s+|[a-zA-Z0-9']+|[^\s\w]/g) || [];
 
   for (const segment of segments) {
@@ -56,7 +56,7 @@ function tokenize(text) {
       continue;
     }
 
-    // Word — attempt BPE-like decomposition
+    // Word - attempt BPE-like decomposition
     const subTokens = decomposeWord(segment);
     tokens.push(...subTokens);
   }
@@ -355,7 +355,7 @@ export function mount(container) {
       outputEl.innerHTML = '<span class="tkz-empty">Start typing to see tokens...</span>';
       tokenCountEl.textContent = '0';
       charCountEl.textContent = '0';
-      ratioEl.textContent = '—';
+      ratioEl.textContent = '-';
       return;
     }
 
@@ -365,7 +365,7 @@ export function mount(container) {
     const meaningfulTokens = tokens.filter(t => !/^\s+$/.test(t));
     const tokenCount = meaningfulTokens.length;
     const charCount = text.length;
-    const ratio = tokenCount > 0 ? (charCount / tokenCount).toFixed(1) : '—';
+    const ratio = tokenCount > 0 ? (charCount / tokenCount).toFixed(1) : '-';
 
     // Build token spans
     let colorIdx = 0;

@@ -238,11 +238,11 @@ export function render(container) {
         <!-- Subtitle -->
         <text x="${cx}" y="335" text-anchor="middle" class="fw-title" style="animation-delay: 2.5s;"
           fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">
-          Each stage reinforces the next \u2014 compounding value over time
+          Each stage reinforces the next - compounding value over time
         </text>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Platform Flywheel \u2014 Self-reinforcing growth cycle
+        Platform Flywheel - Self-reinforcing growth cycle
       </p>
     </div>
   `;

@@ -40,7 +40,7 @@ router.onNavigate = () => {
   renderSidebar();
 };
 
-// Initialize — modules execute deferred, so DOM is already ready
+// Initialize - modules execute deferred, so DOM is already ready
 function init() {
   renderSidebar();
   initSidebarToggle();

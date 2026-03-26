@@ -245,11 +245,11 @@ export function render(container) {
         <!-- Bottom text -->
         <text x="${cx}" y="372" text-anchor="middle" class="ge-title" style="animation-delay: 3.5s;"
           fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">
-          Products orbit the core \u2014 Capabilities expand the frontier
+          Products orbit the core - Capabilities expand the frontier
         </text>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        Gemini Ecosystem \u2014 Foundation model product architecture
+        Gemini Ecosystem - Foundation model product architecture
       </p>
     </div>
   `;

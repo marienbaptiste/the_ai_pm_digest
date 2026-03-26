@@ -1,4 +1,4 @@
-// Neuron Playground — interactive single-neuron visualisation
+// Neuron Playground - interactive single-neuron visualisation
 // Lets users adjust inputs, weights, bias, and activation function
 // to see how a neuron computes its output in real time.
 

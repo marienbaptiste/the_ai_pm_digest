@@ -1,5 +1,5 @@
 /* ============================================
-   CARDS — with diagonal accent & number overlay
+   CARDS - with diagonal accent & number overlay
    ============================================ */
 .card {
   background: var(--gradient-card);
@@ -35,7 +35,7 @@
   cursor: pointer;
 }
 
-/* Module card — with oversized faded number & diagonal stripe */
+/* Module card - with oversized faded number & diagonal stripe */
 .card--module {
   display: flex;
   gap: var(--space-5);
@@ -136,7 +136,7 @@
 }
 
 /* ============================================
-   BUTTONS — with shimmer and personality
+   BUTTONS - with shimmer and personality
    ============================================ */
 .btn {
   font-family: var(--font-heading);
@@ -232,7 +232,7 @@
 }
 
 /* ============================================
-   PROGRESS BAR — animated gradient sweep
+   PROGRESS BAR - animated gradient sweep
    ============================================ */
 .progress-bar {
   width: 100%;
@@ -307,7 +307,7 @@
 }
 
 /* ============================================
-   GLOSSARY TOOLTIP — frosted glass with colored top
+   GLOSSARY TOOLTIP - frosted glass with colored top
    ============================================ */
 .term {
   color: var(--accent-blue);

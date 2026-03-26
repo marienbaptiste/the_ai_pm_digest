@@ -112,7 +112,7 @@ export function render(container) {
         </text>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">
-        RAG Pipeline \u2014 Query \u2192 Embed \u2192 Retrieve \u2192 Generate
+        RAG Pipeline - Query \u2192 Embed \u2192 Retrieve \u2192 Generate
       </p>
     </div>
   `;

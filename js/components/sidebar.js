@@ -62,10 +62,10 @@ export function updateSidebarProgress() {
 
   // Update text first (most reliable, most important)
   if (text) {
-    text.textContent = `${overall.completed}/${overall.total} — ${overall.percent}% Complete`;
+    text.textContent = `${overall.completed}/${overall.total} - ${overall.percent}% Complete`;
   }
 
-  // Update ring separately — if this fails, text is already updated
+  // Update ring separately - if this fails, text is already updated
   if (container) {
     try {
       container.innerHTML = '';

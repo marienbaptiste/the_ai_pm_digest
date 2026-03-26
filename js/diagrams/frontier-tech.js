@@ -123,7 +123,7 @@ export function render(container) {
         <!-- Title -->
         <text x="${cx}" y="28" text-anchor="middle" class="ft-title" style="animation-delay: 0s;"
           fill="var(--text-dim)" font-family="var(--font-mono)" font-size="11" letter-spacing="2">
-          Frontier AI Landscape \u2014 2022\u20132026
+          Frontier AI Landscape - 2022\u20132026
         </text>
 
         <!-- Subtitle -->
@@ -144,7 +144,7 @@ export function render(container) {
         <!-- Bottom annotation -->
         <text x="${cx}" y="${H - 10}" text-anchor="middle" class="ft-title" style="animation-delay: 3.0s;"
           fill="var(--text-dim)" font-family="var(--font-mono)" font-size="9">
-          Each shift compounds on the last \u2014 modern frontier models combine all five
+          Each shift compounds on the last - modern frontier models combine all five
         </text>
       </svg>
       <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-dim); margin-top: var(--space-3);">

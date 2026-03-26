@@ -1,10 +1,10 @@
 export const lessons = {
 
   // ─────────────────────────────────────────────
-  // L01 — Mixture of Experts
+  // L01 - Mixture of Experts
   // ─────────────────────────────────────────────
   l01: {
-    title: 'Mixture of Experts — How Gemini & Mixtral Scale Efficiently',
+    title: 'Mixture of Experts - How Gemini & Mixtral Scale Efficiently',
     content: `
 <h2>The Scaling Dilemma: Why Dense Models Hit a Wall</h2>
 <p>The scaling laws that have driven AI progress since GPT-3 present a brutal tradeoff: to make a model smarter, you need more parameters, but more parameters means proportionally more compute for every single token processed. A large dense model activates <em>all</em> of its parameters for every token &mdash; whether the user asks "what is 2+2?" or "derive the Navier-Stokes equations from first principles." This is extraordinarily wasteful. The human brain does not activate all 86 billion neurons to tie a shoelace.</p>
@@ -181,7 +181,7 @@ where L_load_balance = N * sum_i( f_i * P_i )
           type: 'multi',
           options: [
             'Lower per-token inference cost enables more competitive API pricing',
-            'Customers generally do not care about architecture — they care about quality, speed, and price',
+            'Customers generally do not care about architecture - they care about quality, speed, and price',
             'The total parameter count (47B) could be confusingly marketed since it sounds smaller than 70B',
             'Faster inference latency due to fewer active parameters is a tangible user benefit',
             'MoE is a technical differentiator that impresses enterprise procurement teams'
@@ -196,10 +196,10 @@ where L_load_balance = N * sum_i( f_i * P_i )
   },
 
   // ─────────────────────────────────────────────
-  // L02 — State Space Models
+  // L02 - State Space Models
   // ─────────────────────────────────────────────
   l02: {
-    title: 'State Space Models — Mamba, S4 & Alternatives to Transformers',
+    title: 'State Space Models - Mamba, S4 & Alternatives to Transformers',
     content: `
 <h2>The Quadratic Bottleneck: Attention's Achilles Heel</h2>
 <p>The <span class="term" data-term="transformer">Transformer</span> architecture's greatest strength &mdash; <span class="term" data-term="self-attention">self-attention</span> &mdash; is also its most expensive operation. Self-attention computes pairwise interactions between every pair of <span class="term" data-term="token">tokens</span> in the sequence, producing an attention matrix of size <code>n &times; n</code> where <code>n</code> is the sequence length. This means both compute and memory scale as <strong>O(n&sup2;)</strong>. Double the <span class="term" data-term="context-window">context window</span> and you quadruple the cost.</p>
@@ -405,10 +405,10 @@ y_k = C_k * x_k</code></pre>
   },
 
   // ─────────────────────────────────────────────
-  // L03 — Reasoning Models & Test-Time Compute
+  // L03 - Reasoning Models & Test-Time Compute
   // ─────────────────────────────────────────────
   l03: {
-    title: 'Reasoning Models & Test-Time Compute — o1, R1 & Thinking at Inference',
+    title: 'Reasoning Models & Test-Time Compute - o1, R1 & Thinking at Inference',
     content: `
 <h2>The Paradigm Shift: From Training-Time to Test-Time Scaling</h2>
 <p>For years, the AI scaling playbook was straightforward: bigger models, more data, more training compute. The <span class="term" data-term="scaling-laws">scaling laws</span> documented by Kaplan et al. (2020) and Hoffmann et al. (2022, "Chinchilla") described a clear relationship: invest more FLOPs during training, get a smarter model. Once the model was trained, inference was relatively cheap &mdash; the model produced an answer in a single forward pass, taking the same amount of compute whether the question was trivial or profound.</p>
@@ -551,7 +551,7 @@ There are 3 r's in "strawberry."</code></pre>
           question: 'Your team is launching a coding assistant powered by a reasoning model. During beta testing, you discover that 40% of user queries are simple questions ("how do I write a for loop in Python") that the reasoning model handles with unnecessary thinking time, adding 8 seconds of latency and 10x the cost. What is the best product strategy?',
           type: 'mc',
           options: [
-            'Accept the latency and cost as unavoidable — reasoning models always improve output quality regardless of query complexity',
+            'Accept the latency and cost as unavoidable - reasoning models always improve output quality regardless of query complexity',
             'Remove the reasoning model entirely and replace it with a standard model for all query types, accepting the quality reduction on complex problems',
             'Add an engaging animated loading screen to hide the 8-second latency from users, making the wait feel intentional and premium',
             'Implement a routing layer that sends simple queries to a fast model and complex queries to reasoning model'
@@ -565,7 +565,7 @@ There are 3 r's in "strawberry."</code></pre>
           question: 'DeepSeek R1 demonstrated that reasoning capabilities can be distilled from a large model into much smaller ones (down to 1.5B parameters). Which of the following are valid implications of this finding? Select all that apply.',
           type: 'multi',
           options: [
-            'Reasoning is not an emergent property requiring minimum model scale — it can be taught through distillation',
+            'Reasoning is not an emergent property requiring minimum model scale - it can be taught through distillation',
             'The distilled reasoning models achieve identical performance to the full R1 model on all tasks',
             'Reasoning could become accessible on edge devices and mobile phones through distilled models',
             'The value of frontier reasoning models may partially shift from deployment to being "teacher" models for distillation',
@@ -605,7 +605,7 @@ There are 3 r's in "strawberry."</code></pre>
           options: [
             'The reasoning tokens would routinely run too long for users to read and the extreme length would create a confusing, unusable interface experience',
             'Multiple reasons: preventing prompt injection attacks, avoiding user confusion, maintaining flexibility, and preventing distillation',
-            'To protect OpenAI\'s core intellectual property — the specific reasoning methodology and chain-of-thought format are proprietary competitive assets',
+            'To protect OpenAI\'s core intellectual property - the specific reasoning methodology and chain-of-thought format are proprietary competitive assets',
             'The reasoning tokens are generated in a specialized internal format that cannot be serialized or displayed as readable text to end users'
           ],
           correct: 1,
@@ -618,7 +618,7 @@ There are 3 r's in "strawberry."</code></pre>
   },
 
   // ─────────────────────────────────────────────
-  // L04 — AI Agents, Tool Use & Multi-Agent Systems
+  // L04 - AI Agents, Tool Use & Multi-Agent Systems
   // ─────────────────────────────────────────────
   l04: {
     title: 'AI Agents, Tool Use & Multi-Agent Systems',
@@ -780,9 +780,9 @@ Action: respond("John Smith is on an active Enterprise plan and is eligible for 
           question: 'Your agent-based customer service product has a per-step accuracy of 92%. The average customer issue requires 12 agent steps to resolve. What is the approximate end-to-end success rate, and what product strategy should you pursue?',
           type: 'mc',
           options: [
-            'Approximately 38% (0.92^12) — implement human-in-the-loop checkpoints and improve per-step accuracy to 98%',
-            '92% — per-step accuracy is the correct proxy for end-to-end accuracy since errors in agentic pipelines do not compound multiplicatively',
-            'Approximately 80% — because individual errors are statistically independent and normally distributed, they partially cancel each other out across the 12 steps',
+            'Approximately 38% (0.92^12) - implement human-in-the-loop checkpoints and improve per-step accuracy to 98%',
+            '92% - per-step accuracy is the correct proxy for end-to-end accuracy since errors in agentic pipelines do not compound multiplicatively',
+            'Approximately 80% - because individual errors are statistically independent and normally distributed, they partially cancel each other out across the 12 steps',
             'The success rate cannot be calculated from this information alone without knowing the specific error types and their downstream propagation effects'
           ],
           correct: 0,
@@ -847,10 +847,10 @@ Action: respond("John Smith is on an active Enterprise plan and is eligible for 
   },
 
   // ─────────────────────────────────────────────
-  // L05 — Frontier Trends
+  // L05 - Frontier Trends
   // ─────────────────────────────────────────────
   l05: {
-    title: 'Frontier Trends — Synthetic Data, World Models, Video Gen & What\'s Next',
+    title: 'Frontier Trends - Synthetic Data, World Models, Video Gen & What\'s Next',
     content: `
 <h2>The Data Wall: Is the Internet Not Enough?</h2>
 <p>The <span class="term" data-term="scaling-laws">scaling laws</span> that powered the LLM revolution depend on a critical assumption: you can always find more training data. The Chinchilla scaling laws tell us that optimal training requires data tokens proportional to model parameters. A 10-trillion-parameter model would need roughly 10 trillion tokens of high-quality text &mdash; and by most estimates, we are approaching the limits of unique, high-quality text available on the public internet.</p>
