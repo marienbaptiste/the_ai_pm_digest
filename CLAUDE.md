@@ -7,7 +7,7 @@ Training platform for AI Product Management. Static SPA with no framework - vani
 - `index.html` - App shell, served via `npx serve . -p 3000 -s`
 - `css/` - Design system (variables, base, layout, components, animations, lesson, quiz)
 - `js/` - SPA router, storage, components (sidebar, dashboard, lesson-viewer, glossary, quiz-engine, progress-ring), animated SVG diagrams
-- `data/` - Module registry, 147-term glossary, 12 lesson content files (51 lessons total)
+- `data/` - Module registry, 147-term glossary, 11 lesson content files (48 lessons total)
 
 ## Dev Server
 
