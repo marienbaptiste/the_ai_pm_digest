@@ -1,6 +1,6 @@
 export function render(container) {
-  const cx = 375;
-  const cy = 175;
+  const cx = 360;
+  const cy = 185;
 
   // Layers from innermost to outermost
   const layers = [
@@ -56,17 +56,23 @@ export function render(container) {
         </g>
       `;
 
-      // Technique labels
+      // Technique labels - spread evenly, offset per layer to avoid overlap
+      const techAngles = [
+        [Math.PI * 0.75, Math.PI * 1.25],   // Alignment: upper-left, lower-left
+        [Math.PI * 0.65, Math.PI * 1.35],   // Guardrails
+        [Math.PI * 0.55, Math.PI * 1.45],   // Red Teaming
+        [Math.PI * 0.45, Math.PI * 1.55]    // Regulation
+      ];
       layer.techniques.forEach((tech, ti) => {
-        const techAngle = Math.PI + (ti === 0 ? -0.5 : 0.5) + (i * 0.15);
-        const tr = layer.r - 3;
+        const techAngle = techAngles[i - 1][ti];
+        const tr = layer.r;
         const tx = cx + tr * Math.cos(techAngle);
         const ty = cy - tr * Math.sin(techAngle);
 
         techniquesSvg += `
           <g class="sl-technique" style="animation-delay: ${(layer.delay + 0.5 + ti * 0.15).toFixed(2)}s;">
             <text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="central"
-              fill="${layer.color}" font-family="var(--font-mono)" font-size="8" opacity="0.7">
+              fill="${layer.color}" font-family="var(--font-mono)" font-size="8" opacity="0.6">
               ${tech}
             </text>
           </g>
@@ -77,9 +83,9 @@ export function render(container) {
 
   // Attack arrows from outside
   const attacks = [
-    { fromX: 680, fromY: 60, angle: -2.2, label: 'Prompt Injection' },
-    { fromX: 700, fromY: 200, angle: -3.0, label: 'Adversarial Input' },
-    { fromX: 620, fromY: 310, angle: -2.6, label: 'Data Poisoning' }
+    { fromX: 700, fromY: 60, label: 'Prompt Injection' },
+    { fromX: 720, fromY: 200, label: 'Adversarial Input' },
+    { fromX: 680, fromY: 320, label: 'Data Poisoning' }
   ];
 
   let attacksSvg = '';
@@ -104,8 +110,8 @@ export function render(container) {
           stroke="#EB6F92" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"
           marker-end="url(#sl-attack-arrow)"/>
         <!-- Label -->
-        <text x="${(atk.fromX + midX) / 2 + 5}" y="${(atk.fromY + midY) / 2 - 6}" text-anchor="middle"
-          fill="#EB6F92" font-family="var(--font-mono)" font-size="8" opacity="0.8">
+        <text x="${atk.fromX + 5}" y="${atk.fromY - 8}" text-anchor="middle"
+          fill="#EB6F92" font-family="var(--font-mono)" font-size="9" opacity="0.8">
           ${atk.label}
         </text>
         <!-- Blocked X mark -->
@@ -120,7 +126,7 @@ export function render(container) {
 
   container.innerHTML = `
     <div style="text-align: center; width: 100%;">
-      <svg viewBox="0 0 750 350" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+      <svg viewBox="0 0 800 370" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
         <style>
           .sl-ring {
             opacity: 0;
@@ -213,7 +219,7 @@ export function render(container) {
         </g>
 
         <!-- Bottom annotation -->
-        <text x="${cx}" y="338" text-anchor="middle" class="sl-title" style="animation-delay: 3.5s;"
+        <text x="${cx}" y="358" text-anchor="middle" class="sl-title" style="animation-delay: 3.5s;"
           fill="var(--text-dim)" font-family="var(--font-mono)" font-size="10">
           Multiple layers of protection - no single point of failure
         </text>
